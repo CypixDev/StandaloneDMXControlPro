@@ -1,6 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.loading;
 
-import de.standaloendmx.standalonedmxcontrolpro.main.MainApplication;
+import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

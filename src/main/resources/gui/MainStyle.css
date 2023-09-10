@@ -5,7 +5,12 @@
     -fx-text-color: #7a7a7a; /* Textfarbe (Dunkelgrau) */
     -fx-accent-color: #39ff14;
     -fx-accent-color2: #ff9900;
+
+
+
+    -fx-text-fill: -fx-text-color;
 }
+
 
 /* Hauptanwendungshintergrund */
 body {

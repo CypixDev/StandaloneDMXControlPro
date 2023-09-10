@@ -22,13 +22,13 @@
       </ImageView>
      <VBox alignment="BOTTOM_CENTER" StackPane.alignment="CENTER">
         <children>
-             <Label style="-fx-text-fill: #AAA;" text="Version 1.0">
+             <Label text="Version 1.0">
                  <font>
                      <Font size="12" />
                  </font>
              </Label>
              <ProgressBar id="progress-bar" fx:id="progressBar" prefHeight="2.0" prefWidth="290.0" stylesheets="@style.css" />
-             <Label fx:id="nachrichtLabel" alignment="CENTER" style="-fx-text-fill: #444;" text="Lade views..." textFill="#757575">
+             <Label fx:id="nachrichtLabel" alignment="CENTER" text="Lade views...">
               <font>
                  <Font size="10.0" />
               </font>

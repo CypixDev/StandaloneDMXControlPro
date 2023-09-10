@@ -83,7 +83,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                de.standaloendmx.standalonedmxcontrollpro/de.standaloendmx.standalonedmxcontrolpro.main.MainApplication
+                                de.standaloendmx.standalonedmxcontrollpro/de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

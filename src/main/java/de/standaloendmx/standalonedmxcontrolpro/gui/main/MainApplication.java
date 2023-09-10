@@ -1,4 +1,4 @@
-package de.standaloendmx.standalonedmxcontrolpro.main;
+package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

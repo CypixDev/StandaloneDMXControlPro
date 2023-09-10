@@ -1,48 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../MainStyle.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.main.MainViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
-    <top>
-        <!-- Menüleiste -->
-        <MenuBar>
-            <!-- Menüs und Menüpunkte hier hinzufügen -->
-            <Menu text="Datei">
-                <MenuItem text="Öffnen" />
-                <MenuItem text="Speichern" />
-                <MenuItem text="Beenden" />
-            </Menu>
-            <!-- Weitere Menüs hier hinzufügen -->
-        </MenuBar>
-    </top>
-    <left>
-        <!-- Lichtgruppen oder Lichter hier auflisten -->
-        <ListView fx:id="lightListView" />
-    </left>
-    <center>
-        <!-- Hauptarbeitsbereich -->
-        <AnchorPane>
-            <!-- Hier können Sie Elemente für die Bearbeitung von Lichtszenen hinzufügen -->
-        </AnchorPane>
-    </center>
-    <right>
-        <!-- Einstellungen und Steuerelemente hier hinzufügen -->
-        <VBox>
-            <Button text="Neue Szene" />
-            <Button text="Starte Show" />
-            <!-- Weitere Steuerelemente hier hinzufügen -->
-        </VBox>
-    </right>
-    <bottom>
-        <!-- Statusleiste oder Fortschrittsanzeige hier hinzufügen -->
-        <ProgressBar />
-    </bottom>
+            fx:id="borderPane">
 </BorderPane>
