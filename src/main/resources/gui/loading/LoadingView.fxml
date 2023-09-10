@@ -9,7 +9,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: grey;" stylesheets="@../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.loading.LoadingScreenController">
+<StackPane prefHeight="150.0" prefWidth="200.0"
+           style="-fx-background-color: grey;" stylesheets="@../MainStyle.css"
+           xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.loading.LoadingScreenController">
   <children>
       <!-- Header mit Logo und Versionsinformation -->
       <ImageView>

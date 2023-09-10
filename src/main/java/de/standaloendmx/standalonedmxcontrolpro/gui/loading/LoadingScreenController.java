@@ -1,8 +1,15 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.loading;
 
+import de.standaloendmx.standalonedmxcontrolpro.main.MainApplication;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.BorderPane;
+
+import java.io.IOException;
 
 public class LoadingScreenController {
 
@@ -13,7 +20,7 @@ public class LoadingScreenController {
     private Label nachrichtLabel;
 
     // Simulierte Ladedauer (in Millisekunden)
-    private final int LADEDAUER_MS = 5000;
+    private final int LADEDAUER_MS = 5000/2;
 
     public void initialize() {
         // Initialisieren Sie die Fortschrittseigenschaften
@@ -21,7 +28,7 @@ public class LoadingScreenController {
         //nachrichtLabel.setText("Starte den Ladevorgang...");
 
         // Starten Sie den Ladevorgang
-        //startLadevorgang();
+        startLadevorgang();
     }
 
     private void startLadevorgang() {
@@ -34,13 +41,28 @@ public class LoadingScreenController {
                 }
                 final int fortgeschritten = i;
                 // Aktualisieren Sie den Fortschritt auf dem JavaFX-Thread
-                javafx.application.Platform.runLater(() -> {
-                    progressBar.setProgress(fortgeschritten / 100.0);
-                    nachrichtLabel.setText("Ladevorgang: " + fortgeschritten + "%");
-                });
+/*                javafx.application.Platform.runLater(() -> {
+
+*//*                    progressBar.setProgress(fortgeschritten / 100.0);
+                    nachrichtLabel.setText("Ladevorgang: " + fortgeschritten + "%");*//*
+                });*/
             }
             // Ladevorgang abgeschlossen
-            nachrichtLabel.setText("Ladevorgang abgeschlossen!");
+            //nachrichtLabel.setText("Alles geladen!");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        BorderPane pane = new FXMLLoader(LoadingScreenController.class.getResource(
+                                "/gui/main/MainView.fxml")).load();
+                        MainApplication.mainStage.setScene(new Scene(pane));
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
         });
         thread.start();
     }
