@@ -1,0 +1,51 @@
+/* Hauptfarben */
+.root * {
+    -fx-primary-color: #3498db; /* Primäre Farbe (Blau) */
+    -fx-text-color: #333333; /* Textfarbe (Dunkelgrau) */
+}
+
+/* Hauptanwendungshintergrund */
+body {
+    background-color: #f0f0f0; /* Hintergrundfarbe des Hauptcontainers */
+    color: -fx-text-color;
+    font-family: Arial, sans-serif; /* Standard-Schriftart */
+}
+
+/* Buttons */
+.button {
+    background-color: -fx-primary-color;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+    background-color: #258cd1; /* Dunklere Farbe im Hover-Zustand */
+}
+
+/* Links */
+a {
+    color: -fx-primary-color;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #258cd1; /* Dunklere Farbe im Hover-Zustand */
+}
+
+/* Fortschrittsleiste (ProgressBar) */
+.progress-bar {
+    -fx-background-color: transparent; /* Hintergrund der ProgressBar */
+}
+
+.progress-bar .bar {
+    -fx-background-color: -fx-primary-color; /* Hintergrundfarbe des Balkens */
+}
+
+.progress-bar .bar .track {
+    -fx-background-color: transparent; /* Transparenter Hintergrund des Fortschritts-Hintergrunds */
+}
