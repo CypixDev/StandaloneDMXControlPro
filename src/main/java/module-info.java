@@ -7,6 +7,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens de.standaloendmx.standalonedmxcontrollpro to javafx.fxml;
-    exports de.standaloendmx.standalonedmxcontrollpro;
+
+    opens de.standaloendmx.standalonedmxcontrolpro to javafx.fxml;
+    exports de.standaloendmx.standalonedmxcontrolpro;
 }
