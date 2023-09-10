@@ -1,0 +1,22 @@
+/* Entfernen Sie die Border der ProgressBar und setzen Sie den Rand auf 0 */
+.progress-bar {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+/* Ändern Sie die Farbe des Fortschrittsbalkens */
+.progress-bar .bar {
+    -fx-background-color: grey; /* Hintergrundfarbe */
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+
+}
+.progress-bar .track{
+    -fx-background-color: transparent;
+}
+

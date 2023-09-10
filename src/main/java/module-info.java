@@ -7,6 +7,8 @@ module de.standaloendmx.standalonedmxcontrollpro {
     requires org.kordamp.bootstrapfx.core;
 
 
-    opens de.standaloendmx.standalonedmxcontrolpro to javafx.fxml;
-    exports de.standaloendmx.standalonedmxcontrolpro;
+    opens de.standaloendmx.standalonedmxcontrolpro.gui.loading to javafx.fxml;
+    exports de.standaloendmx.standalonedmxcontrolpro.gui.loading;
+    exports de.standaloendmx.standalonedmxcontrolpro.main;
+    opens de.standaloendmx.standalonedmxcontrolpro.main to javafx.fxml;
 }
