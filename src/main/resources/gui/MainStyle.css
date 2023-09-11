@@ -1,6 +1,9 @@
 /* Hauptfarben */
 .root * {
     -fx-color: #333333;
+    -fx-grey1: #333333;
+    -fx-grey2: #7a7a7a;
+    -fx-grey3: #969696;
     -fx-primary-color: #3498db; /* Primäre Farbe (Blau) */
     -fx-text-color: #7a7a7a; /* Textfarbe (Dunkelgrau) */
     -fx-accent-color: #39ff14;
@@ -10,6 +13,7 @@
 
     -fx-text-fill: -fx-text-color;
 }
+
 
 
 /* Hauptanwendungshintergrund */
