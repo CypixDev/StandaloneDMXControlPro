@@ -5,6 +5,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires log4j;
 
     opens de.standaloendmx.standalonedmxcontrolpro.gui.loading to javafx.fxml;
     opens de.standaloendmx.standalonedmxcontrolpro.gui.main to javafx.fxml;

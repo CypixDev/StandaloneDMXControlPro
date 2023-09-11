@@ -20,7 +20,7 @@
                </graphic>
             </Button>
             <Label text="Fixture Library" />
-            <Button mnemonicParsing="false">
+            <Button fx:id="btnReset" mnemonicParsing="false">
                <graphic>
                   <FontIcon iconLiteral="anto-cloud-download" iconSize="18" />
                </graphic>

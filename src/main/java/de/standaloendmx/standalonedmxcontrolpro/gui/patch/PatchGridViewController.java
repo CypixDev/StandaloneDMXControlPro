@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -40,7 +41,7 @@ public class PatchGridViewController implements Initializable {
 
                 pane.setOnDragExited(e -> {
                     for (Node child : grid.getChildren()) {
-                        if(!child.getStyle().contains("-fx-grey3")){
+                        if (!child.getStyle().contains("-fx-grey3")) {
                             child.setStyle("-fx-background-color: -fx-color;");
                         }
                     }
@@ -59,11 +60,7 @@ public class PatchGridViewController implements Initializable {
             if (e.getGestureSource() != grid && e.getDragboard().hasString()) {
                 e.acceptTransferModes(TransferMode.MOVE);
 
-                int size = Integer.parseInt(e.getDragboard().getString().split(":")[1]);
-                int pos = getPaneAtXYPos(e.getX(), e.getY());
-                for (int i = 0; i < size; i++) {
-                    grid.getChildren().get(pos+i).setStyle("-fx-background-color: -fx-grey3;");
-                }
+                colorPane(e);
             }
             e.consume();
         });
@@ -72,26 +69,31 @@ public class PatchGridViewController implements Initializable {
             getPaneAtXY(e.getX(), e.getY()).setStyle("-fx-background-color: -fx-grey3;");
         });
 
-        grid.setOnDragDropped(e -> {
-            int size = Integer.parseInt(e.getDragboard().getString().split(":")[1]);
-            int pos = getPaneAtXYPos(e.getX(), e.getY());
+        grid.setOnDragDropped(this::colorPane);
+    }
+
+    private void colorPane(DragEvent e) {
+        int size = Integer.parseInt(e.getDragboard().getString().split(":")[1]);
+        int pos = getPaneAtXYPos(e.getX(), e.getY());
+        if (pos + size <= 513) {
             for (int i = 0; i < size; i++) {
-                grid.getChildren().get(pos+i).setStyle("-fx-background-color: -fx-grey3;");
+                grid.getChildren().get(pos + i).setStyle("-fx-background-color: -fx-grey3;");
             }
-        });
+        }
     }
 
     //SOOOO FUCKING GREAT!!!!
-    private Pane getPaneAtXY(double x, double y){
-        return (Pane)grid.getChildren().get(getPaneAtXYPos(x, y));
+    private Pane getPaneAtXY(double x, double y) {
+        return (Pane) grid.getChildren().get(getPaneAtXYPos(x, y));
     }
-    private int getPaneAtXYPos(double x, double y){
-        double width = ((Pane)grid.getChildren().get(1)).getWidth();
-        double height = ((Pane)grid.getChildren().get(1)).getHeight();
-        int betterX = (int) (x/width)+1;
-        int betterY = (int) (y/height);
-        int pos = betterX+betterY*32;
-        if(pos > 512) pos=512;
+
+    private int getPaneAtXYPos(double x, double y) {
+        double width = ((Pane) grid.getChildren().get(1)).getWidth();
+        double height = ((Pane) grid.getChildren().get(1)).getHeight();
+        int betterX = (int) (x / width) + 1;
+        int betterY = (int) (y / height);
+        int pos = betterX + betterY * 32;
+        if (pos > 512) pos = 512;
         return pos;
     }
 }

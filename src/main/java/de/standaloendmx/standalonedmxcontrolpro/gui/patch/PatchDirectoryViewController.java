@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.patch;
 
+import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,8 @@ public class PatchDirectoryViewController implements Initializable {
 
     @FXML
     private Button btnFolder;
+    @FXML
+    private Button btnReset;
 
     @FXML
     private TreeView<PatchFixture> directory;
@@ -35,30 +38,18 @@ public class PatchDirectoryViewController implements Initializable {
 
         btnFolder.setOnAction(e -> {
             try {
-                Runtime.getRuntime().exec("explorer.exe /open," + "C:\\Users\\pikon\\OneDrive\\Dokumente\\SDCP");
+                Runtime.getRuntime().exec("explorer.exe /open," + StandaloneDMXControlPro.instance.getFilesManager().getFixtureLibraryFolder().getAbsolutePath());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
 
-
-        directory.setOnDragEntered(e -> {
-            System.out.println(e.getEventType().getName());
+        btnReset.setOnAction(e -> {
+            StandaloneDMXControlPro.instance.getFilesManager().resetFixtureLibrary();
         });
 
-        directory.setOnDragDone(e -> {
-            e.acceptTransferModes(TransferMode.COPY);
-            System.out.println(e.getEventType().getName());
-        });
 
-        directory.setOnDragExited(e -> {
-            e.acceptTransferModes(TransferMode.COPY);
-            System.out.println(e.getEventType().getName());
-        });
 
-        directory.setOnDragDetected(e -> {
-            System.out.println(e.getEventType().getName());
-        });
         directory.setOnDragDetected(event -> {
             Dragboard dragboard = directory.startDragAndDrop(TransferMode.MOVE);
 
