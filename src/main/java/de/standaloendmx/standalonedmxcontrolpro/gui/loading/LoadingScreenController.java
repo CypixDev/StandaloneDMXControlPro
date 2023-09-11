@@ -4,10 +4,13 @@ import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 
 import java.io.IOException;
 
@@ -19,7 +22,7 @@ public class LoadingScreenController {
     @FXML
     private Label nachrichtLabel;
 
-    private final int LADEDAUER = 5000/2;
+    private final int LADEDAUER = 5000/10;
 
     public void initialize() {
         startDelay();
@@ -38,6 +41,18 @@ public class LoadingScreenController {
                     BorderPane pane = new FXMLLoader(LoadingScreenController.class.getResource(
                             "/gui/main/MainView.fxml")).load();
                     MainApplication.mainStage.setScene(new Scene(pane));
+
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getBounds();
+
+                    //Full size and centering
+
+                    MainApplication.mainStage.setWidth(screen.getBounds().getWidth());
+                    MainApplication.mainStage.setHeight(screen.getBounds().getHeight());
+
+                    MainApplication.mainStage.setX(bounds.getMinX() + (bounds.getWidth() - MainApplication.mainStage.getWidth()) / 2);
+                    MainApplication.mainStage.setY(bounds.getMinY() + (bounds.getHeight() - MainApplication.mainStage.getHeight()) / 2);
+
 
                 } catch (IOException e) {
                     e.printStackTrace();

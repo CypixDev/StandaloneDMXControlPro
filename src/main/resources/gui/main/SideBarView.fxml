@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.main.SideBarViewController"
-            style="-fx-background-color: -fx-color;"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane stylesheets="@../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.main.SideBarViewController">
+   <children>
+      <VBox spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="btnPatch" mnemonicParsing="false">
+               <graphic>
+                  <FontIcon iconLiteral="anto-appstore-add" iconSize="64" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnEdit" mnemonicParsing="false">
+               <graphic>
+                  <FontIcon iconLiteral="anto-sliders" iconSize="64" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnLive" mnemonicParsing="false">
+               <graphic>
+                  <FontIcon iconLiteral="anto-play-square" iconSize="64" />
+               </graphic>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+         <stylesheets>
+            <URL value="@../MainStyle.css" />
+            <URL value="@style.css" />
+         </stylesheets>
+      </VBox>
+   </children>
 </AnchorPane>

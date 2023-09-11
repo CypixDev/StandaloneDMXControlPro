@@ -11,53 +11,19 @@
 
 
 
+    -fx-icon-size: 48;
+
     -fx-text-fill: -fx-text-color;
 }
 
+.button{
+    -fx-background-color: -fx-color;
+    -fx-background-radius: 0;
 
-
-/* Hauptanwendungshintergrund */
-body {
-    background-color: #f0f0f0; /* Hintergrundfarbe des Hauptcontainers */
-    color: -fx-text-color;
-    font-family: Arial, sans-serif; /* Standard-Schriftart */
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
 }
 
-/* Buttons */
-.button {
-    background-color: -fx-primary-color;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.button:hover {
-    background-color: #258cd1; /* Dunklere Farbe im Hover-Zustand */
-}
-
-/* Links */
-a {
-    color: -fx-primary-color;
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-}
-
-a:hover {
-    color: #258cd1; /* Dunklere Farbe im Hover-Zustand */
-}
-
-/* Fortschrittsleiste (ProgressBar) */
-.progress-bar {
-    -fx-background-color: transparent; /* Hintergrund der ProgressBar */
-}
-
-.progress-bar .bar {
-    -fx-background-color: -fx-primary-color; /* Hintergrundfarbe des Balkens */
-}
-
-.progress-bar .bar .track {
-    -fx-background-color: transparent; /* Transparenter Hintergrund des Fortschritts-Hintergrunds */
+.ikonli-font-icon:hover {
+    -fx-icon-color: -fx-accent-color;
 }
