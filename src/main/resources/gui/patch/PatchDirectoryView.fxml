@@ -32,7 +32,7 @@
             </Button>
          </children>
       </HBox>
-      <TextField prefHeight="25.0" promptText="Search" VBox.vgrow="NEVER">
+      <TextField fx:id="tfSearch" prefHeight="25.0" promptText="Search" VBox.vgrow="NEVER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
