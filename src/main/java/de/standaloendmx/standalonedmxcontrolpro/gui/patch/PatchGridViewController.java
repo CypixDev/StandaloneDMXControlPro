@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -70,6 +71,7 @@ public class PatchGridViewController implements Initializable {
         });
 
         grid.setOnDragDropped(this::colorPane);
+
     }
 
     private void colorPane(DragEvent e) {
