@@ -6,13 +6,13 @@ import java.io.*;
 
 public class FilesManager {
 
-    private Logger logger;
+    private final Logger logger;
     private final String userHome = System.getProperty("user.home");
     private  String documentsPath = userHome + "\\OneDrive\\Dokumente"; // Für Windows mit Onedrive
 
-    private File workFolder;
-    private File logFolder;
-    private File fixtureLibraryFolder;
+    private final File workFolder;
+    private final File logFolder;
+    private final File fixtureLibraryFolder;
 
     public FilesManager() {
         logger = Logger.getLogger(FilesManager.class);
