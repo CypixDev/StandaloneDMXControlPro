@@ -11,26 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChannelDeserializer implements JsonDeserializer<List<FixtureChannel>> {
+
     @Override
     public List<FixtureChannel> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         List<FixtureChannel> list = new ArrayList<>();
-        List<ChannelCapability> capabilities = new ArrayList<>();
+        List<ChannelCapability> capabilities;
 
         JsonObject obj = json.getAsJsonObject();
-        for (String s : json.getAsJsonObject().keySet()) { //going thru capabilities
+        for (String s : json.getAsJsonObject().keySet()) { //going thru channels
+            capabilities = new ArrayList<>();
             if(obj.getAsJsonObject(s).get("capabilities") != null){
-                JsonArray arr = obj.getAsJsonObject(s).getAsJsonArray("capabilities");
-                for (JsonElement jsonElement : arr) { //all capability options
+
+                for (JsonElement jsonElement : obj.getAsJsonObject(s).getAsJsonArray("capabilities")) { //all capabilities
                     JsonObject d = jsonElement.getAsJsonObject();
                     CapabilityType type = CapabilityType.getByName(jsonElement.getAsJsonObject().get("type").getAsString());
 
-                    String effectName = type.getName();
-                    DMXRange dmxRange = new DMXRange(0, 255);
-                    if(d.get("effectName") != null) effectName = d.get("effectName").getAsString();
-                    if(d.get("dmxRange") != null) dmxRange = new DMXRange(d.getAsJsonArray("dmxRange").get(0).getAsInt(), d.getAsJsonArray("dmxRange").get(1).getAsInt());
-
-                    capabilities.add(new ChannelCapability(type, effectName, dmxRange));
-                    System.out.println(capabilities.get(capabilities.size()-1));
+                    setValues(capabilities, d, type);
                 }
             }else if(obj.getAsJsonObject(s).get("capability") != null){
 
@@ -38,18 +34,25 @@ public class ChannelDeserializer implements JsonDeserializer<List<FixtureChannel
 
                 CapabilityType type = CapabilityType.getByName(k.get("type").getAsString());
 
-                String effectName = type.getName();
-                DMXRange dmxRange = new DMXRange(0, 255);
-                if(k.get("effectName") != null) effectName = k.get("effectName").getAsString();
-                if(k.get("dmxRange") != null) dmxRange = new DMXRange(k.getAsJsonArray("dmxRange").get(0).getAsInt(), k.getAsJsonArray("dmxRange").get(1).getAsInt());
-
-                capabilities.add(new ChannelCapability(type, effectName, dmxRange));
-                System.out.println(capabilities.get(capabilities.size()-1));
+                setValues(capabilities, k, type);
             }
+
+            int defaultValue = 0;
+            if(obj.getAsJsonObject(s).get("defaultValue") != null) defaultValue = obj.getAsJsonObject(s).get("defaultValue").getAsInt();
+            list.add(new FixtureChannel(s, defaultValue, capabilities));
         }
 
 
 
         return list;
+    }
+
+    private void setValues(List<ChannelCapability> capabilities, JsonObject d, CapabilityType type) {
+        String effectName = type.getName();
+        DMXRange dmxRange = new DMXRange(0, 255);
+        if(d.get("effectName") != null) effectName = d.get("effectName").getAsString();
+        if(d.get("dmxRange") != null) dmxRange = new DMXRange(d.getAsJsonArray("dmxRange").get(0).getAsInt(), d.getAsJsonArray("dmxRange").get(1).getAsInt());
+
+        capabilities.add(new ChannelCapability(type, effectName, dmxRange));
     }
 }
