@@ -45,7 +45,8 @@ public class LoggingManager {
     }
 
     private void initLayout(){
-        basicLayout = new PatternLayout( "[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%t] %p %C: %m%n" );
+        basicLayout = new PatternLayout( "[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%t] %m%n" );
+        //Old Layout basicLayout = new PatternLayout( "[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%t] %p %C: %m%n" );
         debugLayout = new PatternLayout( "[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%t] [%C.%M(%F:%L)] %p: %m%n" );
     }
 

@@ -22,6 +22,7 @@ public class FixtureConverter {
 
         FilesManager filesManager = new FilesManager();
         processFolder(filesManager.getFixtureLibraryFolder());
+        //getFixtureFromJson(JsonParser.parseReader(file));
 
         System.out.println("Took: "+(System.currentTimeMillis()-start)+"ms");
 
@@ -38,7 +39,8 @@ public class FixtureConverter {
                     } else if (file.isFile() && file.getName().toLowerCase().endsWith(".json")) {
                         FileReader reader = new FileReader(file);
                         System.out.println("Processing: "+file.getName());
-                        getFixtureFromJson(JsonParser.parseReader(reader));
+
+                        System.out.println(getFixtureFromJson(JsonParser.parseReader(reader)));
                         System.out.println("---------------------");
                     }
                 }

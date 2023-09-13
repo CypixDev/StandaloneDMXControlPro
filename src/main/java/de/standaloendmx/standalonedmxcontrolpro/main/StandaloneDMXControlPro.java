@@ -1,6 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.main;
 
 import de.standaloendmx.standalonedmxcontrolpro.files.FilesManager;
+import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureManager;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.logging.LoggingManager;
 import javafx.application.Application;
@@ -9,13 +10,14 @@ import org.apache.log4j.Logger;
 public class StandaloneDMXControlPro {
 
     private static final String VERSION = "0.1-ALPHA";
+    private static final boolean DEBUGGING = false;
 
     public static StandaloneDMXControlPro instance;
 
     /**TODO
     * ♾️
-    *
-    *
+    * try catch hinzufügen bei fixture aus datei laden und in die directory vllt auch
+    * Replace fixture names with fixtureKey from .json maybe
      */
 
     /**TODO-Improve
@@ -30,14 +32,23 @@ public class StandaloneDMXControlPro {
 
     private final LoggingManager loggingManager;
 
+    private final FixtureManager fixtureManager;
+
 
     public StandaloneDMXControlPro() {
         instance = this;
+
         loggingManager = new LoggingManager();
-        loggingManager.setDebugging(true);
+        loggingManager.setDebugging(DEBUGGING);
         logger = Logger.getLogger(StandaloneDMXControlPro.class);
         logger.info("Starting StandaloneDMXControlPro "+VERSION);
+        logger.info("Debugging: "+DEBUGGING);
+
+
+        fixtureManager = new FixtureManager();
+
         startGUI();
+
 
         filesManager = new FilesManager();
         filesManager.init(); //Creating paths
@@ -54,6 +65,10 @@ public class StandaloneDMXControlPro {
 
     public FilesManager getFilesManager() {
         return filesManager;
+    }
+
+    public FixtureManager getFixtureManager() {
+        return fixtureManager;
     }
 
     public static void main(String[] args) {

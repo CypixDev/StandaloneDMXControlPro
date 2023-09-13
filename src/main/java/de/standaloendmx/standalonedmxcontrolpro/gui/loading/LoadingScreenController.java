@@ -1,10 +1,10 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.loading;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
+import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -35,18 +35,23 @@ public class LoadingScreenController {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            Platform.runLater(() -> nachrichtLabel.setText("Lade Fixtures"));
+            StandaloneDMXControlPro.instance.getFixtureManager().loadAllFixturesFromFiles();
+
+            try {
+                Thread.sleep(LADEDAUER);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             Platform.runLater(() -> {
                 try {
+
                     BorderPane pane = new FXMLLoader(LoadingScreenController.class.getResource(
                             "/gui/main/MainView.fxml")).load();
                     MainApplication.mainStage.setScene(new Scene(pane));
-
                     Screen screen = Screen.getPrimary();
                     Rectangle2D bounds = screen.getBounds();
-
-                    //Full size and centering
-
                     MainApplication.mainStage.setWidth(screen.getBounds().getWidth());
                     MainApplication.mainStage.setHeight(screen.getBounds().getHeight());
 

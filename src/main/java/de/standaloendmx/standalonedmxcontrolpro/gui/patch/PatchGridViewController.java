@@ -1,11 +1,13 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.patch;
 
+import de.standaloendmx.standalonedmxcontrolpro.fixture.Fixture;
+import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
+import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -75,7 +77,17 @@ public class PatchGridViewController implements Initializable {
     }
 
     private void colorPane(DragEvent e) {
-        int size = Integer.parseInt(e.getDragboard().getString().split(":")[1]);
+        String[] data = e.getDragboard().getString().split(":");
+        String fixtureName = data[0];
+        Fixture fixture = StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
+        FixtureMode mode;
+        if(data.length == 2){
+            String modeName = data[1];
+            mode = fixture.getModeByName(modeName);
+        }else mode = fixture.getModes().get(0); //In case there is only one
+
+        int size = mode.getFixtureChannels().size();
+
         int pos = getPaneAtXYPos(e.getX(), e.getY());
         if (pos + size <= 513) {
             for (int i = 0; i < size; i++) {
