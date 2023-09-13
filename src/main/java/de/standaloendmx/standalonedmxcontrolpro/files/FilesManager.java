@@ -3,6 +3,7 @@ package de.standaloendmx.standalonedmxcontrolpro.files;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.util.Objects;
 
 public class FilesManager {
 
@@ -25,13 +26,13 @@ public class FilesManager {
     }
 
     public void init() {
-        logger.info("Starting init file system");
+        logger.info("Init file system");
         checkFolderPath(workFolder);
         checkFolderPath(logFolder);
         checkFolderPath(fixtureLibraryFolder);
 
 
-        if(fixtureLibraryFolder.listFiles().length == 0){
+        if(Objects.requireNonNull(fixtureLibraryFolder.listFiles()).length == 0){
             resetFixtureLibrary();
         }
     }

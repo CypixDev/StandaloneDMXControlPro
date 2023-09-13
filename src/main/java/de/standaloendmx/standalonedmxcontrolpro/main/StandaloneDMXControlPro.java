@@ -20,6 +20,7 @@ public class StandaloneDMXControlPro {
 
     /**TODO-Improve
      * Beim färben der Felder beim Patchen nicht jedes mal das ganze feld resetten sondern nur das wo event exited oder ähnlcihes schmeißt
+     * Die suche bei der Fixture Lib verbessern
      *
      */
 

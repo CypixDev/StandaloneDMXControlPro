@@ -14,7 +14,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: -fx-color;" stylesheets="@style.css" VBox.vgrow="NEVER">
          <children>
-            <Button mnemonicParsing="false">
+            <Button fx:id="btnBulb" mnemonicParsing="false">
                <graphic>
                   <FontIcon iconLiteral="anto-bulb" iconSize="18" />
                </graphic>
@@ -28,6 +28,11 @@
             <Button fx:id="btnFolder" mnemonicParsing="false">
                <graphic>
                   <FontIcon iconLiteral="anto-folder" iconSize="18" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnReload" mnemonicParsing="false">
+               <graphic>
+                  <FontIcon iconLiteral="anto-reload" iconSize="18" />
                </graphic>
             </Button>
          </children>
