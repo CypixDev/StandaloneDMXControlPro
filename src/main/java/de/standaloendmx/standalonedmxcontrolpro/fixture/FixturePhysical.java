@@ -15,10 +15,13 @@ public class FixturePhysical {
     private String dmxConnector;
     private List<FixturePowerConnector> powerConnectors;
     private FixtureBulb bulb;
-    private String lens;
+    private FixtureLens lens;
 
+    public FixturePhysical() {
+    }
 
-    public FixturePhysical(FixtureDimension dimension, double weight, int power, String dmxConnector, List<FixturePowerConnector> powerConnectors, FixtureBulb bulbType, String lens) {
+    public FixturePhysical(FixtureDimension dimension, double weight, int power, String dmxConnector, List<FixturePowerConnector> powerConnectors,
+                           FixtureBulb bulbType, FixtureLens lens) {
         this.dimension = dimension;
         this.weight = weight;
         this.power = power;

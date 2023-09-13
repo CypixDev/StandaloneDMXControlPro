@@ -8,6 +8,7 @@ import de.standaloendmx.standalonedmxcontrolpro.fixture.enums.FixtureCategories;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.enums.FixtureLinkType;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,8 @@ public class Fixture {
     private String comment;
     private String RMD;
     @JsonAdapter(LinkDeserializer.class)
-    private Map<FixtureLinkType, List<String>> links;
-    private FixturePhysical physical;
+    private Map<FixtureLinkType, List<String>> links = new HashMap<>();
+    private FixturePhysical physical = new FixturePhysical();
 
     @JsonAdapter(ChannelDeserializer.class)
     private List<FixtureChannel> availableChannels;

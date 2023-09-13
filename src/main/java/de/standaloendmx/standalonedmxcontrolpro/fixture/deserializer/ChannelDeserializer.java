@@ -38,7 +38,13 @@ public class ChannelDeserializer implements JsonDeserializer<List<FixtureChannel
             }
 
             int defaultValue = 0;
-            if(obj.getAsJsonObject(s).get("defaultValue") != null) defaultValue = obj.getAsJsonObject(s).get("defaultValue").getAsInt();
+            //Gets as % or absolute Value...
+            if(obj.getAsJsonObject(s).get("defaultValue") != null) {
+                if(obj.getAsJsonObject(s).get("defaultValue").getAsString().contains("%"))
+                    defaultValue = (Integer.parseInt(obj.getAsJsonObject(s).get("defaultValue").getAsString().replace("%", "")) / 100) * 255;
+                else defaultValue= obj.getAsJsonObject(s).get("defaultValue").getAsInt();
+
+            }
             list.add(new FixtureChannel(s, defaultValue, capabilities));
         }
 
@@ -47,11 +53,11 @@ public class ChannelDeserializer implements JsonDeserializer<List<FixtureChannel
         return list;
     }
 
-    private void setValues(List<ChannelCapability> capabilities, JsonObject d, CapabilityType type) {
+    private void setValues(List<ChannelCapability> capabilities, JsonObject jsonObject, CapabilityType type) {
         String effectName = type.getName();
         DMXRange dmxRange = new DMXRange(0, 255);
-        if(d.get("effectName") != null) effectName = d.get("effectName").getAsString();
-        if(d.get("dmxRange") != null) dmxRange = new DMXRange(d.getAsJsonArray("dmxRange").get(0).getAsInt(), d.getAsJsonArray("dmxRange").get(1).getAsInt());
+        if(jsonObject.get("effectName") != null) effectName = jsonObject.get("effectName").getAsString();
+        if(jsonObject.get("dmxRange") != null) dmxRange = new DMXRange(jsonObject.getAsJsonArray("dmxRange").get(0).getAsInt(), jsonObject.getAsJsonArray("dmxRange").get(1).getAsInt());
 
         capabilities.add(new ChannelCapability(type, effectName, dmxRange));
     }
