@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.loading;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.Views;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.application.Platform;
@@ -44,24 +45,29 @@ public class LoadingScreenController {
                 e.printStackTrace();
             }
 
+            Platform.runLater(() -> nachrichtLabel.setText("Lade Views"));
+            StandaloneDMXControlPro.instance.getViewManager().loadAllViews();
+
+            try {
+                Thread.sleep(LADEDAUER);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             Platform.runLater(() -> {
-                try {
 
-                    BorderPane pane = new FXMLLoader(LoadingScreenController.class.getResource(
-                            "/gui/main/MainView.fxml")).load();
-                    MainApplication.mainStage.setScene(new Scene(pane));
-                    Screen screen = Screen.getPrimary();
-                    Rectangle2D bounds = screen.getBounds();
-                    MainApplication.mainStage.setWidth(screen.getBounds().getWidth());
-                    MainApplication.mainStage.setHeight(screen.getBounds().getHeight());
+                BorderPane pane = (BorderPane) StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.MAIN);
 
-                    MainApplication.mainStage.setX(bounds.getMinX() + (bounds.getWidth() - MainApplication.mainStage.getWidth()) / 2);
-                    MainApplication.mainStage.setY(bounds.getMinY() + (bounds.getHeight() - MainApplication.mainStage.getHeight()) / 2);
+                MainApplication.mainStage.setScene(new Scene(pane));
 
+                //Set full screen
+                Screen screen = Screen.getPrimary();
+                Rectangle2D bounds = screen.getBounds();
+                MainApplication.mainStage.setWidth(screen.getBounds().getWidth());
+                MainApplication.mainStage.setHeight(screen.getBounds().getHeight());
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                MainApplication.mainStage.setX(bounds.getMinX() + (bounds.getWidth() - MainApplication.mainStage.getWidth()) / 2);
+                MainApplication.mainStage.setY(bounds.getMinY() + (bounds.getHeight() - MainApplication.mainStage.getHeight()) / 2);
             });
 
         });

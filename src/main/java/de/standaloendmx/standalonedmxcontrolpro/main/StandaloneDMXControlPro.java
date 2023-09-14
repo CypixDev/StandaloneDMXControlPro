@@ -2,6 +2,7 @@ package de.standaloendmx.standalonedmxcontrolpro.main;
 
 import de.standaloendmx.standalonedmxcontrolpro.files.FilesManager;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureManager;
+import de.standaloendmx.standalonedmxcontrolpro.gui.ViewManager;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.logging.LoggingManager;
 import javafx.application.Application;
@@ -35,6 +36,7 @@ public class StandaloneDMXControlPro {
     private final LoggingManager loggingManager;
 
     private final FixtureManager fixtureManager;
+    private final ViewManager viewManager;
 
 
     public StandaloneDMXControlPro() {
@@ -46,7 +48,7 @@ public class StandaloneDMXControlPro {
         logger.info("Starting StandaloneDMXControlPro "+VERSION);
         logger.info("Debugging: "+DEBUGGING);
 
-
+        viewManager = new ViewManager();
         fixtureManager = new FixtureManager();
 
         startGUI();
@@ -71,6 +73,10 @@ public class StandaloneDMXControlPro {
 
     public FixtureManager getFixtureManager() {
         return fixtureManager;
+    }
+
+    public ViewManager getViewManager() {
+        return viewManager;
     }
 
     public static void main(String[] args) {

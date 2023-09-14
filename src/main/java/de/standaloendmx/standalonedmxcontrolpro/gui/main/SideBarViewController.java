@@ -41,6 +41,7 @@ public class SideBarViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("HELLO!!!");
         lastClickedButton = btnEdit;
         handleButtonClick(btnPatch);
 

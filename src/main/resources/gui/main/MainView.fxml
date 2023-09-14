@@ -3,5 +3,6 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<BorderPane fx:id="borderPane" style="-fx-background-color: -fx-color;" stylesheets="@../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.main.MainViewController">
+<BorderPane fx:id="borderPane" style="-fx-background-color: -fx-color;" stylesheets="@../MainStyle.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.main.MainViewController">
 </BorderPane>
