@@ -32,6 +32,9 @@ public class ContentAreaViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
+
+
+
     }
 
     public void setContentAndAnchor(Node node){
@@ -42,5 +45,9 @@ public class ContentAreaViewController implements Initializable {
     }
     public void setContentAndAnchor(String path) throws IOException {
         setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
+    }
+
+    public void resetContent() {
+        contentBox.getChildren().clear();
     }
 }

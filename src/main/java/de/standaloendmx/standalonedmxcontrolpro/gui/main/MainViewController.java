@@ -22,10 +22,10 @@ public class MainViewController implements Initializable {
         instance = this;
 
         try {
+            Parent contentArea = FXMLLoader.load(getClass().getResource("/gui/main/ContentAreaView.fxml"));
             Parent sideBar = FXMLLoader.load(getClass().getResource("/gui/main/SideBarView.fxml"));
             Parent menuBar = FXMLLoader.load(getClass().getResource("/gui/main/MenuBarView.fxml"));
             Parent bottomBar = FXMLLoader.load(getClass().getResource("/gui/main/BottomBarView.fxml"));
-            Parent contentArea = FXMLLoader.load(getClass().getResource("/gui/main/ContentAreaView.fxml"));
 
             borderPane.setTop(menuBar);
             borderPane.setLeft(sideBar);

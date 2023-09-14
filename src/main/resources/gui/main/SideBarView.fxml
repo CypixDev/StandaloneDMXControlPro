@@ -14,17 +14,17 @@
          <children>
             <Button fx:id="btnPatch" mnemonicParsing="false">
                <graphic>
-                  <FontIcon iconLiteral="anto-appstore-add" iconSize="64" />
+                  <FontIcon iconLiteral="anto-appstore-add" iconSize="64" fx:id="patchIcon" />
                </graphic>
             </Button>
             <Button fx:id="btnEdit" mnemonicParsing="false">
                <graphic>
-                  <FontIcon iconLiteral="anto-sliders" iconSize="64" />
+                  <FontIcon iconLiteral="anto-sliders" iconSize="64" fx:id="editIcon"/>
                </graphic>
             </Button>
             <Button fx:id="btnLive" mnemonicParsing="false">
                <graphic>
-                  <FontIcon iconLiteral="anto-play-square" iconSize="64" />
+                  <FontIcon iconLiteral="anto-play-square" iconSize="64" fx:id="liveIcon"/>
                </graphic>
             </Button>
          </children>

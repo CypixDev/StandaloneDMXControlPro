@@ -77,10 +77,18 @@
     -fx-border-radius: 0;
 }
 
-.ikonli-font-icon:focused {
+/*.ikonli-font-icon:focused {
+    -fx-icon-color: -fx-accent-color;
+}*/
+
+/*.button:focused .ikonli-font-icon{
+    -fx-icon-color: -fx-accent-color;
+}*/
+
+.selected{
     -fx-icon-color: -fx-accent-color;
 }
 
-.button:focused .ikonli-font-icon{
-    -fx-icon-color: -fx-accent-color;
+.not-selected{
+    -fx-icon-color: black;
 }
