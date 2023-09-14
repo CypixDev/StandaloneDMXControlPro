@@ -83,7 +83,10 @@ public class PatchDirectoryViewController implements Initializable {
             directory.refresh();
         });
 
-
+        directory.setOnMouseClicked(e -> {
+            //For double Click on item
+            //if(e.getClickCount() == 2) System.out.println("opEN!");
+        });
 
         directory.setOnDragDetected(event -> {
             TreeItem<Fixture> selectedItem = directory.getSelectionModel().getSelectedItem();
@@ -120,24 +123,23 @@ public class PatchDirectoryViewController implements Initializable {
             }
         });
 
-/*        ContextMenu contextMenu = new ContextMenu();
-        MenuItem deleteMenuItem = new MenuItem("Löschen");
-        contextMenu.getItems().add(deleteMenuItem);*/
 
-/* TODO       directory.setOnContextMenuRequested(event -> {
-            TreeItem<String> selectedItem = directory.getSelectionModel().getSelectedItem();
+       directory.setOnContextMenuRequested(event -> {
+           ContextMenu contextMenu = new ContextMenu();
+           MenuItem openMenuItem = new MenuItem("Öffnen");
+           contextMenu.getItems().add(openMenuItem);
+
+            TreeItem<Fixture> selectedItem = directory.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                // Fügen Sie hier die Aktion zum Löschen des ausgewählten Elements hinzu
-                deleteMenuItem.setOnAction(actionEvent -> {
-                    if (selectedItem.getParent() != null) {
-                        selectedItem.getParent().getChildren().remove(selectedItem);
-                    } else {
-                        // Root-Element kann nicht gelöscht werden
-                    }
+                if(!selectedItem.getValue().isMode()){
+                    contextMenu.show(directory, event.getScreenX(), event.getScreenY());
+                }
+
+                openMenuItem.setOnAction(actionEvent -> {
+                    System.out.println("Open fixture info...");
                 });
-                contextMenu.show(directory, event.getScreenX(), event.getScreenY());
             }
-        });*/
+        });
 
         tfSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override

@@ -51,3 +51,16 @@
 .tree-view .tree-cell > .tree-disclosure-node > .arrow  { /*arrow-color*/
     -fx-background-color: -fx-accent-color;
 }
+
+.context-menu{
+    -fx-background-color: -fx-color;
+    -fx-text-fill: -fx-grey3;
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: transparent; /* Entfernen Sie den Hovern-Hintergrund */
+}
+
+.context-menu .menu-item:focused {
+    -fx-background-color: transparent; /* Entfernen Sie den Fokus-Hintergrund */
+}
