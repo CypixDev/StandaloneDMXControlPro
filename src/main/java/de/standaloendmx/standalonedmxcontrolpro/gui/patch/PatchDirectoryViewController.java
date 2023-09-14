@@ -98,7 +98,7 @@ public class PatchDirectoryViewController implements Initializable {
 
                 }else{
                     Fixture item = selectedItem.getValue();
-                    content.put(DataFormat.PLAIN_TEXT,  item);
+                    content.put(DataFormat.PLAIN_TEXT,  item.getName());
                 }
 
 
