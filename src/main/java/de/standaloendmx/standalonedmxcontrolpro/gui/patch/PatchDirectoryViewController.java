@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.patch;
 
+import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.Fixture;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureChannel;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
@@ -16,19 +17,25 @@ import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class PatchDirectoryViewController implements Initializable {
+
+    private Logger logger = LogManager.getLogger(PatchDirectoryViewController.class);
 
     @FXML
     public static VBox mainBox;
@@ -117,11 +124,26 @@ public class PatchDirectoryViewController implements Initializable {
                 if (fixture == null || empty) {
                     setGraphic(null);
                 } else {
-                    //TODO set icon
                     setText(fixture.getName());
+                    if(!fixture.isMode()){
+                        String svg = FileUtils.getSVGPath("/gui/img/icons/fixture/"+fixture.getCategories().get(0).getFileName()+".svg");
+
+                        SVGPath svgPath = new SVGPath();
+                        svgPath.setFill(Color.BLACK);
+                        svgPath.setContent(svg);
+
+
+                        try {
+                            setGraphic(svgPath);
+                        }catch (Exception e){
+                            logger.error("Error while setting trreitem graphic", e);
+                        }
+                    }
                 }
             }
         });
+
+
 
 
        directory.setOnContextMenuRequested(event -> {
@@ -149,7 +171,6 @@ public class PatchDirectoryViewController implements Initializable {
         });
 
         updateDirectory();
-
     }
 
     public void updateDirectoryFromFiles(){
@@ -184,6 +205,21 @@ public class PatchDirectoryViewController implements Initializable {
 
     }
 
+    public static String convertInputStreamToString(InputStream inputStream) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append(System.lineSeparator()); // Um Zeilenumbrüche beizubehalten
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return stringBuilder.toString();
+    }
 
 
     private void filterTreeView(String filterText) {

@@ -2,7 +2,14 @@ package de.standaloendmx.standalonedmxcontrolpro.files;
 
 import de.standaloendmx.standalonedmxcontrolpro.logging.LoggingManager;
 import org.apache.log4j.Logger;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -63,6 +70,34 @@ public class FileUtils {
             // Ordner selbst löschen
             folder.delete();
         }
+    }
+
+    public static String getSVGPath(String path){
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+        try {
+
+            // optional, but recommended
+            // process XML securely, avoid attacks like XML External Entities (XXE)
+            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+            // parse XML file
+            DocumentBuilder db = dbf.newDocumentBuilder();
+
+            Document doc = db.parse(FileUtils.class.getResourceAsStream(path));
+
+            doc.getDocumentElement().normalize();
+            NodeList list = doc.getElementsByTagName("path");
+
+            Element element = (Element) list.item(0);
+
+            return element.getAttribute("d");
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

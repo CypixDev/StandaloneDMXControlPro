@@ -17,6 +17,10 @@ public enum FixtureCategories {
         return name;
     }
 
+    public String getFileName(){
+        return this.toString().toLowerCase().replace("_", "-");
+    }
+
     public static FixtureCategories getByName(String name){
         for (FixtureCategories value : values()) {
             if(value.getName().equals(name)) return value;
