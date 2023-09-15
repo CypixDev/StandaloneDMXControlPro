@@ -5,6 +5,7 @@ import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureManager;
 import de.standaloendmx.standalonedmxcontrolpro.gui.ViewManager;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.logging.LoggingManager;
+import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import javafx.application.Application;
 import org.apache.log4j.Logger;
 
@@ -27,6 +28,8 @@ public class StandaloneDMXControlPro {
      *
      * Alle views, besonders patchview beim start laden
      *
+     * Nach dem placen von einem Patch grid updaten um nicht zurückgesetzte felder zu resetten
+     *
      */
 
     private final Logger logger;
@@ -37,6 +40,7 @@ public class StandaloneDMXControlPro {
 
     private final FixtureManager fixtureManager;
     private final ViewManager viewManager;
+    private final PatchManager patchManager;
 
 
     public StandaloneDMXControlPro() {
@@ -50,6 +54,7 @@ public class StandaloneDMXControlPro {
 
         viewManager = new ViewManager();
         fixtureManager = new FixtureManager();
+        patchManager = new PatchManager();
 
         startGUI();
 
@@ -77,6 +82,10 @@ public class StandaloneDMXControlPro {
 
     public ViewManager getViewManager() {
         return viewManager;
+    }
+
+    public PatchManager getPatchManager() {
+        return patchManager;
     }
 
     public static void main(String[] args) {

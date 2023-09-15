@@ -31,28 +31,28 @@ public class LoadingScreenController {
 
     private void startDelay() {
         Thread thread = new Thread(() -> {
-            try {
+/*            try {
                 Thread.sleep(LADEDAUER);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             Platform.runLater(() -> nachrichtLabel.setText("Lade Fixtures"));
             StandaloneDMXControlPro.instance.getFixtureManager().loadAllFixturesFromFiles();
 
-            try {
+/*            try {
                 Thread.sleep(LADEDAUER);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             Platform.runLater(() -> nachrichtLabel.setText("Lade Views"));
             StandaloneDMXControlPro.instance.getViewManager().loadAllViews();
-
+/*
             try {
                 Thread.sleep(LADEDAUER);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             Platform.runLater(() -> {
 
