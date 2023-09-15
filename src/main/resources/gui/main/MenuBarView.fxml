@@ -40,6 +40,13 @@
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Device">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Add" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>

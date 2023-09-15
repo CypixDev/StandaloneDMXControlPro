@@ -16,6 +16,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -129,9 +130,11 @@ public class PatchDirectoryViewController implements Initializable {
                         String svg = FileUtils.getSVGPath("/gui/img/icons/fixture/"+fixture.getCategories().get(0).getFileName()+".svg");
 
                         SVGPath svgPath = new SVGPath();
-                        svgPath.setFill(Color.BLACK);
                         svgPath.setContent(svg);
 
+                        svgPath.setFill(Color.BLACK);
+                        svgPath.setScaleX(0.7);
+                        svgPath.setScaleY(0.7);
 
                         try {
                             setGraphic(svgPath);

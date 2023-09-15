@@ -38,6 +38,12 @@ public class SideBarViewController implements Initializable {
     @FXML
     private FontIcon liveIcon;
 
+    @FXML
+    private Button btnDeploy;
+
+    @FXML
+    private FontIcon deployIcon;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,6 +58,9 @@ public class SideBarViewController implements Initializable {
         });
         btnLive.setOnAction(e -> {
             handleButtonClick(btnLive);
+        });
+        btnDeploy.setOnAction(e -> {
+            handleButtonClick(btnDeploy);
         });
 
     }
@@ -76,6 +85,8 @@ public class SideBarViewController implements Initializable {
             } else if (clickedButton.equals(btnEdit)) {
 
             } else if (clickedButton.equals(btnLive)) {
+
+            } else if(clickedButton.equals(btnDeploy)){
 
             }
 
