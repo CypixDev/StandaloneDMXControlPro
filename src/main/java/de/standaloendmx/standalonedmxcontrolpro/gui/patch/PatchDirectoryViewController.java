@@ -136,7 +136,7 @@ public class PatchDirectoryViewController implements Initializable {
                         try {
                             setGraphic(svgPath);
                         }catch (Exception e){
-                            logger.error("Error while setting trreitem graphic", e);
+                            logger.error("Error while setting tree-item graphic", e);
                         }
                     }
                 }
