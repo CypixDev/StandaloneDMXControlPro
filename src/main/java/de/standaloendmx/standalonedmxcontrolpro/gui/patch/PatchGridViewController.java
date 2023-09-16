@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
@@ -97,7 +99,7 @@ public class PatchGridViewController implements Initializable {
             }else mode = fixture.getModes().get(0); //In case there is only one
 
             if(StandaloneDMXControlPro.instance.getPatchManager().isChannelFree(pos, mode.getFixtureChannels().size())){
-                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new PatchFixture(fixture.getName(), pos, mode.getFixtureChannels().size(), Color.LIME));
+                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new PatchFixture(fixture, pos, mode.getFixtureChannels().size(), Color.LIME));
             }
 
             updatePatch();
@@ -117,7 +119,18 @@ public class PatchGridViewController implements Initializable {
         Pane pane = (Pane) grid.getChildren().get(patch.getChannel());
 
         pane.setOnMouseClicked(e -> {
-            removePatch(patch);
+
+            //removePatch(patch);
+        });
+        pane.setOnContextMenuRequested(e -> {
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem removeItem = new MenuItem("Remove");
+            removeItem.setOnAction(b -> {
+                removePatch(StandaloneDMXControlPro.instance.getPatchManager().getPatchByChannel(getChannelByPane(pane)));
+            });
+
+            contextMenu.getItems().add(removeItem);
+            contextMenu.show(pane, e.getScreenX(), e.getScreenY());
         });
 
         GridPane.setColumnSpan(pane, patch.getSize());
@@ -126,6 +139,14 @@ public class PatchGridViewController implements Initializable {
         }
         pane.setBorder(new Border(new BorderStroke(patch.getColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
         ((Label)pane.getChildren().get(0)).setText(patch.getName());
+    }
+    private int getChannelByPane(Pane pane){
+        int channel = 0;
+        for (Node child : grid.getChildren()) {
+            if(pane.equals(child)) return channel;
+            channel++;
+        }
+        return -1;
     }
     private void removePatch(PatchFixture patch){
         GridPane.setColumnSpan(grid.getChildren().get(patch.getChannel()), 1);

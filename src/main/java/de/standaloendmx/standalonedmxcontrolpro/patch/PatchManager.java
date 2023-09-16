@@ -1,5 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.patch;
 
+import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureManager;
+import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ public class PatchManager {
 
     public PatchManager() {
         patches = new ArrayList<>();
-        patches.add(new PatchFixture("Your mama!", 4, 3, Color.AQUAMARINE));
+        //patches.add(new PatchFixture(StandaloneDMXControlPro.instance.getFixtureManager().getFixtures().get(0), 4, 3, Color.AQUAMARINE));
     }
 
     public boolean isChannelFree(int pos, int size){
@@ -22,6 +24,12 @@ public class PatchManager {
         return true;
     }
 
+    public PatchFixture getPatchByChannel(int channel){
+        for (PatchFixture patch : patches) {
+            if(patch.getChannel() == channel) return patch;
+        }
+        return null;
+    }
 
     public List<PatchFixture> getPatches() {
         return patches;
