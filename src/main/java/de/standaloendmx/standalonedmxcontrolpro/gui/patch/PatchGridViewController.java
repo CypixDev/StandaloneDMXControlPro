@@ -12,7 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -50,6 +52,38 @@ public class PatchGridViewController implements Initializable {
                 pane.setOnDragEntered(e -> {
                     //getPaneAtXY(e.getSceneX(),e.getSceneY()).setStyle("-fx-background-color: -fx-accent-color;");
                 });
+
+                pane.setOnDragDetected(e -> {
+
+                    if(getChannelByPane((Pane) e.getTarget()) != -1){
+                        Dragboard dragboard = ((Pane) e.getTarget()).startDragAndDrop(TransferMode.MOVE);
+                        ClipboardContent content = new ClipboardContent();
+                        System.out.println("Correct target");
+                    }
+                });
+                /*
+                        directory.setOnDragDetected(event -> {
+            TreeItem<Fixture> selectedItem = directory.getSelectionModel().getSelectedItem();
+            if(selectedItem != null && selectedItem.isLeaf()){ //So that folders cannot be moved
+                Dragboard dragboard = directory.startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent content = new ClipboardContent();
+
+                if(selectedItem.getValue().isMode()){
+                    Fixture item = selectedItem.getParent().getValue();
+                    String modeName = selectedItem.getValue().getName();
+                    content.put(DataFormat.PLAIN_TEXT, item.getName()+":"+modeName);
+
+                }else{
+                    Fixture item = selectedItem.getValue();
+                    content.put(DataFormat.PLAIN_TEXT,  item.getName());
+                }
+
+
+                dragboard.setContent(content);
+                event.consume();
+            }
+        });
+                 */
 
                 pane.setOnDragExited(e -> {
                     int size = getFixtureSizeByDragBoardString(e.getDragboard().getString());
