@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="grid" gridLinesVisible="true" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.patch.PatchGridViewController">
+<GridPane fx:id="grid" gridLinesVisible="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.patch.PatchGridViewController">
    <stylesheets>
       <URL value="@../MainStyle.css" />
       <URL value="@style.css" />
