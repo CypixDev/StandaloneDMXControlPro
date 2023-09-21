@@ -1,13 +1,12 @@
 package de.standaloendmx.standalonedmxcontrolpro.fixture;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class FixtureMode {
 
+    private final boolean physicalOverride = false;
     private String name;
     private String shortName;
-    private final boolean physicalOverride = false;
     private List<String> fixtureChannels;
 
     public FixtureMode(String name, String shortName, List<String> fixtureChannels) {
@@ -19,9 +18,10 @@ public class FixtureMode {
     public String getName() {
         return name;
     }
-    public String getNameWithChannel(){
-        if(!name.contains("ch"))
-            return name+" ("+fixtureChannels.size()+"CH)";
+
+    public String getNameWithChannel() {
+        if (!name.contains("ch"))
+            return name + " (" + fixtureChannels.size() + "CH)";
         return name;
     }
 

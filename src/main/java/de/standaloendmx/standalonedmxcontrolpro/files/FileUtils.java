@@ -1,10 +1,8 @@
 package de.standaloendmx.standalonedmxcontrolpro.files;
 
-import de.standaloendmx.standalonedmxcontrolpro.logging.LoggingManager;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.XMLConstants;
@@ -19,7 +17,7 @@ public class FileUtils {
     static Logger logger = Logger.getLogger(FileUtils.class);
 
     public static void unzip(InputStream zipFilePath, String destDirectory) throws IOException {
-        logger.info("Unzipping to "+destDirectory);
+        logger.info("Unzipping to " + destDirectory);
         File destDir = new File(destDirectory);
         if (!destDir.exists()) {
             destDir.mkdir();
@@ -41,6 +39,7 @@ public class FileUtils {
             }
         }
     }
+
     public static void extractFile(ZipInputStream zipIn, String filePath) throws IOException {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath))) {
             byte[] bytesIn = new byte[4096];
@@ -50,8 +49,9 @@ public class FileUtils {
             }
         }
     }
+
     public static void deleteFolder(File folder) {
-        logger.info("Deleting folder: "+folder);
+        logger.info("Deleting folder: " + folder);
         if (folder.exists()) {
             File[] files = folder.listFiles();
 
@@ -72,7 +72,7 @@ public class FileUtils {
         }
     }
 
-    public static String getSVGPath(String path){
+    public static String getSVGPath(String path) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         try {
@@ -94,7 +94,7 @@ public class FileUtils {
             return element.getAttribute("d");
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";

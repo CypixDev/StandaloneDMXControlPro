@@ -16,7 +16,8 @@
     -fx-background-insets: 0;
 
 }
-.progress-bar .track{
+
+.progress-bar .track {
     -fx-background-color: transparent;
 }
 

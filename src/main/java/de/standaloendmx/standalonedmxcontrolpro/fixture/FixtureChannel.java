@@ -1,7 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.fixture;
 
 import de.standaloendmx.standalonedmxcontrolpro.fixture.capability.ChannelCapability;
-import de.standaloendmx.standalonedmxcontrolpro.fixture.future.capability.DMXRange;
 
 import java.util.List;
 

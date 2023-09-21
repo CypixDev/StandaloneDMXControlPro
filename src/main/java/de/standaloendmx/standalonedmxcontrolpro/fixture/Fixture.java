@@ -38,12 +38,12 @@ public class Fixture {
         isMode = true;
     }
 
-    public void setManufacture(String manufacture) {
-        this.manufacture = manufacture;
-    }
-
     public String getManufacture() {
         return manufacture;
+    }
+
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
     }
 
     public String getName() {
@@ -86,9 +86,9 @@ public class Fixture {
         return modes;
     }
 
-    public FixtureMode getModeByName(String name){
+    public FixtureMode getModeByName(String name) {
         for (FixtureMode mode : getModes()) {
-            if(mode.getNameWithChannel().equals(name))return mode;
+            if (mode.getNameWithChannel().equals(name)) return mode;
         }
         return null;
     }

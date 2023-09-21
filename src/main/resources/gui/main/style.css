@@ -1,10 +1,10 @@
 /* CSS für die Menüleiste */
-.menu{
+.menu {
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
-.menu:hover{
+.menu:hover {
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
@@ -15,26 +15,28 @@
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
-.menu-bar .label{
+
+.menu-bar .label {
     -fx-font-size: 13px;
 }
-.menu-bar .label:hover{
+
+.menu-bar .label:hover {
     -fx-text-fill: -fx-accent-color;
 }
 
-.menu-bar:hover{
+.menu-bar:hover {
     -fx-background-color: transparent;
     /*Do not change border radius color here!*/
     -fx-border-radius: 0;
 }
 
-.menu-button{
+.menu-button {
     -fx-background-color: transparent;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
-.menu-button:hover{
+.menu-button:hover {
     -fx-background-color: transparent;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
@@ -58,9 +60,9 @@
     -fx-border-width: 0;
 }
 
-.menu-item:hover .label{
-     -fx-text-fill: -fx-grey3;
- }
+.menu-item:hover .label {
+    -fx-text-fill: -fx-grey3;
+}
 
 .context-menu {
     -fx-background-color: -fx-color;
@@ -85,10 +87,10 @@
     -fx-icon-color: -fx-accent-color;
 }*/
 
-.selected{
+.selected {
     -fx-icon-color: -fx-accent-color;
 }
 
-.not-selected{
+.not-selected {
     -fx-icon-color: black;
 }

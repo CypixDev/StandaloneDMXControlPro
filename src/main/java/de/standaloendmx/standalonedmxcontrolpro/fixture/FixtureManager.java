@@ -12,7 +12,10 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class FixtureManager {
 
@@ -24,27 +27,33 @@ public class FixtureManager {
         fixtures = new ArrayList<>();
     }
 
+    public static Fixture getFixtureFromJson(JsonElement jsonElement) {
+        Gson gson = new GsonBuilder().registerTypeAdapter(FixtureDimension.class, new PhysicalDeserializer()).create();
+
+        return gson.fromJson(jsonElement, Fixture.class);
+    }
+
     public List<Fixture> getFixtures() {
         return fixtures;
     }
 
     public Fixture getFixtureByName(String fixtureName) {
         for (Fixture fixture : fixtures) {
-            if(fixture.getName().equals(fixtureName))return fixture;
+            if (fixture.getName().equals(fixtureName)) return fixture;
         }
         return null;
     }
 
-    public SortedMap<String, List<Fixture>> getFixturesPerManufacture(){ //Sorted map is beautiful!
+    public SortedMap<String, List<Fixture>> getFixturesPerManufacture() { //Sorted map is beautiful!
 
         SortedMap<String, List<Fixture>> map = new TreeMap<>();
 
         for (Fixture fixture : fixtures) {
-            if(map.containsKey(fixture.getManufacture())){
+            if (map.containsKey(fixture.getManufacture())) {
                 List<Fixture> tmp = map.get(fixture.getManufacture());
                 tmp.add(fixture);
                 map.put(fixture.getManufacture(), tmp);
-            }else{
+            } else {
                 List<Fixture> list = new ArrayList<>();
                 list.add(fixture);
                 map.put(fixture.getManufacture(), list);
@@ -55,7 +64,7 @@ public class FixtureManager {
         return map;
     }
 
-    public void loadAllFixturesFromFiles(){
+    public void loadAllFixturesFromFiles() {
         File lib = StandaloneDMXControlPro.instance.getFilesManager().getFixtureLibraryFolder();
         logger.info("Starting loading fixtures from file.");
         long start = System.currentTimeMillis();
@@ -64,7 +73,7 @@ public class FixtureManager {
         } catch (Exception e) {
             logger.error("Failed loading fixtures", e);
         }
-        logger.info("Finished loading, took "+(System.currentTimeMillis()-start)+" ms");
+        logger.info("Finished loading, took " + (System.currentTimeMillis() - start) + " ms");
     }
 
     private void processFolder(File folder) throws FileNotFoundException {
@@ -78,7 +87,7 @@ public class FixtureManager {
                         processFolder(file);
                     } else if (file.isFile() && file.getName().toLowerCase().endsWith(".json")) {
                         FileReader reader = new FileReader(file);
-                        logger.debug("Loading fixture: "+file.getName());
+                        logger.debug("Loading fixture: " + file.getName());
                         Fixture fixture = getFixtureFromJson(JsonParser.parseReader(reader));
                         fixture.setManufacture(folder.getName());
                         fixtures.add(fixture);
@@ -86,12 +95,5 @@ public class FixtureManager {
                 }
             }
         }
-    }
-
-
-    public static Fixture getFixtureFromJson(JsonElement jsonElement){
-        Gson gson = new GsonBuilder().registerTypeAdapter(FixtureDimension.class, new PhysicalDeserializer()).create();
-
-        return gson.fromJson(jsonElement, Fixture.class);
     }
 }

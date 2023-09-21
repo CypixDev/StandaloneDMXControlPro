@@ -10,13 +10,12 @@
     -fx-accent-color2: #ff9900;
 
 
-
     -fx-icon-size: 48;
 
     -fx-text-fill: -fx-text-color;
 }
 
-.button{
+.button {
     -fx-background-color: -fx-color;
     -fx-background-radius: 0;
 

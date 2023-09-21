@@ -10,15 +10,15 @@ public enum FixtureLinkType {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public static FixtureLinkType getByName(String name){
+    public static FixtureLinkType getByName(String name) {
         for (FixtureLinkType value : values()) {
-            if(value.getName().equals(name)) return value;
+            if (value.getName().equals(name)) return value;
         }
         return null;
+    }
+
+    public String getName() {
+        return name;
     }
 
 

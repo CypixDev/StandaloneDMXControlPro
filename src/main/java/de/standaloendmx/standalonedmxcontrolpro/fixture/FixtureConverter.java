@@ -1,6 +1,9 @@
 package de.standaloendmx.standalonedmxcontrolpro.fixture;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import de.standaloendmx.standalonedmxcontrolpro.files.FilesManager;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.deserializer.PhysicalDeserializer;
 
@@ -24,9 +27,10 @@ public class FixtureConverter {
         processFolder(filesManager.getFixtureLibraryFolder());
         //getFixtureFromJson(JsonParser.parseReader(file));
 
-        System.out.println("Took: "+(System.currentTimeMillis()-start)+"ms");
+        System.out.println("Took: " + (System.currentTimeMillis() - start) + "ms");
 
     }
+
     public static void processFolder(File folder) throws FileNotFoundException {
         if (folder.isDirectory()) {
             File[] files = folder.listFiles();
@@ -38,7 +42,7 @@ public class FixtureConverter {
                         processFolder(file);
                     } else if (file.isFile() && file.getName().toLowerCase().endsWith(".json")) {
                         FileReader reader = new FileReader(file);
-                        System.out.println("Processing: "+file.getName());
+                        System.out.println("Processing: " + file.getName());
 
                         System.out.println(getFixtureFromJson(JsonParser.parseReader(reader)));
                         System.out.println("---------------------");
@@ -49,7 +53,7 @@ public class FixtureConverter {
     }
 
 
-    public static Fixture getFixtureFromJson(JsonElement jsonElement){
+    public static Fixture getFixtureFromJson(JsonElement jsonElement) {
 
         Gson gson = new GsonBuilder().registerTypeAdapter(FixtureDimension.class, new PhysicalDeserializer()).create();
 

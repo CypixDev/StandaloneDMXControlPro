@@ -13,18 +13,18 @@ public enum FixtureCategories {
         this.name = name;
     }
 
+    public static FixtureCategories getByName(String name) {
+        for (FixtureCategories value : values()) {
+            if (value.getName().equals(name)) return value;
+        }
+        return null;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getFileName(){
+    public String getFileName() {
         return this.toString().toLowerCase().replace("_", "-");
-    }
-
-    public static FixtureCategories getByName(String name){
-        for (FixtureCategories value : values()) {
-            if(value.getName().equals(name)) return value;
-        }
-        return null;
     }
 }

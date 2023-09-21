@@ -1,7 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.patch;
 
 import de.standaloendmx.standalonedmxcontrolpro.fixture.Fixture;
-import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
 import javafx.scene.paint.Color;
 
 public class PatchFixture {
@@ -25,7 +24,7 @@ public class PatchFixture {
         return fixture;
     }
 
-    public String getName(){
+    public String getName() {
         return fixture.getName();
     }
 

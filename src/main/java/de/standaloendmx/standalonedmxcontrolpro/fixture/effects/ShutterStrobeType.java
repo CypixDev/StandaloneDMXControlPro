@@ -11,14 +11,14 @@ public enum ShutterStrobeType {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public static ShutterStrobeType getByName(String name){
+    public static ShutterStrobeType getByName(String name) {
         for (ShutterStrobeType value : values()) {
-            if(value.getName().equals(name))return value;
+            if (value.getName().equals(name)) return value;
         }
         return null;
+    }
+
+    public String getName() {
+        return name;
     }
 }

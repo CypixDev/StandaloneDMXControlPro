@@ -2,25 +2,26 @@ package de.standaloendmx.standalonedmxcontrolpro.files;
 
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class FilesManager {
 
     private final Logger logger;
     private final String userHome = System.getProperty("user.home");
-    private  String documentsPath = userHome + "\\OneDrive\\Dokumente"; // Für Windows mit Onedrive
-
     private final File workFolder;
     private final File logFolder;
     private final File fixtureLibraryFolder;
+    private String documentsPath = userHome + "\\OneDrive\\Dokumente"; // Für Windows mit Onedrive
 
     public FilesManager() {
         logger = Logger.getLogger(FilesManager.class);
-        if(!new File(documentsPath).exists()) documentsPath = userHome+"\\Documents"; //In case onedrive is not installed
-        workFolder = new File(documentsPath+"\\SDMXCP");
-        logFolder = new File(workFolder+"\\logs");
-        fixtureLibraryFolder = new File(workFolder+"\\Fixture_Library");
+        if (!new File(documentsPath).exists())
+            documentsPath = userHome + "\\Documents"; //In case onedrive is not installed
+        workFolder = new File(documentsPath + "\\SDMXCP");
+        logFolder = new File(workFolder + "\\logs");
+        fixtureLibraryFolder = new File(workFolder + "\\Fixture_Library");
 
 
     }
@@ -32,12 +33,12 @@ public class FilesManager {
         checkFolderPath(fixtureLibraryFolder);
 
 
-        if(Objects.requireNonNull(fixtureLibraryFolder.listFiles()).length == 0){
+        if (Objects.requireNonNull(fixtureLibraryFolder.listFiles()).length == 0) {
             resetFixtureLibrary();
         }
     }
 
-    public void resetFixtureLibrary(){
+    public void resetFixtureLibrary() {
         logger.info("Resetting fixtures library");
         try {
             FileUtils.deleteFolder(fixtureLibraryFolder);
@@ -48,9 +49,9 @@ public class FilesManager {
         }
     }
 
-    private void checkFolderPath(File file){
-        if(!file.exists()){
-            logger.info("Created File: "+file.getName()+" | Result: "+file.mkdirs());
+    private void checkFolderPath(File file) {
+        if (!file.exists()) {
+            logger.info("Created File: " + file.getName() + " | Result: " + file.mkdirs());
         }
     }
 

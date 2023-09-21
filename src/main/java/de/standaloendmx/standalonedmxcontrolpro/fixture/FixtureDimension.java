@@ -1,8 +1,5 @@
 package de.standaloendmx.standalonedmxcontrolpro.fixture;
 
-import com.google.gson.annotations.JsonAdapter;
-
-
 public class FixtureDimension {
     private double width;
     private double height;
@@ -18,20 +15,20 @@ public class FixtureDimension {
         return width;
     }
 
-    public double getHeight() {
-        return height;
-    }
-
-    public double getDepth() {
-        return depth;
-    }
-
     public void setWidth(double width) {
         this.width = width;
     }
 
+    public double getHeight() {
+        return height;
+    }
+
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public double getDepth() {
+        return depth;
     }
 
     public void setDepth(double depth) {

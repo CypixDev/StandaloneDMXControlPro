@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
@@ -64,15 +62,16 @@ public class SideBarViewController implements Initializable {
         });
 
     }
-    public void handleButtonClick(Button clickedButton){
-        if(!lastClickedButton.equals(clickedButton)){
+
+    public void handleButtonClick(Button clickedButton) {
+        if (!lastClickedButton.equals(clickedButton)) {
             ContentAreaViewController.instance.resetContent();
 
 
-            ((FontIcon)lastClickedButton.getGraphic()).getStyleClass().remove("selected");
-            ((FontIcon)lastClickedButton.getGraphic()).getStyleClass().add("not-selected");
-            ((FontIcon)clickedButton.getGraphic()).getStyleClass().remove("not-selected");
-            ((FontIcon)clickedButton.getGraphic()).getStyleClass().add("selected");
+            ((FontIcon) lastClickedButton.getGraphic()).getStyleClass().remove("selected");
+            ((FontIcon) lastClickedButton.getGraphic()).getStyleClass().add("not-selected");
+            ((FontIcon) clickedButton.getGraphic()).getStyleClass().remove("not-selected");
+            ((FontIcon) clickedButton.getGraphic()).getStyleClass().add("selected");
 
 
             if (clickedButton.equals(btnPatch)) {
@@ -86,7 +85,7 @@ public class SideBarViewController implements Initializable {
 
             } else if (clickedButton.equals(btnLive)) {
 
-            } else if(clickedButton.equals(btnDeploy)){
+            } else if (clickedButton.equals(btnDeploy)) {
 
             }
 

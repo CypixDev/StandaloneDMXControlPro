@@ -5,7 +5,6 @@ import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,17 +12,13 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 
-import java.io.IOException;
-
 public class LoadingScreenController {
 
+    private final int LADEDAUER = 5000 / 10;
     @FXML
     private ProgressBar progressBar;
-
     @FXML
     private Label nachrichtLabel;
-
-    private final int LADEDAUER = 5000/10;
 
     public void initialize() {
         startDelay();

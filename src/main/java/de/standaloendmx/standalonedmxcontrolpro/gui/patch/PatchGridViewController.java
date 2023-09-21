@@ -7,19 +7,15 @@ import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -53,14 +49,15 @@ public class PatchGridViewController implements Initializable {
                     //getPaneAtXY(e.getSceneX(),e.getSceneY()).setStyle("-fx-background-color: -fx-accent-color;");
                 });
 
-                pane.setOnDragDetected(e -> {
+              /*Future:
+                   pane.setOnDragDetected(e -> {
 
                     if(getChannelByPane((Pane) e.getTarget()) != -1){
                         Dragboard dragboard = ((Pane) e.getTarget()).startDragAndDrop(TransferMode.MOVE);
                         ClipboardContent content = new ClipboardContent();
                         System.out.println("Correct target");
                     }
-                });
+                });*/
                 /*
                         directory.setOnDragDetected(event -> {
             TreeItem<Fixture> selectedItem = directory.getSelectionModel().getSelectedItem();
@@ -91,10 +88,10 @@ public class PatchGridViewController implements Initializable {
                     pane1.setStyle("-fx-background-color: -fx-color;");
 
                     for (int i1 = 0; i1 < grid.getChildren().size(); i1++) {
-                        if(grid.getChildren().get(i1).equals(pane1)){
+                        if (grid.getChildren().get(i1).equals(pane1)) {
                             for (int i2 = 0; i2 < size; i2++) {
-                                if(i1+i2 < 512)
-                                    grid.getChildren().get(i1+i2).setStyle("-fx-background-color: -fx-color;");
+                                if (i1 + i2 < 512)
+                                    grid.getChildren().get(i1 + i2).setStyle("-fx-background-color: -fx-color;");
                             }
                             break;
                         }
@@ -127,12 +124,12 @@ public class PatchGridViewController implements Initializable {
 
             String[] data = e.getDragboard().getString().split(":");
             FixtureMode mode;
-            if(data.length == 2){
+            if (data.length == 2) {
                 String modeName = data[1];
                 mode = fixture.getModeByName(modeName);
-            }else mode = fixture.getModes().get(0); //In case there is only one
+            } else mode = fixture.getModes().get(0); //In case there is only one
 
-            if(StandaloneDMXControlPro.instance.getPatchManager().isChannelFree(pos, mode.getFixtureChannels().size())){
+            if (StandaloneDMXControlPro.instance.getPatchManager().isChannelFree(pos, mode.getFixtureChannels().size())) {
                 StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new PatchFixture(fixture, pos, mode.getFixtureChannels().size(), Color.LIME));
             }
 
@@ -144,12 +141,13 @@ public class PatchGridViewController implements Initializable {
 
     }
 
-    private void updatePatch(){
+    private void updatePatch() {
         for (PatchFixture patchPatch : patchManager.getPatches()) {
             applyPatch(patchPatch);
         }
     }
-    private void applyPatch(PatchFixture patch){
+
+    private void applyPatch(PatchFixture patch) {
         Pane pane = (Pane) grid.getChildren().get(patch.getChannel());
 
         pane.setOnMouseClicked(e -> {
@@ -169,26 +167,28 @@ public class PatchGridViewController implements Initializable {
 
         GridPane.setColumnSpan(pane, patch.getSize());
         for (int i = 1; i < patch.getSize(); i++) {
-            grid.getChildren().get(patch.getChannel()+i).setVisible(false);
+            grid.getChildren().get(patch.getChannel() + i).setVisible(false);
         }
         pane.setBorder(new Border(new BorderStroke(patch.getColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
-        ((Label)pane.getChildren().get(0)).setText(patch.getName());
+        ((Label) pane.getChildren().get(0)).setText(patch.getName());
     }
-    private int getChannelByPane(Pane pane){
+
+    private int getChannelByPane(Pane pane) {
         int channel = 0;
         for (Node child : grid.getChildren()) {
-            if(pane.equals(child)) return channel;
+            if (pane.equals(child)) return channel;
             channel++;
         }
         return -1;
     }
-    private void removePatch(PatchFixture patch){
+
+    private void removePatch(PatchFixture patch) {
         GridPane.setColumnSpan(grid.getChildren().get(patch.getChannel()), 1);
         for (int i = 1; i < patch.getSize(); i++) {
-            grid.getChildren().get(patch.getChannel()+i).setVisible(true);
+            grid.getChildren().get(patch.getChannel() + i).setVisible(true);
         }
-        ((Pane)grid.getChildren().get(patch.getChannel())).setBorder(new Border(new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
-        ((Label)((Pane)grid.getChildren().get(patch.getChannel())).getChildren().get(0)).setText(String.valueOf(patch.getChannel()));
+        ((Pane) grid.getChildren().get(patch.getChannel())).setBorder(new Border(new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
+        ((Label) ((Pane) grid.getChildren().get(patch.getChannel())).getChildren().get(0)).setText(String.valueOf(patch.getChannel()));
     }
 
     private void colorPane(DragEvent e) {
@@ -196,10 +196,10 @@ public class PatchGridViewController implements Initializable {
         String fixtureName = data[0];
         Fixture fixture = StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
         FixtureMode mode;
-        if(data.length == 2){
+        if (data.length == 2) {
             String modeName = data[1];
             mode = fixture.getModeByName(modeName);
-        }else mode = fixture.getModes().get(0); //In case there is only one
+        } else mode = fixture.getModes().get(0); //In case there is only one
 
         int size = mode.getFixtureChannels().size();
 
@@ -212,21 +212,21 @@ public class PatchGridViewController implements Initializable {
     }
 
 
-
-    private Fixture getFixtureByDragBoardString(String dragBoardString){
+    private Fixture getFixtureByDragBoardString(String dragBoardString) {
         String[] data = dragBoardString.split(":");
         String fixtureName = data[0];
         return StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
     }
-    private int getFixtureSizeByDragBoardString(String dragBoardString){
+
+    private int getFixtureSizeByDragBoardString(String dragBoardString) {
         String[] data = dragBoardString.split(":");
         String fixtureName = data[0];
         Fixture fixture = StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
         FixtureMode mode;
-        if(data.length == 2){
+        if (data.length == 2) {
             String modeName = data[1];
             mode = fixture.getModeByName(modeName);
-        }else mode = fixture.getModes().get(0); //In case there is only one
+        } else mode = fixture.getModes().get(0); //In case there is only one
         return mode.getFixtureChannels().size();
     }
 

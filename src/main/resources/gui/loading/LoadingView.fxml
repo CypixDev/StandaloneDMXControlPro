@@ -8,32 +8,34 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<StackPane prefHeight="150.0" prefWidth="200.0" stylesheets="@../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.loading.LoadingScreenController">
-  <children>
-      <!-- Header mit Logo und Versionsinformation -->
-      <ImageView>
-          <image>
-              <Image url="@../img/logo/logo.png" />
-          </image>
-      </ImageView>
-     <VBox alignment="BOTTOM_CENTER" StackPane.alignment="CENTER">
-        <children>
-             <Label text="Version 1.0">
-                 <font>
-                     <Font size="12" />
-                 </font>
-             </Label>
-             <ProgressBar id="progress-bar" fx:id="progressBar" prefHeight="2.0" prefWidth="290.0" stylesheets="@style.css" />
-             <Label fx:id="nachrichtLabel" alignment="CENTER" text="Lade views...">
-              <font>
-                 <Font size="10.0" />
-              </font>
-              <padding>
-                 <Insets top="3.0" />
-              </padding>
-           </Label>
-        </children>
-     </VBox>
-  </children>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="150.0" prefWidth="200.0" stylesheets="@../MainStyle.css"
+           xmlns="http://javafx.com/javafx/19"
+           fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.loading.LoadingScreenController">
+    <children>
+        <!-- Header mit Logo und Versionsinformation -->
+        <ImageView>
+            <image>
+                <Image url="@../img/logo/logo.png"/>
+            </image>
+        </ImageView>
+        <VBox alignment="BOTTOM_CENTER" StackPane.alignment="CENTER">
+            <children>
+                <Label text="Version 1.0">
+                    <font>
+                        <Font size="12"/>
+                    </font>
+                </Label>
+                <ProgressBar id="progress-bar" fx:id="progressBar" prefHeight="2.0" prefWidth="290.0"
+                             stylesheets="@style.css"/>
+                <Label fx:id="nachrichtLabel" alignment="CENTER" text="Lade views...">
+                    <font>
+                        <Font size="10.0"/>
+                    </font>
+                    <padding>
+                        <Insets top="3.0"/>
+                    </padding>
+                </Label>
+            </children>
+        </VBox>
+    </children>
 </StackPane>

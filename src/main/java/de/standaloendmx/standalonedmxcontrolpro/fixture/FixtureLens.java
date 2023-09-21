@@ -14,12 +14,12 @@ public class FixtureLens {
         return name;
     }
 
-    public String getDegreeMinMax() {
-        return degreeMinMax;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDegreeMinMax() {
+        return degreeMinMax;
     }
 
     public void setDegreeMinMax(String degreeMinMax) {

@@ -17,14 +17,14 @@ public enum CapabilityType {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public static CapabilityType getByName(String name){
+    public static CapabilityType getByName(String name) {
         for (CapabilityType value : values()) {
-            if(value.name.equals(name)) return value;
+            if (value.name.equals(name)) return value;
         }
         return null;
+    }
+
+    public String getName() {
+        return name;
     }
 }

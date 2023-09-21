@@ -17,19 +17,19 @@ public class StandaloneDMXControlPro {
     public static StandaloneDMXControlPro instance;
 
     /**TODO
-    * ♾️
-    * try catch hinzufügen bei fixture aus datei laden und in die directory vllt auch
-    * Replace fixture names with fixtureKey from .json maybe
+     * ♾️
+     * try catch hinzufügen bei fixture aus datei laden und in die directory vllt auch
+     * Replace fixture names with fixtureKey from .json maybe
      */
 
-    /**TODO-Improve
+    /**
+     * TODO-Improve
      * Beim färben der Felder beim Patchen nicht jedes mal das ganze feld resetten sondern nur das wo event exited oder ähnlcihes schmeißt
      * Die suche bei der Fixture Lib verbessern
-     *
+     * <p>
      * Alle views, besonders patchview beim start laden
-     *
+     * <p>
      * Nach dem placen von einem Patch grid updaten um nicht zurückgesetzte felder zu resetten
-     *
      */
 
     private final Logger logger;
@@ -49,8 +49,8 @@ public class StandaloneDMXControlPro {
         loggingManager = new LoggingManager();
         loggingManager.setDebugging(DEBUGGING);
         logger = Logger.getLogger(StandaloneDMXControlPro.class);
-        logger.info("Starting StandaloneDMXControlPro "+VERSION);
-        logger.info("Debugging: "+DEBUGGING);
+        logger.info("Starting StandaloneDMXControlPro " + VERSION);
+        logger.info("Debugging: " + DEBUGGING);
 
         viewManager = new ViewManager();
         fixtureManager = new FixtureManager();
@@ -63,10 +63,13 @@ public class StandaloneDMXControlPro {
         filesManager.init(); //Creating paths
     }
 
-    private void startGUI(){
-        new Thread(() -> Application.launch(MainApplication.class)).start();
+    public static void main(String[] args) {
+        instance = new StandaloneDMXControlPro();
     }
 
+    private void startGUI() {
+        new Thread(() -> Application.launch(MainApplication.class)).start();
+    }
 
     public LoggingManager getLoggingManager() {
         return loggingManager;
@@ -86,9 +89,5 @@ public class StandaloneDMXControlPro {
 
     public PatchManager getPatchManager() {
         return patchManager;
-    }
-
-    public static void main(String[] args) {
-        instance = new StandaloneDMXControlPro();
     }
 }

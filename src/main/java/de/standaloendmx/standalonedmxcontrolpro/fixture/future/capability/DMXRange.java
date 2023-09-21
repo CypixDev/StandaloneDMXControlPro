@@ -18,7 +18,7 @@ public class DMXRange {
         return to;
     }
 
-    public boolean isInRange(int dmxValue){
+    public boolean isInRange(int dmxValue) {
         return dmxValue >= from && dmxValue <= to;
     }
 
