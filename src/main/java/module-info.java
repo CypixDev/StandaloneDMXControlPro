@@ -31,5 +31,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
     opens de.standaloendmx.standalonedmxcontrolpro.fixture.capability to com.google.gson;
     exports de.standaloendmx.standalonedmxcontrolpro.fixture.capability.capabilities_future to com.google.gson;
     opens de.standaloendmx.standalonedmxcontrolpro.fixture.capability.capabilities_future to com.google.gson;
+    opens de.standaloendmx.standalonedmxcontrolpro.patch to com.google.gson;
+    exports de.standaloendmx.standalonedmxcontrolpro.patch to com.google.gson;
 
 }

@@ -13,6 +13,7 @@ public class FilesManager {
     private final File workFolder;
     private final File logFolder;
     private final File fixtureLibraryFolder;
+    private final File savesFolder;
     private String documentsPath = userHome + "\\OneDrive\\Dokumente"; // Für Windows mit Onedrive
 
     public FilesManager() {
@@ -22,6 +23,7 @@ public class FilesManager {
         workFolder = new File(documentsPath + "\\SDMXCP");
         logFolder = new File(workFolder + "\\logs");
         fixtureLibraryFolder = new File(workFolder + "\\Fixture_Library");
+        savesFolder = new File(workFolder+"\\saves");
 
 
     }
@@ -31,6 +33,7 @@ public class FilesManager {
         checkFolderPath(workFolder);
         checkFolderPath(logFolder);
         checkFolderPath(fixtureLibraryFolder);
+        checkFolderPath(savesFolder);
 
 
         if (Objects.requireNonNull(fixtureLibraryFolder.listFiles()).length == 0) {
@@ -75,5 +78,7 @@ public class FilesManager {
         return userHome;
     }
 
-
+    public File getSavesFolder() {
+        return savesFolder;
+    }
 }

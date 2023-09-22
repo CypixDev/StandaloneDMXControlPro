@@ -10,9 +10,9 @@ public class PatchFixture {
     private Fixture fixture;
     private int channel; // 1 - 512
     private int size;
-    private Color color;
+    private String color;
 
-    public PatchFixture(Fixture fixture, int channel, int size, Color color) {
+    public PatchFixture(Fixture fixture, int channel, int size, String color) {
         this.channel = channel;
         this.size = size;
         this.color = color;
@@ -36,7 +36,7 @@ public class PatchFixture {
         return size;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 }

@@ -96,4 +96,11 @@ public class FixtureManager {
             }
         }
     }
+
+    public Fixture getFixtureByKey(String key) {
+        for (Fixture fixture : fixtures) {
+            if (fixture.getFixtureKey().equals(key)) return fixture;
+        }
+        return null;
+    }
 }

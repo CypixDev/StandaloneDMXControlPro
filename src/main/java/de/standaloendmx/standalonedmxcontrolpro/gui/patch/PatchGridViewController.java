@@ -17,9 +17,13 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PatchGridViewController implements Initializable {
+
+    public static List<PatchGridViewController> instances = new ArrayList<>(); //TODO: improve lol
 
     @FXML
     private GridPane grid;
@@ -28,6 +32,7 @@ public class PatchGridViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        instances.add(this);
         patchManager = StandaloneDMXControlPro.instance.getPatchManager();
 
         int counter = 1;
@@ -130,7 +135,7 @@ public class PatchGridViewController implements Initializable {
             } else mode = fixture.getModes().get(0); //In case there is only one
 
             if (StandaloneDMXControlPro.instance.getPatchManager().isChannelFree(pos, mode.getFixtureChannels().size())) {
-                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new PatchFixture(fixture, pos, mode.getFixtureChannels().size(), Color.LIME));
+                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new PatchFixture(fixture, pos, mode.getFixtureChannels().size(), Color.LIME.toString()));
             }
 
             updatePatch();
@@ -141,7 +146,8 @@ public class PatchGridViewController implements Initializable {
 
     }
 
-    private void updatePatch() {
+    public void updatePatch() {
+        System.out.println("Updateing");
         for (PatchFixture patchPatch : patchManager.getPatches()) {
             applyPatch(patchPatch);
         }
@@ -169,7 +175,7 @@ public class PatchGridViewController implements Initializable {
         for (int i = 1; i < patch.getSize(); i++) {
             grid.getChildren().get(patch.getChannel() + i).setVisible(false);
         }
-        pane.setBorder(new Border(new BorderStroke(patch.getColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
+        pane.setBorder(new Border(new BorderStroke(Color.valueOf(patch.getColor()), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
         ((Label) pane.getChildren().get(0)).setText(patch.getName());
     }
 
