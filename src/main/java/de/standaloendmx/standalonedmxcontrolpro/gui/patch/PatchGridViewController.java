@@ -147,7 +147,6 @@ public class PatchGridViewController implements Initializable {
     }
 
     public void updatePatch() {
-        System.out.println("Updateing");
         for (PatchFixture patchPatch : patchManager.getPatches()) {
             applyPatch(patchPatch);
         }

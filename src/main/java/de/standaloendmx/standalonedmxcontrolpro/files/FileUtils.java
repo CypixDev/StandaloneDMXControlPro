@@ -103,19 +103,14 @@ public class FileUtils {
     }
 
     public static void writeStringToFile(File file, String content) {
-        // Erzeugen Sie einen Dateinamen basierend auf dem aktuellen Datum
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //String dateStr = dateFormat.format(new Date());
-
         try {
-            // Erstellen Sie einen FileWriter, um den Inhalt in die Datei zu schreiben
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(content);
             fileWriter.close();
-            System.out.println("Datei erfolgreich erstellt: " + file);
+
+            logger.info("Datei erfolgreich erstellt: " + file);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Fehler beim Schreiben in die Datei: " + file);
+            logger.error(e);
         }
     }
     public static String readStringFromFile(File file) {

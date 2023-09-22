@@ -15,6 +15,8 @@ import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCombination;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -38,6 +40,7 @@ public class MenuBarViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        save.setAccelerator(KeyCombination.keyCombination("Ctrl+s"));
         save.setOnAction(e -> {
             PatchManager patchManager = StandaloneDMXControlPro.instance.getPatchManager();
 
@@ -50,12 +53,17 @@ public class MenuBarViewController implements Initializable {
         });
 
         saveAs.setOnAction(e -> {
+            FileChooser chooser = new FileChooser();
+            chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Textdateien", "*.json"));
 
+            chooser.setTitle("Speicherort wählen");
+            File selectedFile = chooser.showOpenDialog(MainApplication.mainStage);
 
         });
 
         open.setOnAction(e -> {
             FileChooser chooser = new FileChooser();
+            chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Textdateien", "*.json"));
             chooser.setTitle("Datei auswählen");
             File selectedFile = chooser.showOpenDialog(MainApplication.mainStage);
 
