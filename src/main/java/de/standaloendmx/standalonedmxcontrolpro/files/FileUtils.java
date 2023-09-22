@@ -97,7 +97,7 @@ public class FileUtils {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return "";
     }
@@ -121,7 +121,7 @@ public class FileUtils {
                 stringBuilder.append(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return stringBuilder.toString();
     }
