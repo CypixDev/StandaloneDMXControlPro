@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class SideBarViewController implements Initializable {
 
-    private Logger logger = LogManager.getLogger(SideBarViewController.class;)
+    private Logger logger = LogManager.getLogger(SideBarViewController.class);
 
     private Button lastClickedButton;
 
