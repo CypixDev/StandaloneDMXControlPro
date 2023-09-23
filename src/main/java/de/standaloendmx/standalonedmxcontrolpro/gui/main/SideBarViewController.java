@@ -82,7 +82,11 @@ public class SideBarViewController implements Initializable {
                     ex.printStackTrace();
                 }
             } else if (clickedButton.equals(btnEdit)) {
-
+                try {
+                    ContentAreaViewController.instance.setContentAndAnchor("/gui/edit/EditView.fxml");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             } else if (clickedButton.equals(btnLive)) {
 
             } else if (clickedButton.equals(btnDeploy)) {

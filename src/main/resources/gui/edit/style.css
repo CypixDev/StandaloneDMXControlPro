@@ -1,0 +1,82 @@
+
+.transparent{
+    -fx-background-color: transparent;
+
+}
+
+.box {
+    -fx-border-color: black;
+    -fx-border-width: 0.5;
+}
+
+.text-field{
+    -fx-background-color: -fx-grey3;
+}
+
+
+/* Setze den Hintergrund der TableView */
+.table-view {
+    -fx-background-color: -fx-color;
+    -fx-spacing: 5;
+}
+
+/* Ändere die Farbe der Tabellenzeilen im Wechsel */
+.table-row-cell:odd {
+    -fx-background-color: -fx-color;
+}
+/* Ändere die Farbe der Tabellenzeilen im Wechsel */
+.table-row-cell:even {
+    -fx-background-color: -fx-grey4;
+}
+
+/* Ändere die Farbe der Tabellenzeilen, wenn die Maus darüber liegt */
+.table-row-cell:hover {
+    -fx-background-color: -fx-accent-color;
+}
+
+/* Ändere die Farbe des ausgewählten Elements */
+.table-row-cell:selected {
+    -fx-background-color: -fx-grey3;
+}
+
+/* Ändere die Farbe der Tabellenüberschrift */
+.table-column-header {
+    -fx-background-color: -fx-text-color;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell{
+    /*-fx-border-color: black;*/
+    -fx-table-cell-border-color:black;
+}
+
+
+/* Ändere die Farbe des Zeigerzeigers, wenn er über den Kopfzeilen schwebt */
+.table-column-header:hover {
+    -fx-background-color: -fx-accent-color;
+}
+
+/* Ändere die Farbe der Tabellenzelleninhalte */
+.table-cell {
+    -fx-text-fill: -fx-grey2;
+}
+
+/* Ändere die Farbe des vertikalen Scrollbalkens */
+.scroll-bar:vertical {
+    -fx-background-color: -fx-grey4;
+}
+
+/* Ändere die Farbe des vertikalen Scrollbalkens, wenn die Maus darüber schwebt */
+.scroll-bar:vertical:hover {
+    -fx-background-color: -fx-grey2;
+}
+
+/* Ändere die Farbe des horizontalen Scrollbalkens */
+.scroll-bar:horizontal {
+    -fx-background-color: -fx-grey4;
+}
+
+/* Ändere die Farbe des horizontalen Scrollbalkens, wenn die Maus darüber schwebt */
+.scroll-bar:horizontal:hover {
+    -fx-background-color: -fx-grey2;
+}

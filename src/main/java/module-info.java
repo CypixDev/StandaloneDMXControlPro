@@ -14,10 +14,12 @@ module de.standaloendmx.standalonedmxcontrollpro {
     opens de.standaloendmx.standalonedmxcontrolpro.gui.loading to javafx.fxml;
     opens de.standaloendmx.standalonedmxcontrolpro.gui.main to javafx.fxml;
     opens de.standaloendmx.standalonedmxcontrolpro.gui.patch to javafx.fxml;
+    opens de.standaloendmx.standalonedmxcontrolpro.gui.edit to javafx.fxml;
 
     exports de.standaloendmx.standalonedmxcontrolpro.gui.loading;
     exports de.standaloendmx.standalonedmxcontrolpro.gui.main;
     exports de.standaloendmx.standalonedmxcontrolpro.gui.patch;
+    exports de.standaloendmx.standalonedmxcontrolpro.gui.edit;
     //GUI END
 
     opens de.standaloendmx.standalonedmxcontrolpro.fixture to com.google.gson;

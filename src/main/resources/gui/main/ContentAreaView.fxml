@@ -23,17 +23,17 @@
                     <children>
                         <Button mnemonicParsing="false">
                             <graphic>
-                                <FontIcon iconLiteral="anto-appstore-add" iconSize="64"/>
+                                <FontIcon iconLiteral="anto-appstore-add" iconSize="48"/>
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false">
                             <graphic>
-                                <FontIcon iconLiteral="anto-sliders" iconSize="64"/>
+                                <FontIcon iconLiteral="anto-sliders" iconSize="48"/>
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false">
                             <graphic>
-                                <FontIcon iconLiteral="anto-play-square" iconSize="64"/>
+                                <FontIcon iconLiteral="anto-play-square" iconSize="48"/>
                             </graphic>
                         </Button>
                     </children>
