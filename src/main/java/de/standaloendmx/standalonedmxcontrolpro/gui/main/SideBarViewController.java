@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class SideBarViewController implements Initializable {
 
+    private Logger logger = LogManager.getLogger(SideBarViewController.class;)
 
     private Button lastClickedButton;
 
@@ -79,13 +82,13 @@ public class SideBarViewController implements Initializable {
                     ContentAreaViewController.instance.setContentAndAnchor("/gui/patch/PatchDirectoryView.fxml");
                     ContentAreaViewController.instance.setContentAndAnchor("/gui/patch/PatchGridView.fxml");
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    logger.error(ex);
                 }
             } else if (clickedButton.equals(btnEdit)) {
                 try {
                     ContentAreaViewController.instance.setContentAndAnchor("/gui/edit/EditView.fxml");
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    logger.error(ex);
                 }
             } else if (clickedButton.equals(btnLive)) {
 
