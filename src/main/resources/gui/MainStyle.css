@@ -25,3 +25,11 @@
 .ikonli-font-icon:hover {
     -fx-icon-color: -fx-accent-color;
 }
+
+.selected {
+    -fx-icon-color: -fx-accent-color;
+}
+
+.not-selected {
+    -fx-icon-color: black;
+}

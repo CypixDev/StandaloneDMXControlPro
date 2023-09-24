@@ -1,0 +1,43 @@
+.vbox{
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
+}
+
+.pane{
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
+}
+
+/* Setze den Hintergrund des Sliders auf dunkelgrau */
+.slider {
+    -fx-background-color: -fx-color;
+}
+
+/* Setze die Farbe des Slidernadels auf mittelgrau */
+.slider .thumb {
+    -fx-background-color: -fx-grey2;
+}
+
+/* Setze die Farbe des Slidernadels, wenn er gedrückt wird, auf helleres Grau */
+.slider .thumb:pressed {
+    -fx-background-color: -fx-grey3;
+}
+
+/* Setze die Farbe der Schiene des Sliders auf noch dunkleres Grau */
+.slider .track {
+    -fx-background-color: black;
+    -fx-pref-width: 3;
+}
+
+/* Setze die Farbe des Schienennadels auf noch helleres Grau */
+.slider .track .thumb {
+    -fx-background-color: -fx-grey4;
+}
+
+.button{
+    -fx-background-color: -fx-grey2;
+    -fx-border-radius: 2;
+    -fx-border-color: black;
+    -fx-background-radius: 2;
+    -fx-text-fill: lime;
+}
