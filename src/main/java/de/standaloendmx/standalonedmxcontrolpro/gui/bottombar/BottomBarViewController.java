@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -22,7 +23,7 @@ public class BottomBarViewController implements Initializable {
     private Button lastClickedButton;
 
     @FXML
-    private Pane content;
+    private AnchorPane content;
 
 
     @FXML
@@ -79,9 +80,8 @@ public class BottomBarViewController implements Initializable {
 
     public void setContentAndAnchor(Node node) {
         content.getChildren().add(node);
-        /*
         AnchorPane.setBottomAnchor(node, 0.0);
-        AnchorPane.setTopAnchor(node, 0.0);*/
+        AnchorPane.setTopAnchor(node, 0.0);
     }
 
     public void setContentAndAnchor(String path) throws IOException {

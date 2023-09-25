@@ -8,13 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<fx:root type="javafx.scene.layout.VBox"
-         xmlns:fx="http://javafx.com/fxml"
-         fx:id="vbox" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="30.0"
-         style="-fx-background-color: -fx-color;" stylesheets="@sliderstyle.css" xmlns="http://javafx.com/javafx/19"
->
-   <Pane fx:id="color" prefHeight="28.0" prefWidth="28.0" style="-fx-background-color: black;">
+<fx:root fx:id="vbox" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="30.0" style="-fx-background-color: -fx-color;" stylesheets="@sliderstyle.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <Pane fx:id="color" prefWidth="28.0" style="-fx-background-color: black;">
       <VBox.margin>
          <Insets left="1.0" right="1.0" top="2.0" />
       </VBox.margin>
@@ -31,7 +26,7 @@
          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
       </VBox.margin>
       <font>
-         <Font name="System Bold" size="9.0" />
+         <Font name="System Bold" size="8.0" />
       </font>
    </Button>
 </fx:root>
