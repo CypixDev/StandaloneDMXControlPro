@@ -1,6 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -61,6 +62,9 @@ public class MySlider extends VBox {
 
     @FXML
     private void initialize() {
-        value.textProperty().bind(Bindings.format("%d", slider.valueProperty().intValue()));
+        slider.valueProperty().addListener(e -> {
+            value.setText(String.valueOf((int)slider.getValue()));
+
+        });
     }
 }
