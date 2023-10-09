@@ -48,7 +48,7 @@
          <children>
             <AnchorPane style="-fx-background-color: -fx-grey4;">
                <children>
-                  <Button mnemonicParsing="false" styleClass="transparent" AnchorPane.leftAnchor="0.0">
+                  <Button fx:id="btnAdd" mnemonicParsing="false" styleClass="transparent" AnchorPane.leftAnchor="0.0">
                      <graphic>
                         <FontIcon iconLiteral="anto-plus" iconSize="17" />
                      </graphic>
