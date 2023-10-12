@@ -30,8 +30,16 @@
 }
 
 /* Setze die Farbe des Schienennadels auf noch helleres Grau */
-.slider .track .thumb {
+
+.slider .thumb {
     -fx-background-color: -fx-grey4;
+    -fx-background-insets: 0; /* Entfernt den inneren Schatten des Thumbs */
+    -fx-padding: 7; /* Ändert die Größe des Thumbs */
+}
+
+.slider .thumb {
+    -fx-background-radius: 4;
+    -fx-padding: 12 5 12 5;
 }
 
 .button{
@@ -39,5 +47,13 @@
     -fx-border-radius: 2;
     -fx-border-color: black;
     -fx-background-radius: 2;
+}
+
+
+.button_active{
     -fx-text-fill: lime;
+}
+
+.button_inactive{
+    -fx-text-fill: red;
 }

@@ -65,6 +65,31 @@ public class MySlider extends VBox {
         slider.valueProperty().addListener(e -> {
             value.setText(String.valueOf((int)slider.getValue()));
 
+            if(button.getText().equals("❌")){
+                setButtonActive();
+            }
         });
+
+
+        setButtonInActive();
+        button.setOnAction(e -> {
+            if(button.getText().equals("✅")){
+                setButtonInActive();
+            }else {
+                setButtonActive();
+            }
+        });
+    }
+
+    private void setButtonActive(){
+        button.setText("✅");
+        button.getStyleClass().add("button_active");
+        button.getStyleClass().remove("button_inactive");
+    }
+
+    private void setButtonInActive(){
+        button.setText("❌");
+        button.getStyleClass().add("button_inactive");
+        button.getStyleClass().remove("button_active");
     }
 }
