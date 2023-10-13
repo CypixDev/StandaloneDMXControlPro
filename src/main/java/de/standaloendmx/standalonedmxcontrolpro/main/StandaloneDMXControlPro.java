@@ -30,6 +30,8 @@ public class StandaloneDMXControlPro {
      * Alle views, besonders patchview beim start laden
      * <p>
      * Nach dem placen von einem Patch grid updaten um nicht zurückgesetzte felder zu resetten
+     *
+     * Das Content feld muss zu einem einfachen pane werden und was applied wird entscheidet was dann passiert
      */
 
     private final Logger logger;

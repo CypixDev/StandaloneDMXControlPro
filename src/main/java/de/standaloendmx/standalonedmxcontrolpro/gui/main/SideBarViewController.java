@@ -3,6 +3,7 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -86,7 +87,7 @@ public class SideBarViewController implements Initializable {
                 }
             } else if (clickedButton.equals(btnEdit)) {
                 try {
-                    ContentAreaViewController.instance.setContentAndAnchor("/gui/edit/EditView.fxml");
+                    ContentAreaViewController.instance.setContentAndAnchor("/gui/edit/EditView.fxml", Priority.ALWAYS);
                 } catch (IOException ex) {
                     logger.error(ex);
                 }

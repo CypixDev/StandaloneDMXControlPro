@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,15 +33,19 @@ public class ContentAreaViewController implements Initializable {
         instance = this;
     }
 
-    public void setContentAndAnchor(Node node) {
+    public void setContentAndAnchor(Node node, Priority hGrow) {
         contentBox.getChildren().add(node);
+        HBox.setHgrow(node, hGrow);
         /*
         AnchorPane.setBottomAnchor(node, 0.0);
         AnchorPane.setTopAnchor(node, 0.0);*/
     }
 
     public void setContentAndAnchor(String path) throws IOException {
-        setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
+        setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), Priority.NEVER);
+    }
+    public void setContentAndAnchor(String path, Priority hGrow) throws IOException {
+        setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), hGrow);
     }
 
     public void resetContent() {

@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import java.net.URL?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="mainBox" prefWidth="266.0" spacing="5.0" style="-fx-background-color: -fx-color;"
-      styleClass="main-vbox" xmlns="http://javafx.com/javafx/19"
-      fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.patch.PatchDirectoryViewController">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox fx:id="mainBox" prefWidth="270.0" spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="main-vbox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.patch.PatchDirectoryViewController">
     <children>
-        <HBox alignment="CENTER_LEFT" style="-fx-background-color: -fx-color;" stylesheets="@style.css"
-              VBox.vgrow="NEVER">
+        <HBox alignment="CENTER_LEFT" style="-fx-background-color: -fx-color;" stylesheets="@style.css" VBox.vgrow="NEVER">
             <children>
                 <Button fx:id="btnBulb" mnemonicParsing="false">
                     <graphic>
-                        <FontIcon iconLiteral="anto-bulb" iconSize="18"/>
+                        <FontIcon iconLiteral="anto-bulb" iconSize="18" />
                     </graphic>
                 </Button>
-                <Label text="Fixture Library"/>
+                <Label text="Fixture Library" />
                 <Button fx:id="btnReset" mnemonicParsing="false">
                     <graphic>
-                        <FontIcon iconLiteral="anto-cloud-download" iconSize="18"/>
+                        <FontIcon iconLiteral="anto-cloud-download" iconSize="18" />
                     </graphic>
                 </Button>
                 <Button fx:id="btnFolder" mnemonicParsing="false">
                     <graphic>
-                        <FontIcon iconLiteral="anto-folder" iconSize="18"/>
+                        <FontIcon iconLiteral="anto-folder" iconSize="18" />
                     </graphic>
                 </Button>
                 <Button fx:id="btnReload" mnemonicParsing="false">
                     <graphic>
-                        <FontIcon iconLiteral="anto-reload" iconSize="18"/>
+                        <FontIcon iconLiteral="anto-reload" iconSize="18" />
                     </graphic>
                 </Button>
             </children>
         </HBox>
         <TextField fx:id="tfSearch" prefHeight="25.0" promptText="Search" VBox.vgrow="NEVER">
             <opaqueInsets>
-                <Insets/>
+                <Insets />
             </opaqueInsets>
             <VBox.margin>
-                <Insets left="5.0" right="5.0"/>
+                <Insets left="5.0" right="5.0" />
             </VBox.margin>
         </TextField>
-        <TreeView fx:id="directory" prefWidth="264.0" style="-fx-background-color: -fx-color;" VBox.vgrow="ALWAYS"/>
+        <TreeView fx:id="directory" prefWidth="264.0" style="-fx-background-color: -fx-color;" VBox.vgrow="ALWAYS" />
     </children>
     <stylesheets>
-        <URL value="@../MainStyle.css"/>
-        <URL value="@style.css"/>
+        <URL value="@../MainStyle.css" />
+        <URL value="@style.css" />
     </stylesheets>
 </VBox>
