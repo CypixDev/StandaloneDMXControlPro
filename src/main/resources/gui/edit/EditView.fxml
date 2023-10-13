@@ -2,9 +2,11 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchor" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.EditViewController">
+<AnchorPane fx:id="anchor" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.EditViewController">
 
-    <fx:include source="ScenesView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <fx:include source="ScenesView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="266.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <fx:include source="StepsView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
 </AnchorPane>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<fx:root fx:id="vbox" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: -fx-color;" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="name" text="Scene 1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="time" text="00'01''00">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <HBox alignment="BOTTOM_RIGHT">
+         <children>
+            <Label fx:id="repeat" alignment="CENTER_RIGHT" text="1">
+               <graphic>
+                  <FontIcon iconLiteral="anto-reload" />
+               </graphic>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@../../MainStyle.css" />
+      <URL value="@SceneStyle.css" />
+   </stylesheets>
+</fx:root>

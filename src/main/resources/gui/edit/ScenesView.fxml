@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.layout.HBox?>
+<HBox fx:id="hBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController">
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController">
-   <children>
-      <TableView fx:id="tvScenes" prefHeight="200.0" prefWidth="200.0" stylesheets="@stepsstyle.css">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-   </children>
-</AnchorPane>
+</HBox>
