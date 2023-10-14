@@ -32,6 +32,8 @@ public class StandaloneDMXControlPro {
      * Nach dem placen von einem Patch grid updaten um nicht zurückgesetzte felder zu resetten
      *
      * Das Content feld muss zu einem einfachen pane werden und was applied wird entscheidet was dann passiert
+     *
+     * Design von Dialogen studieren ?!
      */
 
     private final Logger logger;
