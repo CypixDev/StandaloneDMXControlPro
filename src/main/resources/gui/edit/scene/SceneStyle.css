@@ -1,7 +1,0 @@
-.v-box{
-    -fx-background-color: -fx-color;
-}
-
-.v-box:selected{
-    -fx-background-color: -fx-grey2;
-}

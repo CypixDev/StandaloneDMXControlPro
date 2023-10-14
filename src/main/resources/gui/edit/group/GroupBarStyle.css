@@ -1,0 +1,47 @@
+.label_group{
+    -fx-border-width: 0;
+    -fx-background-radius: 5;
+    -fx-padding: 1 8 1 8;
+}
+.label_group:hover{
+    /*maybe delete ?*/
+    /*-fx-background-color: -fx-grey3;*/
+}
+
+.label_group_selected{
+    -fx-background-color: -fx-color;
+}
+
+.button_add{
+    -fx-background-color: transparent;
+}
+
+
+
+.text_orange{
+    -fx-text-fill: -fx-orange;
+}
+.text_lime{
+    -fx-text-fill: -fx-lime;
+}
+.text_purple{
+    -fx-text-fill: -fx-purple;
+}
+.text_red{
+    -fx-text-fill: -fx-red;
+}
+.text_pink{
+    -fx-text-fill: -fx-pink;
+}
+.text_blue{
+    -fx-text-fill: -fx-blue;
+}
+.text_aqua{
+    -fx-text-fill: -fx-aqua;
+}
+.text_green{
+    -fx-text-fill: -fx-green;
+}
+.text_white{
+    -fx-text-fill: -fx-white;
+}

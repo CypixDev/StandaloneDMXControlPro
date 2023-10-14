@@ -10,6 +10,16 @@
     -fx-accent-color: #39ff14;
     -fx-accent-color2: #ff9900;
 
+    -fx-orange: #ff9900;
+    -fx-lime: #39ff14;
+    -fx-purple: purple;
+    -fx-red: red;
+    -fx-pink: pink;
+    -fx-blue: blue;
+    -fx-aqua: aqua;
+    -fx-green: lightgreen;
+    -fx-white: white;
+
 
     -fx-text-fill: -fx-text-color;
 }
@@ -33,3 +43,4 @@
 .not-selected {
     -fx-icon-color: black;
 }
+

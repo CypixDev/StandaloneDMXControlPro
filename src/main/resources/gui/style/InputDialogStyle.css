@@ -1,0 +1,67 @@
+/* CSS für den TextInputDialog */
+.text-input-dialog {
+    -fx-background-color: -fx-color; /* Hintergrundfarbe */
+}
+
+/* Überschrift */
+.text-input-dialog .alert-header {
+    -fx-background-color: #333; /* Hintergrundfarbe der Überschrift */
+    -fx-text-fill: #fff; /* Textfarbe der Überschrift */
+}
+
+/* Innenraum des Dialogs */
+.text-input-dialog .dialog-pane {
+    -fx-background-color: -fx-color; /* Hintergrundfarbe des Inhalts */
+    -fx-padding: 20px; /* Innenabstand des Inhalts */
+}
+
+/* Textfeld */
+.text-input-dialog .text-field {
+    -fx-background-color: -fx-color; /* Hintergrundfarbe des Textfelds */
+    -fx-text-fill: #333; /* Textfarbe des Textfelds */
+}
+
+/* Buttons */
+.text-input-dialog .button-bar .button {
+    -fx-background-color: #333; /* Hintergrundfarbe der Buttons */
+    -fx-text-fill: -fx-text-color; /* Textfarbe der Buttons */
+}
+
+/* Button-Hover-Effekt */
+.text-input-dialog .button-bar .button:hover {
+    -fx-background-color: #555; /* Hintergrundfarbe beim Hovern */
+}
+
+.myDialog{
+    -fx-background-color: -fx-color;
+}
+.myDialog > *.button-bar > *.container{
+    -fx-background-color: -fx-color;
+}
+.myDialog > *.label.content{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.myDialog:header *.header-panel{
+    -fx-background-color: -fx-color;
+}
+.myDialog:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: -fx-text-color;
+}
+
+.grid-pane{
+    -fx-background-color: -fx-color;
+}
+
+.text-field{
+    -fx-background-color: -fx-color;
+}
+
+.text-input-dialog .text-input {
+    -fx-control-inner-background: -fx-color; /* Hintergrundfarbe des Textfelds ändern */
+}
+.text-input-dialog {
+    -fx-control-inner-background: -fx-color; /* Hintergrundfarbe des Textfelds ändern */
+}

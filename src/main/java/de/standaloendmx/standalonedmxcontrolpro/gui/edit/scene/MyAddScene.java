@@ -1,6 +1,5 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.scene;
 
-import de.standaloendmx.standalonedmxcontrolpro.gui.edit.group.GroupColor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,37 +12,32 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MyScene extends VBox implements Initializable {
+public class MyAddScene extends VBox implements Initializable {
 
     private Logger logger = LogManager.getLogger(MyScene.class);
 
     @FXML
-    private Label name;
+    private VBox vBoxAdd;
 
-    @FXML
-    private Label time;
 
-    @FXML
-    private Label repeat;
-
-    private GroupColor color;
-
-    public MyScene(GroupColor color) {
-        this.color = color;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/edit/scene/MySceneView.fxml"));
+    public MyAddScene() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/edit/scene/MyAddSceneView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
-            exception.printStackTrace();
             logger.error(exception);
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getStyleClass().add(color.getBorderStyleClassName());
+
+    }
+
+    public VBox getVBoxAdd() {
+        return vBoxAdd;
     }
 }

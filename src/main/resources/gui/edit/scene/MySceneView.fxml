@@ -8,7 +8,8 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root fx:id="vbox" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: -fx-color;" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="vbox" prefHeight="60.0" prefWidth="116.0" style="-fx-background-color: -fx-color;" styleClass="v-box"
+         type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="name" text="Scene 1">
          <font>
@@ -35,6 +36,6 @@
    </padding>
    <stylesheets>
       <URL value="@../../MainStyle.css" />
-      <URL value="@SceneStyle.css" />
+      <URL value="@MySceneStyle.css" />
    </stylesheets>
 </fx:root>
