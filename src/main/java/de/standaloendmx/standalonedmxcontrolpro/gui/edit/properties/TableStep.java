@@ -1,4 +1,4 @@
-package de.standaloendmx.standalonedmxcontrolpro.gui.edit;
+package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
 import java.time.LocalTime;
 

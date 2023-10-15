@@ -7,6 +7,6 @@
             fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.EditViewController">
 
     <fx:include source="ScenesView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="266.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-    <fx:include source="StepsView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <fx:include source="properties/StepsView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
 </AnchorPane>

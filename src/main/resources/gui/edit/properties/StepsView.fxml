@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<VBox prefHeight="507.0" prefWidth="266.0" spacing="5.0" style="-fx-background-color: -fx-color;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.StepsViewController">
+<VBox prefHeight="507.0" prefWidth="266.0" spacing="5.0" style="-fx-background-color: -fx-color;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.StepsViewController">
    <children>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
@@ -44,7 +44,7 @@
             <Insets right="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <VBox styleClass="box" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+      <VBox styleClass="box" stylesheets="@../style.css" VBox.vgrow="ALWAYS">
          <children>
             <AnchorPane style="-fx-background-color: -fx-grey4;">
                <children>
@@ -94,7 +94,7 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@../MainStyle.css" />
-      <URL value="@style.css" />
+      <URL value="@../../MainStyle.css" />
+      <URL value="@../style.css" />
    </stylesheets>
 </VBox>

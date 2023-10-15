@@ -1,4 +1,4 @@
-package de.standaloendmx.standalonedmxcontrolpro.gui.edit;
+package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
