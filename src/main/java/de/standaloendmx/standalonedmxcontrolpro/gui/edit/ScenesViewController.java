@@ -46,6 +46,10 @@ public class ScenesViewController implements Initializable {
 
     }
 
+    public void unselectAllScenes(){
+        groupList.forEach(MyGroupContainer::setUnSelected);
+    }
+
     public void addGroupContainer(){
         MyGroupBarLabel l = new MyGroupBarLabel();
         bar.getChildren().add(l);

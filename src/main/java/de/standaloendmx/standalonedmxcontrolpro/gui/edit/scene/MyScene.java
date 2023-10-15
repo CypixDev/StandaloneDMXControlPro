@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.scene;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController;
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.group.GroupColor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,9 @@ import java.util.ResourceBundle;
 public class MyScene extends VBox implements Initializable {
 
     private Logger logger = LogManager.getLogger(MyScene.class);
+
+    @FXML
+    private VBox container;
 
     @FXML
     private Label name;
@@ -45,5 +49,16 @@ public class MyScene extends VBox implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getStyleClass().add(color.getBorderStyleClassName());
+
+        container.setOnMouseClicked(event -> {
+            if(container.getStyleClass().contains("scene_selected")){
+                container.getStyleClass().remove("scene_selected");
+            }else {
+                if(!event.isControlDown())
+                    ScenesViewController.instance.unselectAllScenes();
+                container.getStyleClass().add("scene_selected");
+            }
+        });
+
     }
 }

@@ -80,7 +80,6 @@ public class MyGroupContainer extends VBox implements Initializable {
         //groupBarLabel.setTextFill(Color.valueOf("#7a7a7a"));
         groupBarLabel.getStyleClass().remove("label_group_selected");
         groupBarLabel.getStyleClass().remove(color.getLabelStyleClassName());
-
     }
 
     public MyGroupBarLabel getGroupBarLabel() {
