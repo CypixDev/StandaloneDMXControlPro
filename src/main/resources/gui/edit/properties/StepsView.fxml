@@ -84,8 +84,8 @@
                   <TableView fx:id="tvSteps" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="colPos" prefWidth="75.0" text="#" />
-                      <TableColumn fx:id="colFade" prefWidth="89.0" text="Fadetime" />
-                      <TableColumn fx:id="colWait" prefWidth="99.0" text="Waiting time" />
+                      <TableColumn fx:id="colFade" prefWidth="89.0" text="Fade time" />
+                      <TableColumn fx:id="colWait" prefWidth="99.0" text="Hold time" />
                     </columns>
                   </TableView>
                </children>
