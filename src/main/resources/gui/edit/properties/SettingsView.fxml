@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.SettingsController" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.SettingsController">
    <children>
       <HBox alignment="CENTER_LEFT" spacing="50.0">
          <children>
             <Label fx:id="name" text="Scene 1" />
             <ChoiceBox fx:id="colorChoose" HBox.hgrow="NEVER" />
-         </children>
-      </HBox>
-      <HBox fx:id="trigger" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label text="Trigger:">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnRemote" mnemonicParsing="false" text="Remote" />
          </children>
       </HBox>
    </children>

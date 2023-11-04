@@ -10,7 +10,7 @@
 
 <VBox fx:id="container" spacing="3.0" style="-fx-background-color: -fx-color;" stylesheets="@../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController">
    <children>
-      <HBox fx:id="bar" alignment="CENTER_LEFT" prefHeight="30.0" spacing="10.0" style="-fx-background-color: -fx-grey4;" styleClass="h-box">
+      <HBox fx:id="bar" alignment="CENTER_LEFT" prefHeight="25.0" spacing="10.0" style="-fx-background-color: -fx-grey4;" styleClass="h-box">
          <children>
             <Button fx:id="btnAddGroup" mnemonicParsing="false" styleClass="button_add">
                <graphic>

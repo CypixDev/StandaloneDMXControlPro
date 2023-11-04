@@ -1,0 +1,5 @@
+.border{
+    -fx-border-width: 0 0 0 2;
+    -fx-border-color: -fx-grey2;
+    -fx-border-radius: 0;
+}
