@@ -1,7 +1,5 @@
-package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar;
+package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -46,7 +44,7 @@ public class MySlider extends VBox {
     }
 
     public MySlider(int channel) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/SliderView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/fader/SliderView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

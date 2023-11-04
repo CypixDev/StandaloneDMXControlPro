@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.HBox?>
+
+<SplitPane dividerPositions="0.5" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController">
+   <items>
+      <ScrollPane fx:id="scrollPane">
+         <content>
+            <HBox fx:id="hBox" spacing="2" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" />
+         </content>
+      </ScrollPane>
+      <fx:include source="FixtureSelectView.fxml" />
+   </items>
+</SplitPane>

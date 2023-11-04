@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Fixture {
+public class PatchFixture {
     private boolean isMode = false;
 
     private String manufacture;
@@ -33,7 +33,7 @@ public class Fixture {
     @JsonAdapter(ModeDeserializer.class)
     private List<FixtureMode> modes;
 
-    public Fixture(String name) { //For tree root item
+    public PatchFixture(String name) { //For tree root item
         this.name = name;
         isMode = true;
     }

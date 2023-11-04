@@ -1,7 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.patch;
 
 import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
-import de.standaloendmx.standalonedmxcontrolpro.fixture.Fixture;
+import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.beans.value.ChangeListener;
@@ -50,7 +50,7 @@ public class PatchDirectoryViewController implements Initializable {
     private TextField tfSearch;
 
     @FXML
-    private TreeView<Fixture> directory;
+    private TreeView<PatchFixture> directory;
 
     public static String convertInputStreamToString(InputStream inputStream) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -73,7 +73,7 @@ public class PatchDirectoryViewController implements Initializable {
         directory.setFocusTraversable(false);
         directory.setShowRoot(false);
 
-        TreeItem<Fixture> rootItem = new TreeItem<>(new Fixture("Root"));
+        TreeItem<PatchFixture> rootItem = new TreeItem<>(new PatchFixture("Root"));
         directory.setRoot(rootItem);
 
         btnBulb.setOnAction(e -> {
@@ -110,18 +110,18 @@ public class PatchDirectoryViewController implements Initializable {
         });
 
         directory.setOnDragDetected(event -> {
-            TreeItem<Fixture> selectedItem = directory.getSelectionModel().getSelectedItem();
+            TreeItem<PatchFixture> selectedItem = directory.getSelectionModel().getSelectedItem();
             if (selectedItem != null && selectedItem.isLeaf()) { //So that folders cannot be moved
                 Dragboard dragboard = directory.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
 
                 if (selectedItem.getValue().isMode()) {
-                    Fixture item = selectedItem.getParent().getValue();
+                    PatchFixture item = selectedItem.getParent().getValue();
                     String modeName = selectedItem.getValue().getName();
                     content.put(DataFormat.PLAIN_TEXT, item.getName() + ":" + modeName);
 
                 } else {
-                    Fixture item = selectedItem.getValue();
+                    PatchFixture item = selectedItem.getValue();
                     content.put(DataFormat.PLAIN_TEXT, item.getName());
                 }
 
@@ -131,16 +131,16 @@ public class PatchDirectoryViewController implements Initializable {
             }
         });
 
-        directory.setCellFactory(param -> new TreeCell<Fixture>() {
+        directory.setCellFactory(param -> new TreeCell<PatchFixture>() {
             @Override
-            protected void updateItem(Fixture fixture, boolean empty) {
-                super.updateItem(fixture, empty);
-                if (fixture == null || empty) {
+            protected void updateItem(PatchFixture patchFixture, boolean empty) {
+                super.updateItem(patchFixture, empty);
+                if (patchFixture == null || empty) {
                     setGraphic(null);
                 } else {
-                    setText(fixture.getName());
-                    if (!fixture.isMode()) {
-                        String svg = FileUtils.getSVGPath("/gui/img/icons/fixture/" + fixture.getCategories().get(0).getFileName() + ".svg");
+                    setText(patchFixture.getName());
+                    if (!patchFixture.isMode()) {
+                        String svg = FileUtils.getSVGPath("/gui/img/icons/fixture/" + patchFixture.getCategories().get(0).getFileName() + ".svg");
 
                         SVGPath svgPath = new SVGPath();
                         svgPath.setContent(svg);
@@ -165,7 +165,7 @@ public class PatchDirectoryViewController implements Initializable {
             MenuItem openMenuItem = new MenuItem("Öffnen");
             contextMenu.getItems().add(openMenuItem);
 
-            TreeItem<Fixture> selectedItem = directory.getSelectionModel().getSelectedItem();
+            TreeItem<PatchFixture> selectedItem = directory.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 if (!selectedItem.getValue().isMode()) {
                     contextMenu.show(directory, event.getScreenX(), event.getScreenY());
@@ -199,20 +199,20 @@ public class PatchDirectoryViewController implements Initializable {
         directory.getRoot().getChildren().clear();
 
 
-        TreeItem<Fixture> rootItem = directory.getRoot();
-        Map<String, List<Fixture>> map = StandaloneDMXControlPro.instance.getFixtureManager().getFixturesPerManufacture();
+        TreeItem<PatchFixture> rootItem = directory.getRoot();
+        Map<String, List<PatchFixture>> map = StandaloneDMXControlPro.instance.getFixtureManager().getFixturesPerManufacture();
 
         for (String s : map.keySet()) {
-            TreeItem<Fixture> treeRoot = new TreeItem<>(new Fixture(s));
-            for (Fixture fixture : map.get(s)) {
-                if (fixture.getModes().size() > 1) {
-                    TreeItem<Fixture> treeRoot2 = new TreeItem<>(fixture);
-                    for (FixtureMode mode : fixture.getModes()) {
-                        treeRoot2.getChildren().add(new TreeItem<>(new Fixture(mode.getNameWithChannel())));
+            TreeItem<PatchFixture> treeRoot = new TreeItem<>(new PatchFixture(s));
+            for (PatchFixture patchFixture : map.get(s)) {
+                if (patchFixture.getModes().size() > 1) {
+                    TreeItem<PatchFixture> treeRoot2 = new TreeItem<>(patchFixture);
+                    for (FixtureMode mode : patchFixture.getModes()) {
+                        treeRoot2.getChildren().add(new TreeItem<>(new PatchFixture(mode.getNameWithChannel())));
                     }
                     treeRoot.getChildren().add(treeRoot2);
                 } else {
-                    treeRoot.getChildren().add(new TreeItem<>(fixture));
+                    treeRoot.getChildren().add(new TreeItem<>(patchFixture));
                 }
             }
             rootItem.getChildren().add(treeRoot);
@@ -221,14 +221,14 @@ public class PatchDirectoryViewController implements Initializable {
     }
 
     private void filterTreeView(String filterText) {
-        TreeItem<Fixture> root = directory.getRoot();
+        TreeItem<PatchFixture> root = directory.getRoot();
         filterTreeItem(root, filterText);
     }
 
-    private void filterTreeItem(TreeItem<Fixture> item, String filterText) {
+    private void filterTreeItem(TreeItem<PatchFixture> item, String filterText) {
         boolean hasMatchingChildren = false;
 
-        for (TreeItem<Fixture> child : item.getChildren()) {
+        for (TreeItem<PatchFixture> child : item.getChildren()) {
             filterTreeItem(child, filterText);
             if (child.isExpanded()) {
                 hasMatchingChildren = true;
@@ -245,9 +245,9 @@ public class PatchDirectoryViewController implements Initializable {
         }
     }
 
-    private void populatedTreeView(File folder, TreeItem<Fixture> parentItem) {
+    private void populatedTreeView(File folder, TreeItem<PatchFixture> parentItem) {
         if (folder.isDirectory()) {
-            TreeItem<Fixture> folderItem = new TreeItem<>(new Fixture(folder.getName()));
+            TreeItem<PatchFixture> folderItem = new TreeItem<>(new PatchFixture(folder.getName()));
             parentItem.getChildren().add(folderItem);
 
             File[] files = folder.listFiles();
@@ -263,15 +263,15 @@ public class PatchDirectoryViewController implements Initializable {
             view.setFitHeight(16);
             view.setFitWidth(16);
 
-            TreeItem<Fixture> fileItem = new TreeItem<>(new Fixture(folder.getName()), view);
+            TreeItem<PatchFixture> fileItem = new TreeItem<>(new PatchFixture(folder.getName()), view);
 
             parentItem.getChildren().add(fileItem);
         }
     }
 
-    private void populateTreeView(File folder, TreeItem<Fixture> parentItem) {
+    private void populateTreeView(File folder, TreeItem<PatchFixture> parentItem) {
         if (folder.isDirectory()) {
-            TreeItem<Fixture> folderItem = new TreeItem<>(new Fixture(folder.getName()));
+            TreeItem<PatchFixture> folderItem = new TreeItem<>(new PatchFixture(folder.getName()));
             if (folder.getName().equals("Fixture_Library")) {
                 folderItem = parentItem;
             } else {
@@ -283,7 +283,7 @@ public class PatchDirectoryViewController implements Initializable {
             }
 
         } else {
-            TreeItem<Fixture> fileItem = new TreeItem<>(new Fixture(folder.getName()));
+            TreeItem<PatchFixture> fileItem = new TreeItem<>(new PatchFixture(folder.getName()));
             parentItem.getChildren().add(fileItem);
         }
     }

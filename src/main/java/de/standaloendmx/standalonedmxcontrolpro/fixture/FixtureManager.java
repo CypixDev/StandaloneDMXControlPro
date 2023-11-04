@@ -21,42 +21,42 @@ public class FixtureManager {
 
     private Logger logger = LogManager.getLogger(FixtureManager.class);
 
-    private List<Fixture> fixtures;
+    private List<PatchFixture> patchFixtures;
 
     public FixtureManager() {
-        fixtures = new ArrayList<>();
+        patchFixtures = new ArrayList<>();
     }
 
-    public static Fixture getFixtureFromJson(JsonElement jsonElement) {
+    public static PatchFixture getFixtureFromJson(JsonElement jsonElement) {
         Gson gson = new GsonBuilder().registerTypeAdapter(FixtureDimension.class, new PhysicalDeserializer()).create();
 
-        return gson.fromJson(jsonElement, Fixture.class);
+        return gson.fromJson(jsonElement, PatchFixture.class);
     }
 
-    public List<Fixture> getFixtures() {
-        return fixtures;
+    public List<PatchFixture> getFixtures() {
+        return patchFixtures;
     }
 
-    public Fixture getFixtureByName(String fixtureName) {
-        for (Fixture fixture : fixtures) {
-            if (fixture.getName().equals(fixtureName)) return fixture;
+    public PatchFixture getFixtureByName(String fixtureName) {
+        for (PatchFixture patchFixture : patchFixtures) {
+            if (patchFixture.getName().equals(fixtureName)) return patchFixture;
         }
         return null;
     }
 
-    public SortedMap<String, List<Fixture>> getFixturesPerManufacture() { //Sorted map is beautiful!
+    public SortedMap<String, List<PatchFixture>> getFixturesPerManufacture() { //Sorted map is beautiful!
 
-        SortedMap<String, List<Fixture>> map = new TreeMap<>();
+        SortedMap<String, List<PatchFixture>> map = new TreeMap<>();
 
-        for (Fixture fixture : fixtures) {
-            if (map.containsKey(fixture.getManufacture())) {
-                List<Fixture> tmp = map.get(fixture.getManufacture());
-                tmp.add(fixture);
-                map.put(fixture.getManufacture(), tmp);
+        for (PatchFixture patchFixture : patchFixtures) {
+            if (map.containsKey(patchFixture.getManufacture())) {
+                List<PatchFixture> tmp = map.get(patchFixture.getManufacture());
+                tmp.add(patchFixture);
+                map.put(patchFixture.getManufacture(), tmp);
             } else {
-                List<Fixture> list = new ArrayList<>();
-                list.add(fixture);
-                map.put(fixture.getManufacture(), list);
+                List<PatchFixture> list = new ArrayList<>();
+                list.add(patchFixture);
+                map.put(patchFixture.getManufacture(), list);
             }
         }
 
@@ -88,18 +88,18 @@ public class FixtureManager {
                     } else if (file.isFile() && file.getName().toLowerCase().endsWith(".json")) {
                         FileReader reader = new FileReader(file);
                         logger.debug("Loading fixture: " + file.getName());
-                        Fixture fixture = getFixtureFromJson(JsonParser.parseReader(reader));
-                        fixture.setManufacture(folder.getName());
-                        fixtures.add(fixture);
+                        PatchFixture patchFixture = getFixtureFromJson(JsonParser.parseReader(reader));
+                        patchFixture.setManufacture(folder.getName());
+                        patchFixtures.add(patchFixture);
                     }
                 }
             }
         }
     }
 
-    public Fixture getFixtureByKey(String key) {
-        for (Fixture fixture : fixtures) {
-            if (fixture.getFixtureKey().equals(key)) return fixture;
+    public PatchFixture getFixtureByKey(String key) {
+        for (PatchFixture patchFixture : patchFixtures) {
+            if (patchFixture.getFixtureKey().equals(key)) return patchFixture;
         }
         return null;
     }

@@ -65,7 +65,7 @@ public class BottomBarViewController implements Initializable {
 
             if (clickedButton.equals(btnSlider)) {
                 try {
-                    setContentAndAnchor("/gui/bottombar/SlidersView.fxml");
+                    setContentAndAnchor("/gui/bottombar/fader/FaderView.fxml");
                 } catch (IOException ex) {
                     logger.error(ex);
                 }

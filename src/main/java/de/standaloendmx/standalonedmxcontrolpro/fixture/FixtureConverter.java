@@ -53,12 +53,12 @@ public class FixtureConverter {
     }
 
 
-    public static Fixture getFixtureFromJson(JsonElement jsonElement) {
+    public static PatchFixture getFixtureFromJson(JsonElement jsonElement) {
 
         Gson gson = new GsonBuilder().registerTypeAdapter(FixtureDimension.class, new PhysicalDeserializer()).create();
 
 
-        return gson.fromJson(jsonElement, Fixture.class);
+        return gson.fromJson(jsonElement, PatchFixture.class);
     }
 
 }

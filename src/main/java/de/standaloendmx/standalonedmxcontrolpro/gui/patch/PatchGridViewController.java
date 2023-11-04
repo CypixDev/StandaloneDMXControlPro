@@ -1,9 +1,8 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.patch;
 
-import de.standaloendmx.standalonedmxcontrolpro.fixture.Fixture;
+import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
-import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -124,18 +123,18 @@ public class PatchGridViewController implements Initializable {
         });
 
         grid.setOnDragDropped(e -> {
-            Fixture fixture = getFixtureByDragBoardString(e.getDragboard().getString());
+            PatchFixture patchFixture = getFixtureByDragBoardString(e.getDragboard().getString());
             int pos = getPaneAtXYPos(e.getX(), e.getY());
 
             String[] data = e.getDragboard().getString().split(":");
             FixtureMode mode;
             if (data.length == 2) {
                 String modeName = data[1];
-                mode = fixture.getModeByName(modeName);
-            } else mode = fixture.getModes().get(0); //In case there is only one
+                mode = patchFixture.getModeByName(modeName);
+            } else mode = patchFixture.getModes().get(0); //In case there is only one
 
             if (StandaloneDMXControlPro.instance.getPatchManager().isChannelFree(pos, mode.getFixtureChannels().size())) {
-                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new PatchFixture(fixture, pos, mode.getFixtureChannels().size(), Color.LIME.toString()));
+                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture(patchFixture, pos, mode.getFixtureChannels().size(), Color.LIME.toString()));
             }
 
             updatePatch();
@@ -147,12 +146,12 @@ public class PatchGridViewController implements Initializable {
     }
 
     public void updatePatch() {
-        for (PatchFixture patchPatch : patchManager.getPatches()) {
+        for (de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture patchPatch : patchManager.getPatches()) {
             applyPatch(patchPatch);
         }
     }
 
-    private void applyPatch(PatchFixture patch) {
+    private void applyPatch(de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture patch) {
         Pane pane = (Pane) grid.getChildren().get(patch.getChannel());
 
         pane.setOnMouseClicked(e -> {
@@ -187,7 +186,7 @@ public class PatchGridViewController implements Initializable {
         return -1;
     }
 
-    private void removePatch(PatchFixture patch) {
+    private void removePatch(de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture patch) {
         GridPane.setColumnSpan(grid.getChildren().get(patch.getChannel()), 1);
         for (int i = 1; i < patch.getSize(); i++) {
             grid.getChildren().get(patch.getChannel() + i).setVisible(true);
@@ -199,12 +198,12 @@ public class PatchGridViewController implements Initializable {
     private void colorPane(DragEvent e) {
         String[] data = e.getDragboard().getString().split(":");
         String fixtureName = data[0];
-        Fixture fixture = StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
+        PatchFixture patchFixture = StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
         FixtureMode mode;
         if (data.length == 2) {
             String modeName = data[1];
-            mode = fixture.getModeByName(modeName);
-        } else mode = fixture.getModes().get(0); //In case there is only one
+            mode = patchFixture.getModeByName(modeName);
+        } else mode = patchFixture.getModes().get(0); //In case there is only one
 
         int size = mode.getFixtureChannels().size();
 
@@ -217,7 +216,7 @@ public class PatchGridViewController implements Initializable {
     }
 
 
-    private Fixture getFixtureByDragBoardString(String dragBoardString) {
+    private PatchFixture getFixtureByDragBoardString(String dragBoardString) {
         String[] data = dragBoardString.split(":");
         String fixtureName = data[0];
         return StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
@@ -226,12 +225,12 @@ public class PatchGridViewController implements Initializable {
     private int getFixtureSizeByDragBoardString(String dragBoardString) {
         String[] data = dragBoardString.split(":");
         String fixtureName = data[0];
-        Fixture fixture = StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
+        PatchFixture patchFixture = StandaloneDMXControlPro.instance.getFixtureManager().getFixtureByName(fixtureName);
         FixtureMode mode;
         if (data.length == 2) {
             String modeName = data[1];
-            mode = fixture.getModeByName(modeName);
-        } else mode = fixture.getModes().get(0); //In case there is only one
+            mode = patchFixture.getModeByName(modeName);
+        } else mode = patchFixture.getModes().get(0); //In case there is only one
         return mode.getFixtureChannels().size();
     }
 

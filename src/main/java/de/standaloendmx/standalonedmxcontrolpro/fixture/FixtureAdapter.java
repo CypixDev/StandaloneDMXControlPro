@@ -7,10 +7,10 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-public class FixtureAdapter implements JsonDeserializer<Fixture> {
+public class FixtureAdapter implements JsonDeserializer<PatchFixture> {
 
     @Override
-    public Fixture deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext ctx) throws JsonParseException {
+    public PatchFixture deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext ctx) throws JsonParseException {
 
         return null;
     }

@@ -1,4 +1,4 @@
-package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar;
+package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
 
 import javafx.fxml.Initializable;
 

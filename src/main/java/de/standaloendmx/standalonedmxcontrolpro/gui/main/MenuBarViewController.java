@@ -1,22 +1,17 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
 import de.standaloendmx.standalonedmxcontrolpro.files.PatchFixtureAdapter;
-import de.standaloendmx.standalonedmxcontrolpro.fixture.Fixture;
+import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.gui.patch.PatchGridViewController;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
-import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -45,7 +40,7 @@ public class MenuBarViewController implements Initializable {
             PatchManager patchManager = StandaloneDMXControlPro.instance.getPatchManager();
 
             GsonBuilder gson = new GsonBuilder().setPrettyPrinting();
-            gson.registerTypeAdapter(Fixture.class, new PatchFixtureAdapter());
+            gson.registerTypeAdapter(PatchFixture.class, new PatchFixtureAdapter());
 
             FileUtils.writeStringToFile(
                     new File(StandaloneDMXControlPro.instance.getFilesManager().getSavesFolder().getAbsolutePath()+"\\"+"latest.json"),
@@ -72,11 +67,11 @@ public class MenuBarViewController implements Initializable {
             String json = FileUtils.readStringFromFile(selectedFile);
 
             GsonBuilder gson = new GsonBuilder();
-            gson.registerTypeAdapter(Fixture.class, new PatchFixtureAdapter());
+            gson.registerTypeAdapter(PatchFixture.class, new PatchFixtureAdapter());
 
-            Type listType = new TypeToken<List<PatchFixture>>(){}.getType();
-            List<PatchFixture> list = gson.create().fromJson(json, listType);
-            for (PatchFixture patchFixture : list) {
+            Type listType = new TypeToken<List<de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture>>(){}.getType();
+            List<de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture> list = gson.create().fromJson(json, listType);
+            for (de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture patchFixture : list) {
                 StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(patchFixture);
             }
 

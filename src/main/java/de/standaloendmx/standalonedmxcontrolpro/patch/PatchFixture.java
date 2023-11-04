@@ -1,31 +1,28 @@
 package de.standaloendmx.standalonedmxcontrolpro.patch;
 
-import de.standaloendmx.standalonedmxcontrolpro.fixture.Fixture;
-import javafx.scene.paint.Color;
-
 public class PatchFixture {
 
     //Ein patch auf dem Patch-Grid
 
-    private Fixture fixture;
+    private de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture patchFixture;
     private int channel; // 1 - 512
     private int size;
     private String color;
 
-    public PatchFixture(Fixture fixture, int channel, int size, String color) {
+    public PatchFixture(de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture patchFixture, int channel, int size, String color) {
         this.channel = channel;
         this.size = size;
         this.color = color;
-        this.fixture = fixture;
+        this.patchFixture = patchFixture;
     }
 
 
-    public Fixture getFixture() {
-        return fixture;
+    public de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture getFixture() {
+        return patchFixture;
     }
 
     public String getName() {
-        return fixture.getName();
+        return patchFixture.getName();
     }
 
     public int getChannel() {
