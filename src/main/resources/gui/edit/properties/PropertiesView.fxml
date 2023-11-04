@@ -8,7 +8,7 @@
 
 <VBox alignment="TOP_CENTER" style="-fx-background-color: -fx-grey4;" styleClass="border" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.PropertiesViewController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="25.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="25.0" VBox.vgrow="NEVER">
          <children>
             <Label text="Properties">
                <font>
@@ -17,7 +17,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="h-box">
+      <HBox spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="h-box" VBox.vgrow="ALWAYS">
          <children>
             <fx:include source="SettingsView.fxml" />
             <fx:include source="StepsView.fxml" />
