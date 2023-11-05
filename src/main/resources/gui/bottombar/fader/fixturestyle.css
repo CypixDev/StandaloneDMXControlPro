@@ -1,0 +1,9 @@
+.selected{
+    -fx-background-color: -fx-accent-color;
+    -fx-background-radius: 3;
+}
+
+.not_selected{
+    -fx-background-color: -fx-color;
+    -fx-background-radius: 3;
+}
