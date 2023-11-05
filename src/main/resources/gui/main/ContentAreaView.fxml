@@ -4,7 +4,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane xmlns:fx="http://javafx.com/fxml/1" fx:id="splitPane" dividerPositions="0.5" orientation="VERTICAL"
+<SplitPane xmlns:fx="http://javafx.com/fxml/1" fx:id="splitPane" dividerPositions="0.8" orientation="VERTICAL"
            style="-fx-background-color: -fx-color;" stylesheets="@../MainStyle.css" xmlns="http://javafx.com/javafx/19"
            fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.main.ContentAreaViewController">
     <items>

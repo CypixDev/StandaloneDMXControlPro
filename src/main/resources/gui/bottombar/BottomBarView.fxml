@@ -35,7 +35,7 @@
                     <Insets left="5.0" />
                 </padding>
             </VBox>
-         <AnchorPane fx:id="content" prefHeight="200.0" prefWidth="200.0" />
+         <AnchorPane fx:id="content" HBox.hgrow="ALWAYS" />
         </children>
     </HBox>
 

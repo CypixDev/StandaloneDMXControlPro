@@ -65,7 +65,7 @@ public class BottomBarViewController implements Initializable {
 
             if (clickedButton.equals(btnSlider)) {
                 try {
-                    setContentAndAnchor("/gui/bottombar/fader/FaderView.fxml");
+                    setContentAndAllAnchor("/gui/bottombar/fader/FaderView.fxml");
                 } catch (IOException ex) {
                     logger.error(ex);
                 }
@@ -78,14 +78,24 @@ public class BottomBarViewController implements Initializable {
         }
     }
 
-    public void setContentAndAnchor(Node node) {
+    public void setContentAndBottomTopAnchor(Node node) {
         content.getChildren().add(node);
         AnchorPane.setBottomAnchor(node, 0.0);
         AnchorPane.setTopAnchor(node, 0.0);
     }
+    public void setContentAndAllAnchor(Node node) {
+        content.getChildren().add(node);
+        AnchorPane.setBottomAnchor(node, 0.0);
+        AnchorPane.setTopAnchor(node, 0.0);
+        AnchorPane.setRightAnchor(node, 0.0);
+        AnchorPane.setLeftAnchor(node, 0.0);
+    }
 
-    public void setContentAndAnchor(String path) throws IOException {
-        setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
+    public void setContentAndBottomTopAnchor(String path) throws IOException {
+        setContentAndBottomTopAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
+    }
+    public void setContentAndAllAnchor(String path) throws IOException {
+        setContentAndAllAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
     }
 
     public void resetContent() {

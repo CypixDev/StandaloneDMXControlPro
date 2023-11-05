@@ -4,9 +4,9 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.HBox?>
 
-<SplitPane dividerPositions="0.5" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController">
+<SplitPane fx:id="splitPane" dividerPositions="0.5" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController">
    <items>
-      <ScrollPane fx:id="scrollPane">
+      <ScrollPane fx:id="scrollPane" fitToWidth="true">
          <content>
             <HBox fx:id="hBox" spacing="2" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" />
          </content>
