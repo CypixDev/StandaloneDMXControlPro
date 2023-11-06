@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.patch;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController;
 import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FixtureSelectViewController;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class PatchManager {
     public void addPatch(PatchFixture patchFixture){
         patches.add(patchFixture);
         FixtureSelectViewController.instance.addToSelectable(patchFixture);
+
+        FaderViewController.instance.updateSliders();
     }
 
     public List<PatchFixture> getPatches() {
@@ -42,5 +45,7 @@ public class PatchManager {
         PatchFixture patch = getPatchByChannel(channelByPane);
         FixtureSelectViewController.instance.removeToSelectable(patch);
         patches.remove(patch);
+
+        FaderViewController.instance.updateSliders();
     }
 }

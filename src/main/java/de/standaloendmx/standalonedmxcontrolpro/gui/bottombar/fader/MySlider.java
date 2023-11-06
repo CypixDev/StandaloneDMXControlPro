@@ -60,6 +60,9 @@ public class MySlider extends VBox {
 
     @FXML
     private void initialize() {
+        this.setVisible(true);
+        this.setManaged(true);
+
         slider.valueProperty().addListener(e -> {
             value.setText(String.valueOf((int)slider.getValue()));
 

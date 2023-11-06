@@ -43,7 +43,6 @@ public class SelectableFixture extends VBox {
 
     @FXML
     private void initialize() {
-
         String svg = FileUtils.getSVGPath("/gui/img/icons/fixture/" + patchFixture.getFixture().getCategories().get(0).getFileName() + ".svg");
 
         SVGPath svgPath = new SVGPath();

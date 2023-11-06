@@ -46,6 +46,8 @@ public class FixtureSelectViewController implements Initializable {
                 fx.getStyleClass().remove("not_selected");
                 fx.getStyleClass().add("selected");
             }
+
+            FaderViewController.instance.updateSliders();
         });
     }
 
@@ -57,5 +59,9 @@ public class FixtureSelectViewController implements Initializable {
                 break;
             }
         }
+    }
+
+    public ObservableList<SelectableFixture> getFixtures() {
+        return fixtures;
     }
 }
