@@ -49,6 +49,8 @@ public class SelectableFixture extends VBox {
         SVGPath svgPath = new SVGPath();
         svgPath.setContent(svg);
 
+
+        //TODO: scale so full icon is shown....
         svgPath.setFill(Color.BLACK);
         svgPath.setScaleX(3);
         svgPath.setScaleY(3);
