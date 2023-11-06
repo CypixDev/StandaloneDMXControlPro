@@ -25,7 +25,7 @@ public class SelectableFixture extends VBox {
     @FXML
     private Label lFixtureName;
 
-    private final PatchFixture patchFixture;
+    public final PatchFixture patchFixture;
 
 
     public SelectableFixture(PatchFixture patchFixture) {

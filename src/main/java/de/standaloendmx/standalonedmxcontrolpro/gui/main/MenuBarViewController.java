@@ -72,7 +72,7 @@ public class MenuBarViewController implements Initializable {
             Type listType = new TypeToken<List<de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture>>(){}.getType();
             List<de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture> list = gson.create().fromJson(json, listType);
             for (de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture patchFixture : list) {
-                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(patchFixture);
+                StandaloneDMXControlPro.instance.getPatchManager().addPatch(patchFixture);
             }
 
             PatchGridViewController.instances.forEach(PatchGridViewController::updatePatch);

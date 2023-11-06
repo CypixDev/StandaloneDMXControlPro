@@ -1,11 +1,13 @@
 package de.standaloendmx.standalonedmxcontrolpro.patch;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FixtureSelectViewController;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PatchManager {
 
-    private List<PatchFixture> patches;
+    private List<PatchFixture> patches; //TODO implement observable arraylist
 
     public PatchManager() {
         patches = new ArrayList<>();
@@ -27,7 +29,18 @@ public class PatchManager {
         return null;
     }
 
+    public void addPatch(PatchFixture patchFixture){
+        patches.add(patchFixture);
+        FixtureSelectViewController.instance.addToSelectable(patchFixture);
+    }
+
     public List<PatchFixture> getPatches() {
         return patches;
+    }
+
+    public void removePatch(int channelByPane) {
+        PatchFixture patch = getPatchByChannel(channelByPane);
+        FixtureSelectViewController.instance.removeToSelectable(patch);
+        patches.remove(patch);
     }
 }

@@ -134,7 +134,7 @@ public class PatchGridViewController implements Initializable {
             } else mode = patchFixture.getModes().get(0); //In case there is only one
 
             if (StandaloneDMXControlPro.instance.getPatchManager().isChannelFree(pos, mode.getFixtureChannels().size())) {
-                StandaloneDMXControlPro.instance.getPatchManager().getPatches().add(new de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture(patchFixture, pos, mode.getFixtureChannels().size(), Color.LIME.toString()));
+                StandaloneDMXControlPro.instance.getPatchManager().addPatch(new de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture(patchFixture, pos, mode.getFixtureChannels().size(), Color.LIME.toString()));
             }
 
             updatePatch();
@@ -163,6 +163,7 @@ public class PatchGridViewController implements Initializable {
             MenuItem removeItem = new MenuItem("Remove");
             removeItem.setOnAction(b -> {
                 removePatch(StandaloneDMXControlPro.instance.getPatchManager().getPatchByChannel(getChannelByPane(pane)));
+                StandaloneDMXControlPro.instance.getPatchManager().removePatch(getChannelByPane(pane));
             });
 
             contextMenu.getItems().add(removeItem);
