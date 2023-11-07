@@ -1,15 +1,25 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TableStep {
 
     private int pos;
     private String fadeTime;
     private String holdTime;
 
+    private Map<Integer, Integer> channelValues;
+
     public TableStep(int pos, String fadeTime, String holdTime) {
+        channelValues = new HashMap<>();
         this.pos = pos;
         this.fadeTime = fadeTime;
         this.holdTime = holdTime;
+    }
+
+    public Map<Integer, Integer> getChannelValues() {
+        return channelValues;
     }
 
     public int getPos() {
