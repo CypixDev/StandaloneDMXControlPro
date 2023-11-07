@@ -34,7 +34,7 @@ public class MyAddScene extends VBox implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.getStyleClass().add("addButton");
     }
 
     public VBox getVBoxAdd() {

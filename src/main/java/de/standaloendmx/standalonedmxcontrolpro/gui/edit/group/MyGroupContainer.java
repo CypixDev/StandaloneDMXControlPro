@@ -19,7 +19,7 @@ public class MyGroupContainer extends VBox implements Initializable {
     private Logger logger = LogManager.getLogger(MyGroupContainer.class);
 
     @FXML
-    private VBox vBox;
+    public VBox vBox;
 
     private GroupColor color;
 
@@ -29,6 +29,7 @@ public class MyGroupContainer extends VBox implements Initializable {
     public MyGroupContainer(MyGroupBarLabel l) {
         color = GroupColor.getRandom();
         this.groupBarLabel = l;
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/edit/group/MyGroupContainer.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +16,8 @@ import java.util.ResourceBundle;
 
 public class StepsViewController implements Initializable {
 
+    public static StepsViewController instance;
+
     private int step;
 
     @FXML
@@ -27,15 +30,14 @@ public class StepsViewController implements Initializable {
     @FXML
     private TableColumn<TableStep, String> colHoldTime;
 
-    private ObservableList<TableStep> tvData;
-
     @FXML
     private Button btnAdd;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        instance = this;
         step = 0;
-        tvData = FXCollections.observableArrayList();
+
 
         colPos.setCellValueFactory(new PropertyValueFactory<>("pos"));
         colPos.setEditable(false);
@@ -78,20 +80,24 @@ public class StepsViewController implements Initializable {
 
 
 
-        tvData.add(new TableStep(0, "00:00:00", "00:01:00"));
-
-        tvSteps.setItems(tvData);
         tvSteps.setEditable(true);
         btnAdd.setOnAction(e -> {
             step++;
-            tvData.add(new TableStep(step, getLastStepFade(), getLastStepWait()));
+            tvSteps.getItems().add(new TableStep(step, getLastStepFade(), getLastStepWait()));
         });
     }
 
     private String getLastStepFade(){
-        return tvData.get(tvData.size()-1).getFadeTime();
+        if(tvSteps.getItems().isEmpty()) return "00:00:00";
+        return tvSteps.getItems().get(tvSteps.getItems().size()-1).getFadeTime();
     }
     private String getLastStepWait(){
-        return tvData.get(tvData.size()-1).getHoldTime();
+        if(tvSteps.getItems().isEmpty()) return "00:01:00";
+        return tvSteps.getItems().get(tvSteps.getItems().size()-1).getHoldTime();
+    }
+
+    public void update() {
+        tvSteps.setItems(ScenesViewController.instance.getSelectedScene().getSteps());
+        tvSteps.refresh();
     }
 }

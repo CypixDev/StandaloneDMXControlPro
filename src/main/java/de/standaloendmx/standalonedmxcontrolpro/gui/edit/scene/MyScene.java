@@ -2,6 +2,10 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.edit.scene;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController;
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.group.GroupColor;
+import de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.StepsViewController;
+import de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.TableStep;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +36,12 @@ public class MyScene extends VBox implements Initializable {
 
     private GroupColor color;
 
+    private ObservableList<TableStep> steps;
+
     public MyScene(GroupColor color) {
+        steps = FXCollections.observableArrayList();
+        steps.add(new TableStep(0, "00:00:00", "00:01:00"));
+
         this.color = color;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/edit/scene/MySceneView.fxml"));
         fxmlLoader.setRoot(this);
@@ -58,7 +67,11 @@ public class MyScene extends VBox implements Initializable {
                     ScenesViewController.instance.unselectAllScenes();
                 container.getStyleClass().add("scene_selected");
             }
+            StepsViewController.instance.update();
         });
+    }
 
+    public ObservableList<TableStep> getSteps() {
+        return steps;
     }
 }
