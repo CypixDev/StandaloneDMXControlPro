@@ -1,17 +1,15 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
-import java.time.LocalTime;
-
 public class TableStep {
 
     private int pos;
     private String fadeTime;
-    private int waitTime;
+    private String holdTime;
 
-    public TableStep(int pos, String fadeTime, int waitTime) {
+    public TableStep(int pos, String fadeTime, String holdTime) {
         this.pos = pos;
         this.fadeTime = fadeTime;
-        this.waitTime = waitTime;
+        this.holdTime = holdTime;
     }
 
     public int getPos() {
@@ -22,8 +20,8 @@ public class TableStep {
         return fadeTime;
     }
 
-    public int getWaitTime() {
-        return waitTime;
+    public String getHoldTime() {
+        return holdTime;
     }
 
     public void setPos(int pos) {
@@ -34,7 +32,7 @@ public class TableStep {
         this.fadeTime = fadeTime;
     }
 
-    public void setWaitTime(int waitTime) {
-        this.waitTime = waitTime;
+    public void setHoldTime(String holdTime) {
+        this.holdTime = holdTime;
     }
 }

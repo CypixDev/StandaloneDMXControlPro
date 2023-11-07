@@ -25,7 +25,7 @@ public class StepsViewController implements Initializable {
     @FXML
     private TableColumn<TableStep, String> colFade;
     @FXML
-    private TableColumn<TableStep, Integer> colWait;
+    private TableColumn<TableStep, String> colHoldTime;
 
     private ObservableList<TableStep> tvData;
 
@@ -39,16 +39,10 @@ public class StepsViewController implements Initializable {
 
         colPos.setCellValueFactory(new PropertyValueFactory<>("pos"));
         colPos.setEditable(false);
-        colWait.setSortable(true);
-        /*colFade.setCellValueFactory(new PropertyValueFactory<>("fadeTime"));
-        colFade.setEditable(true);
-        colFade.setSortable(false);*/
-        colWait.setCellValueFactory(new PropertyValueFactory<>("waitTime"));
-        colWait.setEditable(true);
-        colWait.setSortable(false);
 
 
-        //test
+
+
         colFade.setCellValueFactory(new PropertyValueFactory<>("fadeTime"));
         colFade.setCellFactory(TextFieldTableCell.forTableColumn());
         colFade.setOnEditCommit(event -> {
@@ -58,7 +52,19 @@ public class StepsViewController implements Initializable {
         colFade.setEditable(true); // Diese Spalte ist editierbar
 
 
-        tvData.add(new TableStep(0, "22", 222));
+
+        colHoldTime.setCellValueFactory(new PropertyValueFactory<>("holdTime"));
+        colHoldTime.setCellFactory(TextFieldTableCell.forTableColumn());
+        colHoldTime.setOnEditCommit(event -> {
+            TableStep step = event.getRowValue();
+            step.setFadeTime(event.getNewValue());
+        });
+        colHoldTime.setEditable(true); // Diese Spalte ist editierbar
+        colHoldTime.setSortable(false);
+
+
+
+        tvData.add(new TableStep(0, "00:00:00", "00:01:00"));
 
         tvSteps.setItems(tvData);
         tvSteps.setEditable(true);
@@ -71,7 +77,7 @@ public class StepsViewController implements Initializable {
     private String getLastStepFade(){
         return tvData.get(tvData.size()-1).getFadeTime();
     }
-    private int getLastStepWait(){
-        return tvData.get(tvData.size()-1).getWaitTime();
+    private String getLastStepWait(){
+        return tvData.get(tvData.size()-1).getHoldTime();
     }
 }

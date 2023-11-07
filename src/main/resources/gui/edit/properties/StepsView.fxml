@@ -85,7 +85,7 @@
                     <columns>
                         <TableColumn fx:id="colPos" prefWidth="75.0" text="#" />
                       <TableColumn fx:id="colFade" prefWidth="89.0" text="Fade time" />
-                      <TableColumn fx:id="colWait" prefWidth="99.0" text="Hold time" />
+                      <TableColumn fx:id="colHoldTime" prefWidth="99.0" text="Hold time" />
                     </columns>
                   </TableView>
                </children>
