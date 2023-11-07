@@ -123,5 +123,6 @@ public class StepsViewController implements Initializable {
     public void channelValueUpdate(Label channel, Label value) {
         if(getSelectedTableStep() != null)
             getSelectedTableStep().getChannelValues().put(Integer.parseInt(channel.getText())-1, Integer.valueOf(value.getText()));
+        else System.out.println("NON SELECTED!!");
     }
 }

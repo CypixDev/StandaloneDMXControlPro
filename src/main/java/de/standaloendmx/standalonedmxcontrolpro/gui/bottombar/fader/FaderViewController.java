@@ -2,6 +2,7 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
 
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -91,10 +92,12 @@ public class FaderViewController implements Initializable {
         }
 
         for (int i = 0; i < 512; i++) {
-            if(!channelValues.containsKey(i)){
-                MyFader slider = (MyFader) hBox.getChildren().get(i);
-                slider.setSliderValue(0);
-                slider.setButtonInActive();
+            MyFader fader = (MyFader) hBox.getChildren().get(i);
+            System.out.println("i: " + i + ", Fader: " + fader.channel.getText() +", Style classes: "+fader.button.getStyleClass().size());
+
+            if (!channelValues.containsKey(i)) {
+                fader.setSliderValue(0);
+                fader.setButtonInActive();
             }
         }
     }

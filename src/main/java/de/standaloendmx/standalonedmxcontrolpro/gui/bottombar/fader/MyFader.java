@@ -24,13 +24,13 @@ public class MyFader extends VBox {
     private Label value;
 
     @FXML
-    private Label channel;
+    public Label channel;
 
     @FXML
     private Slider slider;
 
     @FXML
-    private Button button;
+    public Button button;
 
     public MyFader() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/SliderView.fxml"));
@@ -67,7 +67,7 @@ public class MyFader extends VBox {
         slider.valueProperty().addListener(e -> {
             value.setText(String.valueOf((int)slider.getValue()));
 
-            if(button.getText().equals("❌")){
+            if(button.getStyleClass().contains("button_inactive")){
                 setButtonActive();
             }
 
@@ -75,9 +75,9 @@ public class MyFader extends VBox {
         });
 
 
-        setButtonInActive();
+
         button.setOnAction(e -> {
-            if(button.getText().equals("✅")){
+            if(button.getStyleClass().contains("button_active")){
                 setButtonInActive();
             }else {
                 setButtonActive();
@@ -87,18 +87,23 @@ public class MyFader extends VBox {
 
     public void setButtonActive(){
         button.setText("✅");
+        if(button.getStyleClass().size() >= 2) //has to be so complicated because just remove with string not working....
+            button.getStyleClass().remove(1);
+
         button.getStyleClass().add("button_active");
-        button.getStyleClass().remove("button_inactive");
     }
 
     public void setButtonInActive(){
         button.setText("❌");
+        if(button.getStyleClass().size() >= 2)
+            button.getStyleClass().remove(1);
+
         button.getStyleClass().add("button_inactive");
-        button.getStyleClass().remove("button_active");
+
     }
 
     public void setSliderValue(int value){
-        if(value < 513 && value > 0)
+        if(value <= 512 && value >= 0)
             slider.setValue(value);
     }
 
