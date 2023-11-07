@@ -19,7 +19,7 @@
       </HBox>
       <HBox spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="h-box" VBox.vgrow="ALWAYS">
          <children>
-            <fx:include source="SettingsView.fxml" />
+            <!--<fx:include source="SettingsView.fxml" />-->
             <fx:include source="StepsView.fxml" />
          </children>
       </HBox>
