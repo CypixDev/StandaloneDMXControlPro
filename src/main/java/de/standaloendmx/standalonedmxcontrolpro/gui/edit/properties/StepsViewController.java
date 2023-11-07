@@ -46,8 +46,15 @@ public class StepsViewController implements Initializable {
         colFade.setCellValueFactory(new PropertyValueFactory<>("fadeTime"));
         colFade.setCellFactory(TextFieldTableCell.forTableColumn());
         colFade.setOnEditCommit(event -> {
+            String regex = "\\d{2}:\\d{2}:\\d{2}";
             TableStep step = event.getRowValue();
-            step.setFadeTime(event.getNewValue());
+            if(event.getNewValue().matches(regex)){
+                step.setFadeTime(event.getNewValue());
+                tvSteps.refresh();
+            }else {
+                step.setFadeTime(event.getOldValue());
+                tvSteps.refresh();
+            }
         });
         colFade.setEditable(true); // Diese Spalte ist editierbar
 
@@ -56,8 +63,15 @@ public class StepsViewController implements Initializable {
         colHoldTime.setCellValueFactory(new PropertyValueFactory<>("holdTime"));
         colHoldTime.setCellFactory(TextFieldTableCell.forTableColumn());
         colHoldTime.setOnEditCommit(event -> {
+            String regex = "\\d{2}:\\d{2}:\\d{2}";
             TableStep step = event.getRowValue();
-            step.setFadeTime(event.getNewValue());
+            if(event.getNewValue().matches(regex)){
+                step.setHoldTime(event.getNewValue());
+                tvSteps.refresh();
+            }else {
+                step.setHoldTime(event.getOldValue());
+                tvSteps.refresh();
+            }
         });
         colHoldTime.setEditable(true); // Diese Spalte ist editierbar
         colHoldTime.setSortable(false);
