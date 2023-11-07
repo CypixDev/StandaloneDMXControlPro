@@ -45,11 +45,7 @@ public class StepsViewController implements Initializable {
 
         tvSteps.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
-                if (!tvSteps.getSelectionModel().isEmpty()) {
-                    TableStep selectedData = tvSteps.getSelectionModel().getSelectedItem();
-                    FaderViewController.instance.setSliders(selectedData.getChannelValues());
-                    FaderViewController.instance.updateSliders();
-                }
+                onStepClick();
             }
         });
 
@@ -102,6 +98,14 @@ public class StepsViewController implements Initializable {
         });
     }
 
+    private void onStepClick() {
+        if (!tvSteps.getSelectionModel().isEmpty()) {
+            TableStep selectedData = tvSteps.getSelectionModel().getSelectedItem();
+            FaderViewController.instance.setSliders(selectedData.getChannelValues());
+            FaderViewController.instance.updateSliders();
+        }
+    }
+
     private String getLastStepFade(){
         if(tvSteps.getItems().isEmpty()) return "00:00:00";
         return tvSteps.getItems().get(tvSteps.getItems().size()-1).getFadeTime();
@@ -112,7 +116,12 @@ public class StepsViewController implements Initializable {
     }
 
     public void update() {
-        tvSteps.setItems(ScenesViewController.instance.getSelectedScene().getSteps());
+        if(ScenesViewController.instance.getSelectedScene() == null){
+            tvSteps.setItems(null);
+            FaderViewController.instance.blindAllFaders();
+        }else{
+            tvSteps.setItems(ScenesViewController.instance.getSelectedScene().getSteps());
+        }
         tvSteps.refresh();
     }
 
@@ -123,6 +132,12 @@ public class StepsViewController implements Initializable {
     public void channelValueUpdate(Label channel, Label value) {
         if(getSelectedTableStep() != null)
             getSelectedTableStep().getChannelValues().put(Integer.parseInt(channel.getText())-1, Integer.valueOf(value.getText()));
-        else System.out.println("NON SELECTED!!");
+    }
+
+    public void selectFirstStep() {
+        if(tvSteps.getItems() != null){
+            tvSteps.getSelectionModel().select(0);
+            onStepClick();
+        }
     }
 }

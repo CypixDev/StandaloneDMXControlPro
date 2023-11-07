@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.HBox;
@@ -93,12 +94,19 @@ public class FaderViewController implements Initializable {
 
         for (int i = 0; i < 512; i++) {
             MyFader fader = (MyFader) hBox.getChildren().get(i);
-            System.out.println("i: " + i + ", Fader: " + fader.channel.getText() +", Style classes: "+fader.button.getStyleClass().size());
+            //DEBUG: System.out.println("i: " + i + ", Fader: " + fader.channel.getText() +", Style classes: "+fader.button.getStyleClass().size());
 
             if (!channelValues.containsKey(i)) {
                 fader.setSliderValue(0);
                 fader.setButtonInActive();
             }
+        }
+    }
+
+    public void blindAllFaders(){
+        for (Node child : hBox.getChildren()) {
+            MyFader fader = (MyFader) child;
+            fader.button.getStyleClass().remove(1);
         }
     }
 }
