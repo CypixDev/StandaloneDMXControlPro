@@ -1,15 +1,19 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController;
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,9 +43,20 @@ public class StepsViewController implements Initializable {
         step = 0;
 
 
+        tvSteps.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                if (!tvSteps.getSelectionModel().isEmpty()) {
+                    TableStep selectedData = tvSteps.getSelectionModel().getSelectedItem();
+                    FaderViewController.instance.setSliders(selectedData.getChannelValues());
+                    FaderViewController.instance.updateSliders();
+                }
+            }
+        });
+
+
+
         colPos.setCellValueFactory(new PropertyValueFactory<>("pos"));
         colPos.setEditable(false);
-
 
 
 
@@ -58,7 +73,7 @@ public class StepsViewController implements Initializable {
                 tvSteps.refresh();
             }
         });
-        colFade.setEditable(true); // Diese Spalte ist editierbar
+        colFade.setEditable(true);
 
 
 
@@ -75,7 +90,7 @@ public class StepsViewController implements Initializable {
                 tvSteps.refresh();
             }
         });
-        colHoldTime.setEditable(true); // Diese Spalte ist editierbar
+        colHoldTime.setEditable(true);
         colHoldTime.setSortable(false);
 
 
@@ -99,5 +114,14 @@ public class StepsViewController implements Initializable {
     public void update() {
         tvSteps.setItems(ScenesViewController.instance.getSelectedScene().getSteps());
         tvSteps.refresh();
+    }
+
+    public TableStep getSelectedTableStep(){
+        return tvSteps.getSelectionModel().getSelectedItem();
+    }
+
+    public void channelValueUpdate(Label channel, Label value) {
+        if(getSelectedTableStep() != null)
+            getSelectedTableStep().getChannelValues().put(Integer.parseInt(channel.getText())-1, Integer.valueOf(value.getText()));
     }
 }

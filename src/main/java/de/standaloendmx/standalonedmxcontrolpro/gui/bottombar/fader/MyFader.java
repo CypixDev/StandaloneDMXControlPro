@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.StepsViewController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -13,9 +14,9 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 
 
-public class MySlider extends VBox {
+public class MyFader extends VBox {
 
-    private final Logger logger = LogManager.getLogger(MySlider.class);
+    private final Logger logger = LogManager.getLogger(MyFader.class);
 
     @FXML
     private Pane color;
@@ -31,7 +32,7 @@ public class MySlider extends VBox {
     @FXML
     private Button button;
 
-    public MySlider() {
+    public MyFader() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/SliderView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -43,7 +44,7 @@ public class MySlider extends VBox {
         }
     }
 
-    public MySlider(int channel) {
+    public MyFader(int channel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/fader/SliderView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -69,6 +70,8 @@ public class MySlider extends VBox {
             if(button.getText().equals("❌")){
                 setButtonActive();
             }
+
+            StepsViewController.instance.channelValueUpdate(channel, value);
         });
 
 
@@ -82,15 +85,22 @@ public class MySlider extends VBox {
         });
     }
 
-    private void setButtonActive(){
+    public void setButtonActive(){
         button.setText("✅");
         button.getStyleClass().add("button_active");
         button.getStyleClass().remove("button_inactive");
     }
 
-    private void setButtonInActive(){
+    public void setButtonInActive(){
         button.setText("❌");
         button.getStyleClass().add("button_inactive");
         button.getStyleClass().remove("button_active");
     }
+
+    public void setSliderValue(int value){
+        if(value < 513 && value > 0)
+            slider.setValue(value);
+    }
+
+
 }

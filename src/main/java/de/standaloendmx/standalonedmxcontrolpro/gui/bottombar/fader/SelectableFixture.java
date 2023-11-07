@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class SelectableFixture extends VBox {
 
-    private final Logger logger = LogManager.getLogger(MySlider.class);
+    private final Logger logger = LogManager.getLogger(MyFader.class);
 
     @FXML
     private ImageView ivFixtureImage;

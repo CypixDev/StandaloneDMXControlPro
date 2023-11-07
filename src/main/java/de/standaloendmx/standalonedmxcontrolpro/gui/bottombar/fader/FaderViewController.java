@@ -1,10 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
 
-import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.MySlider;
-import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
-import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
-import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +11,7 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class FaderViewController implements Initializable {
@@ -40,7 +37,7 @@ public class FaderViewController implements Initializable {
             @Override
             public void run() {
                 for (int i = 0; i < 512; i++) {
-                    hBox.getChildren().add(new MySlider(i + 1));
+                    hBox.getChildren().add(new MyFader(i + 1));
                 }
             }
         });
@@ -79,6 +76,25 @@ public class FaderViewController implements Initializable {
                     hBox.getChildren().get(i).setManaged(false);
                     hBox.getChildren().get(i).setVisible(false);
                 }
+            }
+        }
+    }
+
+    public void setSliders(Map<Integer, Integer> channelValues) {
+
+        for (Map.Entry<Integer, Integer> entry : channelValues.entrySet()) {
+            MyFader slider = (MyFader) hBox.getChildren().get(entry.getKey());
+            slider.setManaged(true);
+            slider.setVisible(true);
+            slider.setSliderValue(entry.getValue());
+            slider.setButtonActive();
+        }
+
+        for (int i = 0; i < 512; i++) {
+            if(!channelValues.containsKey(i)){
+                MyFader slider = (MyFader) hBox.getChildren().get(i);
+                slider.setSliderValue(0);
+                slider.setButtonInActive();
             }
         }
     }
