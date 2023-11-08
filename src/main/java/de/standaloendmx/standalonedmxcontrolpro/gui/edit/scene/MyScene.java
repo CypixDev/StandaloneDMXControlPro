@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class MyScene extends VBox implements Initializable {
@@ -41,7 +43,7 @@ public class MyScene extends VBox implements Initializable {
 
     public MyScene(GroupColor color) {
         steps = FXCollections.observableArrayList();
-        steps.add(new TableStep(0, "00:00:00", "00:01:00"));
+        steps.add(new TableStep(0, "00:00:00", "00:01:00", new HashMap<>()));
 
         this.color = color;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/edit/scene/MySceneView.fxml"));

@@ -11,11 +11,11 @@ public class TableStep {
 
     private Map<Integer, Integer> channelValues;
 
-    public TableStep(int pos, String fadeTime, String holdTime) {
-        channelValues = new HashMap<>();
+    public TableStep(int pos, String fadeTime, String holdTime, Map<Integer, Integer> channelValues) {
         this.pos = pos;
         this.fadeTime = fadeTime;
         this.holdTime = holdTime;
+        this.channelValues = channelValues;
     }
 
     public Map<Integer, Integer> getChannelValues() {

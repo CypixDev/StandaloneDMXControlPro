@@ -16,6 +16,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class StepsViewController implements Initializable {
@@ -94,7 +97,8 @@ public class StepsViewController implements Initializable {
         tvSteps.setEditable(true);
         btnAdd.setOnAction(e -> {
             step++;
-            tvSteps.getItems().add(new TableStep(step, getLastStepFade(), getLastStepWait()));
+            tvSteps.getItems().add(new TableStep(step, getLastStepFade(), getLastStepWait(), getLastChannelValues()));
+            tvSteps.getSelectionModel().select(tvSteps.getItems().size()-1);
         });
     }
 
@@ -104,6 +108,11 @@ public class StepsViewController implements Initializable {
             FaderViewController.instance.setSliders(selectedData.getChannelValues());
             FaderViewController.instance.updateSliders();
         }
+    }
+
+    private Map<Integer, Integer> getLastChannelValues() {
+        if(tvSteps.getItems().isEmpty()) return new HashMap<>();
+        return new HashMap<>(tvSteps.getItems().get(tvSteps.getItems().size()-1).getChannelValues());
     }
 
     private String getLastStepFade(){
