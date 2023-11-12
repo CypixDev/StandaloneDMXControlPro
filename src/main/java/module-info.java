@@ -9,6 +9,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
     requires java.desktop;
     requires com.google.gson;
     requires com.fazecast.jSerialComm;
+    requires it.unimi.dsi.fastutil.core;
 
     //GUI
 
