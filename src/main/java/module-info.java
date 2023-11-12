@@ -8,6 +8,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
     requires log4j;
     requires java.desktop;
     requires com.google.gson;
+    requires com.fazecast.jSerialComm;
 
     //GUI
 
