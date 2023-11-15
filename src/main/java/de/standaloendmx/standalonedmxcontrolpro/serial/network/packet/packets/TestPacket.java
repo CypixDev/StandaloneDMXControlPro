@@ -1,4 +1,4 @@
-package de.standaloendmx.standalonedmxcontrolpro.serial;
+package de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets;
 
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.buffer.CustomByteBuf;

@@ -1,7 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.event.events;
 
 import com.fazecast.jSerialComm.SerialPort;
-import de.standaloendmx.standalonedmxcontrolpro.serial.TestPacket;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.TestPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.PacketSubscriber;
 
 public class StringListener {

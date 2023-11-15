@@ -33,6 +33,11 @@ public class SerialPortInboundHandler extends Thread{
                 byte[] buffer = new byte[4];
                 serialPort.readBytes(buffer, 4);
 
+                for (byte b : buffer) {
+                    System.out.print(" "+b);
+                }
+                System.out.println();
+
                 int packetSize = ByteBuffer.wrap(buffer).getInt();
                 System.out.println("Packet size: "+packetSize);
                 buffer = new byte[packetSize-4]; //-4 because first int already read

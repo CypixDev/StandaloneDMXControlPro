@@ -179,6 +179,7 @@ public class CustomByteBuf {
     }
 
     public CustomByteBuf writeSizePrefixedBytes() {
+        ensureWritable(4);
         // Holen Sie die Länge des Puffers
         int size = writerIndex;
 
