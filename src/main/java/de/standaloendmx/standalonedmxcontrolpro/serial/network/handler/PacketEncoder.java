@@ -13,7 +13,7 @@ public class PacketEncoder {
         this.packetRegistry = packetRegistry;
     }
 
-    protected void encode(SerialPort serialPort, Packet packet, CustomByteBuf byteBuf) throws Exception {
+    public void encode(SerialPort serialPort, Packet packet, CustomByteBuf byteBuf) throws Exception {
         // Get packet id and write into final packet
         int packetId = packetRegistry.getPacketId(packet.getClass());
         if (packetId < 0) {
@@ -24,6 +24,7 @@ public class PacketEncoder {
         byteBuf.writeLong(packet.getSessionId());*/
         packet.write(byteBuf);
 
+        byteBuf.writeSizePrefixedBytes();
     }
 
 }

@@ -15,18 +15,18 @@ public class PacketDecoder {
         this.packetRegistry = packetRegistry;
     }
 
-    protected void decode(SerialPort channelHandlerContext, CustomByteBuf byteBuf, List<Object> list) throws Exception {
-        byteBuf.readInt(); //TODO replace with setReaderIndex...
+    public Packet decode(SerialPort channelHandlerContext, CustomByteBuf byteBuf) throws Exception {
+        //byteBuf.readInt(); //TODO replace with setReaderIndex...
         int packetId = byteBuf.readInt();
         if (!packetRegistry.containsPacketId(packetId)) {
             throw new Exception("Received invalid packet id");
         }
-        long sessionId = byteBuf.readLong();
-        int systemId = byteBuf.readInt();
+/*        long sessionId = byteBuf.readLong();
+        int systemId = byteBuf.readInt();*/
         Packet packet = packetRegistry.constructPacket(packetId);
-        packet.read(byteBuf.readBytes(byteBuf.readableBytes()));
+        packet.read(byteBuf);
 
-        list.add(packet);
+        return packet;
     }
 
 }
