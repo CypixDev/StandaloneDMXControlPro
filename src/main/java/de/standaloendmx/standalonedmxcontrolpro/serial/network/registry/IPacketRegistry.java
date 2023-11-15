@@ -24,7 +24,7 @@ package de.standaloendmx.standalonedmxcontrolpro.serial.network.registry;
 
 
 
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.Packet;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.exception.PacketRegistrationException;
 
 import java.lang.reflect.InvocationTargetException;

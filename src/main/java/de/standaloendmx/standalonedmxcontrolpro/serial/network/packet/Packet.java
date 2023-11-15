@@ -1,4 +1,4 @@
-package de.standaloendmx.standalonedmxcontrolpro.serial.network;
+package de.standaloendmx.standalonedmxcontrolpro.serial.network.packet;
 
 
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.io.Decoder;

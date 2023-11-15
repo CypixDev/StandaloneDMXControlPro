@@ -22,7 +22,7 @@
 
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.registry;
 
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.Packet;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;

@@ -2,7 +2,7 @@ package de.standaloendmx.standalonedmxcontrolpro.serial.network.handler;
 
 import com.fazecast.jSerialComm.SerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.Packet;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.buffer.CustomByteBuf;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.EventRegistry;
 
