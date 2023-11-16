@@ -16,6 +16,7 @@ public class PacketEncoder {
     public void encode(SerialPort serialPort, Packet packet, CustomByteBuf byteBuf) throws Exception {
         // Get packet id and write into final packet
         int packetId = packetRegistry.getPacketId(packet.getClass());
+        System.out.println("PackedId: "+packetId);
         if (packetId < 0) {
             throw new Exception("Returned PacketId by registry is < 0");
         }

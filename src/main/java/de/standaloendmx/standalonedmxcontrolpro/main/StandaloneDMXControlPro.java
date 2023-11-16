@@ -6,6 +6,7 @@ import de.standaloendmx.standalonedmxcontrolpro.gui.ViewManager;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.logging.LoggingManager;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
+import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
 import javafx.application.Application;
 import org.apache.log4j.Logger;
 
@@ -45,6 +46,7 @@ public class StandaloneDMXControlPro {
     private final FixtureManager fixtureManager;
     private final ViewManager viewManager;
     private final PatchManager patchManager;
+    private final SerialServer serialServer;
 
 
     public StandaloneDMXControlPro() {
@@ -65,6 +67,7 @@ public class StandaloneDMXControlPro {
 
         filesManager = new FilesManager();
         filesManager.init(); //Creating paths
+        serialServer = new SerialServer();
     }
 
     public static void main(String[] args) {
@@ -93,5 +96,9 @@ public class StandaloneDMXControlPro {
 
     public PatchManager getPatchManager() {
         return patchManager;
+    }
+
+    public SerialServer getSerialServer() {
+        return serialServer;
     }
 }

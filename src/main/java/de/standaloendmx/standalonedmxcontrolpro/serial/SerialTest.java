@@ -15,17 +15,7 @@ public class SerialTest {
 
         server.getPacketRegistry().registerPacket(0, new TestPacket());
         server.getPacketRegistry().registerPacket(1, new UUIDPacket());
+        server.startScanner();
 
-        Scanner sc = new Scanner(System.in);
-        if(sc.hasNext()){
-            for (SerialPortInboundHandler currentConnection : server.getCurrentConnections()) {
-                try {
-                    System.out.println("Sending packet....");
-                    server.writeAndFlushPacket(currentConnection.getSerialPort(), new TestPacket());
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
     }
 }
