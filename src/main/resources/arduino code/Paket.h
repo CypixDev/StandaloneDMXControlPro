@@ -47,3 +47,22 @@ public:
     return 4 + uuid.length();
   }
 };
+
+class DebugPacket : public Packet {
+public:
+  String debugMessage;
+
+
+  DebugPacket(const String& debugMessage)
+    : Packet(2), debugMessage(debugMessage) {}
+
+  void write(byte* buffer) const override {
+    intToByteArray(debugMessage.length(), buffer);
+    stringToByteArray(debugMessage, buffer+4);
+  }
+
+  //Fixed length of 16  + 4
+  int size() const override {
+    return 4 + debugMessage.length();
+  }
+};

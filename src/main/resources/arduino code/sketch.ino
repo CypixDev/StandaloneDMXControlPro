@@ -25,8 +25,9 @@ void loop() {
           sendHelloPacket();
             break;
         default:
-
-            break;
+          DebugPacket packet("Got not handeled packet id!");
+          sendPacket(packet);
+          break;
     }
   }
 }
@@ -37,7 +38,6 @@ void sendHelloPacket() {
 
   UUIDPacket uuidPacket(byteToString(uuidBuffer, sizeof(uuidBuffer)));
   sendPacket(uuidPacket);
-  Serial.flush();
 }
 
 
