@@ -15,7 +15,6 @@ public class PacketDecoder {
 
     public Packet decode(SerialPort serialPort, CustomByteBuf byteBuf) throws Exception {
         int packetId = byteBuf.readInt();
-        System.out.println("PacketId: "+packetId);
         if (!packetRegistry.containsPacketId(packetId)) {
             throw new Exception("Received invalid packet id");
         }

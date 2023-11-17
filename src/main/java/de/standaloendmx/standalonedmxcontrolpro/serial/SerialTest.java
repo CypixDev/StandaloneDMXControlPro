@@ -1,11 +1,9 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial;
 
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.exception.PacketRegistrationException;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.DebugPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.TestPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
-
-import java.util.Scanner;
 
 
 public class SerialTest {
@@ -15,6 +13,7 @@ public class SerialTest {
 
         server.getPacketRegistry().registerPacket(0, new TestPacket());
         server.getPacketRegistry().registerPacket(1, new UUIDPacket());
+        server.getPacketRegistry().registerPacket(2, new DebugPacket());
         server.startScanner();
 
     }

@@ -15,7 +15,7 @@ public class TestPacket extends Packet {
 
     @Override
     public void write(CustomByteBuf buffer) {
-        buffer.writeString("Hello !");
+
     }
 
     public String getTestString() {

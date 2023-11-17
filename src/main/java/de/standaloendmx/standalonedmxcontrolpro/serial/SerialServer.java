@@ -8,6 +8,7 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.events.Stri
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketDecoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketEncoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.TestPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.registry.IPacketRegistry;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.registry.SimplePacketRegistry;
@@ -62,7 +63,8 @@ public class SerialServer {
                         currentConnections.add(handler);
                         handler.start();
                         try {
-                            writeAndFlushPacket(port, new UUIDPacket());
+                            //writeAndFlushPacket(port, new UUIDPacket());
+                            writeAndFlushPacket(port, new TestPacket());
                             System.out.println("Sending packet....");
                         } catch (Exception e) {
                             throw new RuntimeException(e);
@@ -76,13 +78,9 @@ public class SerialServer {
 
     public boolean writeAndFlushPacket(SerialPort serialPort, Packet packet) throws Exception {
         CustomByteBuf buf = new CustomByteBuf(4);
-        buf.printInConsole();
+
         packetEncoder.encode(serialPort, packet, buf);
-
-
-        buf.printInConsole();
         serialPort.writeBytes(buf.array(), buf.array().length);
-
         return true;
     }
 
