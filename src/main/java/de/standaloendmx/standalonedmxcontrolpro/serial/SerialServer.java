@@ -8,6 +8,8 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.events.Stri
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketDecoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketEncoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.DebugPacket;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.PingPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.TestPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.registry.IPacketRegistry;
@@ -16,7 +18,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class SerialServer {
 
@@ -50,7 +54,8 @@ public class SerialServer {
 
         for (SerialPort port : ports) {
                 if(port.openPort()){
-                    if(port.getDescriptivePortName().startsWith("USB-SERIAL CH340")){
+                    //if(port.getDescriptivePortName().startsWith("USB-SERIAL CH340")){
+                    if(port.getDescriptivePortName().startsWith("Arduino Uno")){
                         System.out.println("Connected to Arduino nano ("+port.getSystemPortName()+")");
                         //config port
                         port.setBaudRate(9600);
@@ -63,8 +68,9 @@ public class SerialServer {
                         currentConnections.add(handler);
                         handler.start();
                         try {
-                            //writeAndFlushPacket(port, new UUIDPacket());
-                            writeAndFlushPacket(port, new TestPacket());
+                            Thread.sleep(200);
+                            writeAndFlushPacket(port, new UUIDPacket());
+                            //writeAndFlushPacket(port, new PingPacket());
                             System.out.println("Sending packet....");
                         } catch (Exception e) {
                             throw new RuntimeException(e);
@@ -77,10 +83,11 @@ public class SerialServer {
 
 
     public boolean writeAndFlushPacket(SerialPort serialPort, Packet packet) throws Exception {
-        CustomByteBuf buf = new CustomByteBuf(4);
+        CustomByteBuf buf = new CustomByteBuf(8);
 
         packetEncoder.encode(serialPort, packet, buf);
         serialPort.writeBytes(buf.array(), buf.array().length);
+        System.out.println(Arrays.toString(buf.array()));
         return true;
     }
 

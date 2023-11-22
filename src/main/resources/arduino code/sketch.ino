@@ -1,34 +1,87 @@
 #include "Paket.h"
 #include <EEPROM.h>
 
+
 const int ledPin = 13;  // Pin für die LED
 const int UUID_SIZE = 16;
 const int UUID_ADDRESS = 0;
 
+
+//Debugging purpose...
+/* Define shift register pins used for seven segment display */
+#define LATCH_DIO 4
+#define CLK_DIO 7
+#define DATA_DIO 8
+
+#define Pot1 0
+
+/* Segment byte maps for numbers 0 to 9 */
+const byte SEGMENT_MAP[] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0X80, 0X90 };
+/* Byte maps to select digit 1 to 4 */
+const byte SEGMENT_SELECT[] = { 0xF1, 0xF2, 0xF4, 0xF8 };
+//----
+
 void setup() {
+  char uuidBuffer[UUID_SIZE];
+  generateRandomUUID(uuidBuffer);
+  //Debugging purpose...
+  pinMode(LATCH_DIO, OUTPUT);
+  pinMode(CLK_DIO, OUTPUT);
+  pinMode(DATA_DIO, OUTPUT);
+  //-----
+
+
   pinMode(ledPin, OUTPUT);  // Setze den Pin-Modus auf Ausgang
   Serial.begin(9600);       // Starte die serielle Kommunikation mit einer Baudrate von 9600
   checkAndGenerateUUID();
 }
 
 void loop() {
-  if (Serial.available() >= 4) {
+  while (Serial.available() < 8) {
+    delay(300);
+    WriteNumberToSegment(0, Serial.available());
+  }
 
-    byte sizeBuffer[4];
-    Serial.readBytes(sizeBuffer, 4);
-    int packageSize = byteToInt(sizeBuffer);
-    Serial.readBytes(sizeBuffer, 4);
-    int packetId = byteToInt(sizeBuffer);
+  byte buffer[8];
+  Serial.readBytes(buffer, 8);
 
-    switch (packetId) {
-        case 1:
-          sendHelloPacket();
-            break;
-        default:
-          DebugPacket packet("Got not handeled packet id!");
-          sendPacket(packet);
-          break;
-    }
+  int packageSize = byteToInt(buffer);
+  int packetId = byteToInt(buffer + 4);
+
+  delay(500);
+  WriteNumberToSegment(2, packageSize);
+  delay(500);
+  WriteNumberToSegment(3, packetId);
+
+
+
+  if (packetId == 0) {
+    PingPacket pingPacket;
+    blink(4);
+    //pingPacket.read(packetBytes);
+    sendPacket(pingPacket);
+  } else if (packetId == 1) {
+    sendHelloPacket();
+  } else if (packetId == 2) {
+    //debug message
+  } else {
+    DebugPacket debugPacket("Got not handeled packet id!");
+    sendPacket(debugPacket);
+  }
+}
+void WriteNumberToSegment(byte Segment, byte Value) {
+  digitalWrite(LATCH_DIO, LOW);
+  shiftOut(DATA_DIO, CLK_DIO, MSBFIRST, SEGMENT_MAP[Value]);
+  shiftOut(DATA_DIO, CLK_DIO, MSBFIRST, SEGMENT_SELECT[Segment]);
+  digitalWrite(LATCH_DIO, HIGH);
+}
+
+void blink(int c) {
+  for (int i = 0; i < c; i++) {
+    digitalWrite(ledPin, HIGH);
+    delay(250);
+    digitalWrite(ledPin, LOW);
+    delay(250);
   }
 }
 
@@ -59,19 +112,20 @@ void checkAndGenerateUUID() {
   char uuidBuffer[UUID_SIZE];
   readUUID(uuidBuffer);
 
-  bool isEmpty = true;
+  bool isEmpty = false;
+
   for (int i = 0; i < UUID_SIZE; ++i) {
-    if (uuidBuffer[i] != 0) {
-      isEmpty = false;
+    if (EEPROM.read(i) == 255) {
+      isEmpty = true;
       break;
     }
   }
+
   if (isEmpty) {
     generateRandomUUID(uuidBuffer);
     writeUUID(uuidBuffer);
-    //Serial.println("Generated and saved a new UUID in EEPROM.");
+
   } else {
-    //Serial.println("UUID already exists in EEPROM.");
   }
 }
 void generateRandomUUID(char* uuidBuffer) {

@@ -21,11 +21,10 @@ public class PacketEncoder {
             throw new Exception("Returned PacketId by registry is < 0");
         }
         byteBuf.writeInt(packetId);
-/*        byteBuf.writeInt(packet.getSystemId());
-        byteBuf.writeLong(packet.getSessionId());*/
         packet.write(byteBuf);
 
         byteBuf.writeSizePrefixedBytes();
+        //byteBuf.printInConsole();
     }
 
 }

@@ -193,8 +193,8 @@ public class CustomByteBuf {
         ensureWritable(size);
 
         writeInt(size);
-
-        buffer.put(content);
+        writeBytes(content);
+        //buffer.put(content);
         return this;
     }
 
