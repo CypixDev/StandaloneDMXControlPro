@@ -94,7 +94,11 @@ public class SideBarViewController implements Initializable {
             } else if (clickedButton.equals(btnLive)) {
 
             } else if (clickedButton.equals(btnDeploy)) {
-
+                try {
+                    ContentAreaViewController.instance.setContentAndAnchor("/gui/deploy/DeployView.fxml", Priority.ALWAYS);
+                } catch (IOException ex) {
+                    logger.error(ex);
+                }
             }
 
             lastClickedButton = clickedButton;

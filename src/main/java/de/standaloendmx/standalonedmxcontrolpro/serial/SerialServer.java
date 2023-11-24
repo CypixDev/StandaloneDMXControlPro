@@ -56,7 +56,7 @@ public class SerialServer {
                 if(port.openPort()){
                     //if(port.getDescriptivePortName().startsWith("USB-SERIAL CH340")){
                     if(port.getDescriptivePortName().startsWith("Arduino Uno")){
-                        System.out.println("Connected to Arduino nano ("+port.getSystemPortName()+")");
+                        logger.info("Connected to Arduino nano ("+port.getSystemPortName()+")");
                         //config port
                         port.setBaudRate(9600);
                         port.setNumDataBits(8);
@@ -81,13 +81,49 @@ public class SerialServer {
         return true;
     }
 
+    public SerialPortInboundHandler startCom(MySerialPort mySerialPort){
+        SerialPort port = mySerialPort.getSerialPort();
+        port.openPort();
+
+        logger.info("Connected to "+port.getSystemPortName());
+
+        //config port
+        port.setBaudRate(9600);
+        port.setNumDataBits(8);
+        port.setNumStopBits(1);
+        port.setParity(SerialPort.NO_PARITY);
+
+
+        SerialPortInboundHandler handler = new SerialPortInboundHandler(eventRegistry, port);
+        currentConnections.add(handler);
+        handler.start();
+        try {
+            writeAndFlushPacket(port, new UUIDPacket());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return handler;
+    }
+
+    public List<MySerialPort> getAvailableComPorts() {
+        List<MySerialPort> ret = new ArrayList<>();
+        SerialPort[] ports = SerialPort.getCommPorts();
+
+        for (SerialPort port : ports) {
+            if(!port.isOpen()){
+                ret.add(new MySerialPort(port));
+            }
+        }
+        return ret;
+    }
+
 
     public boolean writeAndFlushPacket(SerialPort serialPort, Packet packet) throws Exception {
         CustomByteBuf buf = new CustomByteBuf(8);
 
         packetEncoder.encode(serialPort, packet, buf);
         serialPort.writeBytes(buf.array(), buf.array().length);
-        System.out.println(Arrays.toString(buf.array()));
+        //System.out.println(Arrays.toString(buf.array()));
         return true;
     }
 

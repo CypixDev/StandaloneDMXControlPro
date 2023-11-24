@@ -3,6 +3,7 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
@@ -45,7 +46,12 @@ public class ContentAreaViewController implements Initializable {
         setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), Priority.NEVER);
     }
     public void setContentAndAnchor(String path, Priority hGrow) throws IOException {
-        setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), hGrow);
+        try{
+            setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), hGrow);
+        }catch (LoadException e){
+            e.printStackTrace();
+        }
+
     }
 
     public void resetContent() {

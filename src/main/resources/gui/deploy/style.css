@@ -1,0 +1,88 @@
+.ikonli-font-icon {
+    -fx-icon-size: 16;
+    -fx-icon-color: -fx-grey2;
+}
+
+.ikonli-font-icon:hover {
+    -fx-icon-color: -fx-color;
+}
+
+.button {
+    -fx-background-color: transparent;
+}
+
+.button:hover .ikonli-font-icon {
+    -fx-icon-color: -fx-color;
+}
+
+.main-vbox {
+    -fx-border-color: -fx-grey3;
+    -fx-border-width: 1;
+}
+
+.text-field {
+    -fx-background-color: -fx-grey2;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-text-fill: -fx-color
+}
+
+.tree-view, .tree-cell {
+    -fx-background-color: -fx-color;
+    -fx-text-fill: -fx-grey3;
+    -fx-font-weight: bold;
+    -fx-font-size: 10;
+}
+
+.tree-view {
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.tree-cell:selected {
+    -fx-text-fill: -fx-accent-color;
+}
+
+.tree-view .tree-cell:filled:hover {
+    -fx-background-color: -fx-color;
+    -fx-text-fill: -fx-accent-color;
+}
+
+
+.tree-view .tree-cell > .tree-disclosure-node > .arrow { /*arrow-color*/
+    -fx-background-color: -fx-accent-color;
+}
+
+.context-menu {
+    -fx-background-color: -fx-color;
+    -fx-text-fill: -fx-grey3;
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: transparent; /* Entfernen Sie den Hovern-Hintergrund */
+}
+
+.context-menu .menu-item:focused {
+    -fx-background-color: transparent; /* Entfernen Sie den Fokus-Hintergrund */
+}
+
+/*Combo box style----------------------------------------------------- */
+
+
+/*.combo-box .arrow, .combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+.combo-box .arrow-button .arrow {
+    -fx-background-color: -fx-accent-color; !* Ändere diese Farbe nach deinen Wünschen *!
+}*/
+/*
+.combo-box .arrow-button {
+    -fx-padding: 0.25em 0.4167em 0.25em 0.4167em; !* 3 5 3 5 *!
+}
+
+.combo-box .arrow {
+    -fx-background-insets: 0, 0, 0;
+    -fx-padding: 0.25em 0.3333em 0.25em 0.3333em; !* 3 4 3 4 *!
+}*/
