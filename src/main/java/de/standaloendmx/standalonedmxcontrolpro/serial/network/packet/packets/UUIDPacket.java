@@ -6,23 +6,21 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import javafx.application.Platform;
 
 public class UUIDPacket extends Packet {
+
+    private String uuid;
+
     @Override
     public void read(CustomByteBuf buffer) {
         String uuid = buffer.readString();
-
-        if(AddNewInterfaceViewController.instance != null){ //TODO: Pretty scetchy.... do better !!
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    AddNewInterfaceViewController.instance.setDeviceId(uuid);
-                }
-            });
-        }
-
+        this.uuid = uuid;
     }
 
     @Override
     public void write(CustomByteBuf buffer) {
 
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }

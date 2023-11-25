@@ -5,10 +5,7 @@ import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,12 +22,12 @@ public class AddNewInterfaceViewController implements Initializable {
     private TextField tvName;
 
     @FXML
-    private Label deviceId;
-
-    @FXML
     public Button btnSave;
     @FXML
     public Button btnCancel;
+
+    @FXML
+    private Label label;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,12 +36,18 @@ public class AddNewInterfaceViewController implements Initializable {
 
         comBox.setOnAction(event -> {
             MySerialPort selectedOption = comBox.getSelectionModel().getSelectedItem();
-            StandaloneDMXControlPro.instance.getSerialServer().startCom(selectedOption);
+            //setDeviceId(StandaloneDMXControlPro.instance.getSerialServer().getUUID(selectedOption));
+        });
 
+        btnSave.setOnAction(e -> {
+            if(tvName.getText().isEmpty() || comBox.getSelectionModel().getSelectedItem() == null){
+                label.setText("Enter a name and select a com port.");
+                saveData();
+            }else label.setText("");
         });
     }
 
-    public void setDeviceId(String id){
-        deviceId.setText("Interface ID: "+id);
+    private void saveData() {
+        DeployViewController.instance.getTreeView().getRoot().getChildren().add(new TreeItem<DeployedInterface>(new DeployedInterface()));
     }
 }
