@@ -65,7 +65,7 @@ public class DeployViewController implements Initializable {
                     SVGPath svgPath = new SVGPath();
                     svgPath.setContent(svg);
 
-                    svgPath.setFill(Color.BLACK);
+                    svgPath.setFill(Color.LIME);
                     try {
                         setGraphic(svgPath);
                     } catch (Exception e) {

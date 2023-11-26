@@ -18,4 +18,6 @@ public class MySerialPort {
     public String toString() {
         return serialPort.getSystemPortName();
     }
+
+
 }

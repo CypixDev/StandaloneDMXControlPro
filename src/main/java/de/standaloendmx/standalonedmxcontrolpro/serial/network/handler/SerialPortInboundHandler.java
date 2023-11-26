@@ -5,9 +5,12 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.buffer.CustomByteBuf;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.EventRegistry;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.SubscribedPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
@@ -15,6 +18,11 @@ public class SerialPortInboundHandler extends Thread{
 
     private final EventRegistry eventRegistry;
     private final SerialPort serialPort;
+
+    private List<SubscribedPacket> subscribedPackets = new ArrayList<>();
+
+
+    private String uuid;
 
     public SerialPortInboundHandler(EventRegistry eventRegistry, SerialPort serialPort) {
         this.eventRegistry = eventRegistry;
@@ -85,6 +93,10 @@ public class SerialPortInboundHandler extends Thread{
 
     public EventRegistry getEventRegistry() {
         return eventRegistry;
+    }
+
+    public List<SubscribedPacket> getSubscribedPackets() {
+        return subscribedPackets;
     }
 
     public SerialPort getSerialPort() {

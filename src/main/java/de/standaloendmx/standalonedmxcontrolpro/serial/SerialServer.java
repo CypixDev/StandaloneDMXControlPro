@@ -8,6 +8,7 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.events.Stri
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketDecoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketEncoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.SubscribedPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.DebugPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.PingPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.TestPacket;
@@ -21,11 +22,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class SerialServer {
+public class SerialServer extends Thread{
 
     private final Logger logger = LogManager.getLogger(SerialServer.class);
 
+    public boolean scannerActive;
     private static SerialServer instance;
 
     private final List<SerialPortInboundHandler> currentConnections;
@@ -35,9 +40,11 @@ public class SerialServer {
     private final PacketEncoder packetEncoder;
     private final PacketDecoder packetDecoder;
 
+
     public SerialServer() {
         instance = this;
 
+        scannerActive = true;
         packetRegistry = new SimplePacketRegistry();
         currentConnections = new ArrayList<>();
         eventRegistry = new EventRegistry();
@@ -45,10 +52,21 @@ public class SerialServer {
         packetEncoder = new PacketEncoder(packetRegistry);
 
         registerEvents();
-
+        startScanner();
     }
 
-    public boolean startScanner() {
+    private void startScanner() {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                scan();
+            }
+        }, 0, 2, TimeUnit.SECONDS);
+    }
+
+
+    public boolean scan() {
         SerialPort[] ports = SerialPort.getCommPorts();
         if(ports.length == 0) return false;
 
@@ -68,10 +86,8 @@ public class SerialServer {
                         currentConnections.add(handler);
                         handler.start();
                         try {
-                            Thread.sleep(200);
+                            handler.getSubscribedPackets().add(new SubscribedPacket(UUIDPacket.class));
                             writeAndFlushPacket(port, new UUIDPacket());
-                            //writeAndFlushPacket(port, new PingPacket());
-                            System.out.println("Sending packet....");
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }

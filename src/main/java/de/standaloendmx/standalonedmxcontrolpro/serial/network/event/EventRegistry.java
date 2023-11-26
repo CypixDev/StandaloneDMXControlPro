@@ -23,10 +23,13 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.event;
 
 
-
 import com.fazecast.jSerialComm.SerialPort;
+import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.SubscribedPacket;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,26 +43,24 @@ public class EventRegistry {
 
     //All packages arrive here
     public void invoke(Packet packet, SerialPort ctx) {
-
-        System.out.println("Paket landet here!!!");
-
-/*        for (SubscribedPacket subscribedPacket : client.getSubscribedPackets()) {
-            if(subscribedPacket.getSubscribedPacket().getClass().equals(packet.getClass()) && monitoredClient.getSystemId() == subscribedPacket.getSystemId()) {
-                //Packet is subscribed
-
-                packet.setSourceSystemId(monitoredClient.getSystemId()); //So the monitoring client knows from which system the packet is....
-                client.getChannel().writeAndFlush(packet); //redirecting packet directly...
+/*        for (SerialPortInboundHandler currentConnection : SerialServer.getInstance().getCurrentConnections()) {
+            if(currentConnection.getSerialPort().equals(ctx)){ //Checking if right port
+                for (SubscribedPacket subscribedPacket : currentConnection.getSubscribedPackets()) {
+                    if(subscribedPacket.getSubscribedPacket().getClass().equals(packet.getClass())){
+                    }
+                }
+                break;
             }
         }*/
-        /*
 
         try {
             for (RegisteredPacketSubscriber subscriber : subscribers) {
-                subscriber.invoke(packet, ctx, Responder.forId(packet.getSessionId(), ctx));
+                subscriber.invoke(packet, ctx);
             }
         } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
-        }*/
+        }
+
     }
 
 }
