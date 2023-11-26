@@ -23,6 +23,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.event;
 
 import com.fazecast.jSerialComm.SerialPort;
+import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
 
@@ -49,7 +50,7 @@ public class RegisteredPacketSubscriber {
                     packetClass = (Class<? extends Packet>) parameter.getType();
                     continue;
                 }
-                if (SerialPort.class.isAssignableFrom(parameter.getType())) {
+                if (MySerialPort.class.isAssignableFrom(parameter.getType())) {
                     continue;
                 }
 

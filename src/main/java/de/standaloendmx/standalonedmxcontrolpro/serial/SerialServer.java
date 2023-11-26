@@ -33,7 +33,7 @@ public class SerialServer extends Thread{
     public boolean scannerActive;
     private static SerialServer instance;
 
-    private final List<SerialPortInboundHandler> currentConnections;
+    private final List<MySerialPort> currentConnections;
     private final EventRegistry eventRegistry;
     private final IPacketRegistry packetRegistry;
 
@@ -76,25 +76,31 @@ public class SerialServer extends Thread{
                     if(port.getDescriptivePortName().startsWith("Arduino Uno")){
                         logger.info("Connected to Arduino nano ("+port.getSystemPortName()+")");
                         //config port
-                        port.setBaudRate(9600);
-                        port.setNumDataBits(8);
-                        port.setNumStopBits(1);
-                        port.setParity(SerialPort.NO_PARITY);
 
-
-                        SerialPortInboundHandler handler = new SerialPortInboundHandler(eventRegistry, port);
-                        currentConnections.add(handler);
-                        handler.start();
+                        SerialPortInboundHandler handler = configPort(port);
                         try {
                             handler.getSubscribedPackets().add(new SubscribedPacket(UUIDPacket.class));
                             writeAndFlushPacket(port, new UUIDPacket());
                         } catch (Exception e) {
-                            throw new RuntimeException(e);
+                            logger.error(e);
                         }
                     }
                 }
         }
         return true;
+    }
+
+    private SerialPortInboundHandler configPort(SerialPort port) {
+        port.setBaudRate(9600);
+        port.setNumDataBits(8);
+        port.setNumStopBits(1);
+        port.setParity(SerialPort.NO_PARITY);
+
+
+        SerialPortInboundHandler handler = new SerialPortInboundHandler(eventRegistry, port);
+        currentConnections.add(new MySerialPort(port, handler));
+        handler.start();
+        return handler;
     }
 
     public SerialPortInboundHandler startCom(MySerialPort mySerialPort){
@@ -104,15 +110,7 @@ public class SerialServer extends Thread{
         logger.info("Connected to "+port.getSystemPortName());
 
         //config port
-        port.setBaudRate(9600);
-        port.setNumDataBits(8);
-        port.setNumStopBits(1);
-        port.setParity(SerialPort.NO_PARITY);
-
-
-        SerialPortInboundHandler handler = new SerialPortInboundHandler(eventRegistry, port);
-        currentConnections.add(handler);
-        handler.start();
+        SerialPortInboundHandler handler = configPort(port);
         try {
             writeAndFlushPacket(port, new UUIDPacket());
         } catch (Exception e) {
@@ -127,7 +125,7 @@ public class SerialServer extends Thread{
 
         for (SerialPort port : ports) {
             if(!port.isOpen()){
-                ret.add(new MySerialPort(port));
+                //TODO ret.add(new MySerialPort(port));
             }
         }
         return ret;
@@ -151,7 +149,7 @@ public class SerialServer extends Thread{
         return eventRegistry;
     }
 
-    public List<SerialPortInboundHandler> getCurrentConnections() {
+    public List<MySerialPort> getCurrentConnections() {
         return currentConnections;
     }
 
