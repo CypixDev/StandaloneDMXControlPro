@@ -7,11 +7,16 @@ public class MySerialPort {
 
     private SerialPort serialPort;
     private SerialPortInboundHandler serialPortInboundHandler;
+    private String uuid;
 
 
     public MySerialPort(SerialPort serialPort, SerialPortInboundHandler serialPortInboundHandler) {
         this.serialPort = serialPort;
         this.serialPortInboundHandler = serialPortInboundHandler;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public SerialPort getSerialPort() {
@@ -27,5 +32,7 @@ public class MySerialPort {
         return serialPort.getSystemPortName();
     }
 
-
+    public String getUuid() {
+        return uuid;
+    }
 }

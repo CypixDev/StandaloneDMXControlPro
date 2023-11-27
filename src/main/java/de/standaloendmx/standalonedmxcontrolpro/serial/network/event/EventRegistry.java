@@ -24,6 +24,7 @@ package de.standaloendmx.standalonedmxcontrolpro.serial.network.event;
 
 
 import com.fazecast.jSerialComm.SerialPort;
+import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
@@ -42,7 +43,7 @@ public class EventRegistry {
     }
 
     //All packages arrive here
-    public void invoke(Packet packet, SerialPort ctx) {
+    public void invoke(Packet packet, MySerialPort ctx) {
 /*        for (SerialPortInboundHandler currentConnection : SerialServer.getInstance().getCurrentConnections()) {
             if(currentConnection.getSerialPort().equals(ctx)){ //Checking if right port
                 for (SubscribedPacket subscribedPacket : currentConnection.getSubscribedPackets()) {

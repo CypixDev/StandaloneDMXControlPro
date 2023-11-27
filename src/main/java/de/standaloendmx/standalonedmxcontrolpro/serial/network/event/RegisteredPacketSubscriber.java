@@ -68,7 +68,7 @@ public class RegisteredPacketSubscriber {
         }
     }
 
-    public void invoke(Packet rawPacket, SerialPort ctx) throws InvocationTargetException, IllegalAccessException {
+    public void invoke(Packet rawPacket, MySerialPort ctx) throws InvocationTargetException, IllegalAccessException {
         Set<InvokableEventMethod> methods = handler.get(rawPacket.getClass());
         if (methods == null) {
             return;

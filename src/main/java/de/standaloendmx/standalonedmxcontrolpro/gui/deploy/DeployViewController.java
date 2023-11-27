@@ -3,6 +3,8 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.deploy;
 import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
+import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
+import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,10 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.FillRule;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.log4j.LogManager;
@@ -44,9 +44,9 @@ public class DeployViewController implements Initializable {
         treeView.setFocusTraversable(false);
         treeView.setShowRoot(false);
 
-        TreeItem<DeployedInterface> rootItem = new TreeItem<>(new DeployedInterface());
+        TreeItem<DeployedInterface> rootItem = new TreeItem<>(new DeployedInterface("", "", ""));
         treeView.setRoot(rootItem);
-        rootItem.getChildren().add(new TreeItem<>(new DeployedInterface()));
+        rootItem.getChildren().add(new TreeItem<>(new DeployedInterface("Test1", "Group", "119521205F6D8099")));
 
         btnAdd.setOnAction(e -> {
             openModalPopup(MainApplication.mainStage);
@@ -65,7 +65,11 @@ public class DeployViewController implements Initializable {
                     SVGPath svgPath = new SVGPath();
                     svgPath.setContent(svg);
 
-                    svgPath.setFill(Color.LIME);
+                    if(deployedInterface.getSerialPort() != null && deployedInterface.getSerialPort().getSerialPort().isOpen())
+                        svgPath.setFill(Color.LIME);
+                    else svgPath.setFill(Color.ORANGE);
+
+
                     try {
                         setGraphic(svgPath);
                     } catch (Exception e) {
@@ -88,6 +92,17 @@ public class DeployViewController implements Initializable {
                 openMenuItem.setOnAction(actionEvent -> {
                     System.out.println("Open fixture info...");
                 });
+            }
+        });
+
+        btnRefresh.setOnAction(e -> {
+            for (TreeItem<DeployedInterface> child : treeView.getRoot().getChildren()) {
+                for (MySerialPort currentConnection : SerialServer.getInstance().getCurrentConnections()) {
+                    if (currentConnection.getUuid() != null && currentConnection.getUuid().equals(child.getValue().getUuid())) {
+                        child.getValue().setSerialPort(currentConnection);
+                        treeView.refresh();
+                    }
+                }
             }
         });
     }

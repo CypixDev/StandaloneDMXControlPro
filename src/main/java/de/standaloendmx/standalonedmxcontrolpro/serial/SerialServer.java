@@ -1,17 +1,13 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial;
 
 import com.fazecast.jSerialComm.SerialPort;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.events.UUIDListener;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.buffer.CustomByteBuf;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.EventRegistry;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.events.StringListener;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketDecoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.PacketEncoder;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.SubscribedPacket;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.DebugPacket;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.PingPacket;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.TestPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.registry.IPacketRegistry;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.registry.SimplePacketRegistry;
@@ -19,7 +15,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -75,11 +70,9 @@ public class SerialServer extends Thread{
                     //if(port.getDescriptivePortName().startsWith("USB-SERIAL CH340")){
                     if(port.getDescriptivePortName().startsWith("Arduino Uno")){
                         logger.info("Connected to Arduino nano ("+port.getSystemPortName()+")");
-                        //config port
 
-                        SerialPortInboundHandler handler = configPort(port);
+                        configPort(port);
                         try {
-                            handler.getSubscribedPackets().add(new SubscribedPacket(UUIDPacket.class));
                             writeAndFlushPacket(port, new UUIDPacket());
                         } catch (Exception e) {
                             logger.error(e);
@@ -98,7 +91,10 @@ public class SerialServer extends Thread{
 
 
         SerialPortInboundHandler handler = new SerialPortInboundHandler(eventRegistry, port);
-        currentConnections.add(new MySerialPort(port, handler));
+        MySerialPort mySerialPort = new MySerialPort(port, handler);
+        handler.setMySerialPort(mySerialPort);
+        currentConnections.add(mySerialPort);
+
         handler.start();
         return handler;
     }
@@ -121,13 +117,11 @@ public class SerialServer extends Thread{
 
     public List<MySerialPort> getAvailableComPorts() {
         List<MySerialPort> ret = new ArrayList<>();
-        SerialPort[] ports = SerialPort.getCommPorts();
 
-        for (SerialPort port : ports) {
-            if(!port.isOpen()){
-                //TODO ret.add(new MySerialPort(port));
-            }
+        for (MySerialPort currentConnection : SerialServer.getInstance().getCurrentConnections()) {
+            if(currentConnection.getUuid() == null) ret.add(currentConnection);
         }
+
         return ret;
     }
 
@@ -142,7 +136,7 @@ public class SerialServer extends Thread{
     }
 
     public void registerEvents(){
-        eventRegistry.registerEvents(new StringListener());
+        eventRegistry.registerEvents(new UUIDListener());
     }
 
     public EventRegistry getEventRegistry() {

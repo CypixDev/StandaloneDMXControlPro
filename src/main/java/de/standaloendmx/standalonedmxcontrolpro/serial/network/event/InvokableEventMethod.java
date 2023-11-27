@@ -24,6 +24,7 @@ package de.standaloendmx.standalonedmxcontrolpro.serial.network.event;
 
 
 import com.fazecast.jSerialComm.SerialPort;
+import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
 
@@ -45,7 +46,7 @@ public class InvokableEventMethod {
         this.method.setAccessible(true);
     }
 
-    public void invoke(Packet packet, SerialPort ctx) throws InvocationTargetException, IllegalAccessException {
+    public void invoke(Packet packet, MySerialPort ctx) throws InvocationTargetException, IllegalAccessException {
         if (!packetClass.equals(packet.getClass()))
             return;
 
@@ -56,7 +57,7 @@ public class InvokableEventMethod {
                 params[index++] = packet;
                 continue;
             }
-            if (SerialPortInboundHandler.class.isAssignableFrom(parameter.getType())) {
+            if (MySerialPort.class.isAssignableFrom(parameter.getType())) {
                 params[index++] = ctx;
             }
         }

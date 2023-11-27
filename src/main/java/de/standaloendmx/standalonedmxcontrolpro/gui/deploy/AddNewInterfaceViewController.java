@@ -48,6 +48,6 @@ public class AddNewInterfaceViewController implements Initializable {
     }
 
     private void saveData() {
-        DeployViewController.instance.getTreeView().getRoot().getChildren().add(new TreeItem<DeployedInterface>(new DeployedInterface()));
+        DeployViewController.instance.getTreeView().getRoot().getChildren().add(new TreeItem<DeployedInterface>(new DeployedInterface("", "", "")));
     }
 }
