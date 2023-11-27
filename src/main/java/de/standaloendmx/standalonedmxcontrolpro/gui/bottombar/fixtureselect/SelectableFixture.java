@@ -1,6 +1,7 @@
-package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
+package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect;
 
 import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.MyFader;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class SelectableFixture extends VBox {
 
     public SelectableFixture(PatchFixture patchFixture) {
         this.patchFixture = patchFixture;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/fader/FixtureView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/fixtureselect/FixtureView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

@@ -4,6 +4,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <FlowPane xmlns:fx="http://javafx.com/fxml/1" fx:id="flowPane" hgap="5.0" rowValignment="TOP" style="-fx-background-color: -fx-color; "
           vgap="5.0" xmlns="http://javafx.com/javafx/19"
-          fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FixtureSelectViewController">
+          fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect.FixtureSelectViewController">
 
 </FlowPane>

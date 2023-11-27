@@ -1,5 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect.FixtureSelectViewController;
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect.SelectableFixture;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -19,9 +22,6 @@ public class FaderViewController implements Initializable {
 
     public static FaderViewController instance;
 
-
-    @FXML
-    private SplitPane splitPane;
 
     @FXML
     private ScrollPane scrollPane;
@@ -45,7 +45,7 @@ public class FaderViewController implements Initializable {
 
         //96+5+71
         //scrollPane.prefWidthProperty().bind(MainApplication.mainStage.widthProperty().subtract(96+5+71));
-        scrollPane.setPrefWidth(splitPane.getWidth() / 2);
+        //scrollPane.setPrefWidth(splitPane.getWidth() / 2);
         scrollPane.setContent(hBox);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Zeige die horizontale Scrollbar immer an
         scrollPane.setFitToWidth(true); // Passe den Inhalt der ScrollPane an die Breite an

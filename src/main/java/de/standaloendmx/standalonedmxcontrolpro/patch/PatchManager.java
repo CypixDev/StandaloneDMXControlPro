@@ -1,7 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.patch;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController;
-import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FixtureSelectViewController;
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect.FixtureSelectViewController;
 
 import java.util.ArrayList;
 import java.util.List;

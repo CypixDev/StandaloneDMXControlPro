@@ -1,11 +1,16 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -14,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
 
 public class BottomBarViewController implements Initializable {
 
@@ -23,6 +29,8 @@ public class BottomBarViewController implements Initializable {
 
     @FXML
     private AnchorPane content;
+    @FXML
+    private SplitPane splitPane;
 
 
     @FXML
@@ -47,6 +55,13 @@ public class BottomBarViewController implements Initializable {
         btnEffect.setOnAction(e -> {
             handleButtonClick(btnEffect);
         });
+
+        new Timeline(new KeyFrame(
+                Duration.seconds(5),
+                actionEvent -> {
+                    splitPane.setDividerPosition(0, 0.6);
+                }
+        )).play();
 
     }
 

@@ -1,5 +1,6 @@
-package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
+package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import javafx.collections.FXCollections;
