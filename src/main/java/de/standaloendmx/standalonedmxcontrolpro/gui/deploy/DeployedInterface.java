@@ -8,7 +8,7 @@ public class DeployedInterface {
     private String group; //soon...
     private String uuid;
 
-    private MySerialPort serialPort;
+    private transient MySerialPort serialPort;
 
 
     public DeployedInterface(String name, String group, String uuid) {
@@ -26,6 +26,9 @@ public class DeployedInterface {
     }
 
     public String getName() {
+        if(serialPort != null && serialPort.getSerialPort().isOpen()){
+            return name+" ("+serialPort.getSerialPort().getSystemPortName()+")";
+        }
         return name;
     }
 

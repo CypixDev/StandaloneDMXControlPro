@@ -5,6 +5,7 @@ import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureManager;
 import de.standaloendmx.standalonedmxcontrolpro.gui.ViewManager;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.logging.LoggingManager;
+import de.standaloendmx.standalonedmxcontrolpro.manager.DeployedInterfaceManager;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.exception.PacketRegistrationException;
@@ -51,6 +52,7 @@ public class StandaloneDMXControlPro {
     private final ViewManager viewManager;
     private final PatchManager patchManager;
     private final SerialServer serialServer;
+    private final DeployedInterfaceManager deployedInterfaceManager;
 
 
     public StandaloneDMXControlPro() {
@@ -71,6 +73,8 @@ public class StandaloneDMXControlPro {
 
         filesManager = new FilesManager();
         filesManager.init(); //Creating paths
+
+        deployedInterfaceManager = new DeployedInterfaceManager();
 
 
         serialServer = new SerialServer();
@@ -118,5 +122,9 @@ public class StandaloneDMXControlPro {
 
     public SerialServer getSerialServer() {
         return serialServer;
+    }
+
+    public DeployedInterfaceManager getDeployedInterfaceManager() {
+        return deployedInterfaceManager;
     }
 }

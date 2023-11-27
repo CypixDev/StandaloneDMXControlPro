@@ -1,6 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial;
 
 import com.fazecast.jSerialComm.SerialPort;
+import de.standaloendmx.standalonedmxcontrolpro.gui.deploy.DeployViewController;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.buffer.CustomByteBuf;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.EventRegistry;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.event.events.UUIDListener;
@@ -11,6 +12,7 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.registry.IPacketRegistry;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.registry.SimplePacketRegistry;
+import javafx.application.Platform;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -56,8 +58,15 @@ public class SerialServer extends Thread {
             @Override
             public void run() {
                 scan();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(DeployViewController.instance != null)
+                            DeployViewController.instance.refreshListAndStatus();
+                    }
+                });
             }
-        }, 0, 2, TimeUnit.SECONDS);
+        }, 1, 2, TimeUnit.SECONDS);
     }
 
     public boolean scan() {
@@ -76,7 +85,7 @@ public class SerialServer extends Thread {
                     } catch (Exception e) {
                         logger.error(e);
                     }
-                }
+                }else port.closePort();
             }
         }
         return true;
@@ -118,7 +127,7 @@ public class SerialServer extends Thread {
         List<MySerialPort> ret = new ArrayList<>();
 
         for (MySerialPort currentConnection : SerialServer.getInstance().getCurrentConnections()) {
-            if (currentConnection.getUuid() == null) ret.add(currentConnection);
+            if (!currentConnection.isAdded()) ret.add(currentConnection);
         }
 
         return ret;

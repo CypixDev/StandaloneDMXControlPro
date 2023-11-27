@@ -8,6 +8,7 @@ public class MySerialPort {
     private SerialPort serialPort;
     private SerialPortInboundHandler serialPortInboundHandler;
     private String uuid;
+    private boolean added;
 
 
     public MySerialPort(SerialPort serialPort, SerialPortInboundHandler serialPortInboundHandler) {
@@ -34,5 +35,13 @@ public class MySerialPort {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public void setAdded(boolean added) {
+        this.added = added;
+    }
+
+    public boolean isAdded() {
+        return added;
     }
 }

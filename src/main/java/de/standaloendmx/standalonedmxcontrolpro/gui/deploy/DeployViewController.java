@@ -2,6 +2,7 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.deploy;
 
 import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
+import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
 import javafx.fxml.FXML;
@@ -45,7 +46,12 @@ public class DeployViewController implements Initializable {
 
         TreeItem<DeployedInterface> rootItem = new TreeItem<>(new DeployedInterface("", "", ""));
         treeView.setRoot(rootItem);
-        rootItem.getChildren().add(new TreeItem<>(new DeployedInterface("Test1", "Group", "119521205F6D8099")));
+
+        //Adding all registered interfaces from files
+        for (DeployedInterface deployedInterface : StandaloneDMXControlPro.instance.getDeployedInterfaceManager().getDeployedInterfaceList()) {
+            rootItem.getChildren().add(new TreeItem<>(deployedInterface));
+        }
+        refreshListAndStatus();
 
         btnAdd.setOnAction(e -> {
             openModalPopup(MainApplication.mainStage);
@@ -64,9 +70,10 @@ public class DeployViewController implements Initializable {
                     SVGPath svgPath = new SVGPath();
                     svgPath.setContent(svg);
 
-                    if (deployedInterface.getSerialPort() != null && deployedInterface.getSerialPort().getSerialPort().isOpen())
+                    if (deployedInterface.getSerialPort() != null && deployedInterface.getSerialPort().getSerialPort().isOpen()){
                         svgPath.setFill(Color.LIME);
-                    else svgPath.setFill(Color.ORANGE);
+                        deployedInterface.getSerialPort().setAdded(true);
+                    } else svgPath.setFill(Color.ORANGE);
 
 
                     try {
@@ -81,29 +88,36 @@ public class DeployViewController implements Initializable {
 
         treeView.setOnContextMenuRequested(event -> {
             ContextMenu contextMenu = new ContextMenu();
-            MenuItem openMenuItem = new MenuItem("Öffnen");
-            contextMenu.getItems().add(openMenuItem);
+            MenuItem deleteMenuItem = new MenuItem("Delete");
+            contextMenu.getItems().add(deleteMenuItem);
 
             TreeItem<DeployedInterface> selectedItem = treeView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 contextMenu.show(treeView, event.getScreenX(), event.getScreenY());
 
-                openMenuItem.setOnAction(actionEvent -> {
-                    System.out.println("Open fixture info...");
+                deleteMenuItem.setOnAction(actionEvent -> {
+                    StandaloneDMXControlPro.instance.getDeployedInterfaceManager().deleteFromList(selectedItem.getValue());
+                    selectedItem.getValue().getSerialPort().setAdded(false);
+                    treeView.getRoot().getChildren().remove(selectedItem);
+                    refreshListAndStatus();
                 });
             }
         });
 
         btnRefresh.setOnAction(e -> {
-            for (TreeItem<DeployedInterface> child : treeView.getRoot().getChildren()) {
-                for (MySerialPort currentConnection : SerialServer.getInstance().getCurrentConnections()) {
-                    if (currentConnection.getUuid() != null && currentConnection.getUuid().equals(child.getValue().getUuid())) {
-                        child.getValue().setSerialPort(currentConnection);
-                        treeView.refresh();
-                    }
+            refreshListAndStatus();
+        });
+    }
+
+    public void refreshListAndStatus() {
+        for (TreeItem<DeployedInterface> child : treeView.getRoot().getChildren()) {
+            for (MySerialPort currentConnection : SerialServer.getInstance().getCurrentConnections()) {
+                if (currentConnection.getUuid() != null && currentConnection.getUuid().equals(child.getValue().getUuid())) {
+                    child.getValue().setSerialPort(currentConnection);
+                    treeView.refresh();
                 }
             }
-        });
+        }
     }
 
     private void openModalPopup(Stage primaryStage) {

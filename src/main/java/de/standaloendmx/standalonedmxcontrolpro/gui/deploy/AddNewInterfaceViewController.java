@@ -36,12 +36,16 @@ public class AddNewInterfaceViewController implements Initializable {
         btnSave.setOnAction(e -> {
             if (tvName.getText().isEmpty() || comBox.getSelectionModel().getSelectedItem() == null) {
                 label.setText("Enter a name and select a com port.");
-                saveData();
-            } else label.setText("");
+            } else {
+                label.setText("");
+                saveData(tvName.getText(), "", comBox.getSelectionModel().getSelectedItem().getUuid());
+            }
         });
     }
 
-    private void saveData() {
-        DeployViewController.instance.getTreeView().getRoot().getChildren().add(new TreeItem<DeployedInterface>(new DeployedInterface("", "", "")));
+    private void saveData(String name, String group, String uuid) {
+        DeployedInterface deployedInterface = new DeployedInterface(name, group, uuid);
+        StandaloneDMXControlPro.instance.getDeployedInterfaceManager().saveInFiles(deployedInterface);
+        DeployViewController.instance.getTreeView().getRoot().getChildren().add(new TreeItem<DeployedInterface>(deployedInterface));
     }
 }
