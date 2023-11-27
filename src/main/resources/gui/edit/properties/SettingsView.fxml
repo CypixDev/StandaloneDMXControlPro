@@ -4,14 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.SettingsController">
-   <children>
-      <HBox alignment="CENTER_LEFT" spacing="50.0">
-         <children>
-            <Label fx:id="name" text="Scene 1" />
-            <ChoiceBox fx:id="colorChoose" HBox.hgrow="NEVER" />
-         </children>
-      </HBox>
-   </children>
+<VBox xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css"
+      xmlns="http://javafx.com/javafx/19"
+      fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.SettingsController">
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="50.0">
+            <children>
+                <Label fx:id="name" text="Scene 1"/>
+                <ChoiceBox fx:id="colorChoose" HBox.hgrow="NEVER"/>
+            </children>
+        </HBox>
+    </children>
 </VBox>

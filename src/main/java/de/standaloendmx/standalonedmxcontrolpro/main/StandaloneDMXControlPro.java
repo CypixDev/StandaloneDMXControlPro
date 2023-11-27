@@ -35,9 +35,9 @@ public class StandaloneDMXControlPro {
      * Alle views, besonders patchview beim start laden
      * <p>
      * Nach dem placen von einem Patch grid updaten um nicht zurückgesetzte felder zu resetten
-     *
+     * <p>
      * Das Content feld muss zu einem einfachen pane werden und was applied wird entscheidet was dann passiert
-     *
+     * <p>
      * Design von Dialogen studieren ?!
      */
 
@@ -78,6 +78,10 @@ public class StandaloneDMXControlPro {
 
     }
 
+    public static void main(String[] args) {
+        instance = new StandaloneDMXControlPro();
+    }
+
     private void registerPackets() {
         try {
             serialServer.getPacketRegistry().registerPacket(0, new PingPacket());
@@ -86,10 +90,6 @@ public class StandaloneDMXControlPro {
         } catch (PacketRegistrationException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) {
-        instance = new StandaloneDMXControlPro();
     }
 
     private void startGUI() {

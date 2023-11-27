@@ -22,10 +22,9 @@
 
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.event;
 
-import com.fazecast.jSerialComm.SerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPortInboundHandler;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

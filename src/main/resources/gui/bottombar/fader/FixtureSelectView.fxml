@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.layout.FlowPane?>
-
-
-<FlowPane fx:id="flowPane" hgap="5.0" rowValignment="TOP" style="-fx-background-color: -fx-color; " vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FixtureSelectViewController">
+<FlowPane xmlns:fx="http://javafx.com/fxml/1" fx:id="flowPane" hgap="5.0" rowValignment="TOP" style="-fx-background-color: -fx-color; "
+          vgap="5.0" xmlns="http://javafx.com/javafx/19"
+          fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FixtureSelectViewController">
 
 </FlowPane>

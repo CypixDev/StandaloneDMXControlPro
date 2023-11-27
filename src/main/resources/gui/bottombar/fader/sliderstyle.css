@@ -1,9 +1,9 @@
-.vbox{
+.vbox {
     -fx-border-width: 0.5;
     -fx-border-color: black;
 }
 
-.pane{
+.pane {
     -fx-border-width: 0.5;
     -fx-border-color: black;
 }
@@ -42,7 +42,7 @@
     -fx-padding: 12 5 12 5;
 }
 
-.button{
+.button {
     -fx-background-color: -fx-grey2;
     -fx-border-radius: 2;
     -fx-border-color: black;
@@ -50,10 +50,10 @@
 }
 
 
-.button_active{
+.button_active {
     -fx-text-fill: lime;
 }
 
-.button_inactive{
+.button_inactive {
     -fx-text-fill: red;
 }

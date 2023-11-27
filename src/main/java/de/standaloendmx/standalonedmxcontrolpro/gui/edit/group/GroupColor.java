@@ -26,10 +26,11 @@ public enum GroupColor {
         return color;
     }
 
-    public String getLabelStyleClassName(){
-        return "text_"+this.name().toLowerCase();
+    public String getLabelStyleClassName() {
+        return "text_" + this.name().toLowerCase();
     }
-    public String getBorderStyleClassName(){
-        return "broder_"+this.name().toLowerCase();
+
+    public String getBorderStyleClassName() {
+        return "broder_" + this.name().toLowerCase();
     }
 }

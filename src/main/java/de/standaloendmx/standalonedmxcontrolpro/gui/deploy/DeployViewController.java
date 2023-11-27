@@ -1,7 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.deploy;
 
 import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
-import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
@@ -65,7 +64,7 @@ public class DeployViewController implements Initializable {
                     SVGPath svgPath = new SVGPath();
                     svgPath.setContent(svg);
 
-                    if(deployedInterface.getSerialPort() != null && deployedInterface.getSerialPort().getSerialPort().isOpen())
+                    if (deployedInterface.getSerialPort() != null && deployedInterface.getSerialPort().getSerialPort().isOpen())
                         svgPath.setFill(Color.LIME);
                     else svgPath.setFill(Color.ORANGE);
 
@@ -106,6 +105,7 @@ public class DeployViewController implements Initializable {
             }
         });
     }
+
     private void openModalPopup(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/deploy/AddNewInterfaceView.fxml"));
@@ -128,8 +128,6 @@ public class DeployViewController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
 
     public TreeView<DeployedInterface> getTreeView() {

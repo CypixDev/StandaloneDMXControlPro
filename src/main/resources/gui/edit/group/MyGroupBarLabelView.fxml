@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-
-<fx:root fx:id="label" styleClass="label_group" text="Group 1" type="javafx.scene.control.Label" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import java.net.URL?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" fx:id="label" styleClass="label_group" text="Group 1"
+         type="javafx.scene.control.Label" xmlns="http://javafx.com/javafx/19">
     <graphic>
-        <FontIcon fx:id="btnDelete" iconLiteral="anto-delete" />
+        <FontIcon fx:id="btnDelete" iconLiteral="anto-delete"/>
     </graphic>
-   <stylesheets>
-      <URL value="@../../MainStyle.css" />
-      <URL value="@GroupBarStyle.css" />
-   </stylesheets>
+    <stylesheets>
+        <URL value="@../../MainStyle.css"/>
+        <URL value="@GroupBarStyle.css"/>
+    </stylesheets>
 </fx:root>

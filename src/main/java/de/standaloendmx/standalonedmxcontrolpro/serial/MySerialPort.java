@@ -15,10 +15,6 @@ public class MySerialPort {
         this.serialPortInboundHandler = serialPortInboundHandler;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
     public SerialPort getSerialPort() {
         return serialPort;
     }
@@ -34,5 +30,9 @@ public class MySerialPort {
 
     public String getUuid() {
         return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

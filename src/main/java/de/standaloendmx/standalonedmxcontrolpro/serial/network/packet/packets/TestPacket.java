@@ -1,7 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets;
 
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.buffer.CustomByteBuf;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 
 public class TestPacket extends Packet {
 

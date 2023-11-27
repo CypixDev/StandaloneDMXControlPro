@@ -1,9 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets;
 
-import de.standaloendmx.standalonedmxcontrolpro.gui.deploy.AddNewInterfaceViewController;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.buffer.CustomByteBuf;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
-import javafx.application.Platform;
 
 public class UUIDPacket extends Packet {
 

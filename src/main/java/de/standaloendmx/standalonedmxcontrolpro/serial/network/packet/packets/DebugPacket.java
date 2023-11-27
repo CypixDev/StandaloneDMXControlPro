@@ -13,7 +13,7 @@ public class DebugPacket extends Packet {
     public void read(CustomByteBuf buffer) {
         String debugMessage = buffer.readString();
 
-        System.out.println("Debug: "+debugMessage);
+        System.out.println("Debug: " + debugMessage);
     }
 
     @Override

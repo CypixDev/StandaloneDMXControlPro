@@ -1,7 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.patch;
 
-import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
+import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchManager;
 import javafx.fxml.FXML;

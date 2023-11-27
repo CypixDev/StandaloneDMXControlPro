@@ -7,7 +7,7 @@ public class PingPacket extends Packet {
     @Override
     public void read(CustomByteBuf buffer) {
         long stamp = buffer.readLong();
-        System.out.println("Ping: "+(System.currentTimeMillis()-stamp)+"ms");
+        System.out.println("Ping: " + (System.currentTimeMillis() - stamp) + "ms");
     }
 
     @Override

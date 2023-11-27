@@ -45,10 +45,11 @@ public class ContentAreaViewController implements Initializable {
     public void setContentAndAnchor(String path) throws IOException {
         setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), Priority.NEVER);
     }
+
     public void setContentAndAnchor(String path, Priority hGrow) throws IOException {
-        try{
+        try {
             setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), hGrow);
-        }catch (LoadException e){
+        } catch (LoadException e) {
             e.printStackTrace();
         }
 

@@ -23,7 +23,7 @@ public class FilesManager {
         workFolder = new File(documentsPath + "\\SDMXCP");
         logFolder = new File(workFolder + "\\logs");
         fixtureLibraryFolder = new File(workFolder + "\\Fixture_Library");
-        savesFolder = new File(workFolder+"\\saves");
+        savesFolder = new File(workFolder + "\\saves");
 
 
     }

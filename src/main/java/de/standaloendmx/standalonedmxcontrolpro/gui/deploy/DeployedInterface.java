@@ -17,14 +17,13 @@ public class DeployedInterface {
         this.uuid = uuid;
     }
 
-    public void setSerialPort(MySerialPort serialPort) {
-        this.serialPort = serialPort;
-    }
-
     public MySerialPort getSerialPort() {
         return serialPort;
     }
 
+    public void setSerialPort(MySerialPort serialPort) {
+        this.serialPort = serialPort;
+    }
 
     public String getName() {
         return name;

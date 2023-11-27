@@ -1,6 +1,5 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.scene;
 
-import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController;
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController;
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.group.GroupColor;
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.StepsViewController;
@@ -17,7 +16,6 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -63,10 +61,10 @@ public class MyScene extends VBox implements Initializable {
         getStyleClass().add(color.getBorderStyleClassName());
 
         container.setOnMouseClicked(event -> {
-            if(container.getStyleClass().contains("scene_selected")){
+            if (container.getStyleClass().contains("scene_selected")) {
                 container.getStyleClass().remove("scene_selected");
-            }else {
-                if(!event.isControlDown()){
+            } else {
+                if (!event.isControlDown()) {
                     ScenesViewController.instance.unselectAllScenes();
                 }
                 container.getStyleClass().add("scene_selected");

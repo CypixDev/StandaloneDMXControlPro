@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -32,7 +31,6 @@ public class BottomBarViewController implements Initializable {
     private Button btnPallet;
     @FXML
     private Button btnEffect;
-
 
 
     @Override
@@ -83,6 +81,7 @@ public class BottomBarViewController implements Initializable {
         AnchorPane.setBottomAnchor(node, 0.0);
         AnchorPane.setTopAnchor(node, 0.0);
     }
+
     public void setContentAndAllAnchor(Node node) {
         content.getChildren().add(node);
         AnchorPane.setBottomAnchor(node, 0.0);
@@ -94,6 +93,7 @@ public class BottomBarViewController implements Initializable {
     public void setContentAndBottomTopAnchor(String path) throws IOException {
         setContentAndBottomTopAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
     }
+
     public void setContentAndAllAnchor(String path) throws IOException {
         setContentAndAllAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
     }

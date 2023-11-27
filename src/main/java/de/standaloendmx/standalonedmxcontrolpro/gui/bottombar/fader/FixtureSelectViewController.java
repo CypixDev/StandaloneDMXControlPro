@@ -32,17 +32,17 @@ public class FixtureSelectViewController implements Initializable {
 
     }
 
-    public void addToSelectable(PatchFixture patch){
+    public void addToSelectable(PatchFixture patch) {
         SelectableFixture fx = new SelectableFixture(patch);
         flowPane.getChildren().add(fx);
         fixtures.add(fx);
 
         fx.getStyleClass().add("not_selected");
         fx.setOnMouseClicked(event -> {
-            if(fx.getStyleClass().contains("selected")){
+            if (fx.getStyleClass().contains("selected")) {
                 fx.getStyleClass().remove("selected");
                 fx.getStyleClass().add("not_selected");
-            }else {
+            } else {
                 fx.getStyleClass().remove("not_selected");
                 fx.getStyleClass().add("selected");
             }
@@ -51,9 +51,9 @@ public class FixtureSelectViewController implements Initializable {
         });
     }
 
-    public void removeToSelectable(PatchFixture patch){
+    public void removeToSelectable(PatchFixture patch) {
         for (SelectableFixture fixture : fixtures) {
-            if(fixture.patchFixture.equals(patch)) {
+            if (fixture.patchFixture.equals(patch)) {
                 flowPane.getChildren().remove(fixture);
                 fixtures.remove(fixture);
                 break;

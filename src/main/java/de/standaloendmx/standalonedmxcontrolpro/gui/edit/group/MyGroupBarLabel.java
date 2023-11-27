@@ -1,12 +1,10 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.group;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -40,17 +38,18 @@ public class MyGroupBarLabel extends Label implements Initializable {
             logger.error(exception);
         }
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         label.setOnMouseClicked(event -> {
             label.getStyleClass().add("label_group_selected");
-            if(event.getClickCount() == 2){
+            if (event.getClickCount() == 2) {
                 openNameInputPopup();
             }
         });
 
         btnDelete.setOnMouseClicked(event -> {
-            if(showDeleteConfirmationPopup("Delete: "+label.getText()+" ?"))
+            if (showDeleteConfirmationPopup("Delete: " + label.getText() + " ?"))
                 ScenesViewController.instance.removeGroupContainer(groupParent);
         });
 
@@ -80,12 +79,12 @@ public class MyGroupBarLabel extends Label implements Initializable {
         return result == ButtonType.OK;
     }
 
-    public void setGroupParent(MyGroupContainer groupParent) {
-        this.groupParent = groupParent;
-    }
-
     public MyGroupContainer getGroupParent() {
         return groupParent;
+    }
+
+    public void setGroupParent(MyGroupContainer groupParent) {
+        this.groupParent = groupParent;
     }
 
     public void openNameInputPopup() {
@@ -101,7 +100,7 @@ public class MyGroupBarLabel extends Label implements Initializable {
         Optional<String> result = dialog.showAndWait();
 
         result.ifPresent(name -> {
-            if(!label.getText().isEmpty() && !label.getText().equals(" "))
+            if (!label.getText().isEmpty() && !label.getText().equals(" "))
                 label.setText(name);
         });
     }

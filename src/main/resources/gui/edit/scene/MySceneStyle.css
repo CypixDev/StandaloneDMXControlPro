@@ -1,4 +1,4 @@
-.v-box{
+.v-box {
     -fx-border-color: transparent;
     -fx-border-width: 1;
     -fx-border-radius: 4;
@@ -6,34 +6,42 @@
     -fx-background-radius: 4;
 }
 
-.scene_selected{
+.scene_selected {
     -fx-background-color: -fx-grey4;
 }
 
-.broder_orange{
+.broder_orange {
     -fx-border-color: -fx-orange;
 }
-.broder_lime{
+
+.broder_lime {
     -fx-border-color: -fx-lime;
 }
-.broder_purple{
+
+.broder_purple {
     -fx-border-color: -fx-purple;
 }
-.broder_red{
+
+.broder_red {
     -fx-border-color: -fx-red;
 }
-.broder_pink{
+
+.broder_pink {
     -fx-border-color: -fx-pink;
 }
-.broder_blue{
+
+.broder_blue {
     -fx-border-color: -fx-blue;
 }
-.broder_aqua{
+
+.broder_aqua {
     -fx-border-color: -fx-aqua;
 }
-.broder_green{
+
+.broder_green {
     -fx-border-color: -fx-green;
 }
-.broder_white{
+
+.broder_white {
     -fx-border-color: -fx-white;
 }

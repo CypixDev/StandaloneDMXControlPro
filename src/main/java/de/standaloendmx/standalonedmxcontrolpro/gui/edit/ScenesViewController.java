@@ -50,11 +50,11 @@ public class ScenesViewController implements Initializable {
 
     }
 
-    public void unselectAllScenes(){
+    public void unselectAllScenes() {
         groupList.forEach(MyGroupContainer::setUnSelected);
     }
 
-    public void addGroupContainer(){
+    public void addGroupContainer() {
         MyGroupBarLabel l = new MyGroupBarLabel();
         bar.getChildren().add(l);
         MyGroupContainer group = new MyGroupContainer(l);
@@ -64,13 +64,14 @@ public class ScenesViewController implements Initializable {
 
         l.setOnMouseClicked(event -> {
             resetSelectedGroups();
-            ((MyGroupBarLabel)event.getSource()).getGroupParent().setSelected();
-            if(event.getClickCount() == 2){
+            ((MyGroupBarLabel) event.getSource()).getGroupParent().setSelected();
+            if (event.getClickCount() == 2) {
                 l.openNameInputPopup();
             }
         });
     }
-    public void removeGroupContainer(MyGroupContainer group){
+
+    public void removeGroupContainer(MyGroupContainer group) {
         groupList.remove(group);
         groupHBox.getChildren().remove(group);
         bar.getChildren().remove(group.getGroupBarLabel());
@@ -78,14 +79,15 @@ public class ScenesViewController implements Initializable {
 
     /**
      * Returns all scenes from all groups. But not the add scene(hopefully)
+     *
      * @return
      */
-    public List<MyScene> getAllScenes(){
+    public List<MyScene> getAllScenes() {
         List<MyScene> list = new ArrayList<>();
         for (MyGroupContainer myGroupContainer : groupList) {
             for (Node child : myGroupContainer.vBox.getChildren()) {
-                if(child instanceof MyScene scene){
-                    if(!scene.getStyleClass().contains("addButton")){
+                if (child instanceof MyScene scene) {
+                    if (!scene.getStyleClass().contains("addButton")) {
                         list.add(scene);
                     }
                 }
@@ -97,20 +99,21 @@ public class ScenesViewController implements Initializable {
 
     /**
      * Returns null if more than one scene is selected!
+     *
      * @return
      */
-    public MyScene getSelectedScene(){
+    public MyScene getSelectedScene() {
         MyScene ret = null;
         for (MyScene allScene : getAllScenes()) {
-            if(allScene.getStyleClass().contains("scene_selected")){
-                if(ret != null) return null;
+            if (allScene.getStyleClass().contains("scene_selected")) {
+                if (ret != null) return null;
                 ret = allScene;
             }
         }
         return ret;
     }
 
-    private void resetSelectedGroups(){
+    private void resetSelectedGroups() {
         groupList.forEach(MyGroupContainer::setUnSelected);
     }
 }

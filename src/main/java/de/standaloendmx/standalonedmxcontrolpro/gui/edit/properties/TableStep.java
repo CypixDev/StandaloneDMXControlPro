@@ -1,6 +1,5 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class TableStep {
@@ -26,20 +25,20 @@ public class TableStep {
         return pos;
     }
 
-    public String getFadeTime() {
-        return fadeTime;
-    }
-
-    public String getHoldTime() {
-        return holdTime;
-    }
-
     public void setPos(int pos) {
         this.pos = pos;
     }
 
+    public String getFadeTime() {
+        return fadeTime;
+    }
+
     public void setFadeTime(String fadeTime) {
         this.fadeTime = fadeTime;
+    }
+
+    public String getHoldTime() {
+        return holdTime;
     }
 
     public void setHoldTime(String holdTime) {

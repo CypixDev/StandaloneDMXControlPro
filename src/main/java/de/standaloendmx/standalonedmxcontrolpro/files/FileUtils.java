@@ -9,8 +9,6 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -113,6 +111,7 @@ public class FileUtils {
             logger.error(e);
         }
     }
+
     public static String readStringFromFile(File file) {
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -125,7 +124,6 @@ public class FileUtils {
         }
         return stringBuilder.toString();
     }
-
 
 
 }

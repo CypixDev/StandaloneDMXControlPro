@@ -2,7 +2,6 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader;
 
 import de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -46,7 +45,7 @@ public class FaderViewController implements Initializable {
 
         //96+5+71
         //scrollPane.prefWidthProperty().bind(MainApplication.mainStage.widthProperty().subtract(96+5+71));
-        scrollPane.setPrefWidth(splitPane.getWidth()/2);
+        scrollPane.setPrefWidth(splitPane.getWidth() / 2);
         scrollPane.setContent(hBox);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Zeige die horizontale Scrollbar immer an
         scrollPane.setFitToWidth(true); // Passe den Inhalt der ScrollPane an die Breite an
@@ -54,27 +53,27 @@ public class FaderViewController implements Initializable {
 
     }
 
-    public void updateSliders(){
+    public void updateSliders() {
         List<Integer> shownFaders = new ArrayList<>();
         for (SelectableFixture fixture : FixtureSelectViewController.instance.getFixtures()) {
-            if(fixture.getStyleClass().contains("selected")) {
+            if (fixture.getStyleClass().contains("selected")) {
                 PatchFixture patch = fixture.patchFixture;
                 for (int i = patch.getChannel(); i < patch.getSize() + patch.getChannel(); i++) {
                     shownFaders.add(i);
                 }
             }
         }
-        if(shownFaders.isEmpty()){
+        if (shownFaders.isEmpty()) {
             for (int i = 0; i < 512; i++) {
                 hBox.getChildren().get(i).setManaged(true);
                 hBox.getChildren().get(i).setVisible(true);
             }
-        }else{
+        } else {
             for (int i = 0; i < 512; i++) {
-                if(shownFaders.contains(i)){
+                if (shownFaders.contains(i)) {
                     hBox.getChildren().get(i).setManaged(true);
                     hBox.getChildren().get(i).setVisible(true);
-                }else {
+                } else {
                     hBox.getChildren().get(i).setManaged(false);
                     hBox.getChildren().get(i).setVisible(false);
                 }
@@ -103,7 +102,7 @@ public class FaderViewController implements Initializable {
         }
     }
 
-    public void blindAllFaders(){
+    public void blindAllFaders() {
         for (Node child : hBox.getChildren()) {
             MyFader fader = (MyFader) child;
             fader.button.getStyleClass().remove(1);

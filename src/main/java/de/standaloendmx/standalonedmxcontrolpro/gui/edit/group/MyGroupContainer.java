@@ -16,14 +16,11 @@ import java.util.ResourceBundle;
 
 public class MyGroupContainer extends VBox implements Initializable {
 
-    private Logger logger = LogManager.getLogger(MyGroupContainer.class);
-
+    private final MyGroupBarLabel groupBarLabel;
     @FXML
     public VBox vBox;
-
+    private Logger logger = LogManager.getLogger(MyGroupContainer.class);
     private GroupColor color;
-
-    private final MyGroupBarLabel groupBarLabel;
 
 
     public MyGroupContainer(MyGroupBarLabel l) {
@@ -61,7 +58,7 @@ public class MyGroupContainer extends VBox implements Initializable {
         }
     }
 
-    public void setSelected(){
+    public void setSelected() {
         vBox.getChildren().forEach(child -> {
             child.getStyleClass().add("scene_selected");
         });
@@ -72,7 +69,7 @@ public class MyGroupContainer extends VBox implements Initializable {
 
     }
 
-    public void setUnSelected(){
+    public void setUnSelected() {
         vBox.getChildren().forEach(child -> {
             child.getStyleClass().remove("scene_selected");
         });

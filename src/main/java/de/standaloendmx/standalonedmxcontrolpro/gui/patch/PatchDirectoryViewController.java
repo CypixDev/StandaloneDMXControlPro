@@ -1,8 +1,8 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.patch;
 
 import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
-import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
+import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

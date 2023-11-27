@@ -17,20 +17,16 @@ import java.io.IOException;
 public class MyFader extends VBox {
 
     private final Logger logger = LogManager.getLogger(MyFader.class);
-
+    @FXML
+    public Label channel;
+    @FXML
+    public Button button;
     @FXML
     private Pane color;
     @FXML
     private Label value;
-
-    @FXML
-    public Label channel;
-
     @FXML
     private Slider slider;
-
-    @FXML
-    public Button button;
 
     public MyFader() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/SliderView.fxml"));
@@ -65,9 +61,9 @@ public class MyFader extends VBox {
         this.setManaged(true);
 
         slider.valueProperty().addListener(e -> {
-            value.setText(String.valueOf((int)slider.getValue()));
+            value.setText(String.valueOf((int) slider.getValue()));
 
-            if(button.getStyleClass().contains("button_inactive")){
+            if (button.getStyleClass().contains("button_inactive")) {
                 setButtonActive();
             }
 
@@ -75,35 +71,34 @@ public class MyFader extends VBox {
         });
 
 
-
         button.setOnAction(e -> {
-            if(button.getStyleClass().contains("button_active")){
+            if (button.getStyleClass().contains("button_active")) {
                 setButtonInActive();
-            }else {
+            } else {
                 setButtonActive();
             }
         });
     }
 
-    public void setButtonActive(){
+    public void setButtonActive() {
         button.setText("✅");
-        if(button.getStyleClass().size() >= 2) //has to be so complicated because just remove with string not working....
+        if (button.getStyleClass().size() >= 2) //has to be so complicated because just remove with string not working....
             button.getStyleClass().remove(1);
 
         button.getStyleClass().add("button_active");
     }
 
-    public void setButtonInActive(){
+    public void setButtonInActive() {
         button.setText("❌");
-        if(button.getStyleClass().size() >= 2)
+        if (button.getStyleClass().size() >= 2)
             button.getStyleClass().remove(1);
 
         button.getStyleClass().add("button_inactive");
 
     }
 
-    public void setSliderValue(int value){
-        if(value <= 512 && value >= 0)
+    public void setSliderValue(int value) {
+        if (value <= 512 && value >= 0)
             slider.setValue(value);
     }
 

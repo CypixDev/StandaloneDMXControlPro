@@ -30,7 +30,7 @@ public class PatchManager {
         return null;
     }
 
-    public void addPatch(PatchFixture patchFixture){
+    public void addPatch(PatchFixture patchFixture) {
         patches.add(patchFixture);
         FixtureSelectViewController.instance.addToSelectable(patchFixture);
 

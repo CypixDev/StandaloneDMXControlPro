@@ -1,75 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
-
-<VBox prefWidth="600.0" spacing="20.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.deploy.AddNewInterfaceViewController">
-   <children>
-      <Label text="Add new device">
-         <font>
-            <Font name="System Bold" size="23.0" />
-         </font>
-         <graphic>
-            <FontIcon iconColor="#6b6b6b" iconLiteral="anto-deployment-unit">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </FontIcon>
-         </graphic>
-      </Label>
-      <HBox alignment="CENTER_RIGHT">
-         <children>
-            <ComboBox fx:id="comBox" promptText="Available com" style="-fx-background-color: -fx-color;">
-               <HBox.margin>
-                  <Insets right="80.0" />
-               </HBox.margin>
-            </ComboBox>
-         </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-      </HBox>
-      <VBox alignment="CENTER_LEFT" spacing="10.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" spacing="10.0">
-               <children>
-                  <Label text="Name:" />
-                  <TextField fx:id="tvName" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="10.0">
-               <children>
-                  <Label text="Goup: " />
-                  <ComboBox promptText="Soon..." style="-fx-background-color: -fx-color;" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <HBox alignment="CENTER">
-         <children>
-            <Label fx:id="label" />
-         </children>
-      </HBox>
-      <HBox alignment="BOTTOM_CENTER" spacing="80.0">
-         <children>
-            <Button fx:id="btnSave" mnemonicParsing="false" stylesheets="@style.css" text="Save">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel" />
-         </children>
-      </HBox>
-   </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-   <stylesheets>
-      <URL value="@../MainStyle.css" />
-      <URL value="@addNewInterfaceStyle.css" />
-   </stylesheets>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import java.net.URL?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #333333;"
+      xmlns="http://javafx.com/javafx/17.0.2-ea"
+      fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.deploy.AddNewInterfaceViewController">
+    <children>
+        <Label text="Add new device">
+            <font>
+                <Font name="System Bold" size="23.0"/>
+            </font>
+            <graphic>
+                <FontIcon iconColor="#6b6b6b" iconLiteral="anto-deployment-unit">
+                    <font>
+                        <Font size="30.0"/>
+                    </font>
+                </FontIcon>
+            </graphic>
+        </Label>
+        <HBox alignment="CENTER_RIGHT">
+            <children>
+                <ComboBox fx:id="comBox" promptText="Available com" style="-fx-background-color: -fx-color;">
+                    <HBox.margin>
+                        <Insets right="80.0"/>
+                    </HBox.margin>
+                </ComboBox>
+            </children>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+        </HBox>
+        <VBox alignment="CENTER_LEFT" spacing="10.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="Name:"/>
+                        <TextField fx:id="tvName"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="Goup: "/>
+                        <ComboBox promptText="Soon..." style="-fx-background-color: -fx-color;"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <HBox alignment="CENTER">
+            <children>
+                <Label fx:id="label"/>
+            </children>
+        </HBox>
+        <HBox alignment="BOTTOM_CENTER" spacing="80.0">
+            <children>
+                <Button fx:id="btnSave" mnemonicParsing="false" stylesheets="@style.css" text="Save">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel"/>
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+    <stylesheets>
+        <URL value="@../MainStyle.css"/>
+        <URL value="@addNewInterfaceStyle.css"/>
+    </stylesheets>
 </VBox>

@@ -42,6 +42,7 @@ public class CustomByteBuf {
 
     /**
      * Setting the current reader position
+     *
      * @param index
      * @return
      */
@@ -57,6 +58,7 @@ public class CustomByteBuf {
 
     /**
      * Setting current writer position
+     *
      * @param index
      * @return
      */
@@ -92,11 +94,12 @@ public class CustomByteBuf {
 
     /**
      * Increases the reader index by length
+     *
      * @param length
      * @return
      */
     public CustomByteBuf skipBytes(int length) {
-        readerIndex(readerIndex+length);
+        readerIndex(readerIndex + length);
         return this;
     }
 
@@ -112,7 +115,7 @@ public class CustomByteBuf {
         ensureWritable(2);
         buffer.position(writerIndex);
         buffer.putShort(value);
-        writerIndex = writerMark+=2;
+        writerIndex = writerMark += 2;
         return this;
     }
 
@@ -120,7 +123,7 @@ public class CustomByteBuf {
         ensureWritable(4);
         buffer.position(writerIndex);
         buffer.putInt(value);
-        writerIndex+=4;
+        writerIndex += 4;
         return this;
     }
 
@@ -128,7 +131,7 @@ public class CustomByteBuf {
         ensureWritable(8);
         buffer.position(writerIndex);
         buffer.putLong(value);
-        writerIndex+=8;
+        writerIndex += 8;
         return this;
     }
 
@@ -136,7 +139,7 @@ public class CustomByteBuf {
         ensureWritable(4);
         buffer.position(writerIndex);
         buffer.putFloat(value);
-        writerIndex+=4;
+        writerIndex += 4;
         return this;
     }
 
@@ -144,7 +147,7 @@ public class CustomByteBuf {
         ensureWritable(8);
         buffer.position(writerIndex);
         buffer.putDouble(value);
-        writerIndex+=8;
+        writerIndex += 8;
         return this;
     }
 
@@ -152,12 +155,13 @@ public class CustomByteBuf {
         ensureWritable(bytes.length);
         buffer.position(writerIndex);
         buffer.put(bytes);
-        writerIndex+=bytes.length;
+        writerIndex += bytes.length;
         return this;
     }
 
     /**
      * Reading bytes from readerIndex
+     *
      * @param length
      * @return
      */
@@ -173,7 +177,7 @@ public class CustomByteBuf {
     public String readString() {
         int length = readInt();
         byte[] stringBytes = readBytes(length);
-        readerIndex+=length+4;
+        readerIndex += length + 4;
         System.out.println();
         return new String(stringBytes, StandardCharsets.UTF_8);
     }
@@ -206,31 +210,31 @@ public class CustomByteBuf {
 
     public short readShort() {
         short tmp = buffer.getShort(readerIndex);
-        readerIndex*=2;
+        readerIndex *= 2;
         return tmp;
     }
 
     public int readInt() {
         int tmp = buffer.getInt(readerIndex);
-        readerIndex+=4;
+        readerIndex += 4;
         return tmp;
     }
 
     public long readLong() {
         long tmp = buffer.getLong(readerIndex);
-        readerIndex+=8;
+        readerIndex += 8;
         return tmp;
     }
 
     public float readFloat() {
         float tmp = buffer.getFloat(readerIndex);
-        readerIndex+=4;
+        readerIndex += 4;
         return tmp;
     }
 
     public double readDouble() {
         double tmp = buffer.getDouble(readerIndex);
-        readerIndex+=8;
+        readerIndex += 8;
         return tmp;
     }
 
@@ -260,7 +264,7 @@ public class CustomByteBuf {
 
     private void ensureWritable(int size) {
         if (writableBytes() < size) {
-            int newCapacity = (buffer.capacity() + (size-writableBytes()));
+            int newCapacity = (buffer.capacity() + (size - writableBytes()));
             ByteBuffer newBuffer = ByteBuffer.allocate(newCapacity).order(buffer.order());
             buffer.flip();
             newBuffer.put(buffer);
@@ -274,10 +278,10 @@ public class CustomByteBuf {
             System.out.print(b + " ");
         }
         System.out.println(); // Neue Zeile für bessere Lesbarkeit
-        }
+    }
 
 
-    public void resetPositions(){
+    public void resetPositions() {
         readerIndex = 0;
         writerIndex = 0;
     }

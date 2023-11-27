@@ -1,5 +1,5 @@
 
-.transparent{
+.transparent {
     -fx-background-color: transparent;
 
 }
@@ -9,7 +9,7 @@
     -fx-border-width: 0.5;
 }
 
-.text-field{
+.text-field {
     -fx-background-color: -fx-grey3;
 }
 
@@ -24,6 +24,7 @@
 .table-row-cell:odd {
     -fx-background-color: -fx-color;
 }
+
 /* Ändere die Farbe der Tabellenzeilen im Wechsel */
 .table-row-cell:even {
     -fx-background-color: -fx-grey4;
@@ -45,9 +46,9 @@
     -fx-font-weight: bold;
 }
 
-.table-row-cell{
+.table-row-cell {
     /*-fx-border-color: black;*/
-    -fx-table-cell-border-color:black;
+    -fx-table-cell-border-color: black;
 }
 
 

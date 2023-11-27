@@ -1,6 +1,5 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.deploy;
 
-import com.fazecast.jSerialComm.SerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import javafx.fxml.FXML;
@@ -13,19 +12,14 @@ import java.util.ResourceBundle;
 public class AddNewInterfaceViewController implements Initializable {
 
     public static AddNewInterfaceViewController instance;
-
-
-    @FXML
-    private ComboBox<MySerialPort> comBox;
-
-    @FXML
-    private TextField tvName;
-
     @FXML
     public Button btnSave;
     @FXML
     public Button btnCancel;
-
+    @FXML
+    private ComboBox<MySerialPort> comBox;
+    @FXML
+    private TextField tvName;
     @FXML
     private Label label;
 
@@ -40,10 +34,10 @@ public class AddNewInterfaceViewController implements Initializable {
         });
 
         btnSave.setOnAction(e -> {
-            if(tvName.getText().isEmpty() || comBox.getSelectionModel().getSelectedItem() == null){
+            if (tvName.getText().isEmpty() || comBox.getSelectionModel().getSelectedItem() == null) {
                 label.setText("Enter a name and select a com port.");
                 saveData();
-            }else label.setText("");
+            } else label.setText("");
         });
     }
 

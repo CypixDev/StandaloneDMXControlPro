@@ -43,7 +43,7 @@ public class MenuBarViewController implements Initializable {
             gson.registerTypeAdapter(PatchFixture.class, new PatchFixtureAdapter());
 
             FileUtils.writeStringToFile(
-                    new File(StandaloneDMXControlPro.instance.getFilesManager().getSavesFolder().getAbsolutePath()+"\\"+"latest.json"),
+                    new File(StandaloneDMXControlPro.instance.getFilesManager().getSavesFolder().getAbsolutePath() + "\\" + "latest.json"),
                     gson.create().toJson(patchManager.getPatches()));
         });
 
@@ -69,7 +69,8 @@ public class MenuBarViewController implements Initializable {
             GsonBuilder gson = new GsonBuilder();
             gson.registerTypeAdapter(PatchFixture.class, new PatchFixtureAdapter());
 
-            Type listType = new TypeToken<List<de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture>>(){}.getType();
+            Type listType = new TypeToken<List<de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture>>() {
+            }.getType();
             List<de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture> list = gson.create().fromJson(json, listType);
             for (de.standaloendmx.standalonedmxcontrolpro.patch.PatchFixture patchFixture : list) {
                 StandaloneDMXControlPro.instance.getPatchManager().addPatch(patchFixture);

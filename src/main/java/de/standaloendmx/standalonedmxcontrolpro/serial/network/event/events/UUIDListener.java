@@ -7,7 +7,7 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UU
 public class UUIDListener {
 
     @PacketSubscriber
-    public void onRespondingUUID(UUIDPacket packet, MySerialPort serialPort){
+    public void onRespondingUUID(UUIDPacket packet, MySerialPort serialPort) {
         serialPort.setUuid(packet.getUuid());
     }
 

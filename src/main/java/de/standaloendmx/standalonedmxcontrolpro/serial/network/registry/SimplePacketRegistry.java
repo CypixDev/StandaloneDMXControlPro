@@ -23,8 +23,8 @@
 package de.standaloendmx.standalonedmxcontrolpro.serial.network.registry;
 
 
-import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.exception.PacketRegistrationException;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;

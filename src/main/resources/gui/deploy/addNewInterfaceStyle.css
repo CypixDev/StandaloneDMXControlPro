@@ -9,6 +9,7 @@
     -fx-background-radius: 2;
     -fx-border-color: transparent;
 }
+
 .combo-box .list-view .list-cell {
     -fx-background-color: transparent;
 }
@@ -17,13 +18,16 @@
     -fx-background-color: transparent;
     -fx-text-fill: -fx-accent-color
 }
-.combo-box:hover{
+
+.combo-box:hover {
     -fx-border-color: -fx-accent-color;
 }
-.combo-box:focused{
+
+.combo-box:focused {
     -fx-border-color: -fx-accent-color;
 
 }
+
 /*Text field styling ----------------------------*/
 
 /* Allgemeine Regeln für das TextField */
@@ -39,12 +43,12 @@
     -fx-background-color: transparent; /* Hintergrundfarbe im Fokus-Zustand */
 }
 
-.button{
+.button {
     -fx-border-color: -fx-grey2;
     -fx-border-radius: 2;
     -fx-border-width: 1;
 }
 
-.button:hover{
+.button:hover {
     -fx-border-color: -fx-accent-color;
 }

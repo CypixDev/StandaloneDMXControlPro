@@ -3,7 +3,6 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.edit.scene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

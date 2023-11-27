@@ -1,47 +1,55 @@
-.label_group{
+.label_group {
     -fx-border-width: 0;
     -fx-background-radius: 5;
     -fx-padding: 1 8 1 8;
 }
-.label_group:hover{
+
+.label_group:hover {
     /*maybe delete ?*/
     /*-fx-background-color: -fx-grey3;*/
 }
 
-.label_group_selected{
+.label_group_selected {
     -fx-background-color: -fx-color;
 }
 
-.button_add{
+.button_add {
     -fx-background-color: transparent;
 }
 
 
-
-.text_orange{
+.text_orange {
     -fx-text-fill: -fx-orange;
 }
-.text_lime{
+
+.text_lime {
     -fx-text-fill: -fx-lime;
 }
-.text_purple{
+
+.text_purple {
     -fx-text-fill: -fx-purple;
 }
-.text_red{
+
+.text_red {
     -fx-text-fill: -fx-red;
 }
-.text_pink{
+
+.text_pink {
     -fx-text-fill: -fx-pink;
 }
-.text_blue{
+
+.text_blue {
     -fx-text-fill: -fx-blue;
 }
-.text_aqua{
+
+.text_aqua {
     -fx-text-fill: -fx-aqua;
 }
-.text_green{
+
+.text_green {
     -fx-text-fill: -fx-green;
 }
-.text_white{
+
+.text_white {
     -fx-text-fill: -fx-white;
 }

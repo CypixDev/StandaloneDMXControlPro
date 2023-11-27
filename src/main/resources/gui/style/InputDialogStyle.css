@@ -32,36 +32,41 @@
     -fx-background-color: #555; /* Hintergrundfarbe beim Hovern */
 }
 
-.myDialog{
+.myDialog {
     -fx-background-color: -fx-color;
 }
-.myDialog > *.button-bar > *.container{
+
+.myDialog > *.button-bar > *.container {
     -fx-background-color: -fx-color;
 }
-.myDialog > *.label.content{
+
+.myDialog > *.label.content {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
-.myDialog:header *.header-panel{
+
+.myDialog:header *.header-panel {
     -fx-background-color: -fx-color;
 }
-.myDialog:header *.header-panel *.label{
+
+.myDialog:header *.header-panel *.label {
     -fx-font-size: 18px;
     -fx-font-style: italic;
     -fx-fill: -fx-text-color;
 }
 
-.grid-pane{
+.grid-pane {
     -fx-background-color: -fx-color;
 }
 
-.text-field{
+.text-field {
     -fx-background-color: -fx-color;
 }
 
 .text-input-dialog .text-input {
     -fx-control-inner-background: -fx-color; /* Hintergrundfarbe des Textfelds ändern */
 }
+
 .text-input-dialog {
     -fx-control-inner-background: -fx-color; /* Hintergrundfarbe des Textfelds ändern */
 }

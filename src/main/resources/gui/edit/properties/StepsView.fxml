@@ -1,100 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-
-<VBox prefHeight="507.0" prefWidth="266.0" spacing="5.0" style="-fx-background-color: -fx-color;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.StepsViewController">
-   <children>
-      <HBox alignment="CENTER_LEFT" spacing="5.0">
-         <children>
-            <Label text="Steps">
-               <graphic>
-                  <FontIcon iconLiteral="anto-ordered-list" iconSize="25" />
-               </graphic>
-            </Label>
-            <TextField>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </TextField>
-            <Button fx:id="btnPlay" mnemonicParsing="false" prefHeight="25.0" prefWidth="44.0">
-               <font>
-                  <Font size="1.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconLiteral="bi-play-btn-fill" iconSize="25" wrappingWidth="20.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </FontIcon>
-               </graphic>
-            </Button>
-         </children>
-         <VBox.margin>
-            <Insets right="5.0" top="5.0" />
-         </VBox.margin>
-      </HBox>
-      <VBox styleClass="box" stylesheets="@../style.css" VBox.vgrow="ALWAYS">
-         <children>
-            <AnchorPane style="-fx-background-color: -fx-grey4;">
-               <children>
-                  <Button fx:id="btnAdd" mnemonicParsing="false" styleClass="transparent" AnchorPane.leftAnchor="0.0">
-                     <graphic>
-                        <FontIcon iconLiteral="anto-plus" iconSize="17" />
-                     </graphic>
-                  </Button>
-                  <HBox alignment="CENTER_LEFT" style="-fx-background-color: -fx-grey4;" AnchorPane.rightAnchor="0.0">
-                     <children>
-                        <Button mnemonicParsing="false" styleClass="transparent">
-                           <graphic>
-                              <FontIcon iconLiteral="anto-clock-circle" iconSize="17" />
-                           </graphic>
+<?import org.kordamp.ikonli.javafx.*?>
+<?import java.net.URL?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="507.0" prefWidth="266.0" spacing="5.0"
+      style="-fx-background-color: -fx-color;" xmlns="http://javafx.com/javafx/19"
+      fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties.StepsViewController">
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="5.0">
+            <children>
+                <Label text="Steps">
+                    <graphic>
+                        <FontIcon iconLiteral="anto-ordered-list" iconSize="25"/>
+                    </graphic>
+                </Label>
+                <TextField>
+                    <HBox.margin>
+                        <Insets/>
+                    </HBox.margin>
+                </TextField>
+                <Button fx:id="btnPlay" mnemonicParsing="false" prefHeight="25.0" prefWidth="44.0">
+                    <font>
+                        <Font size="1.0"/>
+                    </font>
+                    <graphic>
+                        <FontIcon iconLiteral="bi-play-btn-fill" iconSize="25" wrappingWidth="20.0">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </FontIcon>
+                    </graphic>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets right="5.0" top="5.0"/>
+            </VBox.margin>
+        </HBox>
+        <VBox styleClass="box" stylesheets="@../style.css" VBox.vgrow="ALWAYS">
+            <children>
+                <AnchorPane style="-fx-background-color: -fx-grey4;">
+                    <children>
+                        <Button fx:id="btnAdd" mnemonicParsing="false" styleClass="transparent"
+                                AnchorPane.leftAnchor="0.0">
+                            <graphic>
+                                <FontIcon iconLiteral="anto-plus" iconSize="17"/>
+                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="transparent">
-                           <graphic>
-                              <FontIcon iconLiteral="anto-copy" iconSize="17" />
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" styleClass="transparent">
-                           <graphic>
-                              <FontIcon iconLiteral="anto-file-ppt" iconSize="17" />
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" styleClass="transparent">
-                           <graphic>
-                              <FontIcon iconLiteral="anto-delete" iconSize="17" />
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
-            <AnchorPane VBox.vgrow="ALWAYS">
-               <children>
-                  <TableView fx:id="tvSteps" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                        <TableColumn fx:id="colPos" prefWidth="75.0" text="#" />
-                      <TableColumn fx:id="colFade" prefWidth="89.0" text="Fade time" />
-                      <TableColumn fx:id="colHoldTime" prefWidth="99.0" text="Hold time" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
-   </children>
-   <stylesheets>
-      <URL value="@../../MainStyle.css" />
-      <URL value="@../style.css" />
-   </stylesheets>
+                        <HBox alignment="CENTER_LEFT" style="-fx-background-color: -fx-grey4;"
+                              AnchorPane.rightAnchor="0.0">
+                            <children>
+                                <Button mnemonicParsing="false" styleClass="transparent">
+                                    <graphic>
+                                        <FontIcon iconLiteral="anto-clock-circle" iconSize="17"/>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" styleClass="transparent">
+                                    <graphic>
+                                        <FontIcon iconLiteral="anto-copy" iconSize="17"/>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" styleClass="transparent">
+                                    <graphic>
+                                        <FontIcon iconLiteral="anto-file-ppt" iconSize="17"/>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" styleClass="transparent">
+                                    <graphic>
+                                        <FontIcon iconLiteral="anto-delete" iconSize="17"/>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </AnchorPane>
+                <AnchorPane VBox.vgrow="ALWAYS">
+                    <children>
+                        <TableView fx:id="tvSteps" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <columns>
+                                <TableColumn fx:id="colPos" prefWidth="75.0" text="#"/>
+                                <TableColumn fx:id="colFade" prefWidth="89.0" text="Fade time"/>
+                                <TableColumn fx:id="colHoldTime" prefWidth="99.0" text="Hold time"/>
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </children>
+    <stylesheets>
+        <URL value="@../../MainStyle.css"/>
+        <URL value="@../style.css"/>
+    </stylesheets>
 </VBox>

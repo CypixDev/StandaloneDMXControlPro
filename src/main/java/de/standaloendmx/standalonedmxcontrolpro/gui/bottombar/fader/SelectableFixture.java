@@ -18,14 +18,12 @@ import java.io.IOException;
 
 public class SelectableFixture extends VBox {
 
+    public final PatchFixture patchFixture;
     private final Logger logger = LogManager.getLogger(MyFader.class);
-
     @FXML
     private ImageView ivFixtureImage;
     @FXML
     private Label lFixtureName;
-
-    public final PatchFixture patchFixture;
 
 
     public SelectableFixture(PatchFixture patchFixture) {
