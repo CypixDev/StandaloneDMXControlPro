@@ -1,30 +1,39 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Control;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
-import javafx.stage.Stage;
 
+import java.awt.*;
 
-public class ColorPaletteViewController extends Application {
+public class ColorWheelControl extends Control {
 
     private Canvas colorWheelCanvas;
     private GraphicsContext colorWheelGC;
 
-    @Override
-    public void start(Stage primaryStage) {
-        colorWheelCanvas = new Canvas(400, 400);
+    public ColorWheelControl() {
+        initialize();
+    }
+
+    private void initialize() {
+        colorWheelCanvas = new Canvas(300, 300);
         colorWheelGC = colorWheelCanvas.getGraphicsContext2D();
 
         drawColorWheel();
 
-        StackPane root = new StackPane();
+        Pane root = new Pane();
+        root.setStyle("-fx-background-color: lime;");
+        root.setPrefWidth(100);
+        root.setPrefHeight(130);
         root.getChildren().add(colorWheelCanvas);
 
         // Set up event listeners for mouse click and drag
@@ -36,10 +45,7 @@ public class ColorPaletteViewController extends Application {
             handleColorSelection(event.getX(), event.getY());
         });
 
-        Scene scene = new Scene(root, 400, 400);
-        primaryStage.setTitle("Color Wheel");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        getChildren().add(root);
     }
 
     private void handleColorSelection(double mouseX, double mouseY) {
@@ -78,7 +84,7 @@ public class ColorPaletteViewController extends Application {
 
         double dotRadius = 4.0;
 
-// Zeichne einen Kreis mit transparentem Inneren und schwarzer Border
+        // Zeichne einen Kreis mit transparentem Inneren und schwarzer Border
         colorWheelGC.fillOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
         colorWheelGC.strokeOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
 
@@ -89,6 +95,7 @@ public class ColorPaletteViewController extends Application {
         double centerY = colorWheelCanvas.getHeight() / 2;
         double radius = Math.min(centerX, centerY);
 
+        colorWheelGC.setFill(Color.LIGHTGRAY);
         colorWheelGC.clearRect(0, 0, colorWheelCanvas.getWidth(), colorWheelCanvas.getHeight());
 
         for (double hue = 0; hue < 360; hue += 0.1) {

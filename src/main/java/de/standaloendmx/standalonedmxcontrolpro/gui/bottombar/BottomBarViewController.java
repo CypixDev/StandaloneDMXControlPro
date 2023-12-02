@@ -83,6 +83,12 @@ public class BottomBarViewController implements Initializable {
                     logger.error(ex);
                 }
             } else if (clickedButton.equals(btnPallet)) {
+                try {
+                    setContentAndAllAnchor("/gui/bottombar/palette/PaletteView.fxml");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    logger.error(ex);
+                }
             } else if (clickedButton.equals(btnEffect)) {
 
             }
