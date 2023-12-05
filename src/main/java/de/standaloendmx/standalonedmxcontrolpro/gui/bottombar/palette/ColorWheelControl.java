@@ -25,15 +25,13 @@ public class ColorWheelControl extends Control {
     }
 
     private void initialize() {
-        colorWheelCanvas = new Canvas(300, 300);
+        colorWheelCanvas = new Canvas(200, 200); //The actual canvas, nearly the size of the circle
         colorWheelGC = colorWheelCanvas.getGraphicsContext2D();
 
         drawColorWheel();
 
         Pane root = new Pane();
         root.setStyle("-fx-background-color: lime;");
-        root.setPrefWidth(100);
-        root.setPrefHeight(130);
         root.getChildren().add(colorWheelCanvas);
 
         // Set up event listeners for mouse click and drag
@@ -95,8 +93,9 @@ public class ColorWheelControl extends Control {
         double centerY = colorWheelCanvas.getHeight() / 2;
         double radius = Math.min(centerX, centerY);
 
-        colorWheelGC.setFill(Color.LIGHTGRAY);
-        colorWheelGC.clearRect(0, 0, colorWheelCanvas.getWidth(), colorWheelCanvas.getHeight());
+// Setze die Farbe für den gesamten Hintergrund des Canvas
+        colorWheelGC.setFill(Color.GREY);
+        colorWheelGC.fillRect(0, 0, colorWheelCanvas.getWidth(), colorWheelCanvas.getHeight());
 
         for (double hue = 0; hue < 360; hue += 0.1) {
             Color color = Color.hsb(hue, 1.0, 1.0);

@@ -14,6 +14,7 @@ public class PaletteViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        vBox.setStyle("-fx-background-color: lime");
         vBox.getChildren().add(new ColorWheelControl());
     }
 }
