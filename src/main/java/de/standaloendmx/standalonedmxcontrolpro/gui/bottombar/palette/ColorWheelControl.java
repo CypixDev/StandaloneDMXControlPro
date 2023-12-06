@@ -25,7 +25,7 @@ public class ColorWheelControl extends Control {
     }
 
     private void initialize() {
-        colorWheelCanvas = new Canvas(200, 200); //The actual canvas, nearly the size of the circle
+        colorWheelCanvas = new Canvas(150, 150); //The actual canvas, nearly the size of the circle
         colorWheelGC = colorWheelCanvas.getGraphicsContext2D();
 
         drawColorWheel();
