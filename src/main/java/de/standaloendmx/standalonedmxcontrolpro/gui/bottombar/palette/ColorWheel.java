@@ -1,31 +1,30 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette;
 
-import javafx.geometry.Insets;
+import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Control;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 
-import java.awt.*;
-
-public class ColorWheelControl extends Control {
+public class ColorWheel extends Pane {
 
     private Canvas colorWheelCanvas;
     private GraphicsContext colorWheelGC;
 
-    public ColorWheelControl() {
+    private Color backgroundColor = Color.AQUAMARINE;
+
+    public ColorWheel() {
         initialize();
+        getStyleClass().add("color-wheel");
     }
 
     private void initialize() {
-        colorWheelCanvas = new Canvas(150, 150); //The actual canvas, nearly the size of the circle
+        getStylesheets().add(getClass().getResource("/gui/MainStyle.css").toExternalForm());
+
+        colorWheelCanvas = new Canvas(200, 200); //The actual canvas, nearly the size of the circle
         colorWheelGC = colorWheelCanvas.getGraphicsContext2D();
 
         drawColorWheel();
@@ -46,16 +45,25 @@ public class ColorWheelControl extends Control {
         getChildren().add(root);
     }
 
+
     private void handleColorSelection(double mouseX, double mouseY) {
-        Color selectedColor = getColorAtMousePosition(mouseX, mouseY);
-        if (selectedColor != null) {
-            System.out.println("Selected Color: " + selectedColor);
+        double centerX = colorWheelCanvas.getWidth() / 2;
+        double centerY = colorWheelCanvas.getHeight() / 2;
+        double distanceFromCenter = Math.sqrt(Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2));
 
-            // Print RGB values
-            printRGBValues(selectedColor);
+        double radius = Math.min(centerX, centerY);
 
-            // Draw a mark at the current mouse position
-            drawMark(mouseX, mouseY);
+        if(distanceFromCenter < radius) {
+            Color selectedColor = getColorAtMousePosition(mouseX, mouseY);
+            if (selectedColor != null) {
+                System.out.println("Selected Color: " + selectedColor);
+
+                // Print RGB values
+                printRGBValues(selectedColor);
+
+                // Draw a mark at the current mouse position
+                drawMark(mouseX, mouseY);
+            }
         }
     }
 
@@ -73,19 +81,26 @@ public class ColorWheelControl extends Control {
     }
 
     private void drawMark(double x, double y) {
-        // Clear previous marks by redrawing the color wheel
-        drawColorWheel();
+        double centerX = colorWheelCanvas.getWidth() / 2;
+        double centerY = colorWheelCanvas.getHeight() / 2;
+        double distanceFromCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
 
-        colorWheelGC.setFill(Color.TRANSPARENT);
-        colorWheelGC.setStroke(Color.BLACK);
-        colorWheelGC.setLineWidth(2.0);
+        double radius = Math.min(centerX, centerY);
 
-        double dotRadius = 4.0;
+        if(distanceFromCenter < radius) {
+            // Clear previous marks by redrawing the color wheel
+            drawColorWheel();
 
-        // Zeichne einen Kreis mit transparentem Inneren und schwarzer Border
-        colorWheelGC.fillOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
-        colorWheelGC.strokeOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
+            colorWheelGC.setFill(Color.TRANSPARENT);
+            colorWheelGC.setStroke(Color.BLACK);
+            colorWheelGC.setLineWidth(2.0);
 
+            double dotRadius = 4.0;
+
+            // Zeichne einen Kreis mit transparentem Inneren und schwarzer Border
+            colorWheelGC.fillOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
+            colorWheelGC.strokeOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
+        }
     }
 
     private void drawColorWheel() {
@@ -94,7 +109,7 @@ public class ColorWheelControl extends Control {
         double radius = Math.min(centerX, centerY);
 
 // Setze die Farbe für den gesamten Hintergrund des Canvas
-        colorWheelGC.setFill(Color.GREY);
+        colorWheelGC.setFill(Color.valueOf("#333333"));
         colorWheelGC.fillRect(0, 0, colorWheelCanvas.getWidth(), colorWheelCanvas.getHeight());
 
         for (double hue = 0; hue < 360; hue += 0.1) {

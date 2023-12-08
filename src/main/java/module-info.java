@@ -25,6 +25,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
     opens de.standaloendmx.standalonedmxcontrolpro.gui.deploy to javafx.fxml, com.google.gson;
     opens de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect to javafx.fxml;
     opens de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette to javafx.graphics, javafx.fxml;
+    opens de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.elements to javafx.graphics, javafx.fxml;
 
     exports de.standaloendmx.standalonedmxcontrolpro.gui.loading;
     exports de.standaloendmx.standalonedmxcontrolpro.gui.main;
@@ -55,7 +56,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
     exports de.standaloendmx.standalonedmxcontrolpro.patch to com.google.gson;
 
     opens de.standaloendmx.standalonedmxcontrolpro.manager to com.google.gson;
-
+    exports de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.elements;
 
 
 }

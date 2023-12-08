@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.elements.ColorWheelPaletteElement;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -14,7 +15,6 @@ public class PaletteViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        vBox.setStyle("-fx-background-color: lime");
-        vBox.getChildren().add(new ColorWheelControl());
+        vBox.getChildren().add(new ColorWheelPaletteElement());
     }
 }
