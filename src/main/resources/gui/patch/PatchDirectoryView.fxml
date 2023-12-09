@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import java.net.URL?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="mainBox" prefWidth="270.0" spacing="5.0" style="-fx-background-color: -fx-color;"
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="mainBox" prefWidth="270.0" spacing="5.0"
+      style="-fx-background-color: -fx-color;"
       styleClass="main-vbox" xmlns="http://javafx.com/javafx/19"
       fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.patch.PatchDirectoryViewController">
     <children>

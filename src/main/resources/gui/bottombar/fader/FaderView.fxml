@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
-
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1" fx:id="scrollPane"
-           style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19"
-           fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController">
+            style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css"
+            xmlns="http://javafx.com/javafx/19"
+            fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController">
     <content>
         <HBox fx:id="hBox" spacing="2" style="-fx-background-color: -fx-color;"
               stylesheets="@../../MainStyle.css"/>

@@ -7,7 +7,8 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import java.net.URL?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" fx:id="container" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="116.0"
+<fx:root xmlns:fx="http://javafx.com/fxml/1" fx:id="container" maxHeight="60.0" minHeight="60.0" prefHeight="60.0"
+         prefWidth="116.0"
          styleClass="v-box" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/17.0.2-ea">
     <children>
         <Label fx:id="name" text="Scene 1">

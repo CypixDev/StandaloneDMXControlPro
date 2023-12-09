@@ -26,8 +26,8 @@ public class DeployedInterface {
     }
 
     public String getName() {
-        if(serialPort != null && serialPort.getSerialPort().isOpen()){
-            return name+" ("+serialPort.getSerialPort().getSystemPortName()+")";
+        if (serialPort != null && serialPort.getSerialPort().isOpen()) {
+            return name + " (" + serialPort.getSerialPort().getSystemPortName() + ")";
         }
         return name;
     }

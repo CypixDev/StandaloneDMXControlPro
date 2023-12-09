@@ -16,6 +16,7 @@ public class ColorWheelPaletteElement extends PaletteElementViewController {
 
     //Not called actually why so ever ?!?!
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
 }

@@ -61,7 +61,7 @@ public class SerialServer extends Thread {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        if(DeployViewController.instance != null)
+                        if (DeployViewController.instance != null)
                             DeployViewController.instance.refreshListAndStatus();
                     }
                 });
@@ -85,7 +85,7 @@ public class SerialServer extends Thread {
                     } catch (Exception e) {
                         logger.error(e);
                     }
-                }else port.closePort();
+                } else port.closePort();
             }
         }
         return true;

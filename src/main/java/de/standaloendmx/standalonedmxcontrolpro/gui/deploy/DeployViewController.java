@@ -70,7 +70,7 @@ public class DeployViewController implements Initializable {
                     SVGPath svgPath = new SVGPath();
                     svgPath.setContent(svg);
 
-                    if (deployedInterface.getSerialPort() != null && deployedInterface.getSerialPort().getSerialPort().isOpen()){
+                    if (deployedInterface.getSerialPort() != null && deployedInterface.getSerialPort().getSerialPort().isOpen()) {
                         svgPath.setFill(Color.LIME);
                         deployedInterface.getSerialPort().setAdded(true);
                     } else svgPath.setFill(Color.ORANGE);

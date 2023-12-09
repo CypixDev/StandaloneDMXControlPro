@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 <?import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.ColorWheel?>
+<?import javafx.scene.layout.VBox?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" fx:id="vbox" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0"
          style="-fx-background-color: -fx-color;" type="javafx.scene.layout.VBox"
          xmlns="http://javafx.com/javafx/19">
-    <ColorWheel xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <ColorWheel xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
         <!-- Hier kannst du weitere Eigenschaften und Kinder hinzufügen -->
     </ColorWheel>
 </fx:root>

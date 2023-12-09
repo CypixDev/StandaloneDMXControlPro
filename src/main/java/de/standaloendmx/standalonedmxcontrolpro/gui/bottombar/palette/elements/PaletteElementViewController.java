@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PaletteElementViewController extends VBox{
+public class PaletteElementViewController extends VBox {
 
     private final Logger logger = LogManager.getLogger(PaletteElementViewController.class);
 
@@ -43,7 +43,8 @@ public class PaletteElementViewController extends VBox{
     }
 
 
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
 
 }

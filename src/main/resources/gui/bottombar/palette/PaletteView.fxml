@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.layout.VBox?>
-
-
-<VBox fx:id="vBox" spacing="5.0" style="-fx-background-color: -fx-color;" stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.PaletteViewController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="vBox" spacing="5.0" style="-fx-background-color: -fx-color;"
+      stylesheets="@../../MainStyle.css" xmlns="http://javafx.com/javafx/19"
+      fx:controller="de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.PaletteViewController">
 
 </VBox>

@@ -37,11 +37,11 @@ public class MySerialPort {
         this.uuid = uuid;
     }
 
-    public void setAdded(boolean added) {
-        this.added = added;
-    }
-
     public boolean isAdded() {
         return added;
+    }
+
+    public void setAdded(boolean added) {
+        this.added = added;
     }
 }
