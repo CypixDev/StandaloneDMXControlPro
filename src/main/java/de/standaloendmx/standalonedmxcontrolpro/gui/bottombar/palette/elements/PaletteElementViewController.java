@@ -39,13 +39,10 @@ public class PaletteElementViewController extends VBox{
         } catch (IOException exception) {
             logger.error(exception);
         }
-        System.out.println("loeaded");
     }
 
 
-    public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("test 123");
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
 
 }
