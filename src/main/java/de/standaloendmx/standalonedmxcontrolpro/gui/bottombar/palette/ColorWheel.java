@@ -106,7 +106,7 @@ public class ColorWheel extends Pane {
     private void drawColorWheel() {
         double centerX = colorWheelCanvas.getWidth() / 2;
         double centerY = colorWheelCanvas.getHeight() / 2;
-        double radius = Math.min(centerX, centerY);
+        double radius = Math.min(centerX, centerY)-1;
 
 // Setze die Farbe für den gesamten Hintergrund des Canvas
         colorWheelGC.setFill(Color.valueOf("#333333"));
