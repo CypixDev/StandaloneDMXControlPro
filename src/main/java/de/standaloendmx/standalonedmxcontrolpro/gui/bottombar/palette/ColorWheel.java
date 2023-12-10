@@ -1,5 +1,9 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
@@ -57,8 +61,10 @@ public class ColorWheel extends Pane {
             if (selectedColor != null) {
                 System.out.println("Selected Color: " + selectedColor);
 
-                // Print RGB values
-                printRGBValues(selectedColor);
+
+                //fireEvent(new ColorChangedEvent(selectedColor)); // Fire color changed
+                onColorChangedProperty.get().handle(new ColorChangedEvent(selectedColor));
+                //printRGBValues(selectedColor);
 
                 // Draw a mark at the current mouse position
                 drawMark(mouseX, mouseY);
@@ -137,5 +143,27 @@ public class ColorWheel extends Pane {
         int blue = (int) Math.round(color.getBlue() * 255);
 
         System.out.println("Red: " + red + ", Green: " + green + ", Blue: " + blue);
+    }
+
+    private ObjectProperty<EventHandler<ColorChangedEvent>> onColorChangedProperty = new SimpleObjectProperty<>();
+
+    public void setOnColorChanged(EventHandler<ColorChangedEvent> handler) {
+        onColorChangedProperty.set(handler);
+    }
+
+    public EventHandler<ColorChangedEvent> getOnColorChanged() {
+        return onColorChangedProperty.get();
+    }
+
+    public static class ColorChangedEvent extends ActionEvent {
+        private final Color color;
+
+        public ColorChangedEvent(Color color) {
+            this.color = color;
+        }
+
+        public Color getColor() {
+            return color;
+        }
     }
 }
