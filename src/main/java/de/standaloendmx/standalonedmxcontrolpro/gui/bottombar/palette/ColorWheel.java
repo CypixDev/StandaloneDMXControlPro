@@ -12,12 +12,15 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ColorWheel extends Pane {
 
     private Canvas colorWheelCanvas;
     private GraphicsContext colorWheelGC;
 
-    private Color backgroundColor = Color.AQUAMARINE;
+    private Color selectedColor;
 
     public ColorWheel() {
         initialize();
@@ -59,11 +62,9 @@ public class ColorWheel extends Pane {
         if (distanceFromCenter < radius) {
             Color selectedColor = getColorAtMousePosition(mouseX, mouseY);
             if (selectedColor != null) {
-                System.out.println("Selected Color: " + selectedColor);
-
-
+                this.selectedColor = selectedColor;
                 //fireEvent(new ColorChangedEvent(selectedColor)); // Fire color changed
-                onColorChangedProperty.get().handle(new ColorChangedEvent(selectedColor));
+                fireColorChangedEvent(selectedColor);
                 //printRGBValues(selectedColor);
 
                 // Draw a mark at the current mouse position
@@ -137,6 +138,10 @@ public class ColorWheel extends Pane {
 
     }
 
+    public Color getSelectedColor() {
+        return selectedColor;
+    }
+
     private void printRGBValues(Color color) {
         int red = (int) Math.round(color.getRed() * 255);
         int green = (int) Math.round(color.getGreen() * 255);
@@ -145,14 +150,27 @@ public class ColorWheel extends Pane {
         System.out.println("Red: " + red + ", Green: " + green + ", Blue: " + blue);
     }
 
-    private ObjectProperty<EventHandler<ColorChangedEvent>> onColorChangedProperty = new SimpleObjectProperty<>();
-
+    private List<EventHandler<ColorChangedEvent>> colorChangedHandlers = new ArrayList<>();
     public void setOnColorChanged(EventHandler<ColorChangedEvent> handler) {
-        onColorChangedProperty.set(handler);
+        addColorChangedHandler(handler);
+    }
+    public void addColorChangedHandler(EventHandler<ColorChangedEvent> handler) {
+        colorChangedHandlers.add(handler);
     }
 
-    public EventHandler<ColorChangedEvent> getOnColorChanged() {
-        return onColorChangedProperty.get();
+    private void fireColorChangedEvent(Color color) {
+        ColorChangedEvent event = new ColorChangedEvent(color);
+        for (EventHandler<ColorChangedEvent> handler : colorChangedHandlers) {
+            handler.handle(event);
+        }
+    }
+
+    public void setSelectedColor(Color color, double x, double y) {
+        selectedColor = color;
+
+        // Setze die ausgewählte Farbe und zeichne den Punkt.
+        handleColorSelection(x, y);
+        fireColorChangedEvent(color);
     }
 
     public static class ColorChangedEvent extends ActionEvent {

@@ -3,6 +3,7 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.elements;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.apache.log4j.LogManager;
@@ -19,6 +20,8 @@ public class PaletteElementViewController extends VBox {
 
     @FXML
     protected VBox vBox;
+    @FXML
+    protected HBox headerBox;
 
     @FXML
     protected Label label;
