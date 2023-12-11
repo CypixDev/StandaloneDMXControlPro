@@ -1,7 +1,5 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
@@ -142,12 +140,12 @@ public class ColorWheel extends Pane {
         return selectedColor;
     }
 
-    private void printRGBValues(Color color) {
+    private String printRGBValues(Color color) {
         int red = (int) Math.round(color.getRed() * 255);
         int green = (int) Math.round(color.getGreen() * 255);
         int blue = (int) Math.round(color.getBlue() * 255);
 
-        System.out.println("Red: " + red + ", Green: " + green + ", Blue: " + blue);
+        return red + "|" + green + "|" + blue;
     }
 
     private List<EventHandler<ColorChangedEvent>> colorChangedHandlers = new ArrayList<>();
@@ -171,6 +169,10 @@ public class ColorWheel extends Pane {
         // Setze die ausgewählte Farbe und zeichne den Punkt.
         handleColorSelection(x, y);
         fireColorChangedEvent(color);
+    }
+
+    public String getSelectedColorString() {
+        return printRGBValues(selectedColor);
     }
 
     public static class ColorChangedEvent extends ActionEvent {

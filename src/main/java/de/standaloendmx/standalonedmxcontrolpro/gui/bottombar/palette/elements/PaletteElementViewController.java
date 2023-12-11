@@ -2,9 +2,11 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.elements;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -47,6 +49,14 @@ public class PaletteElementViewController extends VBox {
 
 
     public void initialize(URL location, ResourceBundle resources) {
+    }
+
+    public Button createIconButton(String iconLiteral) {
+        Button btn = new Button();
+        FontIcon icon = new FontIcon();
+        icon.setIconLiteral(iconLiteral);
+        btn.setGraphic(icon);
+        return btn;
     }
 
 
