@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root fx:id="vBox" maxWidth="220.0" prefWidth="220.0" spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="card" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="vBox" alignment="TOP_CENTER" prefHeight="250.0" spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="card" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox fx:id="headerBox">
             <children>

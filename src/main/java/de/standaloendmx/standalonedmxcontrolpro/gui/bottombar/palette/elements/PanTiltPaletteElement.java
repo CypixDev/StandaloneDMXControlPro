@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 
 public class PanTiltPaletteElement extends PaletteElementViewController{
 
-    private static final int CANVAS_SIZE = 400;
+    private static final int CANVAS_SIZE = 200;
     private static final int CENTER_X = CANVAS_SIZE / 2;
     private static final int CENTER_Y = CANVAS_SIZE / 2;
 

@@ -49,6 +49,7 @@ public class PaletteElementViewController extends VBox {
 
 
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     public Button createIconButton(String iconLiteral) {
