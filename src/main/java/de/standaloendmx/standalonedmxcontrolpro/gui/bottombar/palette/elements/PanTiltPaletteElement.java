@@ -87,8 +87,8 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
         panTiltChangedHandlers.add(handler);
     }
 
-    private void firePanTiltChangedEvent(double x, double y) {
-        PanTiltChangeEvent event = new PanTiltChangeEvent(x, y);
+    private void firePanTiltChangedEvent(double pan, double tilt) {
+        PanTiltChangeEvent event = new PanTiltChangeEvent(pan, tilt);
         for (EventHandler<PanTiltChangeEvent> handler : panTiltChangedHandlers) {
             handler.handle(event);
         }
@@ -96,20 +96,20 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
 
     public static class PanTiltChangeEvent extends ActionEvent{
 
-        private double x;
-        private double y;
+        private double pan;
+        private double tilt;
 
-        public PanTiltChangeEvent(double x, double y) {
-            this.x = x;
-            this.y = y;
+        public PanTiltChangeEvent(double pan, double tilt) {
+            this.pan = pan;
+            this.tilt = tilt;
         }
 
-        public double getX() {
-            return x;
+        public double getPan() {
+            return pan;
         }
 
-        public double getY() {
-            return y;
+        public double getTilt() {
+            return tilt;
         }
     }
 
