@@ -28,7 +28,7 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
 
-        canvas.setOnMouseMoved(event -> {
+        canvas.setOnMouseDragged(event -> {
             double x = event.getX() - CENTER_X;
             double y = CENTER_Y - event.getY(); // Invert Y-axis
 
@@ -55,26 +55,24 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
 
 
     private void drawDot(double x, double y) {
-        double centerX = canvas.getWidth() / 2;
-        double centerY = canvas.getHeight() / 2;
-        double distanceFromCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-
-        double radius = Math.min(centerX, centerY);
-
-        if (distanceFromCenter < radius) {
-            // Clear previous marks by redrawing the color wheel
-            drawCoordinateSystem(gc);
-
-            gc.setFill(Color.TRANSPARENT);
-            gc.setStroke(Color.BLACK);
-            gc.setLineWidth(2.0);
-
-            double dotRadius = 4.0;
-
-            // Zeichne einen Kreis mit transparentem Inneren und schwarzer Border
-            gc.fillOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
-            gc.strokeOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
+        if (x < 0 || y < 0 || x > canvas.getWidth() || y > canvas.getHeight()) {
+            // The point is outside the canvas, so we ignore this
+            return;
         }
+
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        // Redraw the coordinate system
+        drawCoordinateSystem(gc);
+
+        gc.setFill(Color.TRANSPARENT);
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2.0);
+
+        double dotRadius = 4.0;
+
+        // Draw a circle with a transparent center and black border
+        gc.fillOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
+        gc.strokeOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
     }
 
     private void updateCoordinateSystem(){
