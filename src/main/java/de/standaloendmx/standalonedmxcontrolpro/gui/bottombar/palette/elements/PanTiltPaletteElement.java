@@ -1,11 +1,14 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.elements;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanTiltPaletteElement extends PaletteElementViewController{
 
@@ -37,7 +40,8 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
             double normalizedY = y / CENTER_Y;
 
             // Print normalized coordinates (you can use these values for your moving head)
-            System.out.println("Normalized Coordinates: X=" + normalizedX + ", Y=" + normalizedY);
+            //System.out.println("Normalized Coordinates: X=" + normalizedX + ", Y=" + normalizedY);
+            firePanTiltChangedEvent(normalizedX, normalizedY);
 
             drawDot(event.getX(), event.getY());
         });
@@ -75,7 +79,38 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
         gc.strokeOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
     }
 
-    private void updateCoordinateSystem(){
-
+    private List<EventHandler<PanTiltChangeEvent>> panTiltChangedHandlers = new ArrayList<>();
+    public void setOnPanTiltChanged(EventHandler<PanTiltChangeEvent> handler) {
+        addPanTiltChangedHandler(handler);
     }
+    public void addPanTiltChangedHandler(EventHandler<PanTiltChangeEvent> handler) {
+        panTiltChangedHandlers.add(handler);
+    }
+
+    private void firePanTiltChangedEvent(double x, double y) {
+        PanTiltChangeEvent event = new PanTiltChangeEvent(x, y);
+        for (EventHandler<PanTiltChangeEvent> handler : panTiltChangedHandlers) {
+            handler.handle(event);
+        }
+    }
+
+    public static class PanTiltChangeEvent extends ActionEvent{
+
+        private double x;
+        private double y;
+
+        public PanTiltChangeEvent(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public double getX() {
+            return x;
+        }
+
+        public double getY() {
+            return y;
+        }
+    }
+
 }
