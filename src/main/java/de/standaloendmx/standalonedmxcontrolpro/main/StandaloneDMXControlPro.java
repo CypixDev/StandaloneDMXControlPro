@@ -39,6 +39,12 @@ public class StandaloneDMXControlPro {
      * <p>
      */
 
+    /** Ideas
+     *
+     * Sending the group color to client and show it with rgb led on device.
+     *
+     */
+
     private final Logger logger;
 
     private final FilesManager filesManager;
