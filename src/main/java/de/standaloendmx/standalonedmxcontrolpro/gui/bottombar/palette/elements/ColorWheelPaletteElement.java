@@ -3,11 +3,9 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.elements;
 import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.ColorHistoryPane;
 import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette.ColorWheel;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,7 +25,6 @@ public class ColorWheelPaletteElement extends PaletteElementViewController {
         super();
         rGBColorDisplay = new RGBColorDisplay();
         rGBColorDisplay.setColor(Color.WHITE);
-
 
 
         headerBox.getChildren().add(createIconButton("anto-reload"));

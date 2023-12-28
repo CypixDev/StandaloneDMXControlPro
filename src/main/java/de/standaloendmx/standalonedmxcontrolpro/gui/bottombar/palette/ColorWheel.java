@@ -19,6 +19,7 @@ public class ColorWheel extends Pane {
     private GraphicsContext colorWheelGC;
 
     private Color selectedColor;
+    private List<EventHandler<ColorChangedEvent>> colorChangedHandlers = new ArrayList<>();
 
     public ColorWheel() {
         initialize();
@@ -48,7 +49,6 @@ public class ColorWheel extends Pane {
 
         getChildren().add(root);
     }
-
 
     private void handleColorSelection(double mouseX, double mouseY) {
         double centerX = colorWheelCanvas.getWidth() / 2;
@@ -148,10 +148,10 @@ public class ColorWheel extends Pane {
         return red + "|" + green + "|" + blue;
     }
 
-    private List<EventHandler<ColorChangedEvent>> colorChangedHandlers = new ArrayList<>();
     public void setOnColorChanged(EventHandler<ColorChangedEvent> handler) {
         addColorChangedHandler(handler);
     }
+
     public void addColorChangedHandler(EventHandler<ColorChangedEvent> handler) {
         colorChangedHandlers.add(handler);
     }

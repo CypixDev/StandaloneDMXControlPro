@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PanTiltPaletteElement extends PaletteElementViewController{
+public class PanTiltPaletteElement extends PaletteElementViewController {
 
     private static final int CANVAS_SIZE = 200;
     private static final int CENTER_X = CANVAS_SIZE / 2;
@@ -21,6 +21,7 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
 
     private int panValue;
     private int tiltValue;
+    private List<EventHandler<PanTiltChangeEvent>> panTiltChangedHandlers = new ArrayList<>();
 
     public PanTiltPaletteElement() {
         canvas = new Canvas(CANVAS_SIZE, CANVAS_SIZE);
@@ -57,7 +58,6 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
         gc.strokeLine(CENTER_X, 0, CENTER_X, CANVAS_SIZE);
     }
 
-
     private void drawDot(double x, double y) {
         if (x < 0 || y < 0 || x > canvas.getWidth() || y > canvas.getHeight()) {
             // The point is outside the canvas, so we ignore this
@@ -79,10 +79,10 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
         gc.strokeOval(x - dotRadius, y - dotRadius, 2 * dotRadius, 2 * dotRadius);
     }
 
-    private List<EventHandler<PanTiltChangeEvent>> panTiltChangedHandlers = new ArrayList<>();
     public void setOnPanTiltChanged(EventHandler<PanTiltChangeEvent> handler) {
         addPanTiltChangedHandler(handler);
     }
+
     public void addPanTiltChangedHandler(EventHandler<PanTiltChangeEvent> handler) {
         panTiltChangedHandlers.add(handler);
     }
@@ -94,7 +94,7 @@ public class PanTiltPaletteElement extends PaletteElementViewController{
         }
     }
 
-    public static class PanTiltChangeEvent extends ActionEvent{
+    public static class PanTiltChangeEvent extends ActionEvent {
 
         private double pan;
         private double tilt;

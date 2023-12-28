@@ -6,10 +6,9 @@ import javafx.scene.paint.Color;
 
 public class ColorHistoryPane extends Pane {
 
+    private final ColorWheel colorWheelInstance;
     private Color color;
     private double x, y;
-
-    private final ColorWheel colorWheelInstance;
 
     public ColorHistoryPane(ColorWheel colorWheelInstance) {
         super();
@@ -21,9 +20,9 @@ public class ColorHistoryPane extends Pane {
         setBorder(new Border(new BorderStroke(Color.GREY, BorderStrokeStyle.SOLID, new CornerRadii(5.0), BorderWidths.DEFAULT)));
 
         setOnMouseClicked(e -> { //TODO improve with double click....
-            if(color == null){
+            if (color == null) {
                 setColor(colorWheelInstance.getSelectedColor(), e.getX(), e.getY());
-            }else{
+            } else {
                 colorWheelInstance.setSelectedColor(color, x, y);
             }
         });

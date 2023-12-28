@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
@@ -8,28 +7,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-
-<fx:root fx:id="vBox" alignment="TOP_CENTER" prefHeight="250.0" spacing="5.0" style="-fx-background-color: -fx-color;" styleClass="card" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import java.net.URL?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" fx:id="vBox" alignment="TOP_CENTER" prefHeight="250.0" spacing="5.0"
+         style="-fx-background-color: -fx-color;" styleClass="card" type="javafx.scene.layout.VBox"
+         xmlns="http://javafx.com/javafx/19">
     <children>
         <HBox fx:id="headerBox">
             <children>
                 <Label fx:id="label" text="Dimmer">
                     <graphic>
-                        <FontIcon fx:id="icon" iconLiteral="antf-gold" />
+                        <FontIcon fx:id="icon" iconLiteral="antf-gold"/>
                     </graphic>
                     <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="14.0"/>
                     </font>
                 </Label>
             </children>
         </HBox>
-        <Pane fx:id="content" />
+        <Pane fx:id="content"/>
     </children>
     <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
     </padding>
     <stylesheets>
-        <URL value="@../../../MainStyle.css" />
-        <URL value="@PaletteElementStyle.css" />
+        <URL value="@../../../MainStyle.css"/>
+        <URL value="@PaletteElementStyle.css"/>
     </stylesheets>
 </fx:root>
