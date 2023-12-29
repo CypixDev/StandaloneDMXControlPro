@@ -38,8 +38,7 @@ void setup() {
 
 void loop() {
   while (Serial.available() < 8) {
-    delay(300);
-    WriteNumberToSegment(0, Serial.available());
+    delay(10);
   }
 
   byte buffer[8];
@@ -48,16 +47,10 @@ void loop() {
   int packageSize = byteToInt(buffer);
   int packetId = byteToInt(buffer + 4);
 
-  delay(500);
-  WriteNumberToSegment(2, packageSize);
-  delay(500);
-  WriteNumberToSegment(3, packetId);
-
 
 
   if (packetId == 0) {
     PingPacket pingPacket;
-    blink(4);
     //pingPacket.read(packetBytes);
     sendPacket(pingPacket);
   } else if (packetId == 1) {

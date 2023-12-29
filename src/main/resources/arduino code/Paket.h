@@ -98,3 +98,24 @@ public:
     return 8;
   }
 };
+
+
+class ScenePacket : public Packet {
+public:
+
+
+  ScenePacket()
+    : Packet(3) {}
+
+  void write(byte* buffer) const override {
+
+  }
+  void read(byte* buffer) override{
+
+  }
+
+  //Fixed length of 16  + 4
+  int size() const override {
+    return 4;
+  }
+};
