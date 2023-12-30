@@ -1,0 +1,111 @@
+#ifndef BYTEBUFFER_H
+#define BYTEBUFFER_H
+
+class ByteBuffer {
+private:
+  static const int MAX_BUFFER_SIZE = 512;
+  byte buffer[MAX_BUFFER_SIZE];
+  int readPos = 0;
+  int writePos = 0;
+
+public:
+  ByteBuffer() {}
+
+  // Puts a byte in the buffer and updates the write position
+  void writeByte(byte b) {
+    if (writePos < MAX_BUFFER_SIZE) {
+      buffer[writePos] = b;
+      writePos++;
+    }
+    // else, handle buffer overflow (e.g., throw exception or silently fail)
+  }
+
+  byte readByte() {
+    if (readPos < writePos) {  // Only read if the read position is behind the write position
+      return buffer[readPos++];
+    }
+    // else, handle buffer underflow (e.g., throw exception, return default value, or fail silently)
+  }
+
+void writeInt(int value) {
+  byte byteArray[4];
+  byteArray[0] = (value >> 24) & 0xFF;
+  byteArray[1] = (value >> 16) & 0xFF;
+  byteArray[2] = (value >> 8)  & 0xFF;
+  byteArray[3] = value & 0xFF;
+
+  for (int i = 0; i < 4; i++) {
+    writeByte(byteArray[i]);
+  }
+}
+
+  int readInt() {
+    int result = 0;
+    for (int i = 0; i < 4; i++) {
+      result = (result << 8) | readByte();
+    }
+    return result;
+  }
+
+  void writeLong(long value) {
+    for (int i = 7; i >= 0; i--) {
+      writeByte(value >> (8 * i));
+    }
+  }
+
+  long readLong() {
+    long result = 0;
+    for (int i = 0; i < 8; i++) {
+      result = (result << 8) | readByte();
+    }
+    return result;
+  }
+
+  int getReadPos() {
+    return readPos;
+  }
+
+  int getWritePos() {
+    return writePos;
+  }
+  void writeString(const String& value) {
+    // Convert string length to 4 bytes and store it in the buffer
+    writeInt(value.length());
+
+    // Store each character of the string in the buffer
+    for (int i = 0; i < value.length(); i++) {
+      writeByte(value[i]);
+    }
+  }
+
+  String readString() {
+    // Read the length of the string from the buffer
+    int length = readInt();
+
+    // Read each character of the string from the buffer
+    String result = "";
+    for (int i = 0; i < length; i++) {
+      byte b = readByte();
+      result += char(b);  // Convert to char and append to the result string
+    }
+
+    return result;
+  };
+  byte* getBuffer() {
+    return buffer;
+}
+  //kann zu speicherproblemen führen....
+  /* void resize(int newCapacity) {
+      byte* newBuf = new byte [newCapacity];
+      for (int i = 0; i < MAX_BUFFER_SIZE && i < newCapacity; i++) {
+          newBuf[i] = buffer[i];
+      }
+      delete[] buffer;
+      buffer = newBuf;
+      MAX_BUFFER_SIZE = newCapacity;
+      if (readPos > newCapacity) readPos -= newCapacity;
+      if (writePos > newCapacity) writePos -= newCapacity;
+  }*/
+};
+
+#endif

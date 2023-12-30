@@ -1,5 +1,6 @@
 #include "Paket.h"
 #include <EEPROM.h>
+#include "ByteBuffer.h"
 
 
 const int ledPin = 13;  // Pin für die LED
@@ -79,10 +80,9 @@ void blink(int c) {
 }
 
 void sendHelloPacket() {
-  char uuidBuffer[UUID_SIZE];
-  readUUID(uuidBuffer);
+  String uuid = readUUID();
 
-  UUIDPacket uuidPacket(byteToString(uuidBuffer, sizeof(uuidBuffer)));
+  UUIDPacket uuidPacket(uuid);
   sendPacket(uuidPacket);
 }
 
@@ -90,20 +90,21 @@ void sendHelloPacket() {
 void sendPacket(const Packet& packet) {
   int packetSize = 4 + 4 + static_cast<int>(packet.size());
 
-  byte packetBuffer[packetSize];
+  ByteBuffer buf;
 
-  intToByteArray(packetSize, packetBuffer);
-  intToByteArray(packet.packetId, packetBuffer + 4);
+  buf.writeInt(packetSize);
+  buf.writeInt(packet.packetId);
 
-  packet.write(packetBuffer + 4 + 4);
+  packet.write(buf);
+  //buf.writeString(readUUID());
 
-  Serial.write(packetBuffer, packetSize);
+
+  Serial.write(buf.getBuffer(), packetSize);
   Serial.flush();
 }
 
 void checkAndGenerateUUID() {
-  char uuidBuffer[UUID_SIZE];
-  readUUID(uuidBuffer);
+  String uuidStr = readUUID();
 
   bool isEmpty = false;
 
@@ -115,10 +116,11 @@ void checkAndGenerateUUID() {
   }
 
   if (isEmpty) {
+    char uuidBuffer[UUID_SIZE];
     generateRandomUUID(uuidBuffer);
     writeUUID(uuidBuffer);
-
   } else {
+    WriteNumberToSegment(1, 4);
   }
 }
 void generateRandomUUID(char* uuidBuffer) {
@@ -130,12 +132,13 @@ void generateRandomUUID(char* uuidBuffer) {
     sprintf(uuidBuffer + i, "%02X", randomValue);
   }
 }
-void readUUID(char* uuidBuffer) {
+String readUUID() {
+  String uuidString;
   for (int i = 0; i < UUID_SIZE; ++i) {
-    uuidBuffer[i] = EEPROM.read(UUID_ADDRESS + i);
+    uuidString += char(EEPROM.read(UUID_ADDRESS + i));
   }
+  return uuidString;
 }
-
 // Funktion zum Schreiben einer UUID in den EEPROM
 void writeUUID(const char* uuidBuffer) {
   for (int i = 0; i < UUID_SIZE; ++i) {

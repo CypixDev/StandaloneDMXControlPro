@@ -1,4 +1,7 @@
+#include "ByteBuffer.h"
+
 class Packet {
+
 public:
   int packetId;
   String data;
@@ -8,23 +11,14 @@ public:
     : packetId(packetId) {}
 
   // Virtuelle Funktion zum Schreiben des Packets in ein Byte-Array
-  virtual void write(byte* buffer) const = 0;
-  virtual void read(byte* buffer){};
+  virtual void write(const ByteBuffer& buffer) const = 0;
+  virtual void read(ByteBuffer buffer){};
   virtual int size() const = 0;
 
-  void stringToByteArray(String str, byte* byteArray) {
-    for (int i = 0; i < str.length(); i++) {
-      byteArray[i] = str[i];
-    }
-  }
-
-  int byteToInt(byte* byteArray) {
-    return (byteArray[0] << 24) | (byteArray[1] << 16) | (byteArray[2] << 8) | byteArray[3];
-  }
   long byteToLong(byte* byteArray) {
   return ((long)byteArray[0] << 56) | ((long)byteArray[1] << 48) | ((long)byteArray[2] << 40) | ((long)byteArray[3] << 32) |
          ((long)byteArray[4] << 24) | ((long)byteArray[5] << 16) | ((long)byteArray[6] << 8) | (long)byteArray[7];
-}
+  }
   void intToByteArray(int value, byte* byteArray) {
     byteArray[0] = (value >> 24) & 0xFF;
     byteArray[1] = (value >> 16) & 0xFF;
@@ -42,11 +36,12 @@ public:
   UUIDPacket(const String& uuid)
     : Packet(1), uuid(uuid) {}
 
-  void write(byte* buffer) const override {
-    intToByteArray(uuid.length(), buffer);
-    stringToByteArray(uuid, buffer+4);
+  void write(const ByteBuffer& buffer) const override {
+
+
+    buffer.writeString(uuid);
   }
-  void read(byte* buffer) override{
+  void read(const ByteBuffer& buffer) override{
 
   }
 
@@ -64,12 +59,11 @@ public:
   DebugPacket(const String& debugMessage)
     : Packet(2), debugMessage(debugMessage) {}
 
-  void write(byte* buffer) const override {
-    intToByteArray(debugMessage.length(), buffer);
-    stringToByteArray(debugMessage, buffer+4);
+  void write(const ByteBuffer& buffer) const override {
+    buffer.writeString(debugMessage);
   }
 
-  void read(byte* buffer) override{
+  void read(const ByteBuffer& buffer) override{
 
   }
 
@@ -87,11 +81,11 @@ public:
   PingPacket()
     : Packet(0) {}
 
-  void write(byte* buffer) const override {
-    intToByteArray(stamp, buffer);
+  void write(const ByteBuffer& buffer) const override {
+    buffer.writeLong(stamp);
   }
-  void read(byte* buffer) override{
-    stamp = byteToLong(buffer);
+  void read(const ByteBuffer& buffer) override{
+    stamp = buffer.readLong();
   }
 
   int size() const override {
@@ -107,11 +101,10 @@ public:
   ScenePacket()
     : Packet(3) {}
 
-  void write(byte* buffer) const override {
+  void write(const ByteBuffer& buffer) const override {
 
   }
-  void read(byte* buffer) override{
-
+  void read(const ByteBuffer& buffer) override{
   }
 
   //Fixed length of 16  + 4
