@@ -8,6 +8,7 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ScenePacket extends Packet {
 
@@ -49,6 +50,7 @@ public class ScenePacket extends Packet {
     @Override
     public void read(CustomByteBuf buffer) {
         if (buffer != null) {
+            UUID uuid = UUID.fromString(buffer.readString());
             int stepsSize = buffer.readInt();
             int pos = 0;
             for (int i = 0; i < stepsSize; i++) {
@@ -75,6 +77,7 @@ public class ScenePacket extends Packet {
     @Override
     public void write(CustomByteBuf buffer) {
         if (scene != null) {
+            buffer.writeString(scene.getUuid().toString());
             List<TableStep> steps = scene.getSteps();
             if (steps != null) {
                 buffer.writeInt(steps.size());

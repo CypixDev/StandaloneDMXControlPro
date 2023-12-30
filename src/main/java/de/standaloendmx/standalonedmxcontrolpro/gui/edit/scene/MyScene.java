@@ -18,10 +18,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class MyScene extends VBox implements Initializable {
 
     private Logger logger = LogManager.getLogger(MyScene.class);
+
+    private UUID uuid;
 
     @FXML
     private VBox container;
@@ -40,6 +43,7 @@ public class MyScene extends VBox implements Initializable {
     private ObservableList<TableStep> steps;
 
     public MyScene(GroupColor color) {
+        uuid = UUID.randomUUID();
         steps = FXCollections.observableArrayList();
         steps.add(new TableStep(0, "00:00:00", "00:01:00", new HashMap<>()));
 
@@ -76,5 +80,9 @@ public class MyScene extends VBox implements Initializable {
 
     public ObservableList<TableStep> getSteps() {
         return steps;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 }

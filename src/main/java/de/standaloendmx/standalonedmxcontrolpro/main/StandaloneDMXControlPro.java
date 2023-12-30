@@ -11,6 +11,7 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.exception.PacketRegistrationException;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.DebugPacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.PingPacket;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.ScenePacket;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
 import javafx.application.Application;
 import org.apache.log4j.Logger;
@@ -94,6 +95,7 @@ public class StandaloneDMXControlPro {
             serialServer.getPacketRegistry().registerPacket(0, new PingPacket());
             serialServer.getPacketRegistry().registerPacket(1, new UUIDPacket());
             serialServer.getPacketRegistry().registerPacket(2, new DebugPacket());
+            serialServer.getPacketRegistry().registerPacket(3, new ScenePacket());
         } catch (PacketRegistrationException e) {
             throw new RuntimeException(e);
         }
