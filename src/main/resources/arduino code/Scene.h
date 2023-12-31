@@ -1,63 +1,71 @@
-#include <iostream>
-#include <vector>
-#include <map>
 
 class TableStep {
 private:
-    int pos;
-    int fadeTime;
-    int holdTime;
-    std::map<int, int> mapValues;
+  int pos;
+  int fadeTime;
+  int holdTime;
+  int channelValues[512];
 
 public:
-    TableStep(int pos, int fadeTime, int holdTime)
-        : pos(pos), fadeTime(fadeTime), holdTime(holdTime)
-    {
+  TableStep() {}
+  TableStep(int pos, int fadeTime, int holdTime, int inputChannelValues[])
+    : pos(pos), fadeTime(fadeTime), holdTime(holdTime) {
+    for (int i = 0; i < 512; ++i) {
+      channelValues[i] = inputChannelValues[i];
     }
+  }
 
-    int getPos() {
-        return pos;
-    }
+  int getPos() {
+    return pos;
+  }
 
-    int getFadeTime() {
-        return fadeTime;
-    }
+  int getFadeTime() {
+    return fadeTime;
+  }
 
-    int getHoldTime() {
-        return holdTime;
-    }
+  int getHoldTime() {
+    return holdTime;
+  }
 
-    std::map<int, int> getMapValues() {
-        return mapValues;
-    }
+  int* getChannelValues() {
+    return channelValues;
+  }
 };
 
 struct GroupColor {
   int r;
   int g;
   int b;
+
+  GroupColor(int r, int g, int b) : r(r), g(g), b(b) {}
 };
 
 class MyScene {
 private:
-    int sceneId;
-    std::string name;
-    std::string time;
-    std::string repeat;
+    String sceneUUID;
+    String name;
+    int time;
 
     GroupColor color;
-    std::vector<TableStep> steps;
+    TableStep* steps;
 
 public:
-    MyScene(GroupColor color) : color(color) {
-        // implementation omitted for shortness
+    int numberOfSteps;
+
+    MyScene(String sceneUUID, String name, int time, GroupColor color, TableStep* inputSteps, int numSteps)
+    : sceneUUID(sceneUUID), name(name), time(time), color(color), steps(inputSteps), numberOfSteps(numSteps)
+    {
     }
 
-    std::vector<TableStep> getSteps() {
+    TableStep* getSteps() {
         return steps;
     }
 
-    void initialize() {
+    int getNumberOfSteps() {
+        return numberOfSteps;
+    }
 
+    void initialize() {
+        // Ihre Initialisierungslogik hier...
     }
 };

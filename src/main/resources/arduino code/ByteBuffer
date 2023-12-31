@@ -11,6 +11,20 @@ private:
 public:
   ByteBuffer() {}
 
+
+  void readToByteBuffer(int numBytes) {
+    // Ensure enough bytes are available
+    if (Serial.available() >= numBytes) {
+        for(int i=0; i<numBytes; i++) {
+            if (Serial.available())
+                writeByte((byte)Serial.read());  // read a byte and write it to the buffer
+        }
+    }
+    else {
+        // Handle case where not enough data is available
+    }
+}
+
   // Puts a byte in the buffer and updates the write position
   void writeByte(byte b) {
     if (writePos < MAX_BUFFER_SIZE) {
@@ -27,17 +41,17 @@ public:
     // else, handle buffer underflow (e.g., throw exception, return default value, or fail silently)
   }
 
-void writeInt(int value) {
-  byte byteArray[4];
-  byteArray[0] = (value >> 24) & 0xFF;
-  byteArray[1] = (value >> 16) & 0xFF;
-  byteArray[2] = (value >> 8)  & 0xFF;
-  byteArray[3] = value & 0xFF;
+  void writeInt(int value) {
+    byte byteArray[4];
+    byteArray[0] = (value >> 24) & 0xFF;
+    byteArray[1] = (value >> 16) & 0xFF;
+    byteArray[2] = (value >> 8) & 0xFF;
+    byteArray[3] = value & 0xFF;
 
-  for (int i = 0; i < 4; i++) {
-    writeByte(byteArray[i]);
+    for (int i = 0; i < 4; i++) {
+      writeByte(byteArray[i]);
+    }
   }
-}
 
   int readInt() {
     int result = 0;
@@ -93,7 +107,11 @@ void writeInt(int value) {
   };
   byte* getBuffer() {
     return buffer;
-}
+  }
+
+  int getSize(){
+    return writePos;
+  }
   //kann zu speicherproblemen führen....
   /* void resize(int newCapacity) {
       byte* newBuf = new byte [newCapacity];

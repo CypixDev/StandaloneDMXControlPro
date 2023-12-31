@@ -42,13 +42,16 @@ void loop() {
     delay(10);
   }
 
+  ByteBuffer byteBuffer;
+
   byte buffer[8];
   Serial.readBytes(buffer, 8);
 
   int packageSize = byteToInt(buffer);
   int packetId = byteToInt(buffer + 4);
 
-
+  byteBuffer.readToByteBuffer(packageSize-8);
+  blink(2);
 
   if (packetId == 0) {
     PingPacket pingPacket;
@@ -57,7 +60,14 @@ void loop() {
   } else if (packetId == 1) {
     sendHelloPacket();
   } else if (packetId == 2) {
-    //debug message
+
+  } else if (packetId == 3) {
+    ScenePacket packet;
+    packet.read(byteBuffer);
+    WriteNumberToSegment(0, packet.scene->numberOfSteps);
+
+    DebugPacket debugPacket("Recived it!");
+    sendPacket(debugPacket);
   } else {
     DebugPacket debugPacket("Got not handeled packet id!");
     sendPacket(debugPacket);
@@ -119,8 +129,6 @@ void checkAndGenerateUUID() {
     char uuidBuffer[UUID_SIZE];
     generateRandomUUID(uuidBuffer);
     writeUUID(uuidBuffer);
-  } else {
-    WriteNumberToSegment(1, 4);
   }
 }
 void generateRandomUUID(char* uuidBuffer) {

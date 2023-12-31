@@ -1,4 +1,5 @@
 #include "ByteBuffer.h"
+#include "Scene.h"
 
 class Packet {
 
@@ -12,7 +13,7 @@ public:
 
   // Virtuelle Funktion zum Schreiben des Packets in ein Byte-Array
   virtual void write(const ByteBuffer& buffer) const = 0;
-  virtual void read(ByteBuffer buffer){};
+  virtual void read(const ByteBuffer& buffer){};
   virtual int size() const = 0;
 
   long byteToLong(byte* byteArray) {
@@ -96,7 +97,7 @@ public:
 
 class ScenePacket : public Packet {
 public:
-
+  MyScene* scene;
 
   ScenePacket()
     : Packet(3) {}
@@ -105,7 +106,40 @@ public:
 
   }
   void read(const ByteBuffer& buffer) override{
+    blink(1);
+    String sceneUUID = buffer.readString();
+    blink(4);
+    String name = buffer.readString();
+    int stepsCount = buffer.readInt();
+    blink(3);
+
+    TableStep steps[20];
+    for(int i = 0; i<stepsCount; i++){
+        int fadeTime = buffer.readInt();
+        int holdTime = buffer.readInt();
+        int channelValuesSize = buffer.readInt();
+
+        int channelValues[512];
+        for (int j = 0; j < channelValuesSize; ++j) {
+            int key = buffer.readInt();
+            int value = buffer.readInt();
+            channelValues[key] = value;
+        }
+
+        steps[i] = TableStep(i, fadeTime, holdTime, channelValues);
+        // Proceed with step ...
+    }
+    //TODO time....
+    scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), steps, stepsCount);
   }
+  void blink(int c) {
+  for (int i = 0; i < c; i++) {
+    digitalWrite(13, HIGH);
+    delay(250);
+    digitalWrite(13, LOW);
+    delay(250);
+  }
+}
 
   //Fixed length of 16  + 4
   int size() const override {

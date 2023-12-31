@@ -88,9 +88,11 @@ public class StepsViewController implements Initializable {
 
         tvSteps.setEditable(true);
         btnAdd.setOnAction(e -> {
-            step++;
-            tvSteps.getItems().add(new TableStep(step, getLastStepFade(), getLastStepWait(), getLastChannelValues()));
-            tvSteps.getSelectionModel().select(tvSteps.getItems().size() - 1);
+            if(!tvSteps.getSelectionModel().getSelectedCells().isEmpty()){
+                step++;
+                tvSteps.getItems().add(new TableStep(step, getLastStepFade(), getLastStepWait(), getLastChannelValues()));
+                tvSteps.getSelectionModel().select(tvSteps.getItems().size() - 1);
+            }
         });
     }
 

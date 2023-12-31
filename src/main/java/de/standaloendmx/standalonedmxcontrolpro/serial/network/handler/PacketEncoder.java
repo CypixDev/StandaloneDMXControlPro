@@ -24,7 +24,7 @@ public class PacketEncoder {
         packet.write(byteBuf);
 
         byteBuf.writeSizePrefixedBytes();
-        //byteBuf.printInConsole();
+        byteBuf.printInConsole();
     }
 
 }

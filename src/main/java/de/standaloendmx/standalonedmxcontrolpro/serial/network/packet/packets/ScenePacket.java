@@ -51,8 +51,8 @@ public class ScenePacket extends Packet {
     public void read(CustomByteBuf buffer) {
         if (buffer != null) {
             UUID uuid = UUID.fromString(buffer.readString());
+            String name = buffer.readString();
             int stepsSize = buffer.readInt();
-            int pos = 0;
             for (int i = 0; i < stepsSize; i++) {
                 String fadeTime = millisecondsToTime(buffer.readInt());
                 String holdTime = millisecondsToTime(buffer.readInt());
@@ -66,9 +66,9 @@ public class ScenePacket extends Packet {
                 }
 
                 // Create a new TableStep object
-                TableStep step = new TableStep(pos, fadeTime, holdTime, channelValues);
+                TableStep step = new TableStep(i, fadeTime, holdTime, channelValues);
 
-                pos++;
+
                 // Proceed with step ...
             }
         }
@@ -78,6 +78,7 @@ public class ScenePacket extends Packet {
     public void write(CustomByteBuf buffer) {
         if (scene != null) {
             buffer.writeString(scene.getUuid().toString());
+            buffer.writeString(scene.name.getText());
             List<TableStep> steps = scene.getSteps();
             if (steps != null) {
                 buffer.writeInt(steps.size());

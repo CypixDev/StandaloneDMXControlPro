@@ -141,6 +141,9 @@ public class SerialServer extends Thread {
         //System.out.println(Arrays.toString(buf.array()));
         return true;
     }
+    public boolean writeAndFlushPacket(MySerialPort serialPort, Packet packet) throws Exception {
+        return writeAndFlushPacket(serialPort.getSerialPort(), packet);
+    }
 
     public void registerEvents() {
         eventRegistry.registerEvents(new UUIDListener());
