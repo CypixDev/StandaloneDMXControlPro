@@ -44,6 +44,8 @@ public class StandaloneDMXControlPro {
      * Ideas
      * <p>
      * Sending the group color to client and show it with rgb led on device.
+     *
+     * Adding option to random values for ex. color direkt to device, so device makes random values.
      */
 
     private final Logger logger;
