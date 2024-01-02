@@ -80,7 +80,7 @@ public class ScenePacket extends Packet {
             buffer.writeString(scene.getUuid().toString());
             buffer.writeString(scene.name.getText());
             List<TableStep> steps = scene.getSteps();
-            if (steps != null) {
+/*            if (steps != null) {
                 buffer.writeInt(steps.size());
                 for (TableStep step : steps) {
                     if (step != null) {
@@ -106,7 +106,7 @@ public class ScenePacket extends Packet {
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }

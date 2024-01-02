@@ -186,6 +186,7 @@ public class CustomByteBuf {
         ensureWritable(4);
         // Holen Sie die Länge des Puffers
         int size = writerIndex;
+        System.out.println("Out size: "+size);
 
 
         // Sichern Sie den aktuellen Inhalt des Puffers
