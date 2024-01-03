@@ -11,22 +11,33 @@ private:
 public:
   ByteBuffer() {}
 
-void readToByteBuffer(int numBytes) {
-    while (Serial.available() < numBytes) {
-        delay(100);  // Warten Sie ein wenig, um die Bytes zur Verfügung zu stellen
-    }
-    for (int i = 0; i < numBytes; i++) {
+  void readToByteBuffer(int numBytes) {
+    int bytesRead = 0;
+    while (bytesRead < numBytes) {
+      while (Serial.available() > 0) {
         this->writeByte((byte)Serial.read());
+        bytesRead++;
+      }
+      delay(10);  // Warten Sie ein wenig, um die Bytes zur Verfügung zu stellen
     }
-}
-  void blink(int c) {
-  for (int i = 0; i < c; i++) {
-    digitalWrite(13, HIGH);
-    delay(250);
-    digitalWrite(13, LOW);
-    delay(250);
   }
-}
+  void blink(int c) {
+    for (int i = 0; i < c; i++) {
+      digitalWrite(13, HIGH);
+      delay(250);
+      digitalWrite(13, LOW);
+      delay(250);
+    }
+  }
+
+  void blinkShort(int c) {
+    for (int i = 0; i < c; i++) {
+      digitalWrite(13, HIGH);
+      delay(50);
+      digitalWrite(13, LOW);
+      delay(50);
+    }
+  }
 
   // Puts a byte in the buffer and updates the write position
   void writeByte(byte b) {

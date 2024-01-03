@@ -137,6 +137,18 @@ public class SerialServer extends Thread {
         CustomByteBuf buf = new CustomByteBuf(8);
 
         packetEncoder.encode(serialPort, packet, buf);
+
+        byte[] toSend = buf.array();
+        for (int i = 0; i < toSend.length; i+=64) {
+            if((i+64) > toSend.length){
+                serialPort.writeBytes(toSend, toSend.length-i, i);
+            }else{
+                serialPort.writeBytes(toSend, 64, i);
+                TimeUnit.MILLISECONDS.sleep(100);
+                System.out.println("Sendung heap....");
+            }
+        }
+
         serialPort.writeBytes(buf.array(), buf.array().length);
         //System.out.println(Arrays.toString(buf.array()));
         return true;

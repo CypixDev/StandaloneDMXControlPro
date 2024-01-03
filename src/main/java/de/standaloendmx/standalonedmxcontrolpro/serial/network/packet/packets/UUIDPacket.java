@@ -11,6 +11,7 @@ public class UUIDPacket extends Packet {
     public void read(CustomByteBuf buffer) {
         String uuid = buffer.readString();
         this.uuid = uuid;
+        System.out.println("Recieved uuid: "+uuid);
     }
 
     @Override

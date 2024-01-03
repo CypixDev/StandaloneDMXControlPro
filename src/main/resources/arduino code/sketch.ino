@@ -2,6 +2,9 @@
 #include <EEPROM.h>
 #include "ByteBuffer.h"
 
+#define SERIAL_TX_BUFFER_SIZE 512
+#define SERIAL_RX_BUFFER_SIZE 512
+
 
 const int ledPin = 13;  // Pin für die LED
 const int UUID_SIZE = 16;
@@ -50,7 +53,7 @@ void loop() {
   int packageSize = byteToInt(buffer);
   int packetId = byteToInt(buffer + 4);
 
-  byteBuffer.readToByteBuffer(packageSize-4);
+  byteBuffer.readToByteBuffer(packageSize - 4);
   blink(2);
 
   if (packetId == 0) {
@@ -62,11 +65,11 @@ void loop() {
   } else if (packetId == 2) {
 
   } else if (packetId == 3) {
-    writeDigitToSegment(0, packageSize%100/10);
+    writeDigitToSegment(0, packageSize % 100 / 10);
     ScenePacket packet;
     packet.read(byteBuffer);
 
-    DebugPacket debugPacket(String(packet.stepsCount)+String(" ")+String(packet.debug));
+    DebugPacket debugPacket("Pimmel");
     sendPacket(debugPacket);
   } else {
     DebugPacket debugPacket("Got not handeled packet id!");

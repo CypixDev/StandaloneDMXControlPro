@@ -83,7 +83,7 @@ public class ScenePacket extends Packet {
             if (steps != null) {
                 buffer.writeInt(steps.size());
                 System.out.println(scene.getUuid().toString()+" - "+scene.name.getText()+" - "+steps.size());
- /*               for (TableStep step : steps) {
+                for (TableStep step : steps) {
                     if (step != null) {
                         String fadeTime = step.getFadeTime();
                         if (fadeTime != null) {
@@ -106,7 +106,7 @@ public class ScenePacket extends Packet {
                             }
                         }
                     }
-                }*/
+                }
             }
         }
     }

@@ -101,7 +101,6 @@ public:
   String sceneUUID;
   String name;
   int stepsCount;
-  int debug;
 
   ScenePacket()
     : Packet(3) {}
@@ -114,11 +113,10 @@ public:
     name = buffer.readString();
 
     stepsCount = buffer.readInt();
-    debug = buffer.getWritePos();
     //blink(stepsCount);
 
     TableStep steps[20];
-    /*for(int i = 0; i<stepsCount; i++){
+    for(int i = 0; i<stepsCount; i++){
         int fadeTime = buffer.readInt();
         int holdTime = buffer.readInt();
         int channelValuesSize = buffer.readInt();
@@ -132,7 +130,7 @@ public:
 
         steps[i] = TableStep(i, fadeTime, holdTime, channelValues);
         // Proceed with step ...
-    }*/
+    }
     //TODO time....
     scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), steps, stepsCount);
   }
