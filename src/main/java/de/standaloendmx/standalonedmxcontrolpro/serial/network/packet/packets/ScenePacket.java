@@ -77,12 +77,14 @@ public class ScenePacket extends Packet {
     @Override
     public void write(CustomByteBuf buffer) {
         if (scene != null) {
-            buffer.writeString(scene.getUuid().toString());
+            buffer.writeString("pimmel");
             buffer.writeString(scene.name.getText());
             List<TableStep> steps = scene.getSteps();
-/*            if (steps != null) {
-                buffer.writeInt(steps.size());
-                for (TableStep step : steps) {
+            if (steps != null) {
+                //buffer.writeInt(steps.size());
+                buffer.writeInt(22);
+                System.out.println(scene.getUuid().toString()+" - "+scene.name.getText());
+/*                for (TableStep step : steps) {
                     if (step != null) {
                         String fadeTime = step.getFadeTime();
                         if (fadeTime != null) {
@@ -105,8 +107,8 @@ public class ScenePacket extends Packet {
                             }
                         }
                     }
-                }
-            }*/
+                }*/
+            }
         }
     }
 }
