@@ -98,7 +98,10 @@ public:
 class ScenePacket : public Packet {
 public:
   MyScene* scene;
-  String sceneUUID = "not set";
+  String sceneUUID;
+  String name;
+  int stepsCount;
+  int debug;
 
   ScenePacket()
     : Packet(3) {}
@@ -108,9 +111,10 @@ public:
   }
   void read(const ByteBuffer& buffer) override{
     sceneUUID = buffer.readString();
-    String name = buffer.readString();
+    name = buffer.readString();
 
-    int stepsCount = buffer.readInt();
+    stepsCount = buffer.readInt();
+    debug = buffer.getWritePos();
     //blink(stepsCount);
 
     TableStep steps[20];

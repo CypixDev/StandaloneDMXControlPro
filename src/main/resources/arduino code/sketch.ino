@@ -50,7 +50,7 @@ void loop() {
   int packageSize = byteToInt(buffer);
   int packetId = byteToInt(buffer + 4);
 
-  byteBuffer.readToByteBuffer(packageSize-8);
+  byteBuffer.readToByteBuffer(packageSize-4);
   blink(2);
 
   if (packetId == 0) {
@@ -66,7 +66,7 @@ void loop() {
     ScenePacket packet;
     packet.read(byteBuffer);
 
-    DebugPacket debugPacket(packet.sceneUUID);
+    DebugPacket debugPacket(String(packet.stepsCount)+String(" ")+String(packet.debug));
     sendPacket(debugPacket);
   } else {
     DebugPacket debugPacket("Got not handeled packet id!");
