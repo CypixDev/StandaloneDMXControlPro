@@ -62,18 +62,19 @@ void loop() {
   } else if (packetId == 2) {
 
   } else if (packetId == 3) {
+    writeDigitToSegment(0, packageSize%100/10);
     ScenePacket packet;
     packet.read(byteBuffer);
-    WriteNumberToSegment(0, packet.scene->numberOfSteps);
 
-    DebugPacket debugPacket("Recived it!");
+    DebugPacket debugPacket(packet.sceneUUID);
     sendPacket(debugPacket);
   } else {
     DebugPacket debugPacket("Got not handeled packet id!");
     sendPacket(debugPacket);
   }
 }
-void WriteNumberToSegment(byte Segment, byte Value) {
+
+void writeDigitToSegment(byte Segment, byte Value) {
   digitalWrite(LATCH_DIO, LOW);
   shiftOut(DATA_DIO, CLK_DIO, MSBFIRST, SEGMENT_MAP[Value]);
   shiftOut(DATA_DIO, CLK_DIO, MSBFIRST, SEGMENT_SELECT[Segment]);

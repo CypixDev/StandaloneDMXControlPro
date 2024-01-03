@@ -98,6 +98,7 @@ public:
 class ScenePacket : public Packet {
 public:
   MyScene* scene;
+  String sceneUUID = "not set";
 
   ScenePacket()
     : Packet(3) {}
@@ -106,15 +107,14 @@ public:
 
   }
   void read(const ByteBuffer& buffer) override{
-    blink(1);
-    String sceneUUID = buffer.readString();
-    blink(4);
+    sceneUUID = buffer.readString();
     String name = buffer.readString();
+
     int stepsCount = buffer.readInt();
-    blink(3);
+    //blink(stepsCount);
 
     TableStep steps[20];
-    for(int i = 0; i<stepsCount; i++){
+    /*for(int i = 0; i<stepsCount; i++){
         int fadeTime = buffer.readInt();
         int holdTime = buffer.readInt();
         int channelValuesSize = buffer.readInt();
@@ -128,7 +128,7 @@ public:
 
         steps[i] = TableStep(i, fadeTime, holdTime, channelValues);
         // Proceed with step ...
-    }
+    }*/
     //TODO time....
     scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), steps, stepsCount);
   }
