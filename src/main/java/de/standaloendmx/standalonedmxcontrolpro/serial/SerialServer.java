@@ -145,11 +145,8 @@ public class SerialServer extends Thread {
             }else{
                 serialPort.writeBytes(toSend, 64, i);
                 TimeUnit.MILLISECONDS.sleep(100);
-                System.out.println("Sendung heap....");
             }
         }
-
-        serialPort.writeBytes(buf.array(), buf.array().length);
         //System.out.println(Arrays.toString(buf.array()));
         return true;
     }
