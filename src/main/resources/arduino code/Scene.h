@@ -52,8 +52,8 @@ private:
 public:
     int numberOfSteps;
 
-    MyScene(String sceneUUID, String name, int time, GroupColor color, TableStep* inputSteps, int numSteps)
-    : sceneUUID(sceneUUID), name(name), time(time), color(color), steps(inputSteps), numberOfSteps(numSteps)
+    MyScene(String sceneUUID, String name, int time, GroupColor color, int numSteps)
+    : sceneUUID(sceneUUID), name(name), time(time), color(color), numberOfSteps(numSteps)
     {
     }
 

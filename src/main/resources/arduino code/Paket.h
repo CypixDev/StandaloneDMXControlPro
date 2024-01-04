@@ -113,14 +113,12 @@ public:
     name = buffer.readString();
 
     stepsCount = buffer.readInt();
-    //blink(stepsCount);
 
     TableStep steps[20];
     for(int i = 0; i<stepsCount; i++){
         int fadeTime = buffer.readInt();
         int holdTime = buffer.readInt();
         int channelValuesSize = buffer.readInt();
-
         int channelValues[512];
         for (int j = 0; j < channelValuesSize; ++j) {
             int key = buffer.readInt();
@@ -132,14 +130,22 @@ public:
         // Proceed with step ...
     }
     //TODO time....
-    scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), steps, stepsCount);
+    scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), stepsCount);
   }
   void blink(int c) {
   for (int i = 0; i < c; i++) {
     digitalWrite(13, HIGH);
-    delay(250);
+    delay(500);
     digitalWrite(13, LOW);
-    delay(250);
+    delay(500);
+  }
+}
+void blinkFast(int c) {
+  for (int i = 0; i < c; i++) {
+    digitalWrite(13, HIGH);
+    delay(50);
+    digitalWrite(13, LOW);
+    delay(50);
   }
 }
 
