@@ -69,7 +69,7 @@ void loop() {
     ScenePacket packet;
     packet.read(byteBuffer);
 
-    DebugPacket debugPacket("Pimmel");
+    DebugPacket debugPacket(String(packet.scene->getNumberOfSteps()));
     sendPacket(debugPacket);
   } else {
     DebugPacket debugPacket("Got not handeled packet id!");

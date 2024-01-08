@@ -119,7 +119,7 @@ public:
         int fadeTime = buffer.readInt();
         int holdTime = buffer.readInt();
         int channelValuesSize = buffer.readInt();
-        int channelValues[512];
+        byte channelValues[20];
         for (int j = 0; j < channelValuesSize; ++j) {
             int key = buffer.readInt();
             int value = buffer.readInt();
@@ -130,7 +130,7 @@ public:
         // Proceed with step ...
     }
     //TODO time....
-    scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), stepsCount);
+    scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), steps, stepsCount);
   }
   void blink(int c) {
   for (int i = 0; i < c; i++) {

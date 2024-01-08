@@ -4,13 +4,13 @@ private:
   int pos;
   int fadeTime;
   int holdTime;
-  int channelValues[512];
+  byte channelValues[20];
 
 public:
   TableStep() {}
-  TableStep(int pos, int fadeTime, int holdTime, int inputChannelValues[])
+  TableStep(int pos, int fadeTime, int holdTime, byte inputChannelValues[])
     : pos(pos), fadeTime(fadeTime), holdTime(holdTime) {
-    for (int i = 0; i < 512; ++i) {
+    for (int i = 0; i < sizeof(channelValues); ++i) {
       channelValues[i] = inputChannelValues[i];
     }
   }
@@ -27,7 +27,7 @@ public:
     return holdTime;
   }
 
-  int* getChannelValues() {
+  byte* getChannelValues() {
     return channelValues;
   }
 };
@@ -52,8 +52,8 @@ private:
 public:
     int numberOfSteps;
 
-    MyScene(String sceneUUID, String name, int time, GroupColor color, int numSteps)
-    : sceneUUID(sceneUUID), name(name), time(time), color(color), numberOfSteps(numSteps)
+    MyScene(String sceneUUID, String name, int time, GroupColor color, TableStep* inputSteps, int numSteps)
+    : sceneUUID(sceneUUID), name(name), time(time), color(color), steps(inputSteps), numberOfSteps(numSteps)
     {
     }
 
