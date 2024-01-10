@@ -1,10 +1,7 @@
+//#include "FileManager.h"
 #include "Paket.h"
 #include <EEPROM.h>
 #include "ByteBuffer.h"
-
-#define SERIAL_TX_BUFFER_SIZE 512
-#define SERIAL_RX_BUFFER_SIZE 512
-
 
 const int ledPin = 13;  // Pin für die LED
 const int UUID_SIZE = 16;
@@ -25,7 +22,6 @@ void loop() {
   while (Serial.available() < 8) {
     delay(10);
   }
-
   ByteBuffer byteBuffer;
 
   byte buffer[8];
@@ -35,7 +31,6 @@ void loop() {
   int packetId = byteToInt(buffer + 4);
 
   byteBuffer.readToByteBuffer(packageSize - 4);
-  blink(2);
 
   if (packetId == 0) {
     PingPacket pingPacket;
@@ -49,7 +44,10 @@ void loop() {
     ScenePacket packet;
     packet.read(byteBuffer);
 
-    DebugPacket debugPacket(String(packet.scene->getNumberOfSteps()));
+    //FileManager fileManager(4);
+    //fileManager.saveScene("test.txt", packet.scene);
+
+    DebugPacket debugPacket(String(packet.scene->numberOfSteps));
     sendPacket(debugPacket);
   } else {
     DebugPacket debugPacket("Got not handeled packet id!");
@@ -72,6 +70,7 @@ void sendHelloPacket() {
 
   UUIDPacket uuidPacket(uuid);
   sendPacket(uuidPacket);
+
 }
 
 
