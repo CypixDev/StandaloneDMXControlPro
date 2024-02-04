@@ -15,9 +15,7 @@ public class UUIDPacket extends Packet {
     }
 
     @Override
-    public void write(CustomByteBuf buffer) {
-
-    }
+    public void write(CustomByteBuf buffer) {}
 
     public String getUuid() {
         return uuid;
