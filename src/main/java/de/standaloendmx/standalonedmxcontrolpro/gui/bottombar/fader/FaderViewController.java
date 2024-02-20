@@ -11,10 +11,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class FaderViewController implements Initializable {
 
@@ -32,12 +30,9 @@ public class FaderViewController implements Initializable {
         instance = this;
 
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 512; i++) {
-                    hBox.getChildren().add(new MyFader(i + 1));
-                }
+        Platform.runLater(() -> {
+            for (int i = 0; i < 512; i++) {
+                hBox.getChildren().add(new MyFader(i + 1));
             }
         });
 
@@ -52,7 +47,7 @@ public class FaderViewController implements Initializable {
     }
 
     public void updateSliders() {
-        List<Integer> shownFaders = new ArrayList<>();
+        Set<Integer> shownFaders = new HashSet<>();
         for (SelectableFixture fixture : FixtureSelectViewController.instance.getFixtures()) {
             if (fixture.getStyleClass().contains("selected")) {
                 PatchFixture patch = fixture.patchFixture;
