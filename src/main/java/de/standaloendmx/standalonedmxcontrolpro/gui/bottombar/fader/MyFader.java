@@ -28,6 +28,7 @@ public class MyFader extends VBox {
     @FXML
     private Slider slider;
 
+
     public MyFader() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/bottombar/SliderView.fxml"));
         fxmlLoader.setRoot(this);
@@ -102,5 +103,18 @@ public class MyFader extends VBox {
             slider.setValue(value);
     }
 
+    public int getChannel() {
+        return Integer.parseInt(this.channel.getText());
+    }
 
+    public void update() {
+        this.setManaged(this.isManaged());
+        this.setVisible(this.isVisible());
+        this.setSliderValue((int)this.slider.getValue());
+        if (this.button.getStyleClass().contains("button_active")) {
+            this.setButtonActive();
+        } else {
+            this.setButtonInActive();
+        }
+    }
 }
