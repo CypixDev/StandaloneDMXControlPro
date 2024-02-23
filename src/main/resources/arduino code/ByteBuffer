@@ -18,7 +18,7 @@ public:
         this->writeByte((byte)Serial.read());
         bytesRead++;
       }
-      delay(10);  // Warten Sie ein wenig, um die Bytes zur Verfügung zu stellen
+      delay(10);
     }
   }
   void blink(int c) {
@@ -54,17 +54,15 @@ public:
     // else, handle buffer underflow (e.g., throw exception, return default value, or fail silently)
   }
 
-  void writeInt(int value) {
+void writeInt(int value) {
     byte byteArray[4];
-    byteArray[0] = (value >> 24) & 0xFF;
-    byteArray[1] = (value >> 16) & 0xFF;
-    byteArray[2] = (value >> 8) & 0xFF;
-    byteArray[3] = value & 0xFF;
-
     for (int i = 0; i < 4; i++) {
-      writeByte(byteArray[i]);
+        byteArray[i] = (value >> (i*8)) & 0xFF;
     }
-  }
+    for (int i = 0; i < 4; i++) {
+        writeByte(byteArray[i]);
+    }
+}
 
   int readInt() {
     int result = 0;

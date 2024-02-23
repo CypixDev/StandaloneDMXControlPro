@@ -12,8 +12,8 @@ public:
     : packetId(packetId) {}
 
   // Virtuelle Funktion zum Schreiben des Packets in ein Byte-Array
-  virtual void write(const ByteBuffer& buffer) const = 0;
-  virtual void read(const ByteBuffer& buffer){};
+  virtual void write(ByteBuffer& buffer) const = 0;
+  virtual void read(ByteBuffer& buffer){};
   virtual int size() const = 0;
 
   long byteToLong(byte* byteArray) {
@@ -37,12 +37,12 @@ public:
   UUIDPacket(const String& uuid)
     : Packet(1), uuid(uuid) {}
 
-  void write(const ByteBuffer& buffer) const override {
+  void write(ByteBuffer& buffer) const override {
 
 
     buffer.writeString(uuid);
   }
-  void read(const ByteBuffer& buffer) override{
+  void read(ByteBuffer& buffer) override{
 
   }
 
@@ -60,11 +60,11 @@ public:
   DebugPacket(const String& debugMessage)
     : Packet(2), debugMessage(debugMessage) {}
 
-  void write(const ByteBuffer& buffer) const override {
+  void write(ByteBuffer& buffer) const override {
     buffer.writeString(debugMessage);
   }
 
-  void read(const ByteBuffer& buffer) override{
+  void read(ByteBuffer& buffer) override{
 
   }
 
@@ -82,10 +82,10 @@ public:
   PingPacket()
     : Packet(0) {}
 
-  void write(const ByteBuffer& buffer) const override {
+  void write(ByteBuffer& buffer) const override {
     buffer.writeLong(stamp);
   }
-  void read(const ByteBuffer& buffer) override{
+  void read(ByteBuffer& buffer) override{
     stamp = buffer.readLong();
   }
 
@@ -105,15 +105,15 @@ public:
   ScenePacket()
     : Packet(3) {}
 
-  void write(const ByteBuffer& buffer) const override {
+  void write(ByteBuffer& buffer) const override {
 
   }
-  void read(const ByteBuffer& buffer) override{
+  void read(ByteBuffer& buffer) override{
     sceneUUID = buffer.readString();
     name = buffer.readString();
 
     stepsCount = buffer.readInt();
-
+    blink(3);
     TableStep steps[20];
     for(int i = 0; i<stepsCount; i++){
         int fadeTime = buffer.readInt();

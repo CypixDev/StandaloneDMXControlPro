@@ -46,7 +46,6 @@ public class SerialPortInboundHandler extends Thread {
 
                 int packetSize = ByteBuffer.wrap(buffer).getInt();
                 System.out.println("Incomming Size: " + packetSize);
-
                 buffer = new byte[packetSize - 4]; //-4 because first int already read
 
                 long timeoutStamp = System.currentTimeMillis();
