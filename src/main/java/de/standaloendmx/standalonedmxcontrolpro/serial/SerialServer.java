@@ -76,7 +76,7 @@ public class SerialServer extends Thread {
         for (SerialPort port : ports) {
             if (port.openPort()) {
                 //if(port.getDescriptivePortName().startsWith("USB-SERIAL CH340")){
-                if (port.getDescriptivePortName().startsWith("Arduino Uno") || port.getDescriptivePortName().startsWith("Silicon Labs CP210x")) {
+                if (port.getDescriptivePortName().startsWith("Arduino Uno") || port.getDescriptivePortName().startsWith("Silicon Labs CP210x")|| port.getDescriptivePortName().startsWith("Serielles USB-Gerät")) {
                     logger.info("Connected to Arduino nano/ESP32 (" + port.getSystemPortName() + ")");
 
                     configPort(port);
@@ -92,7 +92,7 @@ public class SerialServer extends Thread {
     }
 
     private SerialPortInboundHandler configPort(SerialPort port) {
-        port.setBaudRate(9600);
+        port.setBaudRate(115200);
         port.setNumDataBits(8);
         port.setNumStopBits(1);
         port.setParity(SerialPort.NO_PARITY);
