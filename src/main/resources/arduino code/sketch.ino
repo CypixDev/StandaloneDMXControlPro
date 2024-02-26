@@ -1,14 +1,15 @@
-//#include "FileManager.h"
+#include "FileManager.h"
 #include "Paket.h"
 #include <EEPROM.h>
 #include "ByteBuffer.h"
 #include <LiquidCrystal_I2C.h>
-#include "FileManager.h"
 
 const int ledPin = 25;  // Pin für die LED
 const int ledPin2 = 26;  // Pin für die LED
 const int UUID_SIZE = 16;
 const int UUID_ADDRESS = 0;
+
+const int EEPROM_SIZE = 64;
 
 // set the LCD number of columns and rows
 int lcdColumns = 16;
@@ -20,19 +21,18 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 
 void setup() {
+  EEPROM.begin(EEPROM_SIZE);
 
   lcd.init();
   lcd.backlight();
   lcd.print("Hello!");
   delay(200);
 
-  char uuidBuffer[UUID_SIZE+1];
-  generateRandomUUID(uuidBuffer);
-
   Serial.begin(115200);
 
   pinMode(ledPin, OUTPUT);  //Setze den Pin-Modus auf Ausgang
   pinMode(ledPin2, OUTPUT);  //Setze den Pin-Modus auf Ausgang
+
   checkAndGenerateUUID();
 }
 
@@ -94,9 +94,11 @@ void blinkFast(int c) {
 }
 
 void sendHelloPacket() {
-  //DebugPacket debugPacket("Hellooo!");
-  //sendPacket(debugPacket);
+  lcd.println("Received!");
+  delay(200);
+  lcd.clear();
   String uuid = readUUID();
+  lcd.print(uuid);
 
   UUIDPacket uuidPacket(uuid);
   sendPacket(uuidPacket);
@@ -124,14 +126,15 @@ void checkAndGenerateUUID() {
   bool isEmpty = false;
 
   for (int i = 0; i < UUID_SIZE; ++i) {
-    if (EEPROM.read(i) == 255) {
+    if (EEPROM.read(i) == 0 || EEPROM.read(i) == 255) {
+      delay(200);
       isEmpty = true;
       break;
     }
   }
 
   if (isEmpty) {
-    char uuidBuffer[UUID_SIZE];
+    char uuidBuffer[UUID_SIZE+1];
     generateRandomUUID(uuidBuffer);
     writeUUID(uuidBuffer);
   }
@@ -157,6 +160,7 @@ void writeUUID(const char* uuidBuffer) {
   for (int i = 0; i < UUID_SIZE; ++i) {
     EEPROM.write(UUID_ADDRESS + i, uuidBuffer[i]);
   }
+  EEPROM.commit();
 }
 
 

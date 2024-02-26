@@ -10,6 +10,7 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Subscribed
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -43,21 +44,31 @@ public class SerialPortInboundHandler extends Thread {
             if (serialPort.bytesAvailable() >= 4) {
                 byte[] buffer = new byte[4];
                 serialPort.readBytes(buffer, 4);
+                System.out.println(Arrays.toString(buffer));
 
                 int packetSize = ByteBuffer.wrap(buffer).getInt();
                 System.out.println("Incomming Size: " + packetSize);
                 buffer = new byte[packetSize - 4]; //-4 because first int already read
 
                 long timeoutStamp = System.currentTimeMillis();
+                boolean timeout = false;
                 while (serialPort.bytesAvailable() < buffer.length) {
-                    if (System.currentTimeMillis() - timeoutStamp > 900)
-                        throw new TimeoutException("Reading packet took more than 300 millis to arrive");
+                    if (System.currentTimeMillis() - timeoutStamp > 900){
+                        System.err.println("Reading packet took more than 300 millis to arrive. continue.");
+                        timeout = true;
+                        serialPort.readBytes(new byte[serialPort.bytesAvailable()+1], serialPort.bytesAvailable());
+                        break;
+                    }
+
+                        //throw new TimeoutException("Reading packet took more than 300 millis to arrive");
                 } //Waiting for all bytes from packet to arrive!
-                serialPort.readBytes(buffer, packetSize);
+                if(!timeout){
+                    serialPort.readBytes(buffer, packetSize);
 
 
-                Packet packet = SerialServer.getInstance().getPacketDecoder().decode(serialPort, new CustomByteBuf(buffer));
-                channelRead(mySerialPort, packet);
+                    Packet packet = SerialServer.getInstance().getPacketDecoder().decode(serialPort, new CustomByteBuf(buffer));
+                    channelRead(mySerialPort, packet);
+                }
             }
         }
     }

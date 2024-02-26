@@ -5,6 +5,7 @@ import de.standaloendmx.standalonedmxcontrolpro.gui.main.MainApplication;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.SerialServer;
+import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.packets.UUIDPacket;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -57,6 +58,13 @@ public class DeployViewController implements Initializable {
             openModalPopup(MainApplication.mainStage);
         });
 
+        treeView.setOnMouseClicked(e -> {
+            try {
+                SerialServer.getInstance().writeAndFlushPacket(SerialServer.getInstance().getAvailableComPorts().get(0), new UUIDPacket());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         treeView.setCellFactory(param -> new TreeCell<DeployedInterface>() {
             @Override
             protected void updateItem(DeployedInterface deployedInterface, boolean empty) {
