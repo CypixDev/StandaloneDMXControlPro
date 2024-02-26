@@ -15,6 +15,18 @@ const int EEPROM_SIZE = 64;
 int lcdColumns = 16;
 int lcdRows = 2;
 
+
+/* PINS
+* --LCD-I2C--
+* 22 SCL
+* 21 SDA
+* --SD-Card--
+* 5 CS
+* 18 SCK
+* 23 MOSI
+* 19 MISO
+*/
+
 // set LCD address, number of columns and rows
 // if you don't know your display address, run an I2C scanner sketch
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
@@ -61,11 +73,22 @@ void loop() {
   } else if (packetId == 2) {
 
   } else if (packetId == 3) {
+    lcd.clear();
+    lcd.print("PacketId: 3");
+    delay(200);
     ScenePacket packet;
     packet.read(byteBuffer);
+    lcd.clear();
+    lcd.print("Gelesen!");
+    delay(200);
 
-    FileManager fileManager(4);
-    fileManager.saveScene("test.txt", packet.scene);
+    FileManager fileManager(5, &lcd);
+    fileManager.saveScene("/test.txt", packet.scene);
+
+    lcd.clear();
+    lcd.print("Saved");
+    delay(500);
+    lcd.clear();
 
     DebugPacket debugPacket(String(packet.scene->numberOfSteps));
     sendPacket(debugPacket);

@@ -1,14 +1,22 @@
+#include "SPI.h"
+#include "FS.h"
 #include <SD.h>
 #include "Scene.h"
+#include <LiquidCrystal_I2C.h>
+
 
 class FileManager {
 private:
   int pin;
+  LiquidCrystal_I2C* lcd;
 
 public:
-  FileManager(int csPin)
-    : pin(csPin) {
-    if (!SD.begin(csPin)) {
+  FileManager(int csPin, LiquidCrystal_I2C* lcdDisplay)
+    : pin(csPin), lcd(lcdDisplay) {
+    if (!SD.begin()) {
+      lcd->print("Fehler bei init!");
+      delay(2000);
+      lcd->clear();
       //Serial.println("SD-Karteninitialisierung fehlgeschlagen!");
     }
   }
@@ -118,14 +126,22 @@ public:
   void saveScene(String filename, MyScene *scene) {
     File file = SD.open(filename, FILE_WRITE);
     if (!file) {
+      lcd->clear();
+      lcd->print(SD.cardSize());
+      //lcd->print("File could not open");
+      delay(2000);
+      lcd->clear();
       //Serial.println("Speichern der Szene fehlgeschlagen: konnte die Datei nicht öffnen.");
       return;
     }
 
-    String sceneData = serializeMyScene(*scene);
-    for (int i = 0; i < sceneData.length(); i++) {
+    String sceneData = /*serializeMyScene(*scene);*/ scene->toJSONString();
+    lcd->print(sceneData);
+    delay(2000);
+    /*for (int i = 0; i < sceneData.length(); i++) {
       file.write(sceneData[i]);
-    }
+    }*/
+    file.print(sceneData);
 
     file.close();
   }
