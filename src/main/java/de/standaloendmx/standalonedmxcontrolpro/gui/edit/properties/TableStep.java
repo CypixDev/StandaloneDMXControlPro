@@ -8,16 +8,16 @@ public class TableStep {
     private String fadeTime;
     private String holdTime;
 
-    private Map<Integer, Integer> channelValues;
+    private Map<Integer, Byte> channelValues;
 
-    public TableStep(int pos, String fadeTime, String holdTime, Map<Integer, Integer> channelValues) {
+    public TableStep(int pos, String fadeTime, String holdTime, Map<Integer, Byte> channelValues) {
         this.pos = pos;
         this.fadeTime = fadeTime;
         this.holdTime = holdTime;
         this.channelValues = channelValues;
     }
 
-    public Map<Integer, Integer> getChannelValues() {
+    public Map<Integer, Byte> getChannelValues() {
         return channelValues;
     }
 

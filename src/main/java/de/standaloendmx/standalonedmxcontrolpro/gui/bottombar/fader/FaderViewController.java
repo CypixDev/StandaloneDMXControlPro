@@ -74,9 +74,9 @@ public class FaderViewController implements Initializable {
         }
     }
 
-    public void setSliders(Map<Integer, Integer> channelValues) {
+    public void setSliders(Map<Integer, Byte> channelValues) {
 
-        for (Map.Entry<Integer, Integer> entry : channelValues.entrySet()) {
+        for (Map.Entry<Integer, Byte> entry : channelValues.entrySet()) {
             MyFader slider = (MyFader) hBox.getChildren().get(entry.getKey());
             slider.setManaged(true);
             slider.setVisible(true);

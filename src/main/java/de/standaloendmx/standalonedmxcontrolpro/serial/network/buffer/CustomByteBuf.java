@@ -115,7 +115,7 @@ public class CustomByteBuf {
         ensureWritable(2);
         buffer.position(writerIndex);
         buffer.putShort(value);
-        writerIndex = writerMark += 2;
+        writerIndex += 2;
         return this;
     }
 
@@ -275,8 +275,14 @@ public class CustomByteBuf {
 
     public void printInConsole() {
         System.out.print("CustomByteBuf Contents: ");
+        System.out.println();
         for (byte b : buffer.array()) {
             System.out.print(b + " ");
+        }
+        System.out.println();
+        for (byte b : buffer.array()) {
+            int unsignedByteValue = b & 0xFF;
+            System.out.print(unsignedByteValue + " ");
         }
         System.out.println(); // Neue Zeile für bessere Lesbarkeit
     }

@@ -104,7 +104,7 @@ public class StepsViewController implements Initializable {
         }
     }
 
-    private Map<Integer, Integer> getLastChannelValues() {
+    private Map<Integer, Byte> getLastChannelValues() {
         if (tvSteps.getItems().isEmpty()) return new HashMap<>();
         return new HashMap<>(tvSteps.getItems().get(tvSteps.getItems().size() - 1).getChannelValues());
     }
@@ -134,8 +134,10 @@ public class StepsViewController implements Initializable {
     }
 
     public void channelValueUpdate(Label channel, Label value) {
-        if (getSelectedTableStep() != null)
-            getSelectedTableStep().getChannelValues().put(Integer.parseInt(channel.getText()) - 1, Integer.valueOf(value.getText()));
+        if (getSelectedTableStep() != null){
+            byte byteValue = (byte) Integer.parseInt(value.getText());
+            getSelectedTableStep().getChannelValues().put(Integer.parseInt(channel.getText()) - 1, byteValue);
+        }
     }
 
     public void selectFirstStep() {

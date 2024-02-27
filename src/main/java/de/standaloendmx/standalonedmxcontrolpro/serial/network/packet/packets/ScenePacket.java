@@ -57,12 +57,12 @@ public class ScenePacket extends Packet {
                 String fadeTime = millisecondsToTime(buffer.readInt());
                 String holdTime = millisecondsToTime(buffer.readInt());
                 int channelValuesSize = buffer.readInt();
-                Map<Integer, Integer> channelValues = new HashMap<>();
+                Map<Integer, Byte> channelValues = new HashMap<>();
 
                 for (int j = 0; j < channelValuesSize; j++) {
-                    int key = buffer.readInt();
-                    int value = buffer.readInt();
-                    channelValues.put(key, value);
+                    short key = buffer.readShort();
+                    byte value = buffer.readByte();
+                    channelValues.put((int)key, value);
                 }
 
                 // Create a new TableStep object
@@ -95,13 +95,13 @@ public class ScenePacket extends Packet {
                             buffer.writeInt(timeToMilliseconds(holdTime));
                         }
 
-                        Map<Integer, Integer> channelValues = step.getChannelValues();
+                        Map<Integer, Byte> channelValues = step.getChannelValues();
                         if (channelValues != null) {
                             buffer.writeInt(channelValues.size());
-                            for (Map.Entry<Integer, Integer> entry : channelValues.entrySet()) {
+                            for (Map.Entry<Integer, Byte> entry : channelValues.entrySet()) {
                                 if (entry != null) {
-                                    buffer.writeInt(entry.getKey());
-                                    buffer.writeInt(entry.getValue());
+                                    buffer.writeShort(Short.parseShort(String.valueOf(entry.getKey())));
+                                    buffer.writeByte(entry.getValue());
                                 }
                             }
                         }
