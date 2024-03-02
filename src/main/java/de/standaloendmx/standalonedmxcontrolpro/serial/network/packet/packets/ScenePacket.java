@@ -23,14 +23,19 @@ public class ScenePacket extends Packet {
     }
 
     public static int timeToMilliseconds(String time) {
-        String[] units = time.split(":"); //split the time into hours, minutes, and seconds
+        try{
+            String[] units = time.split(":"); //split the time into hours, minutes, and seconds
 
-        int hours = Integer.parseInt(units[0]);
-        int minutes = Integer.parseInt(units[1]);
-        int seconds = Integer.parseInt(units[2]);
+            int hours = Integer.parseInt(units[0]);
+            int minutes = Integer.parseInt(units[1]);
+            int seconds = Integer.parseInt(units[2]);
 
-        //convert everything to milliseconds and return the total
-        return ((hours * 60 * 60) + (minutes * 60) + seconds) * 1000;
+            //convert everything to milliseconds and return the total
+            System.out.println("    ret: "+(((hours * 60 * 60) + (minutes * 60) + seconds) * 1000));
+            return ((hours * 60 * 60) + (minutes * 60) + seconds) * 1000;
+        }catch (Exception e){
+            return 0;
+        }
     }
 
     public static String millisecondsToTime(int milliseconds) {
@@ -52,6 +57,7 @@ public class ScenePacket extends Packet {
         if (buffer != null) {
             UUID uuid = UUID.fromString(buffer.readString());
             String name = buffer.readString();
+            //TODO outdated model, do not use!
             int stepsSize = buffer.readInt();
             for (int i = 0; i < stepsSize; i++) {
                 String fadeTime = millisecondsToTime(buffer.readInt());
@@ -79,32 +85,37 @@ public class ScenePacket extends Packet {
         if (scene != null) {
             buffer.writeString(scene.getUuid().toString());
             buffer.writeString(scene.name.getText());
+
+            buffer.writeByte((byte)187);
+            buffer.writeByte((byte)187);
+            buffer.writeByte((byte)187);
+
+
             List<TableStep> steps = scene.getSteps();
             if (steps != null) {
-                buffer.writeInt(steps.size());
+                buffer.writeInt(steps.size()); //steps count
+
                 System.out.println(scene.getUuid().toString()+" - "+scene.name.getText()+" - "+steps.size());
                 for (TableStep step : steps) {
-                    if (step != null) {
-                        String fadeTime = step.getFadeTime();
-                        if (fadeTime != null) {
-                            buffer.writeInt(timeToMilliseconds(fadeTime));
-                        }
+                    System.out.println("Step pos: "+step.getPos());
 
-                        String holdTime = step.getHoldTime();
-                        if (holdTime != null) {
-                            buffer.writeInt(timeToMilliseconds(holdTime));
-                        }
+                    String fadeTime = step.getFadeTime();
+                    System.out.println("Fade-time: "+step.getHoldTime());
+                    buffer.writeInt(timeToMilliseconds(fadeTime));
 
-                        Map<Integer, Byte> channelValues = step.getChannelValues();
-                        if (channelValues != null) {
-                            buffer.writeInt(channelValues.size());
-                            for (Map.Entry<Integer, Byte> entry : channelValues.entrySet()) {
-                                if (entry != null) {
-                                    buffer.writeShort(Short.parseShort(String.valueOf(entry.getKey())));
-                                    buffer.writeByte(entry.getValue());
-                                }
-                            }
-                        }
+                    String holdTime = step.getHoldTime();
+                    System.out.println("Hold-time: "+step.getHoldTime());
+                    buffer.writeInt(timeToMilliseconds(holdTime));
+
+
+                    Map<Integer, Byte> channelValues = step.getChannelValues();
+                    buffer.writeInt(channelValues.size());
+
+                    System.out.println("    ChannelValues-Size: "+channelValues);
+
+                    for (Map.Entry<Integer, Byte> entry : channelValues.entrySet()) {
+                        buffer.writeShort(Short.parseShort(String.valueOf(entry.getKey())));
+                        buffer.writeByte(entry.getValue());
                     }
                 }
             }

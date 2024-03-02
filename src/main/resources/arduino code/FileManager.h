@@ -8,10 +8,10 @@
 class FileManager {
 private:
   int pin;
-  LiquidCrystal_I2C* lcd;
+  LiquidCrystal_I2C *lcd;
 
 public:
-  FileManager(int csPin, LiquidCrystal_I2C* lcdDisplay)
+  FileManager(int csPin, LiquidCrystal_I2C *lcdDisplay)
     : pin(csPin), lcd(lcdDisplay) {
     if (!SD.begin()) {
       lcd->print("Fehler bei init!");
@@ -96,16 +96,24 @@ public:
     endPos = data.indexOf('\n', pos);
     int holdTime = data.substring(pos, endPos).toInt();
 
-    byte *channelValues = new byte[20];
-    for (int i = 0; i < 20; ++i) {
+    // Anzahl der Kanal-Werte-Paare
+    int channelCount = 10;
+
+    // Erzeugen Sie ein ChannelValue-Array anstelle eines Byte-Array
+    ChannelValue *channelValues = new ChannelValue[channelCount];
+    for (int i = 0; i < channelCount; ++i) {
       pos = endPos + 1;
       endPos = data.indexOf('\n', pos);
-      channelValues[i] = (byte)data.substring(pos, endPos).toInt();
+      channelValues[i].channel = (byte)data.substring(pos, endPos).toInt();
+
+      pos = endPos + 1;
+      endPos = data.indexOf('\n', pos);
+      channelValues[i].value = (byte)data.substring(pos, endPos).toInt();
     }
 
     pos = endPos + 1;
 
-    return TableStep(tablePos, fadeTime, holdTime, channelValues);
+    return TableStep(tablePos, fadeTime, holdTime, channelValues, channelCount);
   }
   // Methode zum Serialisieren von TableStep
   String serializeTableStep(TableStep &step) {
@@ -115,9 +123,9 @@ public:
     serializedString += String(step.fadeTime) + "\n";
     serializedString += String(step.holdTime) + "\n";
 
-    byte *channelValues = step.channelValues;
-    for (int i = 0; i < 20; ++i) {
-      serializedString += String(channelValues[i]) + "\n";
+    // Ein Kanal-Wert-Paar wird durch einen ":" getrennt und durch "\n" von den anderen getrennt.
+    for (int i = 0; i < step.channelCount; ++i) {
+      serializedString += String(step.channelValues[i].channel) + ":" + String(step.channelValues[i].value) + "\n";
     }
 
     return serializedString;
@@ -127,9 +135,10 @@ public:
     File file = SD.open(filename, FILE_WRITE);
     if (!file) {
       lcd->clear();
-      lcd->print(SD.cardSize());
+      lcd->print("Da:");
+      lcd->print(scene->color.r);
       //lcd->print("File could not open");
-      delay(2000);
+      delay(4000);
       lcd->clear();
       //Serial.println("Speichern der Szene fehlgeschlagen: konnte die Datei nicht öffnen.");
       return;

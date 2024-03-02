@@ -3,31 +3,53 @@
 
 #include <ArduinoJson.h>
 
+struct ChannelValue {
+  short channel;
+  byte value;
+};
+
 class TableStep {
 
 public:
   int pos;
   int fadeTime;
   int holdTime;
-  byte channelValues[20];
+  ChannelValue* channelValues;
+  int channelCount;
 
   TableStep() {}
-  TableStep(int pos, int fadeTime, int holdTime, byte inputChannelValues[])
-    : pos(pos), fadeTime(fadeTime), holdTime(holdTime) {
-    for (int i = 0; i < sizeof(channelValues); ++i) {
-      channelValues[i] = inputChannelValues[i];
+  TableStep(int pos, int fadeTime, int holdTime, ChannelValue* inputChannelValues, int inputChannelCount)
+    : pos(pos), fadeTime(fadeTime), holdTime(holdTime), channelCount(inputChannelCount) {
+    channelValues = new ChannelValue[channelCount];
+    for (int i = 0; i < channelCount; ++i) {
+      channelValues[i].channel = inputChannelValues[i].channel;
+      channelValues[i].value = inputChannelValues[i].value;
     }
   }
 };
 
 struct GroupColor {
-  int r;
-  int g;
-  int b;
+  byte r, g, b;
 
-  GroupColor(int r, int g, int b)
+  GroupColor(byte r, byte g, byte b)
     : r(r), g(g), b(b) {}
 };
+
+String splitString(String data, char separator, int index) {
+  int found = 0;
+  int strIndex[] = { 0, -1 };
+  int maxIndex = data.length() - 1;
+
+  for (int i = 0; i <= maxIndex && found <= index; i++) {
+    if (data.charAt(i) == separator || i == maxIndex) {
+      found++;
+      strIndex[0] = strIndex[1] + 1;
+      strIndex[1] = (i == maxIndex) ? i + 1 : i;
+    }
+  }
+
+  return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
 
 class MyScene {
 public:
@@ -70,8 +92,8 @@ public:
       stepObj["fadeTime"] = steps[i].fadeTime;
       stepObj["holdTime"] = steps[i].holdTime;
       JsonArray channelValuesArray = stepObj.createNestedArray("channelValues");
-      for (int j = 0; j < 20; j++) {  // Angenommen, es gibt 20 Kanalwerte pro Schritt
-        channelValuesArray.add(steps[i].channelValues[j]);
+      for (int j = 0; j < 2; j++) {
+        channelValuesArray.add(String(steps[i].channelValues[j].channel) + ":" + String(steps[i].channelValues[j].value));
       }
     }
 
@@ -115,7 +137,14 @@ public:
       step.holdTime = stepObj["holdTime"].as<int>();
       JsonArray channelValuesArray = stepObj["channelValues"];
       for (int j = 0; j < channelValuesArray.size(); j++) {
-        step.channelValues[j] = channelValuesArray[j].as<int>();  // Stellen Sie sicher, dass channelValues richtig initialisiert ist
+        String channelValuePair = channelValuesArray[j].as<String>();
+        String channelStr = splitString(channelValuePair, ':', 0);
+        String valueStr = splitString(channelValuePair, ':', 1);
+
+        ChannelValue channelValue;
+        channelValue.channel = channelStr.toInt();
+        channelValue.value = valueStr.toInt();
+        step.channelValues[j] = channelValue;  // Angenommen, Sie haben Speicher für channelValues in 'step' reserviert
       }
       // Hier müssen Sie die Logik hinzufügen, um den Schritt `step` zur Szene `scene` hinzuzufügen
       // Dies könnte das Hinzufügen zum `steps`-Array oder einer anderen Datenstruktur sein, je nachdem, wie Ihre Klasse organisiert ist.

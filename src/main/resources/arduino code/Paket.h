@@ -102,6 +102,9 @@ public:
   String name;
   int stepsCount;
 
+//DEBUG
+  LiquidCrystal_I2C* lcd;
+
   ScenePacket()
     : Packet(3) {}
 
@@ -112,25 +115,33 @@ public:
     sceneUUID = buffer.readString();
     name = buffer.readString();
 
+    int r,g,b;
+    r = buffer.readByte();
+    g = buffer.readByte();
+    b = buffer.readByte();
+
     stepsCount = buffer.readInt();
-    blink(3);
-    TableStep steps[20];
+
+
+    TableStep* steps = new TableStep[stepsCount]; // Dynamische Allokation
     for(int i = 0; i<stepsCount; i++){
         int fadeTime = buffer.readInt();
         int holdTime = buffer.readInt();
         int channelValuesSize = buffer.readInt();
-        byte channelValues[20];
+
+        ChannelValue* channelValues = new ChannelValue[channelValuesSize]; // Dynamische Allokation
         for (int j = 0; j < channelValuesSize; ++j) {
-            int key = buffer.readInt();
-            int value = buffer.readInt();
-            channelValues[key] = value;
+            short key = buffer.readShort();
+            byte value = buffer.readByte();
+            channelValues[j].channel = key;
+            channelValues[j].value = value;
         }
 
-        steps[i] = TableStep(i, fadeTime, holdTime, channelValues);
+        steps[i] = TableStep(i, fadeTime, holdTime, channelValues, channelValuesSize);
         // Proceed with step ...
     }
     //TODO time....
-    scene = new MyScene(sceneUUID, name, 0, GroupColor(0, 0, 0), steps, stepsCount);
+    scene = new MyScene(sceneUUID, name, 0, GroupColor(r, g, b), steps, stepsCount);
   }
   void blink(int c) {
   for (int i = 0; i < c; i++) {
