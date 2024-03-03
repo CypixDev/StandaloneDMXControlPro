@@ -114,6 +114,10 @@ public class MyScene extends VBox implements Initializable {
         });
     }
 
+    public GroupColor getColor() {
+        return color;
+    }
+
     public ObservableList<TableStep> getSteps() {
         return steps;
     }

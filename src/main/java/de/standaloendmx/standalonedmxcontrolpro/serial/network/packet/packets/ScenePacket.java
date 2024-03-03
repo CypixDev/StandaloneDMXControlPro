@@ -86,9 +86,9 @@ public class ScenePacket extends Packet {
             buffer.writeString(scene.getUuid().toString());
             buffer.writeString(scene.name.getText());
 
-            buffer.writeByte((byte)187);
-            buffer.writeByte((byte)187);
-            buffer.writeByte((byte)187);
+            buffer.writeByte((byte)scene.getColor().getColor().getRed());
+            buffer.writeByte((byte)scene.getColor().getColor().getGreen());
+            buffer.writeByte((byte)scene.getColor().getColor().getBlue());
 
 
             List<TableStep> steps = scene.getSteps();
