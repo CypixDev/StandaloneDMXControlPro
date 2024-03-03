@@ -75,6 +75,7 @@ public class MyFader extends VBox {
         button.setOnAction(e -> {
             if (button.getStyleClass().contains("button_active")) {
                 setButtonInActive();
+                StepsViewController.instance.buttonActiveUpdate(this);
             } else {
                 setButtonActive();
             }

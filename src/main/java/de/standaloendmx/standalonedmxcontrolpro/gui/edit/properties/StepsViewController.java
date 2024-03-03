@@ -1,6 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.edit.properties;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController;
+import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.MyFader;
 import de.standaloendmx.standalonedmxcontrolpro.gui.edit.ScenesViewController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -97,8 +99,11 @@ public class StepsViewController implements Initializable {
     }
 
     private void onStepClick() {
+        System.out.print("Step Clicked. ");
         if (!tvSteps.getSelectionModel().isEmpty()) {
             TableStep selectedData = tvSteps.getSelectionModel().getSelectedItem();
+            System.out.println("Actually selected no. "+selectedData.getPos());
+            System.out.println("    "+ selectedData.getChannelValues().toString());
             FaderViewController.instance.setSliders(selectedData.getChannelValues());
             FaderViewController.instance.updateSliders();
         }
@@ -137,7 +142,7 @@ public class StepsViewController implements Initializable {
         if (getSelectedTableStep() != null){
             byte byteValue = (byte) Integer.parseInt(value.getText());
             getSelectedTableStep().getChannelValues().put(Integer.parseInt(channel.getText()) - 1, byteValue);
-        }
+        }else System.out.println("No step selected!");
     }
 
     public void selectFirstStep() {
@@ -145,5 +150,10 @@ public class StepsViewController implements Initializable {
             tvSteps.getSelectionModel().select(0);
             onStepClick();
         }
+    }
+
+    public void buttonActiveUpdate(MyFader myFader) {
+        getSelectedTableStep().getChannelValues().remove(Integer.parseInt(myFader.channel.getText())-1);
+        System.out.println("Removed "+myFader.channel.getText());
     }
 }

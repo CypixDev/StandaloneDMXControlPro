@@ -35,6 +35,9 @@ public class FaderViewController implements Initializable {
                 hBox.getChildren().add(new MyFader(i + 1));
             }
         });
+        for (Node child : hBox.getChildren()) {
+            MyFader fader = (MyFader) child;
+        }
 
         //96+5+71
         //scrollPane.prefWidthProperty().bind(MainApplication.mainStage.widthProperty().subtract(96+5+71));
@@ -80,7 +83,8 @@ public class FaderViewController implements Initializable {
             MyFader slider = (MyFader) hBox.getChildren().get(entry.getKey());
             slider.setManaged(true);
             slider.setVisible(true);
-            slider.setSliderValue(entry.getValue());
+            int val = entry.getValue() & 0xFF;
+            slider.setSliderValue(val);
             slider.setButtonActive();
         }
 

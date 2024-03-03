@@ -8,7 +8,7 @@ public class TableStep {
     private String fadeTime;
     private String holdTime;
 
-    private Map<Integer, Byte> channelValues;
+    private final Map<Integer, Byte> channelValues;
 
     public TableStep(int pos, String fadeTime, String holdTime, Map<Integer, Byte> channelValues) {
         this.pos = pos;

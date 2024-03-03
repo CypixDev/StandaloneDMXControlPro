@@ -92,7 +92,7 @@ public:
       stepObj["fadeTime"] = steps[i].fadeTime;
       stepObj["holdTime"] = steps[i].holdTime;
       JsonArray channelValuesArray = stepObj.createNestedArray("channelValues");
-      for (int j = 0; j < 2; j++) {
+      for (int j = 0; j < steps[i].channelCount; j++) {
         channelValuesArray.add(String(steps[i].channelValues[j].channel) + ":" + String(steps[i].channelValues[j].value));
       }
     }
