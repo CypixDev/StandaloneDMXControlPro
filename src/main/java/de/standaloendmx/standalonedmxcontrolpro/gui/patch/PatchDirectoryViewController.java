@@ -195,7 +195,7 @@ public class PatchDirectoryViewController implements Initializable {
 
     public void updateDirectory() {
         //Clear directory
-        //TODO: reload fixture manager as well
+        //TODO: reload fixture manager as well //remove ?
         directory.getRoot().getChildren().clear();
 
 

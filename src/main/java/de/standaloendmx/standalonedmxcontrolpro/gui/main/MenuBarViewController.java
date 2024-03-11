@@ -76,7 +76,7 @@ public class MenuBarViewController implements Initializable {
                 StandaloneDMXControlPro.instance.getPatchManager().addPatch(patchFixture);
             }
 
-            PatchGridViewController.instances.forEach(PatchGridViewController::updatePatch);
+            PatchGridViewController.instance.updatePatch();
         });
     }
 }

@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class PatchGridViewController implements Initializable {
 
-    public static List<PatchGridViewController> instances = new ArrayList<>(); //TODO: improve lol
+    public static PatchGridViewController instance;
 
     @FXML
     private GridPane grid;
@@ -31,7 +31,7 @@ public class PatchGridViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        instances.add(this);
+        instance = this;
         patchManager = StandaloneDMXControlPro.instance.getPatchManager();
 
         int counter = 1;

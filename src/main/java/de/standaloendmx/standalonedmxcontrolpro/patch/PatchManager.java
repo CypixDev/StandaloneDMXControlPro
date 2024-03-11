@@ -2,17 +2,26 @@ package de.standaloendmx.standalonedmxcontrolpro.patch;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fader.FaderViewController;
 import de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect.FixtureSelectViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PatchManager {
 
-    private List<PatchFixture> patches; //TODO implement observable arraylist
+    private final ObservableList<PatchFixture> patches;
 
     public PatchManager() {
-        patches = new ArrayList<>();
+        patches = FXCollections.observableArrayList();
         //patches.add(new PatchFixture(StandaloneDMXControlPro.instance.getFixtureManager().getFixtures().get(0), 4, 3, Color.AQUAMARINE));
+        patches.addListener(new ListChangeListener<PatchFixture>() {
+            @Override
+            public void onChanged(Change<? extends PatchFixture> c) {
+                //TODO implement
+            }
+        });
     }
 
     public boolean isChannelFree(int pos, int size) {

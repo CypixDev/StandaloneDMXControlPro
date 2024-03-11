@@ -89,7 +89,7 @@ public class MyScene extends VBox implements Initializable {
             ContextMenu contextMenu = new ContextMenu();
 
             MenuItem menuItem = new MenuItem("Send to Device");
-            //TODO: fix
+            //TODO: fix / remove?
             menuItem.setOnAction(event -> {
                 System.out.println("Sending...");
                 System.out.println("Size: "+StandaloneDMXControlPro.instance.getDeployedInterfaceManager().getDeployedInterfaceList().size());

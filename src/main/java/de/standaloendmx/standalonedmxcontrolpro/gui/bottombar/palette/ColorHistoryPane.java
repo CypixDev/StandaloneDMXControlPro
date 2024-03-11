@@ -19,8 +19,9 @@ public class ColorHistoryPane extends Pane {
         //setColor(Color.WHITE, 0, 0);
         setBorder(new Border(new BorderStroke(Color.GREY, BorderStrokeStyle.SOLID, new CornerRadii(5.0), BorderWidths.DEFAULT)));
 
-        setOnMouseClicked(e -> { //TODO improve with double click....
-            if (color == null) {
+        setOnMouseClicked(e -> {
+
+            if (color == null || e.isControlDown()) {
                 setColor(colorWheelInstance.getSelectedColor(), e.getX(), e.getY());
             } else {
                 colorWheelInstance.setSelectedColor(color, x, y);
