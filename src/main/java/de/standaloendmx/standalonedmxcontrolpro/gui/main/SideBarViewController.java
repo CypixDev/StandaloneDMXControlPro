@@ -1,5 +1,6 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.Views;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -59,6 +60,12 @@ public class SideBarViewController implements Initializable {
 
     }
 
+    /**
+     * Handles the click event of a button.
+     * Resets the content area view, updates the style of the clicked button and sets the content and anchor based on the clicked button.
+     *
+     * @param clickedButton The button that was clicked.
+     */
     public void handleButtonClick(Button clickedButton) {
         if (!lastClickedButton.equals(clickedButton)) {
             ContentAreaViewController.instance.resetContent();
@@ -79,7 +86,7 @@ public class SideBarViewController implements Initializable {
                 }
             } else if (clickedButton.equals(btnEdit)) {
                 try {
-                    ContentAreaViewController.instance.setContentAndAnchor("/gui/edit/EditView.fxml", Priority.ALWAYS);
+                    ContentAreaViewController.instance.setContentAndAnchor(Views.EDIT_VIEW, Priority.ALWAYS);
                 } catch (IOException ex) {
                     logger.error(ex);
                 }

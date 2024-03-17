@@ -1,5 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.Views;
+import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -82,6 +84,14 @@ public class ContentAreaViewController implements Initializable {
         try {
             setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), hGrow);
         } catch (LoadException e) {
+            logger.error(e);
+        }
+
+    }
+    public void setContentAndAnchor(Views view, Priority hGrow) throws IOException {
+        try {
+            setContentAndAnchor((Node) StandaloneDMXControlPro.instance.getViewManager().getLoadedView(view), hGrow);
+        } catch (Exception e) {
             logger.error(e);
         }
 

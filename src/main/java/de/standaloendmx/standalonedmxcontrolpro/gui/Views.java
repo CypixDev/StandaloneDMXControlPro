@@ -13,7 +13,7 @@ public enum Views {
     BOTTOM_BAR("/gui/main/BottomBarView.fxml"), CONTENT_AREA("/gui/main/ContentAreaView.fxml"),
     MAIN("/gui/main/MainView.fxml"), MENU_BAR("/gui/main/MenuBarView.fxml"),
     SIDE_BAR("/gui/main/SideBarView.fxml"), PATCH_DIRECTORY("/gui/patch/PatchDirectoryView.fxml"),
-    PATCH_GRID("/gui/patch/PatchGridView.fxml");
+    PATCH_GRID("/gui/patch/PatchGridView.fxml"), EDIT_VIEW("/gui/edit/EditView.fxml");
 
     private String path;
 
