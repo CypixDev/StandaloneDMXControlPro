@@ -5,7 +5,6 @@ import javafx.scene.Node;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -26,7 +25,8 @@ public class ViewManager {
             try {
                 logger.info("Loading " + value + " from " + value.getPath());
                 loadedViews.put(value, FXMLLoader.load(Objects.requireNonNull(getClass().getResource(value.getPath()))));
-            } catch (IOException e) {
+            } catch (Exception e) {
+                e.printStackTrace();
                 logger.error("Failed loading view: " + value.getPath(), e);
             }
         }

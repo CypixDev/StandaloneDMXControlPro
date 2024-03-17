@@ -1,5 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.bottombar;
 
+import de.standaloendmx.standalonedmxcontrolpro.gui.Views;
+import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -68,15 +70,16 @@ public class BottomBarViewController implements Initializable {
             resetContent();
 
 
-            ((FontIcon) lastClickedButton.getGraphic()).getStyleClass().remove("selected");
-            ((FontIcon) lastClickedButton.getGraphic()).getStyleClass().add("not-selected");
-            ((FontIcon) clickedButton.getGraphic()).getStyleClass().remove("not-selected");
-            ((FontIcon) clickedButton.getGraphic()).getStyleClass().add("selected");
+            lastClickedButton.getGraphic().getStyleClass().remove("selected");
+            lastClickedButton.getGraphic().getStyleClass().add("not-selected");
+            clickedButton.getGraphic().getStyleClass().remove("not-selected");
+            clickedButton.getGraphic().getStyleClass().add("selected");
 
 
             if (clickedButton.equals(btnSlider)) {
                 try {
-                    setContentAndAllAnchor("/gui/bottombar/fader/FaderView.fxml");
+                    setContentAndAllAnchor(Views.Fader_VIEW);
+                    //setContentAndAllAnchor("/gui/bottombar/fader/FaderView.fxml");
                 } catch (IOException ex) {
                     logger.error(ex);
                 }
@@ -84,7 +87,6 @@ public class BottomBarViewController implements Initializable {
                 try {
                     setContentAndAllAnchor("/gui/bottombar/palette/PaletteView.fxml");
                 } catch (Exception ex) {
-                    ex.printStackTrace();
                     logger.error(ex);
                 }
             } else if (clickedButton.equals(btnEffect)) {
@@ -115,6 +117,10 @@ public class BottomBarViewController implements Initializable {
 
     public void setContentAndAllAnchor(String path) throws IOException {
         setContentAndAllAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))));
+    }
+
+    public void setContentAndAllAnchor(Views view) throws IOException {
+        setContentAndAllAnchor(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(view));
     }
 
     public void resetContent() {

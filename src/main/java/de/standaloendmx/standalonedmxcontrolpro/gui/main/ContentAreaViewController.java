@@ -2,8 +2,6 @@ package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.Views;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +11,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -31,6 +28,7 @@ public class ContentAreaViewController implements Initializable {
     @FXML
     private SplitPane splitPane;
 
+
     @FXML
     private AnchorPane content;
 
@@ -42,12 +40,15 @@ public class ContentAreaViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
 
-        Timeline timeline = new Timeline(new KeyFrame(
+        splitPane.getItems().add(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.BOTTOM_BAR));
+
+
+/*        Timeline timeline = new Timeline(new KeyFrame(
                 Duration.seconds(5),
                 actionEvent -> splitPane.setDividerPosition(0, 0.7)
         ));
 
-        timeline.play();
+        timeline.play();*/
     }
 
     /**
@@ -90,7 +91,7 @@ public class ContentAreaViewController implements Initializable {
     }
     public void setContentAndAnchor(Views view, Priority hGrow) throws IOException {
         try {
-            setContentAndAnchor((Node) StandaloneDMXControlPro.instance.getViewManager().getLoadedView(view), hGrow);
+            setContentAndAnchor(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(view), hGrow);
         } catch (Exception e) {
             logger.error(e);
         }

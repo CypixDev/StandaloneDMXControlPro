@@ -40,9 +40,16 @@ public class LoadingScreenController {
             Platform.runLater(() -> nachrichtLabel.setText("Lade Views"));
             StandaloneDMXControlPro.instance.getViewManager().loadAllViews();
 
-            Platform.runLater(() -> {
+            //TODO remove ? just testing...
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
+            Platform.runLater(() -> {
                 BorderPane pane = (BorderPane) StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.MAIN);
+
 
                 MainApplication.mainStage.setScene(new Scene(pane));
 
