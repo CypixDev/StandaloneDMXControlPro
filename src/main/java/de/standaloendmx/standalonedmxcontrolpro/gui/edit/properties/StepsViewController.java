@@ -14,7 +14,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 
 import java.net.URL;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -90,7 +89,7 @@ public class StepsViewController implements Initializable {
 
         tvSteps.setEditable(true);
         btnAdd.setOnAction(e -> {
-            if(!tvSteps.getSelectionModel().getSelectedCells().isEmpty()){
+            if (!tvSteps.getSelectionModel().getSelectedCells().isEmpty()) {
                 step++;
                 tvSteps.getItems().add(new TableStep(step, getLastStepFade(), getLastStepWait(), getLastChannelValues()));
                 tvSteps.getSelectionModel().select(tvSteps.getItems().size() - 1);
@@ -102,8 +101,8 @@ public class StepsViewController implements Initializable {
         System.out.print("Step Clicked. ");
         if (!tvSteps.getSelectionModel().isEmpty()) {
             TableStep selectedData = tvSteps.getSelectionModel().getSelectedItem();
-            System.out.println("Actually selected no. "+selectedData.getPos());
-            System.out.println("    "+ selectedData.getChannelValues().toString());
+            System.out.println("Actually selected no. " + selectedData.getPos());
+            System.out.println("    " + selectedData.getChannelValues().toString());
             FaderViewController.instance.setSliders(selectedData.getChannelValues());
             FaderViewController.instance.updateSliders();
         }
@@ -139,10 +138,10 @@ public class StepsViewController implements Initializable {
     }
 
     public void channelValueUpdate(Label channel, Label value) {
-        if (getSelectedTableStep() != null){
+        if (getSelectedTableStep() != null) {
             byte byteValue = (byte) Integer.parseInt(value.getText());
             getSelectedTableStep().getChannelValues().put(Integer.parseInt(channel.getText()) - 1, byteValue);
-        }else System.out.println("No step selected!");
+        } else System.out.println("No step selected!");
     }
 
     public void selectFirstStep() {
@@ -153,7 +152,7 @@ public class StepsViewController implements Initializable {
     }
 
     public void buttonActiveUpdate(MyFader myFader) {
-        getSelectedTableStep().getChannelValues().remove(Integer.parseInt(myFader.channel.getText())-1);
-        System.out.println("Removed "+myFader.channel.getText());
+        getSelectedTableStep().getChannelValues().remove(Integer.parseInt(myFader.channel.getText()) - 1);
+        System.out.println("Removed " + myFader.channel.getText());
     }
 }

@@ -23,7 +23,7 @@ public class ScenePacket extends Packet {
     }
 
     public static int timeToMilliseconds(String time) {
-        try{
+        try {
             String[] units = time.split(":"); //split the time into hours, minutes, and seconds
 
             int hours = Integer.parseInt(units[0]);
@@ -31,9 +31,9 @@ public class ScenePacket extends Packet {
             int seconds = Integer.parseInt(units[2]);
 
             //convert everything to milliseconds and return the total
-            System.out.println("    ret: "+(((hours * 60 * 60) + (minutes * 60) + seconds) * 1000));
+            System.out.println("    ret: " + (((hours * 60 * 60) + (minutes * 60) + seconds) * 1000));
             return ((hours * 60 * 60) + (minutes * 60) + seconds) * 1000;
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0;
         }
     }
@@ -68,7 +68,7 @@ public class ScenePacket extends Packet {
                 for (int j = 0; j < channelValuesSize; j++) {
                     short key = buffer.readShort();
                     byte value = buffer.readByte();
-                    channelValues.put((int)key, value);
+                    channelValues.put((int) key, value);
                 }
 
                 // Create a new TableStep object
@@ -86,32 +86,32 @@ public class ScenePacket extends Packet {
             buffer.writeString(scene.getUuid().toString());
             buffer.writeString(scene.name.getText());
 
-            buffer.writeByte((byte)scene.getColor().getColor().getRed());
-            buffer.writeByte((byte)scene.getColor().getColor().getGreen());
-            buffer.writeByte((byte)scene.getColor().getColor().getBlue());
+            buffer.writeByte((byte) scene.getColor().getColor().getRed());
+            buffer.writeByte((byte) scene.getColor().getColor().getGreen());
+            buffer.writeByte((byte) scene.getColor().getColor().getBlue());
 
 
             List<TableStep> steps = scene.getSteps();
             if (steps != null) {
                 buffer.writeInt(steps.size()); //steps count
 
-                System.out.println(scene.getUuid().toString()+" - "+scene.name.getText()+" - "+steps.size());
+                System.out.println(scene.getUuid().toString() + " - " + scene.name.getText() + " - " + steps.size());
                 for (TableStep step : steps) {
-                    System.out.println("Step pos: "+step.getPos());
+                    System.out.println("Step pos: " + step.getPos());
 
                     String fadeTime = step.getFadeTime();
-                    System.out.println("Fade-time: "+step.getHoldTime());
+                    System.out.println("Fade-time: " + step.getHoldTime());
                     buffer.writeInt(timeToMilliseconds(fadeTime));
 
                     String holdTime = step.getHoldTime();
-                    System.out.println("Hold-time: "+step.getHoldTime());
+                    System.out.println("Hold-time: " + step.getHoldTime());
                     buffer.writeInt(timeToMilliseconds(holdTime));
 
 
                     Map<Integer, Byte> channelValues = step.getChannelValues();
                     buffer.writeInt(channelValues.size());
 
-                    System.out.println("    ChannelValues-Size: "+channelValues);
+                    System.out.println("    ChannelValues-Size: " + channelValues);
 
                     for (Map.Entry<Integer, Byte> entry : channelValues.entrySet()) {
                         buffer.writeShort(Short.parseShort(String.valueOf(entry.getKey())));

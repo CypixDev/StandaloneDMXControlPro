@@ -14,7 +14,8 @@ import javafx.stage.Screen;
 
 public class LoadingScreenController {
 
-    private final int LADEDAUER = 5000 / 10;
+    private final int LADEDAUER = 5000 / 10; //remove ?
+
     @FXML
     private ProgressBar progressBar;
     @FXML
@@ -24,30 +25,20 @@ public class LoadingScreenController {
         startDelay();
     }
 
+    /**
+     * Starts a delay in a separate thread.
+     * This method is responsible for loading fixtures, loading views,
+     * and setting up the main stage of the application.
+     */
     private void startDelay() {
         Thread thread = new Thread(() -> {
-/*            try {
-                Thread.sleep(LADEDAUER);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
+
             Platform.runLater(() -> nachrichtLabel.setText("Lade Fixtures"));
             StandaloneDMXControlPro.instance.getFixtureManager().loadAllFixturesFromFiles();
 
-/*            try {
-                Thread.sleep(LADEDAUER);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
 
             Platform.runLater(() -> nachrichtLabel.setText("Lade Views"));
             StandaloneDMXControlPro.instance.getViewManager().loadAllViews();
-/*
-            try {
-                Thread.sleep(LADEDAUER);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
 
             Platform.runLater(() -> {
 

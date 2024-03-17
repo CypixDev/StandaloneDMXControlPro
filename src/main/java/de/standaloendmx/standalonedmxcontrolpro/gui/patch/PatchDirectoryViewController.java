@@ -4,8 +4,6 @@ import de.standaloendmx.standalonedmxcontrolpro.files.FileUtils;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.FixtureMode;
 import de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -31,13 +29,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PatchDirectoryViewController implements Initializable {
 
+    private static final Logger logger = LogManager.getLogger(PatchDirectoryViewController.class);
     @FXML
     public static VBox mainBox;
-    private Logger logger = LogManager.getLogger(PatchDirectoryViewController.class);
     @FXML
     private Button btnBulb;
     @FXML
@@ -52,6 +51,14 @@ public class PatchDirectoryViewController implements Initializable {
     @FXML
     private TreeView<PatchFixture> directory;
 
+    /**
+     * Converts an InputStream to a String.
+     *
+     * @param inputStream The InputStream to convert.
+     * @return The converted String.
+     */
+
+    @Deprecated
     public static String convertInputStreamToString(InputStream inputStream) {
         StringBuilder stringBuilder = new StringBuilder();
         String line;
@@ -80,9 +87,7 @@ public class PatchDirectoryViewController implements Initializable {
             Desktop desk = Desktop.getDesktop();
             try {
                 desk.browse(new URI("https://open-fixture-library.org/"));
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (URISyntaxException ex) {
+            } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -95,9 +100,7 @@ public class PatchDirectoryViewController implements Initializable {
             }
         });
 
-        btnReset.setOnAction(e -> {
-            StandaloneDMXControlPro.instance.getFilesManager().resetFixtureLibrary();
-        });
+        btnReset.setOnAction(e -> StandaloneDMXControlPro.instance.getFilesManager().resetFixtureLibrary());
 
         btnReload.setOnAction(e -> {
             updateDirectory();
@@ -105,7 +108,7 @@ public class PatchDirectoryViewController implements Initializable {
         });
 
         directory.setOnMouseClicked(e -> {
-            //For double Click on item
+            //For double-click on item
             //if(e.getClickCount() == 2) System.out.println("opEN!");
         });
 
@@ -131,7 +134,7 @@ public class PatchDirectoryViewController implements Initializable {
             }
         });
 
-        directory.setCellFactory(param -> new TreeCell<PatchFixture>() {
+        directory.setCellFactory(param -> new TreeCell<>() {
             @Override
             protected void updateItem(PatchFixture patchFixture, boolean empty) {
                 super.updateItem(patchFixture, empty);
@@ -171,22 +174,20 @@ public class PatchDirectoryViewController implements Initializable {
                     contextMenu.show(directory, event.getScreenX(), event.getScreenY());
                 }
 
-                openMenuItem.setOnAction(actionEvent -> {
-                    System.out.println("Open fixture info...");
-                });
+                openMenuItem.setOnAction(actionEvent -> System.out.println("Open fixture info..."));
             }
         });
 
-        tfSearch.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filterTreeView(newValue);
-            }
-        });
+        tfSearch.textProperty().addListener((observable, oldValue, newValue) -> filterTreeView(newValue));
 
         updateDirectory();
     }
 
+    /**
+     * Updates the directory view by populating it with files from the fixture library folder.
+     */
+
+    @Deprecated
     public void updateDirectoryFromFiles() {
         File lib = StandaloneDMXControlPro.instance.getFilesManager().getFixtureLibraryFolder();
         directory.getRoot().getChildren().clear();
@@ -258,7 +259,7 @@ public class PatchDirectoryViewController implements Initializable {
             }
         } else {
             Image nodeImage = new Image(
-                    getClass().getResourceAsStream("/gui/img/logo/logo_mini_transparent.png"));
+                    Objects.requireNonNull(getClass().getResourceAsStream("/gui/img/logo/logo_mini_transparent.png")));
             ImageView view = new ImageView(nodeImage);
             view.setFitHeight(16);
             view.setFitWidth(16);
@@ -278,7 +279,7 @@ public class PatchDirectoryViewController implements Initializable {
                 parentItem.getChildren().add(folderItem);
             }
 
-            for (File file : folder.listFiles()) {
+            for (File file : Objects.requireNonNull(folder.listFiles())) {
                 populatedTreeView(file, folderItem);
             }
 

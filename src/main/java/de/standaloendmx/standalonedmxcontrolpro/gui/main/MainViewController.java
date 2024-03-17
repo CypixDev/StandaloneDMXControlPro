@@ -5,12 +5,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
+
+    private static final Logger logger = LogManager.getLogger(MainViewController.class);
 
     public static MainViewController instance;
 
@@ -24,10 +29,10 @@ public class MainViewController implements Initializable {
         try {
             //Parent contentArea = (Parent) StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.CONTENT_AREA);
 
-            Parent contentArea = FXMLLoader.load(getClass().getResource("/gui/main/ContentAreaView.fxml"));
-            Parent sideBar = FXMLLoader.load(getClass().getResource("/gui/main/SideBarView.fxml"));
-            Parent menuBar = FXMLLoader.load(getClass().getResource("/gui/main/MenuBarView.fxml"));
-            Parent bottomBar = FXMLLoader.load(getClass().getResource("/gui/main/BottomBarView.fxml"));
+            Parent contentArea = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/main/ContentAreaView.fxml")));
+            Parent sideBar = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/main/SideBarView.fxml")));
+            Parent menuBar = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/main/MenuBarView.fxml")));
+            Parent bottomBar = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/main/BottomBarView.fxml")));
             //Parent bottomBar = (Parent) StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.BOTTOM_BAR);
             //AnchorPane sideBarClone = (AnchorPane) StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.SIDE_BAR);
 
@@ -39,7 +44,7 @@ public class MainViewController implements Initializable {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 }

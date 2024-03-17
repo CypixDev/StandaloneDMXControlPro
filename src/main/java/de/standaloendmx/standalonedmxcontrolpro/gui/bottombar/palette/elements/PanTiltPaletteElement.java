@@ -18,10 +18,9 @@ public class PanTiltPaletteElement extends PaletteElementViewController {
 
     private final Canvas canvas;
     private final GraphicsContext gc;
-
+    private final List<EventHandler<PanTiltChangeEvent>> panTiltChangedHandlers = new ArrayList<>();
     private int panValue;
     private int tiltValue;
-    private List<EventHandler<PanTiltChangeEvent>> panTiltChangedHandlers = new ArrayList<>();
 
     public PanTiltPaletteElement() {
         canvas = new Canvas(CANVAS_SIZE, CANVAS_SIZE);
@@ -96,8 +95,8 @@ public class PanTiltPaletteElement extends PaletteElementViewController {
 
     public static class PanTiltChangeEvent extends ActionEvent {
 
-        private double pan;
-        private double tilt;
+        private final double pan;
+        private final double tilt;
 
         public PanTiltChangeEvent(double pan, double tilt) {
             this.pan = pan;

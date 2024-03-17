@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 public class DebugPacket extends Packet {
 
-    private final Logger logger = LogManager.getLogger(DebugPacket.class);
+    private static final Logger logger = LogManager.getLogger(DebugPacket.class);
 
     @Override
     public void read(CustomByteBuf buffer) {

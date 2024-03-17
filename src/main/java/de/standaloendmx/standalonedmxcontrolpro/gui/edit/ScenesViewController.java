@@ -41,9 +41,7 @@ public class ScenesViewController implements Initializable {
         instance = this;
         groupList = FXCollections.observableArrayList();
 
-        btnAddGroup.setOnAction(e -> {
-            addGroupContainer();
-        });
+        btnAddGroup.setOnAction(e -> addGroupContainer());
 
         addGroupContainer();
 
@@ -78,9 +76,9 @@ public class ScenesViewController implements Initializable {
     }
 
     /**
-     * Returns all scenes from all groups. But not the add scene(hopefully)
+     * Retrieves all scenes from the groupList and returns a list of MyScene objects.
      *
-     * @return
+     * @return List of MyScene objects
      */
     public List<MyScene> getAllScenes() {
         List<MyScene> list = new ArrayList<>();
@@ -98,9 +96,11 @@ public class ScenesViewController implements Initializable {
     }
 
     /**
-     * Returns null if more than one scene is selected!
+     * Retrieves the selected scene from the list of all scenes.
+     * A scene is considered selected if its style class contains "scene_selected".
+     * If multiple scenes are selected, null is returned.
      *
-     * @return
+     * @return The selected scene or null if no scene is selected or multiple scenes are selected.
      */
     public MyScene getSelectedScene() {
         MyScene ret = null;

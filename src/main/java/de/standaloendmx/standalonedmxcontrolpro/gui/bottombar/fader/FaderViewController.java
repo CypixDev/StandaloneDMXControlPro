@@ -11,8 +11,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 public class FaderViewController implements Initializable {
 

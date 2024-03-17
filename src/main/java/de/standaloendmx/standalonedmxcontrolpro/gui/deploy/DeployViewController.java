@@ -54,9 +54,7 @@ public class DeployViewController implements Initializable {
         }
         refreshListAndStatus();
 
-        btnAdd.setOnAction(e -> {
-            openModalPopup(MainApplication.mainStage);
-        });
+        btnAdd.setOnAction(e -> openModalPopup(MainApplication.mainStage));
 
         treeView.setOnMouseClicked(e -> {
             try {
@@ -65,7 +63,7 @@ public class DeployViewController implements Initializable {
                 throw new RuntimeException(ex);
             }
         });
-        treeView.setCellFactory(param -> new TreeCell<DeployedInterface>() {
+        treeView.setCellFactory(param -> new TreeCell<>() {
             @Override
             protected void updateItem(DeployedInterface deployedInterface, boolean empty) {
                 super.updateItem(deployedInterface, empty);
@@ -112,9 +110,7 @@ public class DeployViewController implements Initializable {
             }
         });
 
-        btnRefresh.setOnAction(e -> {
-            refreshListAndStatus();
-        });
+        btnRefresh.setOnAction(e -> refreshListAndStatus());
     }
 
     public void refreshListAndStatus() {
@@ -136,9 +132,7 @@ public class DeployViewController implements Initializable {
             Stage popupStage = new Stage();
 
 
-            controller.btnCancel.setOnAction(e -> {
-                popupStage.close();
-            });
+            controller.btnCancel.setOnAction(e -> popupStage.close());
 
 
             popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -147,7 +141,7 @@ public class DeployViewController implements Initializable {
             popupStage.setScene(new Scene(popupContent));
             popupStage.showAndWait();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 

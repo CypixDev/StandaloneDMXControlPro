@@ -4,6 +4,11 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * CustomByteBuf is a class that represents a custom implementation of a byte buffer.
+ * It provides methods for reading and writing bytes, shorts, integers, longs,
+ * floats, doubles, and byte arrays.
+ */
 public class CustomByteBuf {
 
     private ByteBuffer buffer;
@@ -186,7 +191,7 @@ public class CustomByteBuf {
         ensureWritable(4);
         // Holen Sie die Länge des Puffers
         int size = writerIndex;
-        System.out.println("Out size: "+size);
+        System.out.println("Out size: " + size);
 
 
         // Sichern Sie den aktuellen Inhalt des Puffers

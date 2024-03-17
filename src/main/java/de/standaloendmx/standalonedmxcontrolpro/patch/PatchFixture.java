@@ -4,10 +4,10 @@ public class PatchFixture {
 
     //Ein patch auf dem Patch-Grid
 
-    private de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture patchFixture;
-    private int channel; // 1 - 512
-    private int size;
-    private String color;
+    private final de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture patchFixture;
+    private final int channel; // 1 - 512
+    private final int size;
+    private final String color;
 
     public PatchFixture(de.standaloendmx.standalonedmxcontrolpro.fixture.PatchFixture patchFixture, int channel, int size, String color) {
         this.channel = channel;

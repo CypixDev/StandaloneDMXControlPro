@@ -111,7 +111,7 @@ public class MyFader extends VBox {
     public void update() {
         this.setManaged(this.isManaged());
         this.setVisible(this.isVisible());
-        this.setSliderValue((int)this.slider.getValue());
+        this.setSliderValue((int) this.slider.getValue());
         if (this.button.getStyleClass().contains("button_active")) {
             this.setButtonActive();
         } else {

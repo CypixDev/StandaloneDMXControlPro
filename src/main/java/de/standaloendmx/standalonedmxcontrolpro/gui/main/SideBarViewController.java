@@ -52,18 +52,10 @@ public class SideBarViewController implements Initializable {
         lastClickedButton = btnEdit;
         handleButtonClick(btnPatch);
 
-        btnPatch.setOnAction(e -> {
-            handleButtonClick(btnPatch);
-        });
-        btnEdit.setOnAction(e -> {
-            handleButtonClick(btnEdit);
-        });
-        btnLive.setOnAction(e -> {
-            handleButtonClick(btnLive);
-        });
-        btnDeploy.setOnAction(e -> {
-            handleButtonClick(btnDeploy);
-        });
+        btnPatch.setOnAction(e -> handleButtonClick(btnPatch));
+        btnEdit.setOnAction(e -> handleButtonClick(btnEdit));
+        btnLive.setOnAction(e -> handleButtonClick(btnLive));
+        btnDeploy.setOnAction(e -> handleButtonClick(btnDeploy));
 
     }
 
@@ -72,10 +64,10 @@ public class SideBarViewController implements Initializable {
             ContentAreaViewController.instance.resetContent();
 
 
-            ((FontIcon) lastClickedButton.getGraphic()).getStyleClass().remove("selected");
-            ((FontIcon) lastClickedButton.getGraphic()).getStyleClass().add("not-selected");
-            ((FontIcon) clickedButton.getGraphic()).getStyleClass().remove("not-selected");
-            ((FontIcon) clickedButton.getGraphic()).getStyleClass().add("selected");
+            lastClickedButton.getGraphic().getStyleClass().remove("selected");
+            lastClickedButton.getGraphic().getStyleClass().add("not-selected");
+            clickedButton.getGraphic().getStyleClass().remove("not-selected");
+            clickedButton.getGraphic().getStyleClass().add("selected");
 
 
             if (clickedButton.equals(btnPatch)) {

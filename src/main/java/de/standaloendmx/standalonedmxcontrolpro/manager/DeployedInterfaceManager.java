@@ -4,16 +4,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.standaloendmx.standalonedmxcontrolpro.gui.deploy.DeployedInterface;
 import de.standaloendmx.standalonedmxcontrolpro.main.StandaloneDMXControlPro;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DeployedInterfaceManager {
 
+    private static final Logger logger = LogManager.getLogger(DeployedInterface.class);
+
     public static DeployedInterfaceManager instance;
     private final File interfacesFile;
-    private List<DeployedInterface> deployedInterfaceList;
+    private final List<DeployedInterface> deployedInterfaceList;
 
 
     public DeployedInterfaceManager() {
@@ -30,12 +35,10 @@ public class DeployedInterfaceManager {
 
             DeployedInterface[] deployedInterfacesArray = gson.fromJson(reader, DeployedInterface[].class);
 
-            for (DeployedInterface deployedInterface : deployedInterfacesArray) {
-                deployedInterfaceList.add(deployedInterface);
-            }
+            Collections.addAll(deployedInterfaceList, deployedInterfacesArray);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
@@ -55,7 +58,7 @@ public class DeployedInterfaceManager {
         try (Writer writer = new FileWriter(interfacesFile)) {
             gson.toJson(deployedInterfaceList, writer);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 

@@ -25,12 +25,16 @@ package de.standaloendmx.standalonedmxcontrolpro.serial.network.event;
 
 import de.standaloendmx.standalonedmxcontrolpro.serial.MySerialPort;
 import de.standaloendmx.standalonedmxcontrolpro.serial.network.packet.Packet;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class EventRegistry {
+
+    private static final Logger logger = LogManager.getLogger(EventRegistry.class);
 
     private final Set<RegisteredPacketSubscriber> subscribers = new HashSet<>();
 
@@ -55,7 +59,7 @@ public class EventRegistry {
                 subscriber.invoke(packet, ctx);
             }
         } catch (InvocationTargetException | IllegalAccessException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
 
     }

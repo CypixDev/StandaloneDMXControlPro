@@ -30,16 +30,12 @@ import java.util.UUID;
 
 public class MyScene extends VBox implements Initializable {
 
-    private Logger logger = LogManager.getLogger(MyScene.class);
-
-    private UUID uuid;
-
-    @FXML
-    private VBox container;
-
     @FXML
     public Label name;
-
+    private Logger logger = LogManager.getLogger(MyScene.class);
+    private UUID uuid;
+    @FXML
+    private VBox container;
     @FXML
     private Label time;
 
@@ -92,8 +88,8 @@ public class MyScene extends VBox implements Initializable {
             //TODO: fix / remove?
             menuItem.setOnAction(event -> {
                 System.out.println("Sending...");
-                System.out.println("Size: "+StandaloneDMXControlPro.instance.getDeployedInterfaceManager().getDeployedInterfaceList().size());
-                if(StandaloneDMXControlPro.instance.getDeployedInterfaceManager().getDeployedInterfaceList().get(0).getSerialPort() != null){
+                System.out.println("Size: " + StandaloneDMXControlPro.instance.getDeployedInterfaceManager().getDeployedInterfaceList().size());
+                if (StandaloneDMXControlPro.instance.getDeployedInterfaceManager().getDeployedInterfaceList().get(0).getSerialPort() != null) {
                     DeployedInterface deployedInterface = StandaloneDMXControlPro.instance.getDeployedInterfaceManager().getDeployedInterfaceList().get(0);
                     try {
                         SerialServer.getInstance().writeAndFlushPacket(deployedInterface.getSerialPort(), new ScenePacket(this));

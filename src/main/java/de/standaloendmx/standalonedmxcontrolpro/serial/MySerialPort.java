@@ -5,8 +5,8 @@ import de.standaloendmx.standalonedmxcontrolpro.serial.network.handler.SerialPor
 
 public class MySerialPort {
 
-    private SerialPort serialPort;
-    private SerialPortInboundHandler serialPortInboundHandler;
+    private final SerialPort serialPort;
+    private final SerialPortInboundHandler serialPortInboundHandler;
     private String uuid;
     private boolean added;
 

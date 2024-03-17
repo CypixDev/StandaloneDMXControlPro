@@ -52,23 +52,25 @@ public class SerialServer extends Thread {
         return instance;
     }
 
+    /**
+     * Starts a scheduler that periodically executes the scan method and refreshes the list and status in the DeployViewController.
+     */
     private void startScanner() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                scan();
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (DeployViewController.instance != null)
-                            DeployViewController.instance.refreshListAndStatus();
-                    }
-                });
-            }
+        scheduler.scheduleAtFixedRate(() -> {
+            scan();
+            Platform.runLater(() -> {
+                if (DeployViewController.instance != null)
+                    DeployViewController.instance.refreshListAndStatus();
+            });
         }, 1, 2, TimeUnit.SECONDS);
     }
 
+    /**
+     * Scans for available serial ports and connects to Arduino Uno, ESP32, or other supported devices.
+     *
+     * @return true if a supported device is detected and connected, false otherwise
+     */
     public boolean scan() {
         SerialPort[] ports = SerialPort.getCommPorts();
         if (ports.length == 0) return false;
@@ -76,7 +78,7 @@ public class SerialServer extends Thread {
         for (SerialPort port : ports) {
             if (port.openPort()) {
                 //if(port.getDescriptivePortName().startsWith("USB-SERIAL CH340")){
-                if (port.getDescriptivePortName().startsWith("Arduino Uno") || port.getDescriptivePortName().startsWith("Silicon Labs CP210x")|| port.getDescriptivePortName().startsWith("Serielles USB-Gerät")) {
+                if (port.getDescriptivePortName().startsWith("Arduino Uno") || port.getDescriptivePortName().startsWith("Silicon Labs CP210x") || port.getDescriptivePortName().startsWith("Serielles USB-Gerät")) {
                     logger.info("Connected to Arduino nano/ESP32 (" + port.getSystemPortName() + ")");
 
                     configPort(port);
@@ -91,6 +93,13 @@ public class SerialServer extends Thread {
         return true;
     }
 
+    /**
+     * Configures the given serial port with the required settings and returns a SerialPortInboundHandler
+     * for communication with the port.
+     *
+     * @param port the serial port to configure
+     * @return the serial port inbound handler for the configured port
+     */
     private SerialPortInboundHandler configPort(SerialPort port) {
         port.setBaudRate(115200);
         port.setNumDataBits(8);
@@ -107,6 +116,14 @@ public class SerialServer extends Thread {
         return handler;
     }
 
+    /**
+     * Starts communication with the given serial port.
+     *
+     * @param mySerialPort the serial port to start communication with
+     * @return the serial port inbound handler for the started communication
+     * @deprecated This method is deprecated and will be removed in future versions. Use a different method for communication.
+     */
+    @Deprecated
     public SerialPortInboundHandler startCom(MySerialPort mySerialPort) {
         SerialPort port = mySerialPort.getSerialPort();
         port.openPort();
@@ -133,16 +150,25 @@ public class SerialServer extends Thread {
         return ret;
     }
 
+    /**
+     * Writes a packet to the serial port and flushes the data. The method encodes the packet
+     * using the given packetEncoder and writes it to the serial port byte by byte.
+     *
+     * @param serialPort the serial port to write the packet to
+     * @param packet     the packet to be written
+     * @return true if the packet was written and flushed successfully, false otherwise
+     * @throws Exception if there is an error in encoding or writing the packet
+     */
     public boolean writeAndFlushPacket(SerialPort serialPort, Packet packet) throws Exception {
         CustomByteBuf buf = new CustomByteBuf(8);
 
         packetEncoder.encode(serialPort, packet, buf);
 
         byte[] toSend = buf.array();
-        for (int i = 0; i < toSend.length; i+=64) {
-            if((i+64) > toSend.length){
-                serialPort.writeBytes(toSend, toSend.length-i, i);
-            }else{
+        for (int i = 0; i < toSend.length; i += 64) {
+            if ((i + 64) > toSend.length) {
+                serialPort.writeBytes(toSend, toSend.length - i, i);
+            } else {
                 serialPort.writeBytes(toSend, 64, i);
                 TimeUnit.MILLISECONDS.sleep(100);
             }
@@ -150,6 +176,7 @@ public class SerialServer extends Thread {
         //System.out.println(Arrays.toString(buf.array()));
         return true;
     }
+
     public boolean writeAndFlushPacket(MySerialPort serialPort, Packet packet) throws Exception {
         return writeAndFlushPacket(serialPort.getSerialPort(), packet);
     }

@@ -12,13 +12,13 @@ import java.util.ResourceBundle;
 
 public class ColorWheelPaletteElement extends PaletteElementViewController {
 
-    private RGBColorDisplay rGBColorDisplay;
-    private Pane colorDisplay;
-    private ColorWheel colorWheel;
-    private VBox vBox;
-    private HBox colorHistoryBox;
+    private final RGBColorDisplay rGBColorDisplay;
+    private final Pane colorDisplay;
+    private final ColorWheel colorWheel;
+    private final VBox vBox;
+    private final HBox colorHistoryBox;
 
-    private ColorHistoryPane[] colorHistoryPanes;
+    private final ColorHistoryPane[] colorHistoryPanes;
 
 
     public ColorWheelPaletteElement() {
@@ -75,10 +75,10 @@ public class ColorWheelPaletteElement extends PaletteElementViewController {
         return colorDisplay;
     }
 
-    private class RGBColorDisplay extends HBox {
-        private Label redLabel;
-        private Label greenLabel;
-        private Label blueLabel;
+    private static class RGBColorDisplay extends HBox {
+        private final Label redLabel;
+        private final Label greenLabel;
+        private final Label blueLabel;
 
         public RGBColorDisplay() {
             // Erstelle Labels

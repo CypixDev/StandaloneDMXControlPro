@@ -12,17 +12,13 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 public class SerialPortInboundHandler extends Thread {
 
     private final EventRegistry eventRegistry;
     private final SerialPort serialPort;
+    private final List<SubscribedPacket> subscribedPackets = new ArrayList<>();
     private MySerialPort mySerialPort;
-
-    private List<SubscribedPacket> subscribedPackets = new ArrayList<>();
-
-
     private String uuid;
 
     public SerialPortInboundHandler(EventRegistry eventRegistry, SerialPort serialPort) {
@@ -47,22 +43,22 @@ public class SerialPortInboundHandler extends Thread {
                 System.out.println(Arrays.toString(buffer));
 
                 int packetSize = ByteBuffer.wrap(buffer).getInt();
-                System.out.println("Incomming Size: " + packetSize);
+                System.out.println("Incoming Size: " + packetSize);
                 buffer = new byte[packetSize - 4]; //-4 because first int already read
 
                 long timeoutStamp = System.currentTimeMillis();
                 boolean timeout = false;
                 while (serialPort.bytesAvailable() < buffer.length) {
-                    if (System.currentTimeMillis() - timeoutStamp > 900){
+                    if (System.currentTimeMillis() - timeoutStamp > 900) {
                         System.err.println("Reading packet took more than 300 millis to arrive. continue.");
                         timeout = true;
-                        serialPort.readBytes(new byte[serialPort.bytesAvailable()+1], serialPort.bytesAvailable());
+                        serialPort.readBytes(new byte[serialPort.bytesAvailable() + 1], serialPort.bytesAvailable());
                         break;
                     }
 
-                        //throw new TimeoutException("Reading packet took more than 300 millis to arrive");
+                    //throw new TimeoutException("Reading packet took more than 300 millis to arrive");
                 } //Waiting for all bytes from packet to arrive!
-                if(!timeout){
+                if (!timeout) {
                     serialPort.readBytes(buffer, packetSize);
 
 
