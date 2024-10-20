@@ -10,8 +10,8 @@ public enum Views {
             Parent bottomBar = FXMLLoader.load(getClass().getResource("/gui/main/BottomBarView.fxml"));
      */
 
-    CONTENT_AREA("/gui/main/ContentAreaView.fxml"), SIDE_BAR("/gui/main/SideBarView.fxml"),
-    MAIN_BOTTOM_BAR("/gui/main/BottomBarView.fxml"), Fader_VIEW("/gui/bottombar/fader/FaderView.fxml"),
+    Fader_VIEW("/gui/bottombar/fader/FaderView.fxml"), CONTENT_AREA("/gui/main/ContentAreaView.fxml"), SIDE_BAR("/gui/main/SideBarView.fxml"),
+    MAIN_BOTTOM_BAR("/gui/main/BottomBarView.fxml"),
     BOTTOM_BAR("/gui/bottombar/BottomBarView.fxml"),
     MAIN("/gui/main/MainView.fxml"),
     MENU_BAR("/gui/main/MenuBarView.fxml"), PATCH_DIRECTORY("/gui/patch/PatchDirectoryView.fxml"),
