@@ -2,6 +2,7 @@ package de.standaloendmx.standalonedmxcontrolpro.gui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -36,4 +37,7 @@ public class ViewManager {
         return loadedViews.get(view);
     }
 
+    public void setLoadedView(Views views, Parent contentArea) {
+        loadedViews.put(views, contentArea);
+    }
 }
