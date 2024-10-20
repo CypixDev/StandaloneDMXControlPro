@@ -1,6 +1,7 @@
 package de.standaloendmx.standalonedmxcontrolpro.gui.main;
 
 import de.standaloendmx.standalonedmxcontrolpro.gui.Views;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,7 +52,7 @@ public class SideBarViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lastClickedButton = btnEdit;
-        handleButtonClick(btnPatch);
+        Platform.runLater(() -> handleButtonClick(btnPatch));
 
         btnPatch.setOnAction(e -> handleButtonClick(btnPatch));
         btnEdit.setOnAction(e -> handleButtonClick(btnEdit));
@@ -79,8 +80,9 @@ public class SideBarViewController implements Initializable {
 
             if (clickedButton.equals(btnPatch)) {
                 try {
-                    ContentAreaViewController.instance.setContentAndAnchor("/gui/patch/PatchDirectoryView.fxml");
-                    ContentAreaViewController.instance.setContentAndAnchor("/gui/patch/PatchGridView.fxml");
+                    ContentAreaViewController.instance.setContentAndAnchor(Views.PATCH_DIRECTORY);
+                    ContentAreaViewController.instance.setContentAndAnchor(Views.PATCH_GRID);
+
                 } catch (IOException ex) {
                     logger.error(ex);
                 }

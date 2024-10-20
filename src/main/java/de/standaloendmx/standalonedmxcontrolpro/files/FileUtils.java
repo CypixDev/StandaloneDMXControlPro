@@ -16,6 +16,13 @@ public class FileUtils {
 
     static Logger logger = Logger.getLogger(FileUtils.class);
 
+    /**
+     * Unzips a zip file to the specified destination directory.
+     *
+     * @param zipFilePath   the input stream of the zip file
+     * @param destDirectory the destination directory to extract the zip file contents
+     * @throws IOException if an I/O error occurs during the unzipping process
+     */
     public static void unzip(InputStream zipFilePath, String destDirectory) throws IOException {
         logger.info("Unzipping to " + destDirectory);
         File destDir = new File(destDirectory);

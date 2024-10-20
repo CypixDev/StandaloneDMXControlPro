@@ -39,6 +39,7 @@ module de.standaloendmx.standalonedmxcontrollpro {
     exports de.standaloendmx.standalonedmxcontrolpro.gui.deploy;
     exports de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.fixtureselect;
     exports de.standaloendmx.standalonedmxcontrolpro.gui.bottombar.palette;
+    exports de.standaloendmx.standalonedmxcontrolpro.gui;
     //GUI END
 
     opens de.standaloendmx.standalonedmxcontrolpro.fixture to com.google.gson;

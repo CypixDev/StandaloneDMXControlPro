@@ -2,10 +2,10 @@ package de.standaloendmx.standalonedmxcontrolpro.gui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class ViewManager {
             try {
                 logger.info("Loading " + value + " from " + value.getPath());
                 loadedViews.put(value, FXMLLoader.load(Objects.requireNonNull(getClass().getResource(value.getPath()))));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 logger.error("Failed loading view: " + value.getPath(), e);
             }
         }
@@ -36,4 +36,7 @@ public class ViewManager {
         return loadedViews.get(view);
     }
 
+    public void setLoadedView(Views views, Parent contentArea) {
+        loadedViews.put(views, contentArea);
+    }
 }
