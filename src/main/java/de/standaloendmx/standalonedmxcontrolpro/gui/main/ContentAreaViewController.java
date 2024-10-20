@@ -40,7 +40,7 @@ public class ContentAreaViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
 
-        //splitPane.getItems().add(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.BOTTOM_BAR));
+        //Already in fxml: splitPane.getItems().add(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(Views.BOTTOM_BAR));
 
 
 /*        Timeline timeline = new Timeline(new KeyFrame(
