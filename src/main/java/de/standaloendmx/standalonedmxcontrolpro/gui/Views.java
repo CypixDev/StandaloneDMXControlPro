@@ -18,6 +18,7 @@ public enum Views {
     BOTTOM_BAR("/gui/bottombar/BottomBarView.fxml"),
     MAIN("/gui/main/MainView.fxml"),
     MENU_BAR("/gui/main/MenuBarView.fxml"),
+    PALETTE_VIEW("/gui/bottombar/palette/PaletteView.fxml"),
     EDIT_VIEW("/gui/edit/EditView.fxml");
 
     private final String path;

@@ -81,9 +81,8 @@ public class SideBarViewController implements Initializable {
             if (clickedButton.equals(btnPatch)) {
                 try {
                     ContentAreaViewController.instance.setContentAndAnchor(Views.PATCH_DIRECTORY);
-                    ContentAreaViewController.instance.setContentAndAnchor(Views.PATCH_GRID);/*
-                    ContentAreaViewController.instance.setContentAndAnchor("/gui/patch/PatchDirectoryView.fxml");
-                    ContentAreaViewController.instance.setContentAndAnchor("/gui/patch/PatchGridView.fxml");*/
+                    ContentAreaViewController.instance.setContentAndAnchor(Views.PATCH_GRID);
+
                 } catch (IOException ex) {
                     logger.error(ex);
                 }

@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
@@ -85,7 +84,9 @@ public class BottomBarViewController implements Initializable {
                 }
             } else if (clickedButton.equals(btnPallet)) {
                 try {
-                    setContentAndAllAnchor("/gui/bottombar/palette/PaletteView.fxml");
+                    setContentAndAllAnchor(Views.PALETTE_VIEW);
+
+                    //setContentAndAllAnchor("/gui/bottombar/palette/PaletteView.fxml");
                 } catch (Exception ex) {
                     logger.error(ex);
                 }

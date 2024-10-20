@@ -40,7 +40,7 @@
                        HBox.hgrow="ALWAYS">
                 <items>
                     <AnchorPane fx:id="content" SplitPane.resizableWithParent="false"/>
-                    <!--<fx:include source="fixtureselect/FixtureSelectView.fxml"/>-->
+                    <fx:include source="fixtureselect/FixtureSelectView.fxml"/>
                 </items>
             </SplitPane>
         </children>

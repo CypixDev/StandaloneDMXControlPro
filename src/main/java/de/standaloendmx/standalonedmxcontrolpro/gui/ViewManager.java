@@ -27,7 +27,6 @@ public class ViewManager {
                 logger.info("Loading " + value + " from " + value.getPath());
                 loadedViews.put(value, FXMLLoader.load(Objects.requireNonNull(getClass().getResource(value.getPath()))));
             } catch (Exception e) {
-                e.printStackTrace();
                 logger.error("Failed loading view: " + value.getPath(), e);
             }
         }
