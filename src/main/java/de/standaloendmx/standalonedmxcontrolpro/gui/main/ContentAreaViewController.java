@@ -73,6 +73,10 @@ public class ContentAreaViewController implements Initializable {
         setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), Priority.NEVER);
     }
 
+    public void setContentAndAnchor(Views view) throws IOException {
+        setContentAndAnchor(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(view), Priority.NEVER);
+    }
+
     /**
      * Sets the content and anchor of the node using the given path and horizontal grow priority.
      * If the content cannot be loaded from the path, an IOException is thrown.
