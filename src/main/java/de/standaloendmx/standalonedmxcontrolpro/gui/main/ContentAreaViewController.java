@@ -19,6 +19,9 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * Handles the view logic for the content area in the application.
+ */
 public class ContentAreaViewController implements Initializable {
 
     private static final Logger logger = LogManager.getLogger(ContentAreaViewController.class);
@@ -62,17 +65,25 @@ public class ContentAreaViewController implements Initializable {
         HBox.setHgrow(node, hGrow);
     }
 
+
     /**
-     * Adds the specified Node to the contentBox and sets the horizontal grow behavior using the given Priority.
+     * Sets the content and anchor of the node using the given path and horizontal grow priority.
+     * If the content cannot be loaded from the path, an IOException is thrown.
      *
-     * @param node  the Node to add to the contentBox
-     * @param hGrow the horizontal grow behavior for the Node
-     * @throws IOException if there is an error loading the Node from the specified path
+     * @param path  the path to load the content from
+     * @throws IOException if the content cannot be loaded from the path
      */
     public void setContentAndAnchor(String path) throws IOException {
         setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), Priority.NEVER);
+        setContentAndAnchor((Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path))), Priority.NEVER);
     }
 
+    /**
+     * Sets the content and anchor of the node using the provided Views enum value.
+     *
+     * @param view the Views enum value representing the content to be loaded
+     * @throws IOException if the content cannot be loaded from the specified view
+     */
     public void setContentAndAnchor(Views view) throws IOException {
         setContentAndAnchor(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(view), Priority.NEVER);
     }
@@ -93,6 +104,14 @@ public class ContentAreaViewController implements Initializable {
         }
 
     }
+
+    /**
+     * Sets the content and anchor of the node using the provided Views enum value and horizontal grow priority.
+     *
+     * @param view  the Views enum value representing the content to be loaded
+     * @param hGrow the priority to apply when resizing the node horizontally
+     * @throws IOException if the content cannot be loaded from the specified view
+     */
     public void setContentAndAnchor(Views view, Priority hGrow) throws IOException {
         try {
             setContentAndAnchor(StandaloneDMXControlPro.instance.getViewManager().getLoadedView(view), hGrow);
